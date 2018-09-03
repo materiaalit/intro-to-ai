@@ -27,3 +27,6 @@ after_success:
 - git commit -m "$COMMIT_MESSAGE"
 - git push "https://hnbot:$GITHUB_API_KEY@github.com/materiaalit/intro-to-ai-18.git"
   gh-pages:gh-pages 2>&1 | sed "s/$GITHUB_API_KEY/<confidential>/g"
+env:
+  global:
+    secure: La15jp9TshPFWDKKdLJ5qJejcPIPDqJmdJKfmos8vpCihe+EQPSpftvTOtFPrccs+ldzsHYMF1WNW1bSg04xCZpCZHmknSsl3KU8myTyneLvnqz3nHu/t16d9vEEMeoDGYpATjNvxmwEL5Q6rGlU5IzCBKKnV4OTMkCUGHwK/SHnSEa/BByKdUhgZdH5rDcCGTgYgvYYvXse8KbiZEJOfI+TmNeQeA/3AedLZtlF6uGItDxb2d/O+JrR764a+9RH/Clvv6jMk8uLzSYbSYnied2thd3s3KGrs58v/uN16sW/z0HZ9ALkYDLGT0lX8DbcESpSOwFiLvEN+DcRjVsHEpJvgj2mG4tQQS1eNYMAcGmY0wSlMMt4wji//S01adD4HW7cGUL/jppSF7SvhNk79qC/n8t4lMM8l8jTzznMORdICANyov4dppokGe8p7WHRh3DAeE3uTzPdEYOSbGoM4q380WSzCPRR6qHVlDoZchS9EP2pXdLroCabBOlBuQ5uaj6GkMlvbGShpKeOc47syg09B6zJYv2yH0t6gHMqnFnp6zuBRCcWDF8BGdRLo475PUEVGvffPBK24PtGm5fEKQtkdmWFD9mi3d04eKqHcaVXT5ehh6HPDDd0Hdj+DAQ9MSETGGuYWOROKeq0TPZGxf7+VVZZZo3OzaNkh5qZLGw=
