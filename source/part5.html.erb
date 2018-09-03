@@ -11,7 +11,7 @@
   Download and install the Weka system on your computer. We've
   prepared a set of instructions to get started and a minitutorial.
   <%= link_to 'Click here', 'part5_ex1.html'%>. You'll also need to
-  download the Two Spirals dataset <a href="https://materiaalit.github.io/intro-to-ai-17/files/spirals.arff">here</a>.
+  download the Two Spirals dataset <a href="https://materiaalit.github.io/intro-to-ai-18/files/spirals.arff">here</a>.
 </p>
 
 <p>
@@ -55,7 +55,7 @@
   (setting <code>hiddenLayers = 1</code>), the error rate becomes
   45.59&nbsp;%, and with two hidden layers (which was apparently
   the default setting) you get again 48.53&nbsp;%.
-  Things start to improve only when you add one more hidden 
+  Things start to improve only when you add one more hidden
   layer (<code>hiddenLayers = 3</code>), and you get 30.88&nbsp;%
   error, and finally, with four hidden layers, the error becomes
   as low as 5.88&nbsp;%.
@@ -72,14 +72,14 @@
     <li>
       Do the same with a decision tree (<b>Trees/J48</b>).
     <li>
-      Visualize the decision boundaries and explain why the MLP, 
+      Visualize the decision boundaries and explain why the MLP,
       nearest neighbor, and decision tree classifiers work or don't work
       in this case.
   </ol>
 </p>
 
 <p>
-  <i>Hint:</i> For item 3, open <b>GUI Chooser</b> in Weka, 
+  <i>Hint:</i> For item 3, open <b>GUI Chooser</b> in Weka,
   click "Visualization" in the top menu, and choose
   "BoundaryVisualizer".
 </p>
@@ -174,7 +174,7 @@ under Materials.
 
 <p>
   Digital image and audio signals represent recordings of natural
-  signals in numerical form. For images, the values represent 
+  signals in numerical form. For images, the values represent
   pixel intensities stored in a two-dimensional array. A third
   dimension can be used to store different bands for, e.g.,
   red, green, and blue (RGB). We can also think of the values
@@ -200,7 +200,7 @@ under Materials.
   involving digital signals. It means generally the problem is
   recognizing an object in a signal (typically an image). The task is
   made hard because signals tend to vary greatly depending on external
-  conditions such as camera angle, distance, lighting conditions, 
+  conditions such as camera angle, distance, lighting conditions,
   echo, noise, and differences between recording devices. Therefore
   the signal is practically always different even if it is from the
   same object.
@@ -235,7 +235,7 @@ under Materials.
     <li>
       <b>Choosing interest points:</b> We identify a set of (x,y)
       points by maximizing the determinant of a so called Hessian
-      matrix that characterizes the local intensity variation 
+      matrix that characterizes the local intensity variation
       around the point. The interest points tend to be located
       at "blobs" in the image. (You are not required to decode the
       details of this -- a rough idea is enough.)
@@ -276,7 +276,7 @@ under Materials.
   The red dots in the images are the locations of the SURF
   interest points. The lines between points in the two images
   represent matches, i.e., pairs of features whose descriptor
-  vectors are sufficiently close to each other to be classified as 
+  vectors are sufficiently close to each other to be classified as
   belonging to the same or similar looking object.
 </p>
 
@@ -321,9 +321,9 @@ under Materials.
 
 <p>
   <i>An alternative (more fun) way:</i> Take multiple photos of the
-  same image from slightly different angles, different distances, 
+  same image from slightly different angles, different distances,
   in different lighting conditions, with occlusion, etc.
-  Does SURF recognize the object despite such changes in 
+  Does SURF recognize the object despite such changes in
   external conditions?
 </p>
 
@@ -348,7 +348,7 @@ under Materials.
 
 <p>
   The features that make language distinctive and different from
-  many other data sources for which we may apply AI techniques 
+  many other data sources for which we may apply AI techniques
   include:
   <ol>
     <li>
@@ -361,7 +361,7 @@ under Materials.
     <li>
       Grammar constrains the possible (allowed) expressions in natural
       languages but still leaves room for ambiguity (unlike formal
-      languages such as programming languages which must be 
+      languages such as programming languages which must be
       unambiguous).
     <li>
       Compared to digital signals such as audio or image, natural
@@ -472,7 +472,7 @@ after trying on your own)' } do %>
       <code>(())[]</code>
   </ol>
 </p>
-        
+
 <% end %>
 
 <% partial 'partials/material_sub_heading' do %>
@@ -500,7 +500,7 @@ after trying on your own)' } do %>
 <p>
   The above parse tree demonstrates the ambiguity of natural language,
   which is a challenge to AI applications. A potential solution in
-  such scenarios is to use the semantics of the words and to 
+  such scenarios is to use the semantics of the words and to
   attach word-dependent probabilities to different rules. This
   could for instance suggest that the probability of eating something
   with a fork is a more probable construction than a fish that
@@ -543,7 +543,7 @@ after trying on your own)' } do %>
 </p>
 
 <p>
-  The terminal symbols &mdash; note that here we consider words 
+  The terminal symbols &mdash; note that here we consider words
   as atomic symbols, and not sequences of characters &mdash; are
   'fish', 'Robots', and 'today'. Also note that the word 'fish'
   is both a verb (V) and a noun (N).
@@ -557,7 +557,7 @@ after trying on your own)' } do %>
 <p>
   A fundamental data structure in CYK is a triangular table that is
   usually depicted as a lower-triangular (or upper-triangular) matrix
-  of size n &times; n. The completed table for our small example is 
+  of size n &times; n. The completed table for our small example is
   below. This would be the result of running the CYK algorithm with
   the sentence "Robots fish fish today" as input.
 </p>
@@ -616,7 +616,7 @@ after trying on your own)' } do %>
   doesn't follow the more usual <i>(row, column)</i> numbering.
   Instead, the numbers given the start and the end of the sub-sentence
   that the cell corresponds to. For example, the cell (1,4) refers to
-  the whole sentence, i.e., words 1&ndash;4, while the cell (2,3) 
+  the whole sentence, i.e., words 1&ndash;4, while the cell (2,3)
   refers to the words <i>fish fish</i>, i.e., words 2&ndash;3.
 </p>
 
@@ -823,7 +823,7 @@ after trying on your own)' } do %>
 
 <p>
   This process is iterated until again we can't apply more rules on the
-  second row from the bottom, after which we move one level up. 
+  second row from the bottom, after which we move one level up.
   This is repeated on all levels until we reach the top node and
   the algorithm terminates.
 </p>
@@ -927,7 +927,7 @@ after trying on your own)' } do %>
 <p>
   You should fill in the CYK table, according to the above
   instructions. The two bottom rows are given to get you started
-  nicely. 
+  nicely.
 </p>
 
 <p>
@@ -1215,7 +1215,7 @@ after trying on your own)' } do %>
       </ol>
 <br><br>
 
-      
+
       The TMC template has tests to verify your solution.<br><br>
     <li>
       Next, implement the following logic in method <code>main</code>
@@ -1225,7 +1225,7 @@ after trying on your own)' } do %>
       <i>The Metamorphosis</i>. Reject all sentences that don't contain
       the word "Gregor".<br><br>
     <li>
-      For all remaining sentences, produce a 
+      For all remaining sentences, produce a
       parsing tree. (If the parsing fails, reject the sentence.) Use the
       method you implemented in item 1 to identify the subject of the
       sentence. Print out all sentences where the subject is "Gregor".
@@ -1257,8 +1257,8 @@ after trying on your own)' } do %>
 <% partial 'partials/solution', locals: { name: 'Example solution' } do %>
 
 <p>
-  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-17/files/part5-NLP-solution.zip">here</a>.
+  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-18/files/part5-NLP-solution.zip">here</a>.
 </p>
-  
+
 
 <% end %>

@@ -48,9 +48,9 @@
       coordinate points per minute.
     <li> Also implement method <code>compare(State s1, State s2)</code>
       in class <code>StateComparator</code> so that it can be used to
-      order the nodes in the priotity queue based on <code>cost 
+      order the nodes in the priotity queue based on <code>cost
 	+ h(node)</code> as described in Part 1. Here the nodes are
-      states that are defined by the stop and the time since 
+      states that are defined by the stop and the time since
       departure.
     <li> Implement the A* search in class <code>TravelPlanner</code>.
       The <code>PriorityQueue</code> data structure comes in handy. An
@@ -81,7 +81,7 @@
 <% partial 'partials/solution', locals: { name: 'Example solution' } do %>
 
 <p>
-  An example Java solution is <a href="https://materiaalit.github.io/intro-to-ai-17/files/astar-solution.zip">here</a>.
+  An example Java solution is <a href="https://materiaalit.github.io/intro-to-ai-18/files/astar-solution.zip">here</a>.
 </p>
 
 <% end %>
@@ -177,7 +177,7 @@ under Materials.
 </p>
 
 <% partial 'partials/material_sub_heading' do %>
-  Game Trees 
+  Game Trees
 <% end %>
 
 <p>
@@ -222,7 +222,7 @@ under Materials.
   in the only remaining cell to win. We can thus decide that the
   end result, or the <b>value</b> of the game in each of the nodes
   on the second level from the bottom is determined. For the
-  nodes that end in Max's victory, we'll say that the value 
+  nodes that end in Max's victory, we'll say that the value
   equals +1, and for the nodes that end in Min's victory, we'll say
   that the value is -1.
 </p>
@@ -301,7 +301,7 @@ under Materials.
 
 <p>
   The algorithm can be implemented using the neat recursive
-  functions below for Max and Min nodes respectively. This is 
+  functions below for Max and Min nodes respectively. This is
   known as the <b>Minimax algorithm</b> (see <a href="https://en.wikipedia.org/wiki/Minimax">Wikipedia: Minimax</a>).
 </p>
 
@@ -311,7 +311,7 @@ under Materials.
 3:     v = -Inf
 4:     for each child in node.children():
 5:        v = max(v, min_value(child))
-6:     return v  
+6:     return v
 <% end %>
 
 <% partial 'partials/code_highlight' do %>
@@ -320,7 +320,7 @@ under Materials.
 3:     v = +Inf
 4:     for each child in node.children():
 5:        v = min(v, max_value(child))
-6:     return v  
+6:     return v
 <% end %>
 
 <% partial 'partials/exercise', locals: { name: 'Why so serious, Max? (1p)' } do %>
@@ -398,7 +398,7 @@ under Materials.
 <p>
   Next, we will learn a few more tricks that help us manage massive
   game trees, and that were crucial elements in IBM's Deep Blue
-  computer defeating the chess world champion, Garry Kasparov, in 
+  computer defeating the chess world champion, Garry Kasparov, in
   1997.
 </p>
 
@@ -411,7 +411,7 @@ under Materials.
   If we can afford to explore only a small part of the game tree,
   we need a way to stop the minimax recursion before reaching an
   end-node, i.e., a node where the game is over and the winner
-  is known. This is achieved by using a <b>heuristic 
+  is known. This is achieved by using a <b>heuristic
     evaluation function</b> that takes as input a board position,
   including the information about which player's turn is next,
   and returns a score that should be an estimate of the likely
@@ -430,7 +430,7 @@ under Materials.
 </p>
 
 <p>
-  The minimax algorithm presented above requires minimal changes 
+  The minimax algorithm presented above requires minimal changes
   to obtain a <b>depth-limited</b> version where the heuristic
   is returned at all nodes at a given depth limit.
 </p>
@@ -469,7 +469,7 @@ under Materials.
 
 <p>
   To implement this in a similar fashion as the Minimax algorithm
-  requires small changes in the <code>min_value</code> and 
+  requires small changes in the <code>min_value</code> and
   <code>max_value</code> functions. Understanding the connection
   between these changes and the principle illustrated by the above
   pruning example is not as easy as it may sound, so please pay
@@ -485,7 +485,7 @@ under Materials.
 5:        v = max(v, min_value(child, alpha, beta))
 6:        alpha = max(alpha, v)
 7:        if alpha >= beta: return v
-8:     return v  
+8:     return v
 <% end %>
 
 <% partial 'partials/code_highlight' do %>
@@ -496,7 +496,7 @@ under Materials.
 5:        v = min(v, max_value(child, alpha, beta))
 6:        beta = min(beta, v)
 7:        if alpha >= beta: return v
-8:     return v  
+8:     return v
 <% end %>
 
 <p>
@@ -550,8 +550,8 @@ under Materials.
 <p>
   Remember that the Max nodes (such as the root node) only update
   the <code>alpha</code> value and pass it down to the next
-  child node. Check that you reach a situation where 
-  <code>alpha=0</code> and  <code>beta=-1</code> in a 
+  child node. Check that you reach a situation where
+  <code>alpha=0</code> and  <code>beta=-1</code> in a
   Min node. Actually you should reach such a situation twice.
 </p>
 
@@ -696,7 +696,7 @@ under Materials.
 <% partial 'partials/solution', locals: { name: 'Example solution' } do %>
 
 <p>
-  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-17/files/Alphabeta_model_solution.zip">here</a> (zip archive).
+  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-18/files/Alphabeta_model_solution.zip">here</a> (zip archive).
 </p>
 
 <% end %>
@@ -745,9 +745,9 @@ under Materials.
     <li>Ian Goodfellow, Yoshua Bengio & Aaron Courville: <a href="http://www.deeplearningbook.org/">Deep Learning</a> (Section 3)
     <li>Charles Grinstead & J. Laurie Snell: <a href="http://www.dartmouth.edu/~chance/teaching_aids/books_articles/probability_book/amsbook.mac.pdf">Introduction to Probability</a>
   </ul>
-  The Bayes rule (aka Bayes theorem) is the single most important tool 
+  The Bayes rule (aka Bayes theorem) is the single most important tool
   from probability calculus, and we'll be using in again and again for
-  building AI applications, here is some more material about it 
+  building AI applications, here is some more material about it
   in particular:
   <ul>
     <li><a href="http://en.wikipedia.org/wiki/Bayes%27_theorem#Drug_testing">Wikipedia: Bayes theorem (Section <i>Drug testing</i>)</a>
@@ -807,7 +807,7 @@ under Materials.
 
       The result is obtained by summing up the probabilities of the aforementioned
       elementary events:<br><br>
-      P((3,6)) + P((4,5)) + P((5,4)) + P((6,3)) = 
+      P((3,6)) + P((4,5)) + P((5,4)) + P((6,3)) =
 	1/6 &times; 1/2 + 1/6 &times; 1/10 + 1/6 &times; 1/10 + 1/6 &times; 1/10
 	= 8/60 &asymp; 0.133.<br><br>
     <li>
@@ -817,7 +817,7 @@ under Materials.
       P(B).<br><br>
 
       The elementary events where both A and B occur are
-      (3,6) and (6,3). Thus, P(A,B) = 1/6 &times; 1/2 + 1/6 &times; 1/10 = 
+      (3,6) and (6,3). Thus, P(A,B) = 1/6 &times; 1/2 + 1/6 &times; 1/10 =
 	6/60. Event B, on the other hand, is the complement of event
       "neither outcome is 6" from item (b) above, so we can get its probability
       easiest by applying the rule P(B) = 1 &ndash; P(&not;B), to get
@@ -846,7 +846,7 @@ under Materials.
       rolling the ordinary die twice?
     <li> What is the distribution of the sum of the outcomes when
       rolling the loaded die twice?
-    <li> Assume that either die (ordinary or loaded) is selected 
+    <li> Assume that either die (ordinary or loaded) is selected
       at random with probability 1/2 each. The selected die is
       rolled twice. Calculate the probability<br><br>
       <i>P("the die is loaded" | "the sum of the outcomes is 10")</i><br><br>
@@ -885,7 +885,7 @@ under Materials.
 
       [P("sum is 2"), ..., P("sum is 12")] = [1/36, 2/36, 3/36, 4/36, 5/36,
       6/36, 5/36, 4/36, 3/36, 2/46, 1/36]<br><br>
-      
+
     <li>
       With the loaded die, the elementary events have different
       probabilities, so a simple counting and multiplication won't do.
@@ -893,10 +893,10 @@ under Materials.
       1/10 = 1/100. Every event (m,n) where m&lt;6 and n=6, or m=6 and n&lt;6,
       has probability 1/10 &times; 1/2 = 1/20. And finally, the event
       (6,6) has probability 1/2 &times 1/2 = 1/4.<br><br>
-									   
+
       We now get, for example, the probability that the sum is 9 from
       <br><br>
-      
+
       P((3,6)) + P((4,5)) + P((5,4)) + P((6,3)) = 1/20 + 1/100 + 1/100 + 1/20
       = 12/100 = 0.12<br><br>
 
@@ -906,8 +906,8 @@ under Materials.
       = [1/100, 2/100, 3/100, 4/100, 5/100, 14/100, 13/100, 12/100, 11/100, 10/100, 25/100]<br><br>
 
       To make sure we haven't messed up (who, me?), we can sum up the
-      probabilities to check that the total is 1.0; i.e., 
-      1+2+3+4+5+14+13+12+11+10+25=100. Yes! 
+      probabilities to check that the total is 1.0; i.e.,
+      1+2+3+4+5+14+13+12+11+10+25=100. Yes!
 <br><br>
 
     <li>
@@ -919,11 +919,11 @@ under Materials.
                           P("the sum is 10")</pre>
 
       The first term in the numerator was calculated in the previous item, and
-      the other term is known to be 1/2 by assumption. However, we'll have to 
+      the other term is known to be 1/2 by assumption. However, we'll have to
       calculate the annoying denominator by splitting it into two alternative
       ways to get the sum 10.<br><br>
 
-      P("sum is 10" | "fair die") &times; P("fair die") + P("sum is 10" | "loaded die") 
+      P("sum is 10" | "fair die") &times; P("fair die") + P("sum is 10" | "loaded die")
       &times; P("loaded die") <br>
       = 3/36 &times; 1/2 + 11/100 &times 1/2 = 29/300 &asymp; 0.0966.<br><br>
 
@@ -943,12 +943,12 @@ under Materials.
       denominator, whose value we already calculated to be 29/300,
       and thus we get:
       <br><br>
-      P("fair die" | "sum is 10") = 3/36 &times; 1/2 / (29/300) = 
+      P("fair die" | "sum is 10") = 3/36 &times; 1/2 / (29/300) =
       25/58.<br><br>
 
       The sum of the probabilities of the loaded and the fair die is
       33/58 + 25/58 = 1  as it should!<br><br>
-     
+
       <i>Note:</i> The end result of the above calculation is that
       observing that the sum is 10 has almost no effect on our belief about
       which die was chosen: before the observation, our prior probability

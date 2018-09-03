@@ -45,7 +45,7 @@
 
 <ol>
   <li>
-    Download the Java template <a href="https://materiaalit.github.io/intro-to-ai-17/files/Chesspackage.zip">here</a>. <strong>NB: There was an error (old version) in the
+    Download the Java template <a href="https://materiaalit.github.io/intro-to-ai-18/files/Chesspackage.zip">here</a>. <strong>NB: There was an error (old version) in the
       package and it was fixed on Sept 21, 4.20pm. If you have problems
       uploading to the server, please reload the new package and try again.</strong>
   <li>
@@ -132,7 +132,7 @@ under Materials.
     probability</strong> (probability prior to the observation),
   the middle factor is called the <strong>likelihood</strong>
   (how likely the observation is when the state is given), and
-  the last term on the right has many names, of which 
+  the last term on the right has many names, of which
   <strong>the annoying denominator</strong> may be the most
   fitting. (Evidence and marginal likelihood are more
   common.)
@@ -156,7 +156,7 @@ under Materials.
      R = P(State=1 | obs) / P(State=2 | obs)
 </pre>
 <p>
-  where <code>obs</code> is an abbreviation for observation. 
+  where <code>obs</code> is an abbreviation for observation.
   Applying Bayes rule to both the numerator and the denominator
   in the ratio, we'll notice that the denominator <code>P(obs)</code>
   cancels:
@@ -245,7 +245,7 @@ R =  ------------------------------------ = ---------------------------
   the spam messages and another one for the ham messages. In each case,
   we will make the simplifying assumption that each of the words in the
   message is distributed according to the same distribution. And as we
-  said above, we also assume that the words are independent of each 
+  said above, we also assume that the words are independent of each
   other given the spam/ham class.
 </p>
 
@@ -456,8 +456,8 @@ R =  ------------------------------------ = ---------------------------
       'million':
       <br><br>
       <pre>
-   P(Word = 'million') 
-   = P(spam) P(Word = 'million' | spam) 
+   P(Word = 'million')
+   = P(spam) P(Word = 'million' | spam)
    + P(ham) P(Word = 'million' | ham)
    &asymp; 0.5 &times; 0.001629 + 0.5 &times; 0.000320 &asymp; 0.000974</pre>
       Thus, we get <code>P(Word &ne; 'million') &asymp; 1-0.000974
@@ -515,8 +515,8 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
   and the following formula for the ratio of the posterior probabilities
 </p>
 <pre>
-     P(spam | 'million', 'conferences') 
- R = ----------------------------------  
+     P(spam | 'million', 'conferences')
+ R = ----------------------------------
       P(ham | 'million', 'conferences')
 
      P(spam) P('million' | spam) P('conferences' | spam)
@@ -555,7 +555,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
 </p>
 <pre>
     P(word_1 | spam)   P('million' | spam)   0.0016285
-    ---------------- = ------------------- &asymp; --------- &asymp; 5.1 
+    ---------------- = ------------------- &asymp; --------- &asymp; 5.1
     P(word_1 | ham)    P('million' | ham)    0.0003198
 </pre>
 <p>
@@ -682,7 +682,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
 </p>
 
 <p>
-  <i>Hint:</i> In item 3, you may encounter words that you haven't 
+  <i>Hint:</i> In item 3, you may encounter words that you haven't
   encountered in the training data at all. You can use the small constant
   lower bound for them.
 </p>
@@ -692,7 +692,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
 <% partial 'partials/solution', locals: { name: 'Example solution' } do %>
 
 <p>
-  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-17/files/SpamHam-solution.zip">here</a> (zip archive).
+  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-18/files/SpamHam-solution.zip">here</a> (zip archive).
 </p>
 
 <% end %>
@@ -747,7 +747,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
   characterized by a set of directed edges between the nodes. The
   graph must be a <strong>directed acyclic graph</strong> (DAG), which
   means that it is impossible to start from a node follow a path in
-  the direction of the edges to arrive at the same node. 
+  the direction of the edges to arrive at the same node.
 </p>
 
 <p>
@@ -766,7 +766,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
   the variables are conditionally independent given some (possibly
   empty) set of other variables. The details of this are slightly too
   complicated to discuss here, so we'll not go into them. For now, it
-  is enough to remember that the edges are a way to encode the 
+  is enough to remember that the edges are a way to encode the
   dependency structure in the domain.
 </p>
 
@@ -783,7 +783,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
 
 <p>
   When the variables are categorical, i.e., they take values in a finite
-  set, the conditional distributions can be specified as 
+  set, the conditional distributions can be specified as
   <strong>conditional probability tables</strong> (CPTs). A CPT for
   variable V includes the distribution of V for each possible
   combination of the values of V's parents. We call such combinations
@@ -955,7 +955,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
 <p>
   The structure (the DAG) and the parameters in the CPTs are the
   building blocks of a Bayesian network. Next we dicuss how they
-  represent a joint distribution and how they can be used to 
+  represent a joint distribution and how they can be used to
   perform inference about the domain.
 </p>
 
@@ -1085,7 +1085,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
   as a sum of two terms. Here the sum will be composed of many
   terms instead of only two, but the basic principle is the same.
   The numerator becomes:<br><br>
-  P(&not;B, &not;R, &not;M) = 
+  P(&not;B, &not;R, &not;M) =
   &Sigma;<sub>&omega; &isin; (&not;B,&not;R,&not;M)</sub> P(&omega;) <br>
   = P(&not;B, &not;R, I, G, S, &not;M)<br>
   + P(&not;B, &not;R, I, G, &not;S, &not;M)<br>
@@ -1194,7 +1194,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
   <code>r</code> is between A = &Sigma;<sub>i=0,...,x-1</sub> P(X=i)
   = P(X=0) + ... + P(X=i-1) and A + P(X=i).
 </p>
-  
+
 <% end %>
 
 <p>
@@ -1218,7 +1218,7 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
   Pseudocode for a generating n random tuples from a Bayesian network
   is as follows.
 </p>
-  
+
 <% partial 'partials/code_highlight' do %>
 1: generate_tuples(n, model):
 2:    for i = 1 to n:

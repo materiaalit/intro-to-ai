@@ -20,7 +20,7 @@
       in the domain? One less is the number of probabilities that we'd have
       to determine in order to fully specify the model. (For example, in the
       Car model of Part 3, with N=6 and k=2, this number was 63.)
-    <li> 
+    <li>
       How many parameters would we have to define to specify the model using
       an "empty" Bayesian network, i.e, a network with no edges at all?
     <li>
@@ -44,7 +44,7 @@
     <li>
       The number of combinations is k<sup>N</sup> = k<sup>4</sup>.
       Since the probabilities of the elementary events must sum to
-      one, it is enough to give k<sup>4</sup>&ndash;1 probability 
+      one, it is enough to give k<sup>4</sup>&ndash;1 probability
       values to define the model this way.<br><br>
     <li>
       In an empty network, we only need to specify the distributions
@@ -62,7 +62,7 @@
       For a node with m parents, the number of possible parent
       configurations is k<sup>m</sup> (since we assumed that the
       number of values that each parent can take is k). To specify
-      the conditional distribution for all parent configurations, 
+      the conditional distribution for all parent configurations,
       we thus need k<sup>m</sup>(k&ndash;1) probability parameters.<br><br>
 
       Summing up the numbers over the N=4 nodes, we thus get k&ndash;1
@@ -136,7 +136,7 @@
 
 <p>
   Now modify the algorithm from the previous exercise so that you can generate
-  data from variables [E]arthquake, [B]urglar, [A]larm. Generate a sample of 
+  data from variables [E]arthquake, [B]urglar, [A]larm. Generate a sample of
   n=100 000 tuples.
   <ol>
     <li>
@@ -276,7 +276,7 @@ under Materials.
   see for example the second image from left: is that really a '7',
   or actually a '4'?
 </p>
-  
+
 <p>
   In this part, we'll study three classic and commonly used
   classifiers: first, the nearest neighbor classifier, second, the
@@ -344,7 +344,7 @@ under Materials.
   digit recognition application, the class variable has ten
   different values (0,...,9), and the feature variables are the
   28 &times 28 = 784 pixel values (binary black/white) in the bitmap
-  images. We store the pixel values in a single vector and use the 
+  images. We store the pixel values in a single vector and use the
   value X<sub>j</sub>=1 to indicate that the j'th pixel is white.
   The value X<sub>j</sub>=&ndash;1 is used for the black color
   for convenience.
@@ -361,7 +361,7 @@ under Materials.
   #{Class=i},
   <br><br>
   where #{X<sub>j</sub> = 1, Class=i} is the number of training instances
-  of class i where the j'th pixel is white, and #{Class=i} is the 
+  of class i where the j'th pixel is white, and #{Class=i} is the
   overall number of class i instances.
 </p>
 
@@ -375,7 +375,7 @@ train_NB(data):
 2:     model.prior[i] = #{class=i} / n
 3:     for each pixel j in 0,...,783: 
 4:        model.cpt[i,j] = #{X<sub>j</sub>=1, class=i} / #{class=i}
-5:  return model 
+5:  return model
 <% end %>
 
 <p>
@@ -386,12 +386,12 @@ train_NB(data):
 
 <p> Given a new image with pixel values
   x<sub>0</sub>,...,x<sub>783</sub> (so, for example, &ndash;1,&ndash;1,&ndash;1,1,... if the first
-  three pixels are black and the fourth is white, etc) the classifier computes 
-  the joint probability<br><br> 
-  P(Class=i, X<sub>0</sub>=x<sub>0</sub>,...,X<sub>783</sub>=x<sub>783</sub>) 
+  three pixels are black and the fourth is white, etc) the classifier computes
+  the joint probability<br><br>
+  P(Class=i, X<sub>0</sub>=x<sub>0</sub>,...,X<sub>783</sub>=x<sub>783</sub>)
   = P(Class=i) P(X<sub>0</sub>=x<sub>0</sub> | Class=i) &times; ...
   &times; P(X<sub>783</sub>=x<sub>783</sub> | Class=i)
-  <br><br> 
+  <br><br>
   for all i=0,...,9.
   The sum of these probabilities over the ten class values,
   Z, is the annoying denominator in the Bayes rule, so we can obtain
@@ -422,7 +422,7 @@ posterior_NB(model, image):
 10: for each class i in 0,...,9:
 11:    posterior[i] = posterior[i] / Z
 12: return posterior
-<% end %>  
+<% end %>
 
 <p>
   Note that since the pixels can only take one of two possible values
@@ -474,7 +474,7 @@ posterior_NB(model, image):
       <b>parallelism:</b> many neurons act simultaneously
     <li>
       <b>stochasticity:</b> the behavior of neurons cannot be predicted
-      in a deterministic fashion -- the same input can lead to 
+      in a deterministic fashion -- the same input can lead to
       different outputs
     <li>
       <b>massive scale:</b> neural networks can involve hundreds of billions
@@ -486,7 +486,7 @@ posterior_NB(model, image):
       over time
   </ol>
 </p>
-	
+
 <p>
   Artificial neural networks (ANNs) mimic natural neural networks by
   copying the basic idea of a connected system including a large
@@ -651,8 +651,8 @@ perceptron(data): 
 1:  w = [0, ...,0]               # array of size p
 2:  while error(data, w) > 0:
 3:     (x,y) = choose_random_item(data)
-4:     z = w[0]x[0] + ... + w[p-1]x[p-1]  
-5:     if z ≥ 0 and y = -1:      # -1 classified as 1 
+4:     z = w[0]x[0] + ... + w[p-1]x[p-1]
+5:     if z ≥ 0 and y = -1:      # -1 classified as 1
 6:        w = w − x              # subtract vector x
 7:     if z < 0 and y = 1:       # 1 classified as -1
 8:        w = w + x              # add vector x
@@ -670,7 +670,7 @@ perceptron(data): 
 
 <p>
   It can be theoretically proven that if the data is <b>linearly
-    separable</b>, then the algorithm is guaranteed to stop after a 
+    separable</b>, then the algorithm is guaranteed to stop after a
   finite number of steps and produce a weigth vector that correctly
   classifies all the training instances.
 </p>
@@ -721,7 +721,7 @@ perceptron(data): 
 <% partial 'partials/solution', locals: { name: 'Example solution' } do %>
 
 <p>
-  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-17/files/Perceptron-solution.zip">here</a>.
+  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-18/files/Perceptron-solution.zip">here</a>.
 </p>
 
 <% end %>
@@ -759,7 +759,7 @@ perceptron(data): 
 <% partial 'partials/solution', locals: { name: 'Example solution' } do %>
 
 <p>
-  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-17/files/NearestNeighbor.java">here</a>.
+  An example solution is <a href="https://materiaalit.github.io/intro-to-ai-18/files/NearestNeighbor.java">here</a>.
 </p>
 
 <% end %>
@@ -776,7 +776,7 @@ perceptron(data): 
   <ol>
     <li>
       Applying a non-linear transformation on the original input
-      data may produce a representation where the data are 
+      data may produce a representation where the data are
       linearly separable. The so called "kernel trick" leads to
       a class of methods known collectively as <a href="https://en.wikipedia.org/wiki/Kernel_method">kernel methods</a>, among which the
       support vector machine (SVM) is the best known.
@@ -909,7 +909,7 @@ perceptron(data): 
 </p>
 
 <p>
-  The neuron states can be given, for example, by pixels in a 
+  The neuron states can be given, for example, by pixels in a
   black-and-white image like in the MNIST task.
 </p>
 
@@ -946,7 +946,7 @@ perceptron(data): 
   machine</b> which is essentially a stochastic version of the
   Hopfield network.  The main differences include the fact that the
   states of only a part of the neurons need to be given in the
-  training data, and the learning and activation rules are 
+  training data, and the learning and activation rules are
   different.
 </p>
 
@@ -1005,4 +1005,4 @@ perceptron(data): 
   inputs activate nearby neurons. A typical application of the SOM is
   data visualization.
 </p>
-  
+

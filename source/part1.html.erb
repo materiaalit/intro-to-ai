@@ -23,17 +23,17 @@ under Materials.
   We will also briefly discuss the philosophical aspects of AI: whether
   intelligent behavior implies or requires the existence of a ''mind'', and
   in what extent is consciousness replicable as a computational process.
-  However, this course is first and foremost focused on building 
-  practically useful AI tools, and we will quickly push considerations 
-  about consciousness aside as they tend to be only in the way when 
+  However, this course is first and foremost focused on building
+  practically useful AI tools, and we will quickly push considerations
+  about consciousness aside as they tend to be only in the way when
   designing working solutions to real problems.
 </p>
 
 <p>
-  The first technical topic, also covered in Part 1, is 
+  The first technical topic, also covered in Part 1, is
   problem-solving by search.
 </p>
-  
+
 <% partial 'partials/hint', locals: { name: 'Learning objectives of Part 1' } do %>
 
 <table class="table">
@@ -53,11 +53,11 @@ under Materials.
       <ul>
 	<li>can express the basic philosophical problems related to AI
 (the difficulty in defining AI and consciousness, acting vs thinking,
-Turing test) 
+Turing test)
 	<li>can distinguish between realistic and unrealistic AI in
-science-fiction 
+science-fiction
 	<li>can describe the contrast between "Good Old Fashioned
-AI" (GOFAI) and modern AI approaches 
+AI" (GOFAI) and modern AI approaches
 	<li>know the main-stream developments in the history of AI
       </ul>
     </td>
@@ -133,7 +133,7 @@ AI" (GOFAI) and modern AI approaches
   However, there is an element of truth in the definition in the sense
   that fifty years ago, for instance, search and planning algorithms
   were considered to belong to the domain of AI. Nowadays algorithms
-  such as breadth-first and depth-first search, and A*, are thought 
+  such as breadth-first and depth-first search, and A*, are thought
   (and taught) as belonging to Data Structures and Algorithms.
 </p>
 
@@ -155,17 +155,17 @@ AI" (GOFAI) and modern AI approaches
   models quickly lead to pessimism and an <b>AI winter</b> followed.
 </p>
 
-<p> 
+<p>
   The 1980s brought a new wave of AI methods based on logic-based
   methods. So called <b>expert systems</b>, manipulating knowledge
   elicited from domain experts, such as medical doctors, showed
-  great promise by solving nicely contained, well-defined 
+  great promise by solving nicely contained, well-defined
   ''toy problems'', but turned out to fail every time when they
   were deployed in more complex, real-world problems. The second
   (or the third, depending on the counting) AI winter lasted from the
   late 1980s until the mid-1990s.
 </p>
- 
+
 <p>
   Currently, since the turn of the millennium, AI has been on the rise
   again. In the late 1990s, the ''classical'' or <b>''Good
@@ -270,7 +270,7 @@ AI" (GOFAI) and modern AI approaches
 <p>
   Good places to start your search are, e.g., the proceedings of
   <a href="http://www.aaai.org">AAAI</a>,
-  <a href="http://www.ijcai.org">IJCAI</a>, and 
+  <a href="http://www.ijcai.org">IJCAI</a>, and
   <a href="https://www.eurai.org/activities/ECAI_conferences">ECAI</a>
   conferences or magazine-style publications that may be somewhat less
   technical and intended for broader audiences, such
@@ -321,9 +321,9 @@ AI" (GOFAI) and modern AI approaches
 <p>
   <ol>
     <li>
-      The article presents new algorithms for factorizing matrices 
+      The article presents new algorithms for factorizing matrices
       (representing big matrices as products of smaller matrices)
-      that are based on certain optimization techniques. Matrix 
+      that are based on certain optimization techniques. Matrix
       factorization can be used in various machine learning scenarios.
       For example, many state-of-the-art recommender systems that
       predict user ratings of items such as movies or music include
@@ -336,7 +336,7 @@ AI" (GOFAI) and modern AI approaches
     <li>
       Based on this article alone, AI research would appear to
       differ only slightly from mathematics research. The emphasis
-      on practical solutions and empirical evaluation is a feature 
+      on practical solutions and empirical evaluation is a feature
       characteristic to AI and ML research.
     <li>
       The paper uses advanced multivariate calculus tools. From an
@@ -345,9 +345,9 @@ AI" (GOFAI) and modern AI approaches
       where further studies would be required to get the details.
     <li>
       The article doesn't mention consciousness or any other
-      "philosophical" issues at all. The problem is clearly 
+      "philosophical" issues at all. The problem is clearly
       constrained as that of minimizing a function. The progress
-      in AI that this paper makes is quantitative, not 
+      in AI that this paper makes is quantitative, not
       qualitative.
   </ol>
 </p>
@@ -364,7 +364,7 @@ AI" (GOFAI) and modern AI approaches
 </p>
 
 <p>
-  Solutions to ''pencil-and-paper'' exercises such as this one 
+  Solutions to ''pencil-and-paper'' exercises such as this one
   are returned at the exercise sessions where you should make sure
   to mark completed exercises on the sheet that is circulated in
   the beginning.
@@ -385,7 +385,7 @@ AI" (GOFAI) and modern AI approaches
 <p>
   We will now put our wine glasses aside, roll our sleeves, and turn
   our minds toward more practical considerations.
-  Let's jump to our first technical topic: 
+  Let's jump to our first technical topic:
   search and problem-solving.
 </p>
 
@@ -402,7 +402,7 @@ AI" (GOFAI) and modern AI approaches
 
 <p>
   Basic tree and network traversal algorithms belong to the
-  course prerequisites, and you should already be familiar with 
+  course prerequisites, and you should already be familiar with
   breadth-first, depth-first, and best-first search (including its
   special case, the A* algorithm). If you forgot the details right
   after taking the exam, no need to worry: we will revisit them
@@ -476,7 +476,7 @@ AI" (GOFAI) and modern AI approaches
 
 <p>
   You need not worry about the difference too much. Here we simply wanted
-  to use the same template for all search methods. The behavior is 
+  to use the same template for all search methods. The behavior is
   always the same: for example, the recursive version of DFS actually
   uses a stack to store the state of the search and pops the next
   state from the stack just like our non-recursive version above.
@@ -488,8 +488,8 @@ AI" (GOFAI) and modern AI approaches
   path with the fewest transitions to a goal node: if node A is nearer
   to the starting node than node B, the search is expanded to node A
   earlier than to B. You can think of the BFS search as
-  a <i>frontier</i> of nodes that gradually progresses outwards from 
-  the starting node, so that all nodes at a certain number of 
+  a <i>frontier</i> of nodes that gradually progresses outwards from
+  the starting node, so that all nodes at a certain number of
   steps away are expanded before moving one step ahead.
 </p>
 
@@ -540,7 +540,7 @@ AI" (GOFAI) and modern AI approaches
       d: [g]
       g: [h]
       h = goal
-</pre>         
+</pre>
 </p>
 
 <% end %>
@@ -569,9 +569,9 @@ AI" (GOFAI) and modern AI approaches
 
 <p>This pretty picture shows the initial state and the goal state:
 <pre>
-initial  |     |     |          goal    |     |     |          
-state:  ---    |     |          state:  |     |    ---  
-       -----   |     |                  |     |   -----     
+initial  |     |     |          goal    |     |     | 
+state:  ---    |     |          state:  |     |    --- 
+       -----   |     |                  |     |   -----  
       =====================         ====================
 </pre>
 </p>
@@ -673,7 +673,7 @@ state:  ---    |     |          state:  |     |    --- 
   so it's not going to be super useful -- data from a file that we give.
   Implement a program that takes as input the starting point A and
   the destination B, and finds the route from A to B with the
-  <i>fewest stops</i> between them. It is quite straightforward to 
+  <i>fewest stops</i> between them. It is quite straightforward to
   show that such a route can be found by BFS.
 </p>
 
@@ -699,7 +699,7 @@ state:  ---    |     |          state:  |     |    --- 
       environment (e.g., Netbeans).
     <li>
       Implement the search algorithm in
-      class <code>TravelPlanner</code>.  
+      class <code>TravelPlanner</code>.
     <li>
       In order to be able to
       extract the resulting route after the search ends, construct a
@@ -732,7 +732,7 @@ state:  ---    |     |          state:  |     |    --- 
 <% partial 'partials/solution', locals: { name: 'Example solution' } do %>
 
 <p>
-  You can download a working solution <a href="https://materiaalit.github.io/intro-to-ai-17/files/TravelPlanner.java">here</a>.
+  You can download a working solution <a href="https://materiaalit.github.io/intro-to-ai-18/files/TravelPlanner.java">here</a>.
 </p>
 
 <% end %>
@@ -746,7 +746,7 @@ state:  ---    |     |          state:  |     |    --- 
 </p>
 
 <p>
-  
+
 </p>
 
 <% partial 'partials/material_sub_heading' do %>
@@ -786,11 +786,11 @@ state:  ---    |     |          state:  |     |    --- 
 <% partial 'partials/hint', locals: { name: 'Alice, Where Art Thou Going?' } do %>
 
 <p>
-  If you play around with 
+  If you play around with
   the <a href="http://qiao.github.io/PathFinding.js/visual/">PathFinding
     applet</a> for a while, using BFS or Dijkstra's algorithm, you
-  will quickly notice a problem. The search spreads out to all 
-  directions symmetrically without any preference towards the 
+  will quickly notice a problem. The search spreads out to all
+  directions symmetrically without any preference towards the
   goal.
 </p>
 
@@ -833,7 +833,7 @@ state:  ---    |     |          state:  |     |    --- 
   the <a href="http://qiao.github.io/PathFinding.js/visual/">PathFinding
   applet</a>, you will immediately see that it wipes the floor with
   other, uninformed search methods.
-</p>  
+</p>
 
 
 <p>
