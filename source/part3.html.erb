@@ -138,12 +138,60 @@ under Materials.
   common.)
 </p>
 
+  The Bayes rule (aka Bayes theorem) is the single most important tool
+  from probability calculus, and we'll be using in again and again for
+  building AI applications, here is some more material about it
+  in particular:
+  <ul>
+    <li><a href="http://en.wikipedia.org/wiki/Bayes%27_theorem#Drug_testing">Wikipedia: Bayes theorem (Section <i>Drug testing</i>)</a>
+    <li><a href="http://www.youtube.com/watch?v=tRE6mKAIkno">Youtube: Maths Doctor, A Level Statistics 1.5 Bayes' Theorem and medical testing</a>
+    <li>Better Explained: <a href="http://betterexplained.com/articles/understanding-bayes-theorem-with-ratios/">Understanding Bayes Theorem with Ratios</a>
+  </ul>
+</p>
+
+<% partial 'partials/exercise', locals: { name: 'Bayes rule (1p)' } do %>
+
+<p>
+  Let's use the same dice as in the previous exercise.
+</p>
+
+<p>
+  <ol>
+    <li> What is the distribution of the sum of the outcomes when
+      rolling the ordinary die twice?
+    <li> What is the distribution of the sum of the outcomes when
+      rolling the loaded die twice?
+    <li> Assume that either die (ordinary or loaded) is selected
+      at random with probability 1/2 each. The selected die is
+      rolled twice. Calculate the probability<br><br>
+      <i>P("the die is loaded" | "the sum of the outcomes is 10")</i><br><br>
+      Calculate the probability that the die is ordinary as well to
+      make sure that the sum of the two probabilities equals one.
+    <li> Again, either die is selected with equal probability.
+      We notice that every time the die is rolled, the outcome is six.
+      After how many rolls can we be at least 99% sure that the
+      die is loaded? <br><br> <i>Hint:</i> Calculate the ratio of the
+      posterior probabilities of each die after <i>k</i>
+      rolls. If the posterior probability of the loaded die is over
+      99%, then the ratio of the posterior probabilities is over
+      0.99/0.01 = 99.
+  </ol>
+</p>
+
+<p>
+  If you have trouble with these exercises, you may wish to study
+  additional material on the Bayes rule. Good pointers are provided above.
+</p>
+
+<% end %>
+
+
 <% partial 'partials/hint', locals: { name: 'On (not) calculating the annoying denominator' } do %>
 
 <p>
-  As you may have noticed, when completing last week's exercises,
-  and as you will notice at the latest when completing this week's,
-  calculating the denominator may indeed be annoying.
+  As you may have noticed, when completing the above exercise,
+  and as you will notice at the latest when completing the ones
+  to follow, calculating the denominator may indeed be annoying.
 </p>
 
 <p>
