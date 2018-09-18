@@ -2,7 +2,7 @@
   title: Part 3
   exercise_page: true
   quiz_page: false
-  published: false
+  published: true
 ---
 
 
@@ -36,18 +36,14 @@
 </p>
 
 <p>
-  To make things exciting, we'll have a <strong>chess-bot
-  tournament</strong>. You will submit your solution (the heuristic
-  evaluation function) on our server and compete against our own
-  contender, <i>Deep Glue</i> and bots by other students. May the
-  best bot win!
+  We challenge you to see how your evaluation function fares against
+  our own contender, <i>Deep Glue</i>. Deep Glue is included in the
+  Java template that we provide. (Sorry, no Python version this time!)
 </p>
 
 <ol>
   <li>
-    Download the Java template <a href="https://materiaalit.github.io/intro-to-ai-18/files/Chesspackage.zip">here</a>. <strong>NB: There was an error (old version) in the
-      package and it was fixed on Sept 21, 4.20pm. If you have problems
-      uploading to the server, please reload the new package and try again.</strong>
+    Download the Java template <a href="https://materiaalit.github.io/intro-to-ai-18/files/Chesspackage.zip">here</a>.
   <li>
     Implement the method <code>double eval(Position p)</code> in class
     <code>YourEvaluator</code>. The method takes as its input a board
@@ -55,21 +51,21 @@
     pieces on the board and which player's turn it is. The return value
     should be the higher the more likely the white player is to win.
   <li>
-    You can upload the compiled <code>YourEvaluator</code> class
-    (i.e., the <code>class</code> file) on
-    the <a href="http://ejaasaar.users.cs.helsinki.fi/">tournament
-    server</a>. (If you use multiple classes, you can also upload a JAR
-    file.)
-  <li>
-    Once you have uploaded your bot, you can play it against the other
-    bots. You gain points by winning and lose points by losing. The
-    highest ranked bot will be declared the champion at the end of the
-    course. (One week before the exam.)
+    When you run the code, the system simulates a game between your
+    bot and Deep Glue. Can you build an evaluation function that
+    beats Deep Glue more often than the other way around?
 </ol>
+
+<p>
+  We have traditionally had a great chess-bot tournament each year.
+  We are currently trying to set up the tournament server, and assuming
+  it works out, you will be able to upload your bot (evaluation function)
+  and compete against your fellow students to earn extra points!
+</p>
 
 <% end %>
 
-You can find the lecture slides for this part on the <a href="https://courses.helsinki.fi/DATA15001/119123276">course homepage</a>
+You can find the lecture slides for this part on the <a href="https://courses.helsinki.fi/en/data15001/124845454">course homepage</a>
 under Materials.
 
 <% partial 'partials/material_heading' do %>
@@ -570,11 +566,11 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
 </p>
 
 <% partial 'partials/code_highlight' do %>
-1:  spamicity(words, estimates):
-2:     R = estimates.prior_spam / estimates.prior_ham
-3:     for each w in words:
-4:        R = R * estimates.spam_prob(w) / estimates.ham_prob(w)
-5:     return R
+    spamicity(words, estimates):
+1:     R = estimates.prior_spam / estimates.prior_ham
+2:     for each w in words:
+3:        R = R * estimates.spam_prob(w) / estimates.ham_prob(w)
+4:     return R
 <% end %>
 
 <p>
@@ -1220,13 +1216,13 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
 </p>
 
 <% partial 'partials/code_highlight' do %>
-1: generate_tuples(n, model):
-2:    for i = 1 to n:
-3:       v = empty array
-4:       for V in model.variables:
-5:          pa = v[V.Pa]    # parents of V
-6:          v.append(sample(V.CPT(pa)))
-7:       output v 
+   generate_tuples(n, model):
+1:    for i = 1 to n:
+2:       v = empty array
+3:       for V in model.variables:
+4:          pa = v[V.Pa]    # parents of V
+5:          v.append(sample(V.CPT(pa)))
+6:       output v 
 <% end %>
 
 <p>
