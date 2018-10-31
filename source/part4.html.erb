@@ -375,7 +375,7 @@ under Materials.
 train_NB(data):
 1:  for each class i in 0,...,9:
 2:     model.prior[i] = #{class=i} / n
-3:     for each pixel j in 0,...,783: 
+3:     for each pixel j in 0,...,783:
 4:        model.cpt[i,j] = #{X<sub>j</sub>=1, class=i} / #{class=i}
 5:  return model
 <% end %>
@@ -412,10 +412,10 @@ train_NB(data):
 
 <% partial 'partials/code_highlight' do %>
 posterior_NB(model, image):
-1:  Z = 0; posterior = empty array 
+1:  Z = 0; posterior = empty array
 2:  for each class i in 0,...,9:
 3:     posterior[i] = model.p[i]
-4:     for each feature j in 0,...,783: 
+4:     for each feature j in 0,...,783:
 5:        if image[j] = 1:
 6:           posterior[i] = posterior[i] * model.cpt[i,j]
 7:        else:
