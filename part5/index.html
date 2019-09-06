@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to Artificial Intelligence 2018 | Part 5</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link href="../stylesheets/styles-b17821ab.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/xcode.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.css" />
+
+      <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47575342-7', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+</script>
+
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="header-wrapper">
+        <div class="browser-support-warning" id="browser-support-warning" style="display: none;">
+  Kaikki tämän materiaalin osat eivät välttämättä tuo nykyistä selaintasi. Voisitko harkita vaihtamista <a href="https://www.google.com/chrome/browser/desktop/" target="_blank" rel="noopener">Chrome</a> tai <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener">Firefox</a> selaimeen?
+  <span class="browser-support-warning__close">Selvä!</span>
+</div>
+
+
+        <nav class="navbar navbar-light bg-white">
+  <a class="navbar-brand" href="http://mooc.fi" alt="MOOC" target="_blank" rel="noopener">
+    <span class="icon-mooc"></span>
+  </a>
+
+  <ul class="nav navbar-nav hidden-md-down">
+      <li class="nav-item ">
+        <a href="../" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=index.html&gt;')">Introduction</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part1/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part1.html&gt;')">Part 1</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part2/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part2.html&gt;')">Part 2</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part3/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part3.html&gt;')">Part 3</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part4/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part4.html&gt;')">Part 4</a>
+      </li>
+      <li class="nav-item active">
+        <a href="./" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part5.html&gt;')">Part 5</a>
+      </li>
+  </ul>
+
+  <div class="float-xs-right navbar__buttons">
+    <div class="dropdown" id="mobile-nav-dropdown">
+      <button class="btn btn-secondary dropdown-toggle navbar__mobile-nav-toggle" data-toggle="dropdown">
+        <i class="fa fa-bars"></i>
+      </button>
+
+      <div class="dropdown-menu">
+      </div>
+    </div>
+
+    <button class="btn btn-secondary" id="table-of-contents-toggle">
+      <span class="hidden-md-down">Table of contents</span>
+      <i class="fa fa-ellipsis-h hidden-lg-up"></i>
+    </button>
+
+    <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
+  </div>
+</nav>
+
+      </div>
+
+      <div class="content-wrapper">
+        <div class="container material" id="material">
+            <div class="exercise-list">
+  <div class="exercise-list__header">
+    Exercises
+  </div>
+
+  <div class="exercise-list__content" id="exercise-list"></div>
+
+</div>
+
+
+          <div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Machine Learning with Weka: MLP (1p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  Download and install the Weka system on your computer. We've
+  prepared a set of instructions to get started and a minitutorial.
+  <a href="../part5_ex1/">Click here</a>. You'll also need to
+  download the Two Spirals dataset <a href="https://materiaalit.github.io/intro-to-ai/files/spirals.arff">here</a>.
+</p>
+
+<p>
+  Use Weka to train a multilayer perceptron (MLP) to classify the
+  Two Spirals data. The class labels are given in the <code>Class</code>
+  column whereas the variables <code>A1</code> and <code>A2</code> are
+  the x- and y-coordinates which are the input features.</p>
+
+<p>
+  Note that using the default settings gives poor results. When
+  accuracy is measured using the <b>Percentage split % 66</b>
+  setting, the accuracy is 52.9&nbsp;% (36 correct, 32 incorrect
+  instances). Click <b>Visualize classification errors</b> and
+  let the x- and y-axis be the input variables <code>A1</code> and
+  <code>A2</code> respectively. You will be able to see that the
+  decision boundary, which is completely bonkers.
+</p>
+
+<p>
+  Adjust the MLP settings and experiment with different number of
+  hidden layers (the parameter <code>hiddenLayers</code> shows the
+  number of neurons on each hidden layer, separated by
+  colons <code>:</code>), and the number of training iterations
+  (<code>trainingTime</code>). You should get classification error
+  less than 10&nbsp;%.
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Machine Learning with Weka: more classifiers (1p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  <ol>
+    <li>
+      Use Weka to train a nearest neighbor classifier (<b>Lazy/IB1</b>).
+    <li>
+      Do the same with a decision tree (<b>Trees/J48</b>).
+    <li>
+      Visualize the decision boundaries and explain why the MLP,
+      nearest neighbor, and decision tree classifiers work or don't work
+      in this case.
+  </ol>
+</p>
+
+<p>
+  <i>Hint:</i> For item 3, open <b>GUI Chooser</b> in Weka,
+  click "Visualization" in the top menu, and choose
+  "BoundaryVisualizer".
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+
+You can find the lecture slides for this part on the <a href="https://courses.helsinki.fi/en/data15001/129802916">course homepage</a>
+under Materials.
+
+
+<h1 class="material-heading">
+    Digital Signal Processing
+
+</h1>
+
+<p>
+  The topics of this week include two special kinds of data that
+  require somewhat specific techniques: digital signals (such as audio
+  or images), and natural language.
+</p>
+
+<p>
+  Next week we will finish the Digital Signal Processing and Robotics
+  theme by studying robotics.
+</p>
+
+<div class="hint">
+  <div class="hint__header">
+    <i class="fa fa-info-circle hint__icon"></i>Learning objectives of Part 5
+  </div>
+
+  <div class="hint__body">
+    
+<table class="table">
+  <tr>
+    <td>
+      Theme
+    </td>
+    <td>
+      Objectives (after the course, you ...)
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Natural language processing
+    </td>
+    <td>
+      <ul>
+	<li>can generate sentences from a given context-free grammar
+	<li>can parse a sentence using the Cocke-Younger-Kasami algorithm
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Digital Signal Processing and Robotics
+    </td>
+    <td>
+      <ul>
+	<li>can describe the principles of at least one pattern recognition method (e.g., SIFT/SURF)
+	<li>can apply at least one pattern recognition method in practice
+      </ul>
+    </td>
+  </tr>
+</table>
+
+
+  </div>
+</div>
+
+<h2 class="material-heading">
+    Digital signal representations
+
+</h2>
+
+<p>
+  Digital image and audio signals represent recordings of natural
+  signals in numerical form. For images, the values represent
+  pixel intensities stored in a two-dimensional array. A third
+  dimension can be used to store different bands for, e.g.,
+  red, green, and blue (RGB). We can also think of the values
+  are functions of the x and y coordinates, F(x,y).
+</p>
+
+<p>
+  <i>Fun fact (but not required for the exam):</i> In the case of
+  audio, the signal can be thought to be a signal of time, F(t), but
+  other representations such as those that are functions of frequency,
+  F(f), are commonly used. The frequency representation is
+  particularly well suited for compact representation since frequency
+  bands outside the audible range 20 Hz to 20 kHz can be left out
+  without observable (to humans) effect.
+</p>
+
+<p>
+  Signal processing covers a wide variaty of different tasks and
+  techniques. See the lecture slides for a number of examples of
+  both audio and image/video processing tasks from ''photoshopping''
+  to face recognition.
+</p>
+
+<h2 class="material-heading">
+    Pattern recognition
+
+</h2>
+
+<p>
+  <b>Pattern recognition</b> is a good example of an AI problem
+  involving digital signals. It means generally the problem is
+  recognizing an object in a signal (typically an image). The task is
+  made hard because signals tend to vary greatly depending on external
+  conditions such as camera angle, distance, lighting conditions,
+  echo, noise, and differences between recording devices. Therefore
+  the signal is practically always different even if it is from the
+  same object.
+</p>
+
+<p>
+  Based on these facts, an essential requirement for successful
+  pattern recognition is the extraction of <b>invariant features</b>
+  in the signal. Such features are insensitive (or as insensitive as
+  possible) to variation in the external conditions, and tend to be
+  similar in recordings of the same object. In the lecture slides
+  there is a famous photograph of
+  an <a href="https://en.wikipedia.org/wiki/Afghan_Girl">Afghan
+  girl</a> by Steve McCurry. She was identified based on the unique
+  patterns in the iris of the eye. Here the iris is the invariant
+  feature, which remains unchanged when a person grows older even if
+  their appearance may otherwise change.  The iris is an example of
+  invariance, and a metaphor for more general invariance with respect
+  to external conditions.
+</p>
+
+<h2 class="material-heading">
+    SIFT and SURF
+
+</h2>
+
+<p>
+  Good examples of commonly used feature extraction techniques for
+  image data include Scale-Invariant Feature Transform (SIFT) and
+  Speeded-Up Robust Features (SURF). We take a closer look at the
+  SURF technique. It can be broken into two or three stages:
+  <ol>
+    <li>
+      <b>Choosing interest points:</b> We identify a set of (x,y)
+      points by maximizing the determinant of a so called Hessian
+      matrix that characterizes the local intensity variation
+      around the point. The interest points tend to be located
+      at "blobs" in the image. (You are not required to decode the
+      details of this -- a rough idea is enough.)
+    <li>
+      <b>Feature descriptors:</b> The intensity variation around each
+      interest point is described by a feature descriptor which is a
+      64-dimensional vector (array of 64 real values).  In addition,
+      the feature has a scale (size) and an orientation (dominant
+      direction).
+    <li>
+      <b>Feature matching:</b> If the problem is to match objects
+      between two images, then both of the above tasks are performed
+      on both images. We then find pairs of feature descriptors
+      (one extracted from image A and the other from image B) that
+      are sufficiently close to each other in Euclidean distance.
+  </ol>
+</p>
+<img src="../img/surf-example-mars-c8674a6e.png" width=100%><br><br>
+
+<p>
+  Above is an example of detected features: interest point location,
+  scale, and orientation shown by the circles, and the type of
+  contrast shown by the color, i.e., dark on light background (red) or
+  light on dark background (blue).  <i>Image credit:</i> NASA/Jet
+  Propulsion Laboratory/University of Arizona. Image from the edge of
+  the south polar residual cap on Mars.
+</p>
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Pattern recognition A (1p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  The TMC template for the pattern recognition task implements
+  SURF feature extraction and matching. When you run the template,
+  you should get the face example presented at the lecture.
+</p>
+
+<p>
+  The red dots in the images are the locations of the SURF
+  interest points. The lines between points in the two images
+  represent matches, i.e., pairs of features whose descriptor
+  vectors are sufficiently close to each other to be classified as
+  belonging to the same or similar looking object.
+</p>
+
+<p>
+  Change the files <code>img1.jpg</code> and <code>img2.jpg</code> in
+  the <code>example</code> folder to another pair of images, and
+  rerun the template. <i>Note:</i> The images must be the same
+  height. (Width can be different.)
+</p>
+
+<p>
+  Try at least five different pairs of images, some of which include
+  the same building, person, and/or object. Try to find examples
+  where the feature matching works, and examples where it doesn't.
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Pattern recognition B (1p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  Use the same template as in the previous exercise.
+</p>
+
+<p>
+  Choose one or more images and do the following modifications (one
+  at a time):
+  <ul>
+    <li> change brightness, contrast, and color balance
+    <li> rotate the image
+    <li> crop and rescale
+    <li> add noise or blur
+  </ul>
+  Use your favorite image processing tool (iPhote, GIMP, Photoshop, etc).
+</p>
+
+<p>
+  Does SURF recognize the objects in the image as the same despite
+  the alterations?
+</p>
+
+<p>
+  <i>An alternative (more fun) way:</i> Take multiple photos of the
+  same image from slightly different angles, different distances,
+  in different lighting conditions, with occlusion, etc.
+  Does SURF recognize the object despite such changes in
+  external conditions?
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+
+<h1 class="material-heading">
+    Natural Language Processing
+
+</h1>
+
+<p>
+  Language is another example of an area where AI has hard time
+  considering how easy it feels to us, as humans, to understand
+  natural scenes or language. This is probably in part because
+  we don't appreciate the hardness of tasks that even a child
+  can perform without much apparent practice. (Of course, a
+  child actually practices these skills very intensively, and
+  in fact, evolution has trained us for millions of years,
+  preconditioning our "neural networks" to process information
+  in this form.)
+</p>
+
+<p>
+  The features that make language distinctive and different from
+  many other data sources for which we may apply AI techniques
+  include:
+  <ol>
+    <li>
+      Even though language follows an obvious <b>linear structure</b>
+      where a piece of text has a beginning and an end, and the words
+      inbetween are in a given order, it also has <b>hierarchical</b>
+      structures including, e.g.,
+      text&ndash;paragraph&ndash;sentence&ndash;word relations,
+      where each sentence, for example, forms a separate unit.
+    <li>
+      Grammar constrains the possible (allowed) expressions in natural
+      languages but still leaves room for ambiguity (unlike formal
+      languages such as programming languages which must be
+      unambiguous).
+    <li>
+      Compared to digital signals such as audio or image, natural
+      language data is much closer to <b>semantics</b>: the idea
+      of a chair has a direct correspondence with the word 'chair'
+      but any particular image of a chair will necessarily carry
+      plenty of additional information such as the color, size,
+      material of the chair and even the lighting conditions, the
+      camera angle, etc, which are completely independent of the
+      chair itself.
+  </ol>
+</p>
+
+<h2 class="material-heading">
+    Formal languages and grammars
+
+</h2>
+
+
+<p>
+  Natural language processing (NLP) applies many concepts from
+  theoretical computer science which are applicable to the study of
+  formal languages. A formal language is generally a set of
+  strings. For example, the set of valid mathematical expressions is a
+  formal language that includes the
+  string <code>(1+2)&times;6&ndash;3</code> but not the string
+  <code>1+(+&times;5(</code>. A <b>(formal) grammar</b> is a set
+  of symbol manipulation rules that enables the generation of the
+  valid strings (or "sentences") in the language.
+</p>
+
+<p>
+  An important subclass of formal languages is <b>context-free
+    languages</b>. A context-free language is defined by a
+    context-free grammar, which is a grammar with rules of the
+    form <code>V&xrarr;w</code>, where <code>V</code> is
+    a <b>non-terminal symbol</b>, and <code>w</code> is a sequence of
+    non-terminal or <b>terminal symbols</b>.  The context-free nature
+    of the rules means that such a rule can be applied independently
+    of the surrounding context, i.e., the symbols before or
+    after <code>V</code>.
+</p>
+
+<p>
+  An example will hopefully make the matter clear. Let <code>S</code>
+  be a <b>start symbol</b>, which is also the only non-terminal symbol
+  in the grammar. Let the set of terminal symbols be <code>()[]</code>.
+  The set of rules is given by
+<pre>
+S &xrarr; SS
+S &xrarr;
+S &xrarr; (S)
+S &xrarr; [S]
+</pre>
+</p>
+
+<p>
+  The language defined by such a grammar is the set of strings that
+  can be generated by repeated application of any of the above rules,
+  starting with the start symbol <code>S</code>.
+</p>
+
+<p>
+  For example, the string <code>()</code> can be generated by first
+  applying the rule <code>S &xrarr; (S)</code> to the start symbol,
+  whereupon we obtain the intermediate string <code>(S)</code>.
+  Applying the rule <code>S &xrarr; </code> to the symbol <code>S</code>
+  in the intermediate string, to obtain the final outcome
+  <code>()</code>.
+</p>
+
+<p>
+  As another example, the string <code>(())[]</code> also belongs to
+  the language. Can you figure out a sequence of rules to generate it
+  from the start symbol <code>S</code>? Notice that each application
+  of a rule only applies to a single symbol in the intermediate
+  string. So for example, if you apply the rule <code>S &xrarr; (S)</code>
+  to the intermediate string <code>SS</code>, only one of the symbols
+  gets parentheses around it (you are free to choose which one):
+  <code>S(S)</code> or <code>(S)S</code>. If you want to apply the
+  same rule to both symbols, you can, you just have to apply the same
+  rule twice, which gives <code>(S)(S)</code>.
+</p>
+
+<p>
+  Try working out a sequence of rules to
+  obtain <code>(())[]</code>. To check the correct answer, you can
+  look at the example solution below but don't look before you've
+  tried it by yourself.
+</p>
+
+
+<h2 class="material-heading">
+    Parsing
+
+</h2>
+
+<p>
+  Efficient algorithms for deciding whether a given string belongs to
+  a given context-free language exist. They are based on <b>parsing</b>,
+  which means the construction of a <b>parse tree</b>. The parse tree
+  represents the hierarchical structure of the string. An example parse
+  tree is shown below.
+</p>
+<img src="../img/diagrams/parse-tree-81cb0e66.png" width=30%><br><br>
+
+<p>
+  In the above tree, the sentence "she eats a fish with a fork" has
+  two main components: "she" and the rest of the sentence. The rest of
+  the sentence likewise has two parts: "eats" and "a fish with a
+  fork".  The interpretation of this parse tree is that the object of
+  eating is a fish that has a fork. (A possible but rather unusual
+  scenario as fish rarely have forks.)
+</p>
+
+<p>
+  The above parse tree demonstrates the ambiguity of natural language,
+  which is a challenge to AI applications. A potential solution in
+  such scenarios is to use the semantics of the words and to
+  attach word-dependent probabilities to different rules. This
+  could for instance suggest that the probability of eating something
+  with a fork is a more probable construction than a fish that
+  has a fork. This method is called <b>lexicalized parsing</b>.
+</p>
+
+
+
+<h2 class="material-heading">
+    CYK algorithm
+
+</h2>
+
+<p>
+  The <b>Cooke&ndash;Younger&ndash;Kasami (CYK) algorithm</b> is an
+  O(mn<sup>3</sup>) time algorithm for parsing context-free languages.
+  Here n refers to the number of words in the sentence, and m is the
+  number of rules in the grammar. It is based on dynamic programming
+  where the sentence is parsed by first processing short substrings
+  (sub-sentences) that form a part of the whole, and combining the
+  results to obtain a parse tree for the whole sentence.
+</p>
+
+<p>
+  To present the idea of the CYK algorihtm, we'll start with an example.
+  In our naive example grammar, we have the following set of rules:<br><br>
+  S &xrarr; NP VP<br>
+  VP &xrarr; V NP<br>
+  VP &xrarr; VP ADV<br>
+  VP &xrarr; V<br>
+  NP &xrarr; N<br>
+  V &xrarr; fish<br>
+  N &xrarr; Robots<br>
+  N &xrarr; fish<br>
+  ADV &xrarr; today<br><br>
+  The starting symbol is again S, which stands for both 'start' as well
+  as 'sentence'. NP stands for noun-phrase, VP for verb-phrase, V and N
+  are of course verb and noun respectively, and finally ADV stands
+  for adverb (a specifier that says <i>how</i> or <i>when</i> something
+  is done).
+</p>
+
+<p>
+  The terminal symbols &mdash; note that here we consider words
+  as atomic symbols, and not sequences of characters &mdash; are
+  'fish', 'Robots', and 'today'. Also note that the word 'fish'
+  is both a verb (V) and a noun (N).
+</p>
+
+<h3 class="material-heading">
+    CYK table
+
+</h3>
+
+
+<p>
+  A fundamental data structure in CYK is a triangular table that is
+  usually depicted as a lower-triangular (or upper-triangular) matrix
+  of size n &times; n. The completed table for our small example is
+  below. This would be the result of running the CYK algorithm with
+  the sentence "Robots fish fish today" as input.
+</p>
+
+<p>
+  <table style="text-align: right; padding: 6px;">
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	S &nbsp;&emsp; <sup>(1,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	S  &nbsp;&emsp; <sup>(1,3)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	S,VP  &ensp; <sup>(2,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	S  &nbsp;&emsp; <sup>(1,2)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	S,VP &ensp; <sup>(2,3)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	VP  &emsp; <sup>(3,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	N,NP  &ensp; <sup>(1,1)</sup><br>
+	<center><i>Robots</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	V,N,VP,NP  <sup>(2,2)</sup><br>
+	<center><i>fish</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	V,N,VP,NP  <sup>(3,3)</sup><br>
+	<center><i>fish</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	ADV  &nbsp;&ensp; <sup>(4,4)</sup><br>
+	<center><i>today</i>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  First of all, pay attention to the numbering scheme of the table cells.
+  Each cell is numbered as shown in the top right corner:
+  (1,4), (1,3), etc. The numbering may be slighly confusing since it
+  doesn't follow the more usual <i>(row, column)</i> numbering.
+  Instead, the numbers given the start and the end of the sub-sentence
+  that the cell corresponds to. For example, the cell (1,4) refers to
+  the whole sentence, i.e., words 1&ndash;4, while the cell (2,3)
+  refers to the words <i>fish fish</i>, i.e., words 2&ndash;3.
+</p>
+
+<p>
+  After the algorihtm is completed, the contents of the cells in the
+  CYK table correspond to the possible interpretations (if any) of the
+  words in question in terms of different non-terminals. For example,
+  the words <i>fish fish</i> are seen to have two interpretations: as
+  a sentence (S) and as a verb-phrase (VP). This is because we can
+  generate these two words by starting either from S or VP.
+</p>
+
+<p>
+  Just to keep you on your toes, let's make sure you understand what
+  we mean when we say that <i>fish fish</i> can be generated from S
+  and VP. That is, give a list of rules to generate these two words
+  starting from S, and then do the same starting from VP.
+</p>
+
+<div class="solution" data-target='collapse'>
+  <div class="solution__header">
+    <a data-toggle="collapse" class="solution__toggle">
+      <i class="fa fa-magic solution__icon"></i>
+      <h1 class="solution__heading">Answer (look only
+after trying on your own)</h1>
+
+      <i class="fa fa-caret-down solution__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="solution__body">
+      
+<p>
+  Starting from S, we first apply the only rule that has S on the
+  left, i.e., S &xrarr; NP VP. Then apply NP &xrarr; N to obtain
+  N VP, and VP &xrarr; V, to obtain N V. Finally, apply N &xrarr; fish
+  and V &xrarr; fish to obtain "fish fish".
+</p>
+
+<p>
+  Starting from VP, apply VP &xrarr; V NP. Then, apply V &xrarr; fish,
+  NP &xrarr; N, and finally N &xrarr; fish.
+</p>
+
+<p>
+  The interpretations of "fish fish" as a sentence (S) and a
+  verb-phrase (VP) are quite different. In the former, the first
+  'fish' is generated through NP and N, i.e., the first word is
+  considered a noun, while the second 'fish' is generated through
+  VP and V, i.e., it is considered a verb. So there are some sea
+  creatures (the first 'fish') that try to catch other sea creatures.
+  On the other hand, in the VP interpretation, the first 'fish'
+  is generated through V, so it is a verb, and the second 'fish'
+  is a noun. This time the interpretation is that what is going on is
+  an attempt to catch some sea creatures but it is not explicated who
+  is fishing since the words only form a verb-phrase that can be
+  combined with a subject noun.
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+<p>
+  The other elements in the table have similar interpretations.  The
+  above example is actually somewhat unusual in the sense that all
+  sub-sentences can be parsed and therefore, all cells in the table
+  contain at least one non-terminal symbol. This is by no means a
+  general property. For example, "Robots Robots Robots" wouldn't
+  have an interpretation as a valid sub-sentence in a grammatical
+  sentence, and the table for a sentence containing these words
+  (consecutively) would have empty cells.
+</p>
+
+<h3 class="material-heading">
+    Operation of the algorithm
+
+</h3>
+
+
+<p>
+  The CYK algorithm operates by processing one row of the table at a
+  time, starting from the bottom row which corresponds to one-word
+  sub-sentences, and working its way to the top node that corresponds
+  to the whole sentence. This shows the dynamic programming nature of
+  the algorithm: the short sub-sentences are parsed first and used
+  in parsing the longer sub-sentences and whole sentence.
+</p>
+
+<p>
+  More specifically, the algorithm tries to find on each row any rules
+  that could have generated the corresponding symbols. On the bottom
+  row, we can start by finding rules that could have generated each
+  individual word. So for example, we notice that the word 'Robots'
+  could have been generated (only) by the rule N &xrarr; Robots, and
+  so we add N into the cell (1,1).  Likewise we add both V and N into
+  the cells (2,2) and (3,3) because the word 'fish' could have been
+  generated from either V or N. At this stage, the CYK table would
+  look as follows:
+</p>
+
+<p>
+  <table style="text-align: right; padding: 6px;">
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(1,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(1,3)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(2,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(1,2)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(2,3)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(3,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	N  &nbsp;&emsp; <sup>(1,1)</sup><br>
+	<center><i>Robots</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	V,N &nbsp;&ensp; <sup>(2,2)</sup><br>
+	<center><i>fish</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	V,N &nbsp;&ensp; <sup>(3,3)</sup><br>
+	<center><i>fish</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	ADV  &nbsp;&ensp; <sup>(4,4)</sup><br>
+	<center><i>today</i>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  The same procedure is repeated as long as there are rules that we
+  haven't applied yet in a given cell. This implies that we will also
+  apply the rule NP &xrarr; N in the cell (1,1) after having added the
+  symbol N in it, etc.
+</p>
+
+<p>
+  Only after we have made sure that no other rules can be applied on
+  the bottom row, we move one row up. Now we will also
+  consider <b>binary rules</b> where the right side has two symbols. A
+  binary rule can be applied in a given cell if the two symbols on the
+  right side of the rule are found in cells that correspond to
+  splitting the sub-sentence in the current cell into two consecutive
+  parts. This means that in cell (1,2) for example, we can split the
+  sub-sentence 'Robots fish' into two parts that correspond to cell
+  (1,1) and (2,2) respectively. As these two cells contain the symbols
+  NP and VP, and the rule S &xrarr; NP VP contains exactly these
+  symbols on the right side, we can add the symbol S on the left side
+  of the rule into the cell (1,2).
+</p>
+
+<p>
+  <table style="text-align: right; padding: 6px;">
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(1,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(1,3)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(2,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	S &ensp;&emsp;<sup>(1,2)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(2,3)</sup>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	<sup>(3,4)</sup>
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	N,NP  &ensp; <sup>(1,1)</sup><br>
+	<center><i>Robots</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	V,N,VP,NP  <sup>(2,2)</sup><br>
+	<center><i>fish</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	V,N,VP,NP  <sup>(3,3)</sup><br>
+	<center><i>fish</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	ADV  &nbsp;&ensp; <sup>(4,4)</sup><br>
+	<center><i>today</i>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  This process is iterated until again we can't apply more rules on the
+  second row from the bottom, after which we move one level up.
+  This is repeated on all levels until we reach the top node and
+  the algorithm terminates.
+</p>
+
+<p>
+  Pseudocode for the CYK algorithm is as follows:
+</p>
+
+<pre class="sh_java code-highlight"><code>1:  T = n x n array of empty lists
+2:  for i in 1,...,n:
+3:     T[i,i] = [word[i]]
+4:  for len = 0,...,n-1:
+5:     while rule can be applied:
+6:        if x &xrarr; T[i,i+len] for some x:
+7:           add x in T[i,i+len]
+8:        if x &xrarr; T[i,i+k] T[i+k+1,i+len] for some k,x:
+9:           add x in T[i,i+len]
+</code></pre>
+
+<p>
+  The variable <code>len</code> refers to the length of the
+  sub-sentence being processed in terms of the distance between
+  its start and end. So for example, in the first iteration of the
+  loop on lines 4&ndash;9, we process individual words in cell
+  (1,1), (2,2), ..., (7,7), and so <code>len = 0</code>.
+</p>
+
+<p>
+  The <code>if</code> statements on lines 6 and 8 check whether there
+  exists a rule where the symbol(s) on the right side are found in the
+  specific cells given in the pseudodode (<code>T[i,i+len]</code> on
+  line 6, or <code>T[i,i+k]</code> and <code>T[i+k+1,i+len]</code> on
+  line 8). If this is the case, then the symbol <code>x</code> on the
+  left side of the rule is added into
+  cell <code>T[i,i+len]</code>. This means that the sub-sentence
+  (i,i+len) can be generated from symbol <code>x</code>.
+</p>
+
+<h3 class="material-heading">
+    Constructing parse trees from the CYK table
+
+</h3>
+
+<p>
+  What is not shown in the pseudocode, is that we should also keep
+  track of how we obtained each entry in the CYK table. Each time we
+  apply a rule, we should therefore store the symbol(s) in the other
+  cell(s) where the symbols on the right side of the rule were
+  found. For example, in the very last step of the algorithm in the
+  above example, we would store that the symbol S was obtained because
+  we found NP in cell (1,1) and VP in cell (2,4), etc. Note that it is
+  important to store references not only the cell but also the
+  individual symbols that were used.
+</p>
+
+<p>
+  If there are multiple ways to obtain a given symbol in a given cell,
+  then we store information about each possible way as a separate set
+  of references. These different ways will correspond to different
+  ways to parse the sentence.
+</p>
+
+<p>
+  Having stored the references to the symbols that enabled us to
+  obtain the symbols in the higher rows of the table, we can
+  reconstruct parse trees by traversing the references between the
+  symbols, starting from the symbol S in top node (if one exists; if
+  there is no S in the top node, the sentence is invalid/not
+  grammatical, and it doesn't belong to the language at all).
+</p>
+
+<p>
+  In the above example there should be only one possible parse
+  tree but the lecture slides and the next exercise show cases
+  where there are more than one.
+</p>
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">NLP: CYK algorithm
+(pencil-and-paper) (1p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  Your task is to parse the sentence "Google bought DeepMind for
+  $500M in January" using the CYK algorithm. Use the following
+  grammar rules:<br><br>
+  S &xrarr; NP VP<br>
+  NP &xrarr; NP PP<br>
+  VP &xrarr; VP PP<br>
+  VP &xrarr; V NP<br>
+  VP &xrarr; V<br>
+  PP &xrarr; P NP<br>
+  NP &xrarr; N<br>
+  N &xrarr; <i>Google</i><br>
+  N &xrarr; <i>DeepMind</i><br>
+  N &xrarr; <i>$500M</i><br>
+  N &xrarr; <i>January</i><br>
+  V &xrarr; <i>bought</i><br>
+  P &xrarr; <i>for</i><br>
+  P &xrarr; <i>in</i><br>
+</p>
+
+<p>
+  You should fill in the CYK table, according to the above
+  instructions. The two bottom rows are given to get you started
+  nicely.
+</p>
+
+<p>
+  <table style="text-align: center; padding: 6px;">
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      &nbsp;</td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      &nbsp;</td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      &nbsp;</td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      &nbsp;</td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      &nbsp;</td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	S
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	VP
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	PP
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5;">
+	PP
+      </td>
+    </tr>
+    <tr>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	N,NP<br>
+	<i>Google</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	V,VP<br>
+	<i>bought</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	N,NP<br>
+	<i>DeepMind</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	P<br>
+	<i>for</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	N,NP<br>
+	<i>$500M</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	P<br>
+	<i>in</i>
+      </td>
+      <td  style="background-color: #ecf0f1; border: 1px solid #7fb3d5; width: 120px;">
+	N,NP<br>
+	<i>January</i>
+      </td>
+    </tr>
+  </table>
+</p>
+
+<p>
+  So for example, in the first cell in the third row from the bottom,
+  you should add S due to the rule S &xrarr; NP VP because we have
+  NP in cell (1,1) and VP in cell (2,3).
+</p>
+
+<p>
+  <ol>
+    <li>
+      Complete the CYK table.
+    <li>
+      Construct all the parse trees from the CYK table by keeping
+      track of which nodes we used to obtain each entry in the
+      table. Which of them is most likely to be the correct one?
+  </ol>
+</p>
+
+<p>
+  <i>Hint:</i> You'll probably want to start numbering the cells
+  using the numbering scheme explained above.
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<h2 class="material-heading">
+    Applications of NLP
+
+</h2>
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">NLP: Knowledge extraction (1p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  You'll find a template for this exercise in TMC.</p>
+
+<p>
+  <ol>
+    <li>
+      Implement method <code>extractSubject</code> in
+      class <code>Extractor</code>. The input will be a parse
+      tree of a sentence. You should try to identify the <b>subject</b> of
+      the sentence (<i>who/what</i> does something). One heuristic method
+      that doesn't always work, but is close enough, is as follows:
+      <ol>
+	<li>Assume that the root node of the parse tree, S, has
+	  children NP (noun phrase) and VP (verb phrase).  If this
+	  is not the case, you can skip the sentence and return null.
+	<li>Choose the child NP.
+	<li>The subject can be assumed to a noun in the NP subtree
+	  (see example below). You can identify nouns by the POS-tag
+	  which should be either NN, NNP, NNPS, or NNS.
+	<li>Use breadth-first search to find the noun closest to the root.<br>
+	  <img src="../img/exercises/ex5/parsetree-68893fca.png" width=65%>
+      </ol>
+<br><br>
+
+
+      The TMC template has tests to verify your solution.<br><br>
+    <li>
+      Next, implement the following logic in method <code>main</code>
+      in class <code>Main</code> using the tools available in class
+      <code>NLPUtils</code>: The template has ready-made functionality
+      for iterating through all sentences in Franz Kafka's
+      <i>The Metamorphosis</i>. Reject all sentences that don't contain
+      the word "Gregor".<br><br>
+    <li>
+      For all remaining sentences, produce a
+      parsing tree. (If the parsing fails, reject the sentence.) Use the
+      method you implemented in item 1 to identify the subject of the
+      sentence. Print out all sentences where the subject is "Gregor".
+      <br><br>
+    <li>
+      Use the output to find out what Gregor does in a similar spirit
+      as this <a href="http://hint.fm/seer/#left=google%20is&right=artificial%20intelligence%20is">cool applet</a>. (No, you <i>don't</i> have to make
+      a visualization!)
+  </ol>
+</p>
+
+<p>
+  <i>Hint:</i> In item 2, you can use method <code>contains</code>.
+
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+        </div>
+      </div>
+
+      <div class="footer-wrapper">
+        <footer class="footer">
+  <div>
+    This material is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 License</a>.
+
+  </div>
+  <div class="improvement">
+    <a href="https://github.com/materiaalit/intro-to-ai-18/issues/new"  target="_blank" rel="noopener">
+  <button class='btn btn-primary'>
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report an error
+  </button>
+</a>
+<a href="https://github.com/materiaalit/intro-to-ai-18/edit/master/source/part5.html.erb" target="_blank" rel="noopener">
+  <button class='btn btn-primary'>
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+ Edit this page
+  </button>
+</a>
+     <a href="https://github.com/materiaalit/intro-to-ai-18" class="footer__github-link" target="_blank" rel="noopener">
+      <i class="fa fa-github"></i>
+    </a>
+  </div>
+</footer>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form id="tmc-login-form">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Log in with your Test My Code Account</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-info">
+            Don't have an account yet? <a href="https://tmc.mooc.fi/user/new" class="alert-link" target="_blank" rel="noopener">Create one!</a>
+          </div>
+
+          <div class="alert alert-danger" id="tmc-login-error" style="display: none;"></div>
+
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="tmc-login-username" class="form-control" placeholder="Username"/>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="tmc-login-password" class="form-control" placeholder="Password"/>
+          </div>
+
+          <div class="form-group">
+            <label>Course</label>
+
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="tmcLoginCourse" value="intro-to-ai-18" checked>
+                 Introduction to Artificial Intelligence 2017 (intro-to-ai-18)
+              </label>
+            </div>
+
+            <small class="form-text text-muted">
+              Course selection may affect the contents of the material.
+            </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+    <div class="table-of-contents-layer" id="table-of-contents-layer">
+</div>
+
+<div class="table-of-contents" id="table-of-contents">
+  <h1 class="table-of-contents__heading">
+    Table of Contents
+  </h1>
+
+  <div class="table-of-contents__content">
+    <ul id="table-of-contents-list"></ul>
+  </div>
+</div>
+
+
+    <script>
+  window._QUIZNATOR_ENABLED = true;
+</script>
+
+<script src="https://quiznator.mooc.fi/javascripts/plugin-loader.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	    crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+      window.SD_SHOW_SURVEY = ['part6', 'part7'].indexOf(window.location.pathname.replace(/\//g,'')) >= 0;
+    </script>
+
+    <script src="../javascripts/scripts-e244a46c.js"></script>
+
+    <script src="https://use.fontawesome.com/ed2f73836b.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js'></script>
+
+    <script>window.cookieconsent.initialise({"palette":{"popup":{"background":"#000"},"button":{"background":"#f1d600"}}});</script>
+  </body>
+</html>
