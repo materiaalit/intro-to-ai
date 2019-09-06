@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to Artificial Intelligence 2018 | Part 6</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link href="../stylesheets/styles-b17821ab.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/xcode.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.css" />
+
+      <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47575342-7', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+</script>
+
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="header-wrapper">
+        <div class="browser-support-warning" id="browser-support-warning" style="display: none;">
+  Kaikki tämän materiaalin osat eivät välttämättä tuo nykyistä selaintasi. Voisitko harkita vaihtamista <a href="https://www.google.com/chrome/browser/desktop/" target="_blank" rel="noopener">Chrome</a> tai <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener">Firefox</a> selaimeen?
+  <span class="browser-support-warning__close">Selvä!</span>
+</div>
+
+
+        <nav class="navbar navbar-light bg-white">
+  <a class="navbar-brand" href="http://mooc.fi" alt="MOOC" target="_blank" rel="noopener">
+    <span class="icon-mooc"></span>
+  </a>
+
+  <ul class="nav navbar-nav hidden-md-down">
+      <li class="nav-item ">
+        <a href="../" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=index.html&gt;')">Introduction</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part1/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part1.html&gt;')">Part 1</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part2/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part2.html&gt;')">Part 2</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part3/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part3.html&gt;')">Part 3</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part4/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part4.html&gt;')">Part 4</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part5/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part5.html&gt;')">Part 5</a>
+      </li>
+      <li class="nav-item active">
+        <a href="./" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part 6</a>
+      </li>
+  </ul>
+
+  <div class="float-xs-right navbar__buttons">
+    <div class="dropdown" id="mobile-nav-dropdown">
+      <button class="btn btn-secondary dropdown-toggle navbar__mobile-nav-toggle" data-toggle="dropdown">
+        <i class="fa fa-bars"></i>
+      </button>
+
+      <div class="dropdown-menu">
+      </div>
+    </div>
+
+    <button class="btn btn-secondary" id="table-of-contents-toggle">
+      <span class="hidden-md-down">Table of contents</span>
+      <i class="fa fa-ellipsis-h hidden-lg-up"></i>
+    </button>
+
+    <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
+  </div>
+</nav>
+
+      </div>
+
+      <div class="content-wrapper">
+        <div class="container material" id="material">
+            <div class="exercise-list">
+  <div class="exercise-list__header">
+    Exercises
+  </div>
+
+  <div class="exercise-list__content" id="exercise-list"></div>
+
+</div>
+
+
+          
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Robotics 1 (2p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  This week's exercises will be done partly on your own (just as
+  usual) and partly at the workshops. You will get the points only
+  by attending a workshop.
+</p>
+
+<p>
+  Each student should register to one workshop (and attend it).
+  Registration is done through a Doodle form. Link will be provided later.
+</p>
+
+<p>
+  In this task, you will get to play
+  with <a href="https://shop.lego.com/en-US/LEGO-MINDSTORMS-NXT-2-0-8547">Lego
+    Mindstorms NXT 2.0</a> robots. We will provide you with a pre-built robot,
+  so unfortunately, no building is involved. The robot is a simple
+  "car" with three wheels, a light sensor, and an ultrasonic sensor.
+</p>
+
+<p>
+  Two of the wheels, the left and the right one, are connected to
+  independent motors (<code>Motor.A</code> and <code>Motor.B</code>),
+  and you can instruct them to rotate either forward or backward.
+  To turn right, for example, you can rotate the left wheel forward and
+  keep the right wheel still.
+</p>
+
+<p>
+  The light sensor is in the front of the robot and points directly
+  toward the floor. The ultrasonic sensor is attached to the left side
+  of the robot, approximately 10cm behind the front of the robot, and
+  it points directly to the left. See the drawing below to get
+  a better idea (maybe).
+</p>
+
+<img src="../img/drawings/legorobo-cfd53b50.png" width=75%><br><br>
+
+<p>
+  <i>Note:</i> You need not install the leJOS environment on your own
+  computer. We will provide laptops with all the required tools to
+  write Java code, compile, and connect to the robot. You will just
+  have to code "blind" without being able to compile and test before
+  the workshop. You'll have to finalize and debug your solution at the
+  workshop.
+</p>
+
+<p>
+  The lecture slides contain some basic instructions
+  about leJOS programming. Here is some more material about the API:
+  <ul>
+    <li><a href="http://www.lejos.org/nxt/nxj/api/">leJOS API reference</a>
+    <li><a href="https://lejos.sourceforge.io/nxt/nxj/tutorial/index.htm">leJOS NXJ Tutorial</a>
+  </ul>
+</p>
+
+<p>
+  <i>Task</i>: Make the robot follow a path marked by white tape
+  on the floor. In the beginning, the robot will be placed on the path
+  and it should move ahead, following the path. (You don't have to
+  care what happens when the path ends.) You will be able to detect
+  the path by using the readings from the light sensor.
+</p>
+
+<p>
+  Use the following template to write a sketch of your solution. You
+  should store your solution on a USB stick (or put it online) so that
+  you can access it from the laptop at the workshop.
+  <a href="https://materiaalit.github.io/intro-to-ai/files/HelloWorld.java">[download code]</a>
+</p>
+
+<pre class="sh_java code-highlight"><code>package org.lejos.example;
+import lejos.nxt.*;
+import lejos.robotics.navigation.DifferentialPilot;
+/**
+ * Write your code in main()
+ */
+public class HelloWorld {
+    static DifferentialPilot pilot = new DifferentialPilot(5.6, 17.5f, Motor.A, Motor.B);
+    static UltrasonicSensor ultra = new UltrasonicSensor(SensorPort.S2);
+    static LightSensor light = new LightSensor(SensorPort.S1);
+    public static void main(String[] args) {
+        System.out.println("I'll be back!");
+        Button.waitForAnyPress();
+    }
+}
+</code></pre>
+
+<p>
+  <i>Hint:</i> Try to solve the task using as simple program logic as
+  possible. In particular, it is not necessary that you maintain a
+  detailed model of the environment (the path) and the position of the
+  robot with respect to it. A useful strategy is to try to follow the
+  right (or left) edge of the path, where the light readings change
+  from high (path) to low (floor). You'll be able to estimate the
+  actual values by printing out the readings on the robot screen
+  at the workshop.
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Robotics 2 (2p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  Please use the registration link to the Robotics Workshops in
+  Exercise 1 above.
+</p>
+
+<p>
+  <i>Task:</i> "Park" the robot. The robot will be placed on a "street"
+  that continues straight ahead, and where there are no obstacles.
+  Drive ahead and use the ultrasonic sensor to detect whether there
+  are obstacles to the left of the robot. Find an minimum
+  40 &times; 40 cm parking spot, and drive the robot into it.
+</p>
+
+<p>
+  <i>Hint:</i> The <code>DifferentialPilot</code> class will probably
+  be useful. It can be instructed to drive ahead a given distance
+  by <code>travel(distance)</code>. You can also set the robot moving
+  by calling <code>travel(distance, true)</code>, in which case the
+  command flow return to the next line of your code immediately,
+  instead of waiting that the robot has first
+  travelled <code>distance</code> cm. You can then query whether the
+  robot is still moving by
+  <code>isMoving()</code>.
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Feedback (2p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  The development of this course relies on your feedback. To give you
+  a concrete incentive to give feedback, you'll even get exercise
+  points for giving feedback!
+</p>
+
+<p>
+  The deadline for this exercise is November 1 (one week after the
+  course exam).
+</p>
+
+<p>
+  Give feedback in both of the following ways:
+  <ol>
+    <li>
+      First, submit anonymously through the university feedback
+      system. You can find the feedback form in WebOodi.
+    <li>
+      <b>After you have submitted the anonymous feedback</b>, send
+	email to the
+	lecturer: <a href="mailto:teemu.roos@cs.helsinki.fi">
+	teemu.roos@cs.helsinki.fi</a>.
+  </ol>
+</p>
+
+<p>
+  To get 1p for item 1, mention in your email that you have submitted
+  the anonymous feedback through the feedback system &mdash; after actually
+  doing so, of course.
+</p>
+
+<p>
+  Also give feedback in the email. You can summarize your anonymous
+  feeback briefly. Don't worry if the content is overlapping.
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+You can find the lecture slides for this part on the <a href="https://courses.helsinki.fi/en/data15001/129802916">course homepage</a>
+under Materials.
+
+
+<h1 class="material-heading">
+    Robotics
+
+</h1>
+
+<p>
+  On this final part, we will encounter a <b>Grand Challenge</b>
+  of AI, namely <b>Robotics</b>. Building and especially
+  programming robots so that they can operate in complex,
+  real-world scenarios requires a combination of virtually
+  all areas of AI. For example:
+  <ul>
+    <li> computer vision and speech recognition  for
+      sensing the environment
+    <li> natural language processing, information retrieval, and
+      reasoning under uncertainty for processing instructions and
+      predicting consequences of potential actions
+    <li> cognitive modeling and <a href="https://en.wikipedia.org/wiki/Affective_computing">affective computing</a> for interacting and
+      working together with humans
+  </ul>
+</p>
+
+<p>
+  Many of the robotics-related AI problems are best approached by
+  machine learning, so it is a very central branch of AI for robotics.
+</p>
+
+<p>
+  Of course we cannot solve all the open problems in robotics.  Our
+  objective is to first appreciate the challenges that operating under
+  constraints on the sensor capabilities of robots, and second, to
+  learn to implement simple functionalities despite such
+  contraints. In practice, this will be done in fun robotics workshops
+  where you'll be able to get your hands on actual robots.
+  (Don't worry, no terminators involved.)
+</p>
+
+
+<div class="hint">
+  <div class="hint__header">
+    <i class="fa fa-info-circle hint__icon"></i>Learning objectives of Part 6
+  </div>
+
+  <div class="hint__body">
+    
+<table class="table">
+  <tr>
+    <td>
+      Theme
+    </td>
+    <td>
+      Objectives (after the course, you ...)
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Digital Signal Processing and Robotics
+    </td>
+    <td>
+      <ul>
+	<li>appreciate the difficulty of implementing an autonomous robot in the real world
+	<li>implement simple functionalities, e.g., following a line on the floor, using a robot with limited sensor capabilities
+      </ul>
+    </td>
+  </tr>
+</table>
+
+
+  </div>
+</div>
+
+<h2 class="material-heading">
+  On the Mindstorms Robots
+
+</h2>
+
+<p>
+  We'll approach robotics in a very practical way, which is the only
+  way to become familiar with the unique nature of robotics AI.
+  The robots used on this course are Lego Mindstorms robots. They
+  may be toys, but make no mistake, they can also teach us many
+  things about operating in the real world with limited sensor
+  capabilities.
+</p>
+
+<p>
+  The system has a graphical programming environment but we'll use a
+  more flexible Java-based <code>leJOS</code> environment that
+  has a well-documented API for controlling the robot.
+</p>
+
+<h2 class="material-heading">
+    Movement: Controlling the wheels
+
+</h2>
+
+<p>
+  The kits that we'll provide you at the workshops (see Exercises 6.1
+  and 6.2 above) have two motors, which you can control through the
+  <code>NXTRegulatedMotor</code> class. The system automatically
+  constructs two (actually three) instances of this
+  class, <code>Motor.A</code> and <code>Motor.B</code>. They allow
+  low-level control of the two wheels in the robot through
+  methods such as <code>forward</code>, <code>backward</code>, and
+  <code>stop</code>.
+</p>
+
+<p>
+  Especially useful for Exercise 6.2 is also the
+  higher-level <code>DifferentialPilot</code> class. The constructor
+  takes as arguments the wheel diameter (in cm), the axis span
+  (in cm), and the two motor objects. The following arguments work
+  with our kits.
+</p>
+<pre class="sh_java code-highlight"><code>static DifferentialPilot pilot = new DifferentialPilot(5.6, 17.5f, Motor.A, Motor.B);
+</code></pre>
+
+<p>
+  The <code>pilot</code> object can be used to drive the robot
+  forward or backward a given distance (in cm) by calling
+  <code>pilot.travel(distance)</code>.
+</p>
+
+<h2 class="material-heading">
+    Sensing
+
+</h2>
+
+<p>
+  The Mindstorms packages include touch, sound, light, and ultrasonic
+  sensors. We need only the last two of these.
+</p>
+
+<p>
+  A light sensor object is constructed by calling the constructor
+  with the sensor port to which the sensor is connected as an argument.
+  The object returns the lightness value sensed by the sensor
+  with the method <code>readValue</code>.
+</p>
+
+<pre class="sh_java code-highlight"><code>LightSensor light = new LightSensor(SensorPort.S2);
+int l = light.readValue();
+</code></pre>
+
+<p>
+  Note that the lightness value depends on the lighting conditions, and
+  in practice it is best to "calibrate" it manually by simply
+  printing out values from the sensor on the robot display. It is
+  okay to hard-code a threshold that detects light vs dark objects
+  in your code.
+</p>
+
+<p>
+  An ultrasonic sensor can be constructed similarly. Remember to check
+  the correct sensor port by following the cable connecting the sensor
+  to the main brick.
+</p>
+
+<pre class="sh_java code-highlight"><code>UltraSonicSensor sonic = new UltraSonicSensor(SensorPort.S3);
+int d = sonic.getDistance()  // 0-255 (cm)
+</code></pre>
+
+<p>
+  If no echo is caught, the reading wll be 255.
+</p>
+
+        </div>
+      </div>
+
+      <div class="footer-wrapper">
+        <footer class="footer">
+  <div>
+    This material is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 License</a>.
+
+  </div>
+  <div class="improvement">
+    <a href="https://github.com/materiaalit/intro-to-ai-18/issues/new"  target="_blank" rel="noopener">
+  <button class='btn btn-primary'>
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report an error
+  </button>
+</a>
+<a href="https://github.com/materiaalit/intro-to-ai-18/edit/master/source/part6.html.erb" target="_blank" rel="noopener">
+  <button class='btn btn-primary'>
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+ Edit this page
+  </button>
+</a>
+     <a href="https://github.com/materiaalit/intro-to-ai-18" class="footer__github-link" target="_blank" rel="noopener">
+      <i class="fa fa-github"></i>
+    </a>
+  </div>
+</footer>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form id="tmc-login-form">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Log in with your Test My Code Account</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-info">
+            Don't have an account yet? <a href="https://tmc.mooc.fi/user/new" class="alert-link" target="_blank" rel="noopener">Create one!</a>
+          </div>
+
+          <div class="alert alert-danger" id="tmc-login-error" style="display: none;"></div>
+
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="tmc-login-username" class="form-control" placeholder="Username"/>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="tmc-login-password" class="form-control" placeholder="Password"/>
+          </div>
+
+          <div class="form-group">
+            <label>Course</label>
+
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="tmcLoginCourse" value="intro-to-ai-18" checked>
+                 Introduction to Artificial Intelligence 2017 (intro-to-ai-18)
+              </label>
+            </div>
+
+            <small class="form-text text-muted">
+              Course selection may affect the contents of the material.
+            </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+    <div class="table-of-contents-layer" id="table-of-contents-layer">
+</div>
+
+<div class="table-of-contents" id="table-of-contents">
+  <h1 class="table-of-contents__heading">
+    Table of Contents
+  </h1>
+
+  <div class="table-of-contents__content">
+    <ul id="table-of-contents-list"></ul>
+  </div>
+</div>
+
+
+    <script>
+  window._QUIZNATOR_ENABLED = true;
+</script>
+
+<script src="https://quiznator.mooc.fi/javascripts/plugin-loader.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	    crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+      window.SD_SHOW_SURVEY = ['part6', 'part7'].indexOf(window.location.pathname.replace(/\//g,'')) >= 0;
+    </script>
+
+    <script src="../javascripts/scripts-e244a46c.js"></script>
+
+    <script src="https://use.fontawesome.com/ed2f73836b.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js'></script>
+
+    <script>window.cookieconsent.initialise({"palette":{"popup":{"background":"#000"},"button":{"background":"#f1d600"}}});</script>
+  </body>
+</html>
