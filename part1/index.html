@@ -531,7 +531,7 @@ AI" (GOFAI) and modern AI approaches
 </p>
 
 <p>
-  If we represent each state as listing the missionaries and cannibals
+  We can represent each state by listing the missionaries and cannibals
   as well as the boat on each side of the river so that
   <pre>
            mmcc|mcb
@@ -539,7 +539,7 @@ AI" (GOFAI) and modern AI approaches
   means that there are two missionaries (mm) and two cannibals (cc)
   on the left bank of the river, and one missionary and one cannibal
   and the boat (mcb) on the right bank. The initial state and the
-  goal state are then
+  goal state are 
 <pre>
      initial:      mmmcccb|
      goal:         |mmmcccb
@@ -547,13 +547,20 @@ AI" (GOFAI) and modern AI approaches
 </p>
 
 <p>
-   The state transition diagram would then contain, for example, edges
+   The state transition diagram would then contain, for example, the
+   following states and edges
 <pre>
             mmmcccb| --- mmcc|mcb --- mmcccb|m
                \                         \
                 \                         \
               mmccc|mb                  ccc|mmmb
 </pre>
+where the two possible transitions from the initial state at the
+top-left corner involve either one missionary and one cannibal or
+one missionary alone crossing the river. The latter transition
+leads to a dead-end situation where one missionary is on the
+right bank alone with the boat and the only option is that she
+goes back only to end up in the initial state.
 </p>
 
 <p>
@@ -562,12 +569,12 @@ AI" (GOFAI) and modern AI approaches
    Since the search procedure is also fully
    automatic, we can solve the problem without having to use our own
    wits. Still, this technique can be used to solve puzzles and problems
-   that most of us would think of tasks that require ''intelligence''.
-   While the small puzzle tasks like the Missionaries and Cannibals 
+   that most of us would think of requiring ''intelligence''.
+   Small puzzle tasks like the Missionaries and Cannibals 
    puzzle are probably easier to solve manually than by writing a
-   computer program to solve it, the real power of the AI approach
+   computer program to solve them. However, the real power of the AI approach
    becomes clear in large-scale problems where our human intelligence
-   has no way to consider all possible options.
+   can't handle all the possible options.
 </p>
 
 <h2 class="material-heading">
