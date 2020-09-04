@@ -483,6 +483,94 @@ AI" (GOFAI) and modern AI approaches
 </p>
 
 <h2 class="material-heading">
+    Formulating Problems as Search
+
+</h2>
+
+<p>
+  Being able to solve AI problems by search requires that we first
+  formula the problem in a certain way.
+</p>
+
+<div class="hint">
+  <div class="hint__header">
+    <i class="fa fa-info-circle hint__icon"></i>Search Space, Transitions, Costs
+  </div>
+
+  <div class="hint__body">
+    
+<p>
+  The key concepts are the set of allowed <b>states</b>, called the </b>search space</b>,
+  and <b>transitions</b> between them. Sometimes different transitions have 
+  different <b>costs</b> associated with them: think, for example, a tram
+  or air travel network where the distances between two stops or
+  airports are different. The cost can be sometimes measured in kilometers,
+  sometimes in hours and minutes, and sometimes in some other resources.
+</p>
+
+<p>
+  The <b>state transition diagram</b> is a diagram where each allowed
+  state is a node and the allowed transitions between them are shown
+  as edges connecting the nodes.
+</p>
+
+
+  </div>
+</div>
+
+<p>
+  In the lecture, we discussed an example involving three missionaries
+  and three cannibals. They were all trying to cross a river with a boat
+  that can only carry two people at a time. Crossing the river two at a
+  time would otherwise be quite simple, but there's an additional 
+  constraint that there can never be more missionaries than cannibals
+  on either side of the river, unless the number os cannibals is zero.
+  (This is because the missionaries, if they can overpower the cannibals,
+  will convert them &mdash; and we don't approve of such colonial intrusion
+  into people's religious beliefs.)
+</p>
+
+<p>
+  If we represent each state as listing the missionaries and cannibals
+  as well as the boat on each side of the river so that
+  <pre>
+           mmcc|mcb
+</pre>
+  means that there are two missionaries (mm) and two cannibals (cc)
+  on the left bank of the river, and one missionary and one cannibal
+  and the boat (mcb) on the right bank. The initial state and the
+  goal state are then
+<pre>
+     initial:      mmmcccb|
+     goal:         |mmmcccb
+</pre>
+</p>
+
+<p>
+   The state transition diagram would then contain, for example, edges
+<pre>
+            mmmcccb| --- mmcc|mcb --- mmcccb|m
+               \                         \
+                \                         \
+              mmccc|mb                  ccc|mmmb
+</pre>
+</p>
+
+<p>
+   The point in all this is that while possibly rather dull and tedius, 
+   constructing the state transition diagram is a routine operation. 
+   Since the search procedure is also fully
+   automatic, we can solve the problem without having to use our own
+   wits. Still, this technique can be used to solve puzzles and problems
+   that most of us would think of tasks that require ''intelligence''.
+   While the small puzzle tasks like the Missionaries and Cannibals 
+   puzzle are probably easier to solve manually than by writing a
+   computer program to solve it, the real power of the AI approach
+   becomes clear in large-scale problems where our human intelligence
+   has no way to consider all possible options.
+</p>
+
+<h2 class="material-heading">
     Breadth-First and Depth-First Search
 
 </h2>
