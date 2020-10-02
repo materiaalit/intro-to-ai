@@ -82,8 +82,15 @@ under Materials.
 </p>
 
 <p>
-  Next week we will finish the Digital Signal Processing and Robotics
-  theme by studying robotics.
+  Even though we try to avoid mentioning the Terminator (because people
+  think about it way too much when we say 'AI'), at this point of the
+  course, it's probably safe to use it as an example of some 
+  signal processing tasks. You can watch this clip before and after
+  this part in the course to see if you'll be able to recognize some
+  familiar features in it:
+  <ul>
+    <li><a href="https://vimeo.com/13128413"</a>Vimeo: Terminator Salvation Machine Vision Montage</a>
+  </ul>
 </p>
 
 <% partial 'partials/hint', locals: { name: 'Learning objectives of Part 5' } do %>
@@ -154,7 +161,7 @@ under Materials.
 </p>
 
 <% partial 'partials/material_sub_heading' do %>
-  Pattern recognition
+  Pattern  recognition and invariant features in images
 <% end %>
 
 <p>
@@ -182,6 +189,41 @@ under Materials.
   their appearance may otherwise change.  The iris is an example of
   invariance, and a metaphor for more general invariance with respect
   to external conditions.
+</p>
+
+<p>
+  More generally, the feature-based approach to image recognition
+  attempts to identify features that are invariant with respect to 
+  (meaning: not affected too much by)
+  <ul>
+    <li> <b>scale</b>, which depends on the distance between the camera and
+      the object
+    <li> <b>orientation</b>, which depends on the angle of the object 
+      relative to the camera
+    <li> <b>brightness</b>, which depends on the lighting conditions and 
+      the camera settings (aperture and exposure time)
+  </ul>
+  Moreover, we'll prefer feature that can be computed
+  <ul>
+    <li> <b>efficiently</b>
+  </ul>
+  Finally, the object should be
+  <ul>
+    <li> <b>identifiable</b>
+  </ul>
+  based on the features.
+</p>
+
+<p>
+  The starting point to construct such features will be a set of
+  <b>points of interest</b>, each of which is located at specific
+  <i>x, y</i> coordinates in the image. The above criteria, especially
+  the requirement of identifiability, lead us to prefer points like
+  corners and ''blobs'' (we won't define this in more detail): a point
+  on a flat surface, on the other hand, would be a poor feature
+  because its only identifiable characteristic is its color, which
+  won't usually be specific enough to distinguish between features in
+  objects of the same color.
 </p>
 
 <% partial 'partials/material_sub_heading' do %>
@@ -291,6 +333,38 @@ under Materials.
 
 <% end %>
 
+<% partial 'partials/material_sub_heading' do %>
+  Deep learning and computer vision
+<% end %>
+
+<p>
+  The latest trend in computer vision and other digital signal 
+  processing domains in AI is <b>deep learning</b>. We already 
+  briefly discussed the idea in deep learning in the previous part.
+</p>
+
+<p>
+  The main promise of deep learning for computer vision is the ability
+  to sidestep the feature engineering step, so that we won't
+  necessarily have to apply the feature-based approach descrived above
+  at all. The deep neural network architecture is designed so that the
+  first layers (the layers closest to the input data) automatically
+  learn to extract useful features from raw pixel data. The next
+  layers will gradually refine the features to obtain higher-level
+  features. Finally, the last layers (the layers furthest from the
+  input data) will solve the actual learning task, be it classification
+  or regression or something else.
+</p>
+
+<p>
+  We didn't go into deep learning for image processing in this course,
+  and it is not included in the learning objectives: don't expect a
+  question about it in the exam. There are other courses like
+  <i>Advanced course in machine learning</i> and <i>Deep learning</i>
+  where you can learn more. You should also remember that you can
+  apply for permission to take courses at Aalto University where they
+  also have relevant courses.
+</p>
 
 <% partial 'partials/material_heading' do %>
   Natural Language Processing
