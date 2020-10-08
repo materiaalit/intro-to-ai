@@ -526,6 +526,26 @@ P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.2
   </ol>
 <% end %>
 
+<!-- Excercise 4.2 -->
+
+<% partial 'partials/solution', locals: { name: 'Example solution' } do %>
+
+  <p>
+    An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/auto.py">here</a>.
+  </p>
+
+<% partial 'partials/exercise', locals: { name: 'Bayesian networks: Earthquake (programming) (1p)' } do %>
+
+<!-- Excercise 4.3 -->
+
+<% partial 'partials/solution', locals: { name: 'Example solution' } do %>
+
+  <p>
+    An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/earthquake.py">here</a>.
+  </p>
+  
+  <% end %>
+
 <!-- Exercise 4.4 -->
 
 <% partial 'partials/solution', locals: { name: 'Example solution' } do %>
