@@ -921,19 +921,23 @@ state:  ---    |     |          state:  |     |    ---
 </p>
 
 <p>
-  The The generic search algorithm template above still applies, except 
-  that we need one modification: In informed search, we'll skip the check 
+  The generic search algorithm template above still applies, except 
+  for one important detail: In informed search, we'll skip the check 
   that the node hasn't been visited before (so we can drop lines 3, 8, and 
   9 in the pseudocode above). This guarantees that if a better path to a node 
   that has already been visited is found at a later stage, we make sure to 
-  check whether it leads to a better path to the goal. The most important 
-  point is that in best-first search, the data structure that holds the nodes on the
-  node list is a <b>priority queue</b>. When adding nodes to the
-  priority queue on line 14, they are given a cost or a value that is
-  then used to order the nodes in the queue.  (Depending on the
-  application and whether the aim is to minimize or maximize the
-  value, the queue can be a min-priority queue or a max-priority
-  queue.)
+  check whether it leads to a better path to the goal.</p>
+
+<p>So except for the above modification, we'll be still using the same
+  search algorithm template. Recall that BFS and DFS were obtained
+  using a queue and a stack as the data structure where the nodes are
+  stored, respectively. In best-first
+  search, the data structure that holds the nodes is
+  a <b>priority queue</b>. When adding nodes to the priority queue on
+  line 14, they are given a cost or a value that is then used to order
+  the nodes in the queue.  (Depending on the application and whether
+  the aim is to minimize or maximize the value, the queue can be a
+  min-priority queue or a max-priority queue.)
 </p>
 
 <div class="hint">
