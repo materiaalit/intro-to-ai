@@ -133,11 +133,13 @@
 
 <p>
   Adjust the MLP settings and experiment with different number of
-  hidden layers (the parameter <code>hiddenLayers</code> shows the
-  number of neurons on each hidden layer, separated by
-  colons <code>:</code>), and the number of training iterations
+  nodes in the hidden layer (the parameter <code>hiddenLayers</code> shows the
+  number of neurons on each hidden layer, separated by a
+  comma, e.g., <code>8:6:4</code>), and the number of training iterations
   (<code>trainingTime</code>). You should get classification error
-  less than 10&nbsp;%.
+  less than 10&nbsp;%. (<em>Hint:</em> The optimizer in Weka seems to be terrible at
+  handling more than one hidden layer, so we suggest sticking to one hidden
+  layer only.)
 </p>
 
 
@@ -168,13 +170,13 @@
 </p>
 
 <p>
-  If you set the number of hidden layers to be one
+  If you set the number of neurons in the only hidden layer to be one
   (setting <code>hiddenLayers = 1</code>), the error rate becomes
-  45.59&nbsp;%, and with two hidden layers (which was apparently
+  45.59&nbsp;%, and with two neurons in the hidden layer (which was apparently
   the default setting) you get again 48.53&nbsp;%.
   Things start to improve only when you add one more hidden
-  layer (<code>hiddenLayers = 3</code>), and you get 30.88&nbsp;%
-  error, and finally, with four hidden layers, the error becomes
+  neuron (<code>hiddenLayers = 3</code>), and you get 30.88&nbsp;%
+  error, and finally, with four neurons, the error becomes
   as low as 5.88&nbsp;%.
 </p>
 
