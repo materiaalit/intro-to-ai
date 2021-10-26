@@ -135,11 +135,14 @@
   Adjust the MLP settings and experiment with different number of
   nodes in the hidden layer (the parameter <code>hiddenLayers</code> shows the
   number of neurons on each hidden layer, separated by a
-  comma, e.g., <code>8:6:4</code>), and the number of training iterations
+  comma, e.g., <code>8,6,4</code>), and the number of training iterations
   (<code>trainingTime</code>). You should get classification error
-  less than 10&nbsp;%. (<em>Hint:</em> The optimizer in Weka seems to be terrible at
+  less than 10&nbsp;%.
+</p>
+
+<p><em>Hint:</em> The optimizer in Weka seems to be terrible at
   handling more than one hidden layer, so we suggest sticking to one hidden
-  layer only.)
+  layer only.
 </p>
 
 
