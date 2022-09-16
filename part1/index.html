@@ -523,49 +523,56 @@ AI" (GOFAI) and modern AI approaches
 </div>
 
 <p>
-  In the lecture, we discussed an example involving three missionaries
-  and three cannibals. They were all trying to cross a river with a boat
-  that can only carry two people at a time. Crossing the river two at a
-  time would otherwise be quite simple, but there's an additional 
-  constraint that there can never be more missionaries than cannibals
-  on either side of the river, unless the number os cannibals is zero.
-  (This is because the missionaries, if they can overpower the cannibals,
-  will convert them &mdash; and we don't approve of such colonial intrusion
-  into people's religious beliefs.)
+  The state transition diagram idea can be illustrated by the classic
+  Wolf, Goat, and Cabbage puzzle. The puzzle involves a farmer who has
+  (for some strange reason) a wolf, a goat, and cabbage. The farmer is
+  transporting them across a river in a small boat that can only carry
+  one piece of cargo at a time. However, the farmer can't leave the
+  wolf alone with the goat, because when unattended, the wolf east the
+  goat. Likewise, the goat can't be left alone with the cabbage for the
+  same reason.
 </p>
 
 <p>
-  We can represent each state by listing the missionaries and cannibals
-  as well as the boat on each side of the river so that
+  Feel free to first try to solve the puzzle using just your wit. You may have to think for a while before you figure it out!
+</p>
+
+<p>
+  We can represent each state by indicating which side the farmer (f),
+  the wolf (w), the goat (g), and the cabbage (c) are, so that for example:
   <pre>
-           mmcc|mcb
+      c|fwg           
 </pre>
-  means that there are two missionaries (mm) and two cannibals (cc)
-  on the left bank of the river, and one missionary and one cannibal
-  and the boat (mcb) on the right bank. The initial state and the
-  goal state are 
+  means that the farmer is on the right bank of the river with the
+  wolf and the goat, whereas the cabbage is on the left bank. Let's say
+  that in the beginning the farmer is on the left bank with all the items
+  that they are about to transport, and that the goal is to get everyone
+  on the right bank:
 <pre>
-     initial:      mmmcccb|
-     goal:         |mmmcccb
+     initial:      fwgc|
+     goal:         |fwgc
 </pre>
 </p>
 
 <p>
    The state transition diagram would then contain, for example, the
    following states and edges
-<pre>
-            mmmcccb| --- mmcc|mcb --- mmcccb|m
-               \                         \
-                \                         \
-              mmccc|mb                  ccc|mmmb
+   <pre>
+                                      c|fwg --- ...
+                                        /
+                                       /
+             fwgc|  ---  wc|fg  ---  fwc|g
+	                               \
+				        \
+                                      w|fgc --- ...
+				  
 </pre>
-where the two possible transitions from the initial state at the
-top-left corner involve either one missionary and one cannibal or
-one missionary alone crossing the river. The latter transition
-leads to a dead-end situation where one missionary is on the
-right bank alone with the boat and the only option is that she
-goes back only to end up in the initial state.
-</p>
+   where the first move from the initial state on the left must be to transport the goat to the right bank. From the state "wc|fg", where the farmer is with the goat on the right bank, we can either return back to the initial state (each of the transitions is two-way), or leave the goat on the right bank and have the farmer go to the left bank with an empty boat.
+  </p>
+
+<p>
+  You can now complete the state transition diagram on your own: it only contains 10 states &ndash; make sure to only draw each distinct state once. After drawing the diagram, you should have no trouble whatsoever to solve the puzzle.
+  </p>
 
 <p>
    The point in all this is that while possibly rather dull and tedius, 
@@ -574,7 +581,7 @@ goes back only to end up in the initial state.
    automatic, we can solve the problem without having to use our own
    wits. Still, this technique can be used to solve puzzles and problems
    that most of us would think of requiring ''intelligence''.
-   Small puzzle tasks like the Missionaries and Cannibals 
+   Small puzzle tasks like the Wolf, Goat, and Cabbage
    puzzle are probably easier to solve manually than by writing a
    computer program to solve them. However, the real power of the AI approach
    becomes clear in large-scale problems where our human intelligence
