@@ -119,10 +119,7 @@
 
 <p>
   Now we'll change gears and go for what used to be thought as a some
-  kind of a "grand challenge" for AI, namely chess! (In fact, that's
-  not exactly true since we'll be playing a variant of chess,
-  called <a href="https://en.wikipedia.org/wiki/Los_Alamos_chess">Los
-    Alamos chess</a> which is played on a 6 x 6 board with no bishops.)
+  kind of a "grand challenge" for AI, namely chess!
 </p>
 
 <p>
@@ -139,39 +136,53 @@
 <p>
   We challenge you to see how your evaluation function fares against
   our own contender, <i>Deep Glue</i>. Deep Glue is included in the
-  Java template that we provide. (Sorry, no Python version this time!)
+  template that we provide. (The Java and Python versions are slighty
+  different &mdash; the Java bot is probably somewhat harder to beat.)
 </p>
 
-<ol>
-  <li>
-    Download the Java template <a href="https://materiaalit.github.io/intro-to-ai/files/Chesspackage.zip">here</a>.
-  <li>
-    Implement the method <code>double eval(Position p)</code> in class
-    <code>YourEvaluator</code>. The method takes as its input a board
-    position <code>p</code> which specifies the positions of all the
-    pieces on the board and which player's turn it is. The return value
-    should be the higher the more likely the white player is to win.
-  <li>
-    When you run the code, the system simulates a game between your
-    bot and Deep Glue. Can you build an evaluation function that
-    beats Deep Glue more often than the other way around?
-</ol>
+<p>
+  <b>Python instructions</b>
+  <ol>
+    <li>
+      Install <a href="https://python-chess.readthedocs.io/en/latest/index.html"><code>python-chess</code></a> by, e.g., <code>pip install chess</code>.
+    <li>
+      Download the Python template <a href="https://materiaalit.github.io/intro-to-ai/files/Chesspackage.zip">here</a>.
+    <li>
+      Implement the function <code>your_heuristic(board: chess.Board)</code>
+      in <code>your_heuristic.py</code>. The function will take as its
+      input a board position of the <code>chess.Board</code> type.
+      See the comments in the code for some tips about how to access the
+      pieces and their positions (rank, file) on the board.
+  </ol>
+</p>
+
+<p>
+  <b>Java instructions</b>
+  <ol>
+    <li>
+      Download the Java template <a href="https://materiaalit.github.io/intro-to-ai/files/iai_chess.zip">here</a>.
+    <li>
+      Implement the method <code>double eval(Position p)</code> in class
+      <code>YourEvaluator</code>. The method takes as its input a board
+      position <code>p</code> which specifies the positions of all the
+      pieces on the board and which player's turn it is. The return value
+      should be the higher the more likely the white player is to win.
+    <li>
+      When you run the code, the system simulates a game between your
+      bot and Deep Glue (<code>OurEvaluator</code>).
+  </ol>
+  Note that for efficiency reasons, the template doesn't do full chess
+  but a variant similar to the so
+  called <a href="https://en.wikipedia.org/wiki/Los_Alamos_chess">Los
+  Alamos chess</a> which is played on a 6 x 6 board with no bishops.
+</p>
 
 <p>
   We have traditionally had a great chess-bot tournament each year.
-  The link to the competition server can be found here later. You can upload your bot (evaluation function)
-  and compete against your fellow students to earn extra points!
-</p>
-
-<p>
-  <b>Extra points:</b>
-  <ul>
-    <li> Winner: 3pt
-    <li> 2nd Place: 2pt
-    <li> Anyone else ranked higher than <i>Deep Glue</i>: 1pt
-  </ul>
-  The extra point awards will be based on the ranking on an arbitrary
-  point in time (towards the end of the course).
+  Unfortunately, this won't be done this year because we're transitioning
+  from Java to Python. Hopefully we'll be able to do it after the course.
+  Let us know if you are interested in setting something like this up
+  as a hobby!
 </p>
 
 
