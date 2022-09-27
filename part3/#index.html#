@@ -146,7 +146,11 @@
     <li>
       Install <a href="https://python-chess.readthedocs.io/en/latest/index.html"><code>python-chess</code></a> by, e.g., <code>pip install chess</code>.
     <li>
-      Download the Python template <a href="https://materiaalit.github.io/intro-to-ai/files/iai_chess_python.zip">here</a>.
+      Find out which version of Python you are running. If you start your Python environment (for instance, by typing <code>python</code> in a shell), the version will usually be printed out, e.g. <code>Python 3.9.7</code>.
+    <li>
+      Depending on the Python version (the first two numbers, e.g., 3.9), download one of the following templates:
+      <ul>
+	<li><a href="https://materiaalit.github.io/intro-to-ai/files/iai_chess.zip">Python 3.9</a>
     <li>
       Implement the function <code>your_heuristic(board: chess.Board)</code>
       in <code>your_heuristic.py</code>. The function will take as its
