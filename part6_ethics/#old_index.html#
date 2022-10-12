@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to Artificial Intelligence 2021 | Part 6</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link href="../stylesheets/styles-b17821ab.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/xcode.min.css">
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.css" />
+
+      <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47575342-7', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+</script>
+
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="header-wrapper">
+        <div class="browser-support-warning" id="browser-support-warning" style="display: none;">
+  Kaikki tämän materiaalin osat eivät välttämättä tuo nykyistä selaintasi. Voisitko harkita vaihtamista <a href="https://www.google.com/chrome/browser/desktop/" target="_blank" rel="noopener">Chrome</a> tai <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener">Firefox</a> selaimeen?
+  <span class="browser-support-warning__close">Selvä!</span>
+</div>
+
+
+        <nav class="navbar navbar-light bg-white">
+  <a class="navbar-brand" href="http://mooc.fi" alt="MOOC" target="_blank" rel="noopener">
+    <span class="icon-mooc"></span>
+  </a>
+
+  <ul class="nav navbar-nav hidden-md-down">
+      <li class="nav-item ">
+        <a href="../" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=index.html&gt;')">Introduction</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part1/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part1.html&gt;')">Part 1</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part2/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part2.html&gt;')">Part 2</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part3/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part3.html&gt;')">Part 3</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part4/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part4.html&gt;')">Part 4</a>
+      </li>
+      <li class="nav-item ">
+        <a href="../part5/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part5.html&gt;')">Part 5</a>
+      </li>
+      <li class="nav-item active">
+        <a href="./" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6_ethics.html&gt;')">Part 6</a>
+      </li>
+  </ul>
+
+  <div class="float-xs-right navbar__buttons">
+    <div class="dropdown" id="mobile-nav-dropdown">
+      <button class="btn btn-secondary dropdown-toggle navbar__mobile-nav-toggle" data-toggle="dropdown">
+        <i class="fa fa-bars"></i>
+      </button>
+
+      <div class="dropdown-menu">
+      </div>
+    </div>
+
+    <button class="btn btn-secondary" id="table-of-contents-toggle">
+      <span class="hidden-md-down">Table of contents</span>
+      <i class="fa fa-ellipsis-h hidden-lg-up"></i>
+    </button>
+
+    <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
+  </div>
+</nav>
+
+      </div>
+
+      <div class="content-wrapper">
+        <div class="container material" id="material">
+            <div class="exercise-list">
+  <div class="exercise-list__header">
+    Exercises
+  </div>
+
+  <div class="exercise-list__content" id="exercise-list"></div>
+
+</div>
+
+
+          <h1 class="material-heading">
+    Ethics in AI
+
+</h1>
+
+<p>
+One day you'll end up in a heated conversation on twitter. It started with a university professor's
+(@TuringLives) tweet on photo recreation models. He told about a model developed in his lab. The
+model depixelated an input image of Finnish Prime Minister Sanna Marin into a photo of middle-
+aged white male:
+<br>
+<img width=80% src="../img/ex6_1-50d37f09.png">
+<br>
+</p>
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Generative Adversarial Networks (1p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      <p>
+The face upsampling was made by using GANs. To see how GANs work,
+you can check out <a href="https://gandissect.csail.mit.edu/">this</a>. (This material
+is optional and not required in the exam.)
+<ol>
+  <li>
+Try whether you can spot deepfakes using
+the test included in <a href="https://www.buzzfeednews.com/article/janelytvynenko/real-or-fake-face-quiz">this article</a>. How many do you get right out of 9 attempts? What features of the photos
+you found most useful to detect deepfakes.
+  <li>
+    What is your favorite deepfake (a picture, an audio or video clip, ...)?
+    If you don't have one yet, you can find plenty of them
+    online (you can do, for example, a search for ``deepfake´´). Is it meant to be actually used to
+    deceive people, or was it created just for fun? How hard would it be to create such a deepfake?
+    Would could it be used for?
+</ol>
+</p>
+    </div>
+  </div>
+</div>
+
+<p>
+The Twitter debate proceeds as follows:
+</p>
+
+<p>
+@TuringLives: “Contemporary “face upsampling” systems just do this. If one trains
+algorithms with images of white males, algorithms produce images of white males.
+That's how they work.
+</p>
+
+<p>
+@AdaLovelace: “ This is an example of about something more important: The hidden dangers of our algorithms.
+The hidden biases of our algorithms. Would you
+want algorithms like these to decide, who gets a job, gets arrested or passes the security check in the airports? I don't. ”
+</p>
+
+<p>
+@Turinglives: “That's how these systems work, guys.
+These algorithms produce biased results, if they are trained with biased data.
+Face upsampling systems make everyone look white males, if they are trained with the datasets of white males.”
+</p>
+
+<p>
+@EugeneG: “But that's not the problem, man. It really isn't about datasets, it is
+about the whole machine learning industry. Don't reduce harms caused by this industry to dataset bias.”
+</p>
+
+<p>
+@Turinglives: “Well, I didn't. All I say:
+If we use biased datasets, then we'll have biased results.
+That's why researchers need to be more careful selecting their data so
+that they don't accidentally encode biases like this.
+And, it is one thing to do research, and an another thing to deploy these methods in real world applications.
+One should worry about bias in practical applications, not bias in academic research.”
+</p>
+
+<p>
+@Gödel'sGhost: “Users get their applications from the engineers, the engineers get
+their methods from computer scientists.
+At least computer scientists should recognize how biased their methods are. And tell it.”
+</p>
+
+<p>
+@Turinglives: “Yes, I agree. But isn't it one thing to do research on these things, and
+another to deploy them in practice?
+The consequences of bias are more problematic, when they are in a deployed product than in an academic paper.
+Don ́t bark the wrong tree.”
+</p>
+
+<p>
+@TheManIntheChineseRoom: “So, you basically say: Researchers might
+acknowledge their data is biased, use it anyway because it's there, and then 
+say ”it's acceptable because it is just an academic experiment and I am not
+responsible, ifsomeone uses it in a way that causes harm? Is that your answer?”
+</p>
+
+<p>
+@Turinglives: ”Well, yes and no. Isn't there a difference between basic 
+research and using applications in real world tasks? 
+Think about physicists. Are physicists responsible for nuclear weaponry?
+Or, are biologists studying genes responsible for eugenetics?
+Isn't this precisely the same question? Can we judge basic research, because
+there can be bad applications? And still, I acknowledge, bias is a big concern, but for
+the real world applications.”
+</p>
+
+<p>
+@YourReply:”...”?
+</p>
+
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Tweet! (1p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+Now, you'll join into the discussion. How would you respond to these tweets?
+Please, reply by a “tweet”. Pick a twitter name, and write a reply.
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Essay (2p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      <p>
+What is this discussion about? What are the ethical issues? Do you see
+them as significant? Please, analyse the discussion and individuate ethical
+themes.
+Write a short (150-300 words) essay, in which you estimate the importance of these topics for a student of computer or data sciences.
+</p>
+<p>
+Please submit your essay as a single pdf file to the teaching assistant
+(matti.leinonen@helsinki.fi, chamalee.wickramaarachch@helsinki.fi or fanni.franssila@helsinki.fi) 
+of the exercise group you will attend.
+Please send the essay before the beginning of your exercise session.
+</p>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="exercise">
+  <div class="exercise__header">
+    <a data-toggle="collapse" class="exercise__toggle">
+      <i class="fa fa-pencil exercise__icon"></i>
+      <h1 class="exercise__heading">Feedback (2p)</h1>
+
+      <i class="fa fa-caret-down exercise__arrow"></i>
+    </a>
+  </div>
+
+  <div class="collapse">
+    <div class="exercise__body">
+      
+<p>
+  The development of this course relies on your feedback. To give you
+  a concrete incentive to give feedback, you'll even get exercise
+  points for giving feedback!
+</p>
+
+<p>
+  The deadline for this exercise is November 1 (one week after the
+  course exam).
+</p>
+
+<p>
+  Give feedback in both of the following ways:
+  <ol>
+    <li>
+      First, submit anonymously through the university feedback
+      system Norppa.
+    <li>
+      <b>After you have submitted the anonymous feedback</b>, send
+	email to the
+	lecturer: <a href="mailto:teemu.roos@cs.helsinki.fi">
+	teemu.roos@cs.helsinki.fi</a>. <b>Important:</b> Include 
+        the magic word IntroAI2021 on the subject line so that Teemu
+        will find your message in his inbox among the <strike>5615</strike> 9038 unread messages.
+  </ol>
+</p>
+
+<p>
+  To get 1p for item 1, mention in your email that you have submitted
+  the anonymous feedback through the feedback system &mdash; after actually
+  doing so, of course.
+</p>
+
+<p>
+  Also give feedback in the email. You can summarize your anonymous
+  feeback briefly. Don't worry if the content is overlapping.
+</p>
+
+
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+      
+      <div class="footer-wrapper">
+        <footer class="footer">
+	  <div>
+	    This material is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 License</a>.
+
+  </div>
+
+</footer>
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form id="tmc-login-form">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Log in with your Test My Code Account</h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-info">
+            Don't have an account yet? <a href="https://tmc.mooc.fi/user/new" class="alert-link" target="_blank" rel="noopener">Create one!</a>
+          </div>
+
+          <div class="alert alert-danger" id="tmc-login-error" style="display: none;"></div>
+
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="tmc-login-username" class="form-control" placeholder="Username"/>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="tmc-login-password" class="form-control" placeholder="Password"/>
+          </div>
+
+          <div class="form-group">
+            <label>Course</label>
+
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="tmcLoginCourse" value="intro-to-ai" checked>
+                 Introduction to Artificial Intelligence (intro-to-ai)
+              </label>
+            </div>
+
+            <small class="form-text text-muted">
+              Course selection may affect the contents of the material.
+            </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+    <div class="table-of-contents-layer" id="table-of-contents-layer">
+</div>
+
+<div class="table-of-contents" id="table-of-contents">
+  <h1 class="table-of-contents__heading">
+    Table of Contents
+  </h1>
+
+  <div class="table-of-contents__content">
+    <ul id="table-of-contents-list"></ul>
+  </div>
+</div>
+
+
+    <script>
+  window._QUIZNATOR_ENABLED = false;
+</script>
+
+<!-- <script src="https://quiznator.mooc.fi/javascripts/plugin-loader.min.js"></script> -->
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	    crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+      window.SD_SHOW_SURVEY = ['part6', 'part7'].indexOf(window.location.pathname.replace(/\//g,'')) >= 0;
+    </script>
+
+    <script src="../javascripts/scripts-cb52849c.js"></script>
+
+    <script src="https://use.fontawesome.com/ed2f73836b.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.js"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js'></script>
+
+    <script>window.cookieconsent.initialise({"palette":{"popup":{"background":"#000"},"button":{"background":"#f1d600"}}});</script>
+  </body>
+</html>
