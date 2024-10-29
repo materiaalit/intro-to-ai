@@ -183,27 +183,7 @@
 </div>
 
 <!-- Exercise 2.1 -->
-<div class="solution" data-target='collapse'>
-  <div class="solution__header">
-    <a data-toggle="collapse" class="solution__toggle">
-      <i class="fa fa-magic solution__icon"></i>
-      <h1 class="solution__heading">Example solution</h1>
 
-      <i class="fa fa-caret-down solution__arrow"></i>
-    </a>
-  </div>
-
-  <div class="collapse">
-    <div class="solution__body">
-
-<p>
-  Example solutions for <a href="https://materiaalit.github.io/intro-to-ai/files/astar-solution.zip">Java</a>, <a href="https://materiaalit.github.io/intro-to-ai/files/AStar_model_python.zip">Python</a>.
-</p>
-
-
-    </div>
-  </div>
-</div>
 
 <h1 class="material-heading">
     Games
@@ -483,37 +463,7 @@
 </div>
 
 <!-- Exercise 2.2 -->
-<div class="solution" data-target='collapse'>
-  <div class="solution__header">
-    <a data-toggle="collapse" class="solution__toggle">
-      <i class="fa fa-magic solution__icon"></i>
-      <h1 class="solution__heading">Example solution</h1>
 
-      <i class="fa fa-caret-down solution__arrow"></i>
-    </a>
-  </div>
-
-  <div class="collapse">
-    <div class="solution__body">
-
-<p>
-  Here's the game tree with the values of each node.
-</p>
-
-<img src="../img/exercises/ex2/tree_Ex2_2-90b2e222.png" width=80%>
-
-<p>
-  As you can see, Max has all the reason to be serious since by
-  playing in the bottom-right corner (Node (4)), Min can guarantee a
-  win (just follow the orange arrows). The inevitable victory of Min
-  can also be seen from the value of the game at the root node which
-  is &ndash;1.
-</p>
-
-
-    </div>
-  </div>
-</div>
 
 
 <div class="hint">
@@ -771,70 +721,7 @@
 </div>
 
 <!-- Exercise 2.3 -->
-<div class="solution" data-target='collapse'>
-  <div class="solution__header">
-    <a data-toggle="collapse" class="solution__toggle">
-      <i class="fa fa-magic solution__icon"></i>
-      <h1 class="solution__heading">Example solution</h1>
 
-      <i class="fa fa-caret-down solution__arrow"></i>
-    </a>
-  </div>
-
-  <div class="collapse">
-    <div class="solution__body">
-
-  <p>
-    As was stated in the exercise, the recursion
-    is started by calling
-    <code>min-value</code> for the root node (Node (1) below) with
-    arguments
-    <code>alpha=-1, beta=1</code>. These values are then passed to the
-    child nodes, starting with the leftmost child (Node (2)), and from
-    it further down all the way to the leaf node (5). The return value,
-    which is passed up the parent node (3), is &ndash;1 since in this
-    case, Min wins with three Os in a row.  Strictly speaking, this
-    already causes pruning to occur in Node (3): it is a Min node, and
-    thus it updates its beta value, and the beta value becomes
-    &ndash;1. The test <code>alpha =-1 &le; beta=-1</code> (line 7
-    in the pseudocode) triggers the return condition. However, the
-    effect is null since there wouldn't have been any other children of
-    Node (3) anyway.
-  </p>
-
-  <img src="../img/exercises/ex2/alphabeta_Ex2_3-3ed29945.png" width=60%>
-
-  <p>
-    Next, Node (3) returns the value &ndash;1 to its parent, Node (2).
-    As a Max node, Node (2) would update its alpha value but since the
-    value returned by the child is &ndash;1 which is already the same
-    as the current alpha value, no update occurs (line 6 in the
-    pseudocode). The processing of nodes (4) and (6) is analogous to
-    that of nodes (3) and (5) respectively.
-  </p>
-
-  <p>
-    Interesting things start to happen in the root node when the value
-    &ndash;1 is returned from Node (2). The root node is a Min node and
-    it updates its beta value to be <code>beta=-1</code> (line 6 in the
-    pseudocode), and therefore, the test <code>alpha=-1 &le;
-    beta=-1</code> again triggers pruning and the other branches of the
-    tree need not be traversed at all!
-  </p>
-
-  <p>
-    The optimal game play can now be obtained by always choosing the
-    child node with the minimum (maximum) value in Min (Max)
-    nodes <i>among the child nodes that were visited</i>. The result is
-    guaranteed to be the same as that of the Minimax algorithm, i.e.,
-    optimal play for both players. For Max this is bad news: it's Min's
-    victory even best-out-of-three...
-  </p>
-
-
-    </div>
-  </div>
-</div>
 
 <p>
   Notice that while the left-to-right order of the children of each
@@ -897,27 +784,7 @@
 </div>
 
 <!-- Exercise 2.4 -->
-<div class="solution" data-target='collapse'>
-  <div class="solution__header">
-    <a data-toggle="collapse" class="solution__toggle">
-      <i class="fa fa-magic solution__icon"></i>
-      <h1 class="solution__heading">Example solution</h1>
 
-      <i class="fa fa-caret-down solution__arrow"></i>
-    </a>
-  </div>
-
-  <div class="collapse">
-    <div class="solution__body">
-
-  <p>
-    Example solutions for <a href="https://materiaalit.github.io/intro-to-ai/files/AlphaBeta_model_solution.zip">Java</a>, <a href="https://materiaalit.github.io/intro-to-ai/files/AlphaBeta_model_python.zip">Python</a>.
-  </p>
-
-
-    </div>
-  </div>
-</div>
 
 <h1 class="material-heading">
     Reasoning under Uncertainty
