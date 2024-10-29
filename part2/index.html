@@ -128,7 +128,7 @@
 <p>
   Your route query will be given in the form:
 <pre>
-      TravelPlanner.search(departureStop, destinationStop, departureTime)
+        CityMap.search(departureStop, destinationStop, departureTime)
 </pre>
   where the departure time can be given in minutes since the last full
   10 minutes since the timetable of our tram network is so regular.
@@ -136,10 +136,10 @@
 
 <p>
   You'll need to complete the following steps (these instructions apply
-  directly to Java but the general idea is the same in other
+  directly to Python but the general idea is the same in other
   languages):
   <ol>
-    <li> Implement a <code>StateComparator</code> class (the Java package
+    <li> Implement a <code>State</code> class (the python TMC extension
       already has a template for this) with
       method <code>heuristic(Stop s)</code>, which calculates a
       lower bound on the time required to reach the destination
@@ -147,16 +147,16 @@
       computing the distance between the two stops, and dividing it by
       the maximum speed of the tram which you can assume to be 260
       coordinate points per minute.
-    <li> Also implement method <code>compare(State s1, State s2)</code>
-      in class <code>StateComparator</code> so that it can be used to
+    <li> Also implement method <code>__lt__(self, other)</code>
+      in class <code>State</code> so that it can be used to
       order the nodes in the priotity queue based on <code>cost
 	+ h(node)</code> as described in Part 1. Here the nodes are
       states that are defined by the stop and the time since
       departure.
-    <li> Implement the A* search in class <code>TravelPlanner</code>.
+    <li> Implement the A* search in class <code>CityMap</code>.
       The <code>PriorityQueue</code> data structure comes in handy. An
-      instance of the <code>StateComparator</code> class should be given as
-      an argument to the <code>PriorityQueue</code> constructor.
+      instance of the <code>State</code> class should be given as
+      an argument to the <code>search</code> method.
   </ol>
 </p>
 
@@ -164,15 +164,15 @@
   As before, you should return the obtained route as a backward-linked
   list of states.</p>
 
+
 <p>
-  The <code>Stop</code> class in the Java package provides
+  The <code>CityMap</code> class in the TMC exercise provides
   functionality for listing the neighboring stops and for getting the
   minimum time required to get there (including the waiting time).
 </p>
 
 <p>
-  If you prefer to not use the Java package and TMC, that's totally
-  fine.  You'll find the stop information in <code>network.json</code>
+  More instructions are provided in the TMC exercise in the method descriptions. You'll find the stop information in <code>network.json</code>
   and the route descriptions in <code>lines.json</code>, both of which
   are self-explanatory.
 </p>
