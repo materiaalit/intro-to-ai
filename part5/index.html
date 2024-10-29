@@ -541,7 +541,7 @@
 </p>
 
 <h2 class="material-heading">
-  1.5 Generative AI in Image Processing
+Generative AI in Image Processing
 </h2>
 
 <p>
@@ -610,6 +610,51 @@
     <li><a href="https://deepmind.com/research/publications/understanding-variational-autoencoders" target="_blank">Understanding Variational Autoencoders by DeepMind</a></li>
   </ul>
 </p>
+
+<h2>Transition from RNN-based Approaches to CNN-based</h2>
+
+<p>
+  Historically, Recurrent Neural Networks (RNNs) were applied to sequential tasks, including image generation. However, RNNs struggled with scalability and capturing spatial hierarchies in image data. As a result, Convolutional Neural Networks (CNNs) became the dominant architecture for image-related tasks, particularly for tasks involving spatial relationships such as object detection and image classification.
+</p>
+
+<p>
+  CNNs are designed to process data with a grid-like topology (e.g., images). They employ convolutional layers that filter small regions of input data, capturing features such as edges, textures, and shapes. This enables CNNs to model spatial hierarchies efficiently, making them more effective for image processing compared to RNNs, which are better suited for sequential data (like text or time-series data).
+</p>
+
+<p>
+  The shift from RNN-based to CNN-based approaches in tasks like image recognition, object detection, and image generation was driven more by the scalability of CNNs and their higher degree of parallelization, rather than an inherent superiority. While both architectures can ultimately achieve similar outcomes, CNNs are generally easier to train and more efficient on large-scale datasets due to their ability to process data in parallel.
+</p>
+
+<h2>Transformers and Attention Mechanisms</h2>
+
+<p>
+  The introduction of Transformers marked a breakthrough in deep learning, primarily due to their attention mechanisms, which enable models to focus on important parts of the input data simultaneously. Initially designed for Natural Language Processing (NLP), transformers are now being applied in computer vision as well, most notably through Vision Transformers (ViTs).
+</p>
+
+<h3>Self-Attention Mechanism</h3>
+
+<p>
+  This is the core of the transformer architecture. Each input token (in NLP, a word; in images, a patch) can attend to every other token, allowing the model to capture long-range dependencies. In image processing, this means understanding relationships between distant regions of an image.
+</p>
+
+<h3>Multi-head Attention</h3>
+
+<p>
+  By using multiple attention heads, transformers learn various relationships simultaneously, improving the model's ability to focus on different features of the image.
+</p>
+
+<p>
+  Transformers have outperformed traditional CNNs in certain vision tasks, especially those requiring understanding of global image contexts. This advancement improved such fields as image classification, object segmentation, and image generation.
+</p>
+
+<p><b>Further Reading:</b></p>
+<ul>
+  <li><a href="https://arxiv.org/abs/1706.03762" target="_blank">"Attention is All You Need" (Original Transformer Paper by Vaswani et al.)</a></li>
+  <li><a href="https://ai.googleblog.com/2020/12/transformers-for-image-recognition-at.html" target="_blank">Vision Transformers Explained (Google AI Blog)</a></li>
+  <li><a href="https://rwightman.github.io/pytorch-image-models/vit/" target="_blank">Vision Transformer Tutorial in PyTorch</a></li>
+  <li><a href="https://towardsdatascience.com/a-comprehensive-guide-to-attention-mechanism-9e57a5e24a9c" target="_blank">A Comprehensive Guide to Attention Mechanism</a></li>
+  <li><a href="https://pytorch.org/tutorials/beginner/transformer_tutorial.html" target="_blank">PyTorch Attention Layer Tutorial</a></li>
+</ul>
 
 
 		
