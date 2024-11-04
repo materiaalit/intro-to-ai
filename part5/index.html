@@ -871,6 +871,187 @@
         </ol>
         </p>
 
+        <h2>Generative AI in NLP</h2>
+
+        <p>
+          Generative AI in Natural Language Processing (NLP) has changed how machines understand and generate human
+          language. NLP tasks, such as text generation, summarization, translation, and conversation, have significantly
+          improved with the introduction of deep learning models that can generate coherent and contextually appropriate
+          language.
+        </p>
+
+        <p>
+          At the heart of this transformation are transformer-based models, such as GPT (Generative Pre-trained
+          Transformer), which leverage massive datasets and powerful neural networks to create natural language outputs.
+          By predicting the next word or phrase based on preceding text, these models are able to produce human-like
+          language with impressive accuracy and fluency.
+        </p>
+
+        <p>
+          Key generative models in NLP include GPT, BERT, and T5, each of which has advanced specific NLP tasks. These
+          models rely heavily on attention mechanisms and self-supervision (where the training data is created
+          automatically from unlabeled text), making them highly scalable.
+        </p>
+
+        <h3>Brief History of GPT: From GPT-0</h3>
+
+        <p>
+          The Generative Pre-trained Transformer (GPT) series represents a breakthrough in language generation, with
+          each iteration improving upon its predecessor in terms of scale, complexity, and performance. Here's a brief
+          history of the evolution from GPT-0 to today's advanced models:
+        </p>
+
+        <ul>
+          <li><b>GPT-0 (2018):</b> The original GPT model was based on the transformer architecture introduced by
+            Vaswani et al. in 2017. GPT-0 (also referred to as GPT-1) was trained on a large corpus of unsupervised text
+            data and could generate text by predicting the next word in a sequence. It had approximately 110 million
+            parameters, which made it significantly more powerful than earlier recurrent neural network (RNN) models.
+            While impressive, GPT-0 had limitations in terms of contextual understanding and coherence over long texts.
+          </li>
+
+          <li><b>GPT-2 (2019):</b> OpenAI introduced GPT-2, which scaled up the number of parameters to 1.5 billion,
+            marking a significant jump in capability. GPT-2 could generate more coherent and contextually relevant
+            paragraphs of text. Its ability to complete sentences and generate long-form content was a major improvement
+            over GPT-0. However, concerns over the potential misuse of GPT-2 for disinformation led OpenAI to initially
+            limit access to the full model.</li>
+
+          <li><b>GPT-3 (2020):</b> GPT-3 represented another massive leap in scale, with 175 billion parameters. Its
+            capabilities in understanding and generating natural language far surpassed previous models. GPT-3 was able
+            to perform a variety of tasks, including answering questions, translating languages, summarizing text, and
+            even generating code—all from a single, pre-trained model. GPT-3 demonstrated the power of few-shot
+            learning, where it could adapt to new tasks with minimal examples.</li>
+
+          <li><b>GPT-4 (Expected 2023+):</b> GPT-4 is expected to be even larger, more efficient, and more adept at
+            solving complex tasks with fewer mistakes. GPT-4 will likely build on advancements in architecture, dataset
+            size, and optimization techniques to push the boundaries of what language models can achieve.</li>
+        </ul>
+
+        <h3>Large Language Models (LLMs)</h3>
+
+        <p>
+          Large Language Models (LLMs), such as GPT-3 and beyond, have become a foundational tool in generative AI,
+          thanks to their ability to process and generate natural language at an unprecedented scale. LLMs are
+          pre-trained on vast corpora of text data, often drawn from books, websites, articles, and other sources. This
+          pre-training allows these models to learn the statistical properties of language, enabling them to generate
+          meaningful text and understand complex language patterns.
+        </p>
+
+        <h4>Key Characteristics of LLMs:</h4>
+
+        <ul>
+          <li><b>Scale:</b> LLMs like GPT-3 contain billions of parameters, making them capable of handling a wide range
+            of NLP tasks with minimal fine-tuning. The sheer size of these models allows them to generalize well across
+            tasks and domains.</li>
+
+          <li><b>Pre-training and Fine-tuning:</b> LLMs are pre-trained on general-purpose text data, which gives them
+            broad language comprehension. They can be fine-tuned on specific tasks, such as sentiment analysis,
+            summarization, or translation, by exposing them to smaller, task-specific datasets.</li>
+
+          <li><b>Few-shot and Zero-shot Learning:</b> One of the most remarkable capabilities of LLMs is their ability
+            to perform few-shot or even zero-shot learning. In few-shot learning, the model can perform a task after
+            seeing only a few examples. In zero-shot learning, the model can tackle a task without any specific
+            training, relying solely on its pre-trained knowledge.</li>
+        </ul>
+
+        <h4>Applications:</h4>
+
+        <ul>
+          <li>Chatbots and virtual assistants (e.g., OpenAI’s ChatGPT, Microsoft’s Cortana)</li>
+          <li>Automated content generation for blogs, news articles, and social media posts</li>
+          <li>Translation services, providing high-quality translations between multiple languages</li>
+          <li>Code generation, where the model can write software code from natural language descriptions (e.g.,
+            GitHub’s Copilot)</li>
+        </ul>
+
+        <p>
+          LLMs represent a significant step toward more general-purpose AI, capable of understanding and generating text
+          across various contexts and industries. However, their scale also raises ethical and practical concerns,
+          including bias, misinformation, and the environmental costs of training such large models.
+        </p>
+
+        <p><b>Further Reading:</b></p>
+        <ul>
+          <li><a href="https://openai.com/research" target="_blank">GPT and Transformer-based Models: GPT-3 and Beyond
+              by OpenAI</a></li>
+          <li><a href="https://arxiv.org/abs/2005.14165" target="_blank">The GPT-3 Paper (Language Models are Few-Shot
+              Learners)</a></li>
+          <li><a href="https://jalammar.github.io/how-gpt3-works-visualizations-animations/" target="_blank">A Visual
+              Guide to GPT-3</a></li>
+          <li><a href="https://arxiv.org/abs/1810.04805" target="_blank">BERT: Pre-training of Deep Bidirectional
+              Transformers</a></li>
+          <li><a href="https://arxiv.org/abs/1910.10683" target="_blank">T5: Exploring the Limits of Transfer
+              Learning</a></li>
+          <li><a href="https://huggingface.co/models" target="_blank">Hugging Face: Overview of Transformer Models</a>
+          </li>
+          <li><a href="https://beta.openai.com/docs/" target="_blank">GPT Implementation in Python: OpenAI GPT API
+              Documentation</a></li>
+          <li><a href="https://huggingface.co/transformers/model_doc/gpt2.html" target="_blank">Hugging Face GPT-2
+              Implementation in PyTorch</a></li>
+        </ul>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Exercise: Exploring NanoGPT for Text Generation (2p)</h1>
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+              <p>
+                You’ve been approached by a group of colleagues in your AI research group who are investigating the
+                performance and practicality of locally run GPT models. They're specifically interested in models that
+                are fully transparent and understandable from a code perspective. To help with this, they've recommended
+                using the <a href="https://github.com/karpathy/nanoGPT" target="_blank">NanoGPT</a> repository by Andrej
+                Karpathy, which is a small but complete GPT implementation, written from scratch. Your mission is to
+                explore this model by running it locally on your machine and experimenting with it to better understand
+                its capabilities.
+              </p>
+
+              <h2>Generating Text with Pre-trained Model (1 point)</h2>
+
+              <ul>
+                <li><b>Clone the NanoGPT Repository:</b> Follow the instructions on the NanoGPT GitHub repository to
+                  clone the code to your local machine.</li>
+                <li><b>Run the Pre-trained Model:</b> The repository comes with a small pre-trained GPT model on a
+                  Shakespearean dataset.</li>
+                <li>Your task is to generate text samples using this pre-trained model. You can do this by running the
+                  provided script that generates text from the Shakespeare model.</li>
+              </ul>
+
+              <p><b>Submission:</b><br> Share the generated text output from your run (minimum 100 characters).</p>
+
+              <h2>Fine-Tuning the GPT Model on Your Own Data (1 point)</h2>
+
+              <ul>
+                <li><b>Prepare Your Own Text:</b> Select a text dataset of your choice. It can be a personal collection
+                  of articles, blog posts, stories, or any form of coherent text (minimum 1,000 words).</li>
+                <li><b>Fine-Tune the NanoGPT Model:</b> Follow the instructions in the repository to fine-tune the GPT
+                  model using your own dataset. Adjust the hyperparameters, if necessary, to ensure that the model
+                  learns effectively from your data.</li>
+                <li><b>Generate New Text with a Prompt:</b> Once the model is fine-tuned, generate new text by providing
+                  a custom prompt related to your dataset.</li>
+              </ul>
+
+              <p><b>Submission:</b><br> Submit the prompt you used and the new text generated by your fine-tuned model
+                (minimum 100 characters).</p>
+
+              <h3>Tips:</h3>
+
+              <ul>
+                <li>Make sure you have all necessary dependencies installed, such as Python and PyTorch, as described in
+                  the repo.</li>
+                <li>Fine-tuning might take time, so choose your dataset wisely for faster experimentation.</li>
+                <li>Feel free to adjust the parameters during fine-tuning to see how the model’s performance changes.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
         <h2 class="material-heading">
           Formal languages and grammars
 
@@ -1555,186 +1736,7 @@ S &xrarr; [S]
         </div>
 
 
-        <h2>Generative AI in NLP</h2>
-
-        <p>
-          Generative AI in Natural Language Processing (NLP) has changed how machines understand and generate human
-          language. NLP tasks, such as text generation, summarization, translation, and conversation, have significantly
-          improved with the introduction of deep learning models that can generate coherent and contextually appropriate
-          language.
-        </p>
-
-        <p>
-          At the heart of this transformation are transformer-based models, such as GPT (Generative Pre-trained
-          Transformer), which leverage massive datasets and powerful neural networks to create natural language outputs.
-          By predicting the next word or phrase based on preceding text, these models are able to produce human-like
-          language with impressive accuracy and fluency.
-        </p>
-
-        <p>
-          Key generative models in NLP include GPT, BERT, and T5, each of which has advanced specific NLP tasks. These
-          models rely heavily on attention mechanisms and self-supervision (where the training data is created
-          automatically from unlabeled text), making them highly scalable.
-        </p>
-
-        <h3>Brief History of GPT: From GPT-0</h3>
-
-        <p>
-          The Generative Pre-trained Transformer (GPT) series represents a breakthrough in language generation, with
-          each iteration improving upon its predecessor in terms of scale, complexity, and performance. Here's a brief
-          history of the evolution from GPT-0 to today's advanced models:
-        </p>
-
-        <ul>
-          <li><b>GPT-0 (2018):</b> The original GPT model was based on the transformer architecture introduced by
-            Vaswani et al. in 2017. GPT-0 (also referred to as GPT-1) was trained on a large corpus of unsupervised text
-            data and could generate text by predicting the next word in a sequence. It had approximately 110 million
-            parameters, which made it significantly more powerful than earlier recurrent neural network (RNN) models.
-            While impressive, GPT-0 had limitations in terms of contextual understanding and coherence over long texts.
-          </li>
-
-          <li><b>GPT-2 (2019):</b> OpenAI introduced GPT-2, which scaled up the number of parameters to 1.5 billion,
-            marking a significant jump in capability. GPT-2 could generate more coherent and contextually relevant
-            paragraphs of text. Its ability to complete sentences and generate long-form content was a major improvement
-            over GPT-0. However, concerns over the potential misuse of GPT-2 for disinformation led OpenAI to initially
-            limit access to the full model.</li>
-
-          <li><b>GPT-3 (2020):</b> GPT-3 represented another massive leap in scale, with 175 billion parameters. Its
-            capabilities in understanding and generating natural language far surpassed previous models. GPT-3 was able
-            to perform a variety of tasks, including answering questions, translating languages, summarizing text, and
-            even generating code—all from a single, pre-trained model. GPT-3 demonstrated the power of few-shot
-            learning, where it could adapt to new tasks with minimal examples.</li>
-
-          <li><b>GPT-4 (Expected 2023+):</b> GPT-4 is expected to be even larger, more efficient, and more adept at
-            solving complex tasks with fewer mistakes. GPT-4 will likely build on advancements in architecture, dataset
-            size, and optimization techniques to push the boundaries of what language models can achieve.</li>
-        </ul>
-
-        <h3>Large Language Models (LLMs)</h3>
-
-        <p>
-          Large Language Models (LLMs), such as GPT-3 and beyond, have become a foundational tool in generative AI,
-          thanks to their ability to process and generate natural language at an unprecedented scale. LLMs are
-          pre-trained on vast corpora of text data, often drawn from books, websites, articles, and other sources. This
-          pre-training allows these models to learn the statistical properties of language, enabling them to generate
-          meaningful text and understand complex language patterns.
-        </p>
-
-        <h4>Key Characteristics of LLMs:</h4>
-
-        <ul>
-          <li><b>Scale:</b> LLMs like GPT-3 contain billions of parameters, making them capable of handling a wide range
-            of NLP tasks with minimal fine-tuning. The sheer size of these models allows them to generalize well across
-            tasks and domains.</li>
-
-          <li><b>Pre-training and Fine-tuning:</b> LLMs are pre-trained on general-purpose text data, which gives them
-            broad language comprehension. They can be fine-tuned on specific tasks, such as sentiment analysis,
-            summarization, or translation, by exposing them to smaller, task-specific datasets.</li>
-
-          <li><b>Few-shot and Zero-shot Learning:</b> One of the most remarkable capabilities of LLMs is their ability
-            to perform few-shot or even zero-shot learning. In few-shot learning, the model can perform a task after
-            seeing only a few examples. In zero-shot learning, the model can tackle a task without any specific
-            training, relying solely on its pre-trained knowledge.</li>
-        </ul>
-
-        <h4>Applications:</h4>
-
-        <ul>
-          <li>Chatbots and virtual assistants (e.g., OpenAI’s ChatGPT, Microsoft’s Cortana)</li>
-          <li>Automated content generation for blogs, news articles, and social media posts</li>
-          <li>Translation services, providing high-quality translations between multiple languages</li>
-          <li>Code generation, where the model can write software code from natural language descriptions (e.g.,
-            GitHub’s Copilot)</li>
-        </ul>
-
-        <p>
-          LLMs represent a significant step toward more general-purpose AI, capable of understanding and generating text
-          across various contexts and industries. However, their scale also raises ethical and practical concerns,
-          including bias, misinformation, and the environmental costs of training such large models.
-        </p>
-
-        <p><b>Further Reading:</b></p>
-        <ul>
-          <li><a href="https://openai.com/research" target="_blank">GPT and Transformer-based Models: GPT-3 and Beyond
-              by OpenAI</a></li>
-          <li><a href="https://arxiv.org/abs/2005.14165" target="_blank">The GPT-3 Paper (Language Models are Few-Shot
-              Learners)</a></li>
-          <li><a href="https://jalammar.github.io/how-gpt3-works-visualizations-animations/" target="_blank">A Visual
-              Guide to GPT-3</a></li>
-          <li><a href="https://arxiv.org/abs/1810.04805" target="_blank">BERT: Pre-training of Deep Bidirectional
-              Transformers</a></li>
-          <li><a href="https://arxiv.org/abs/1910.10683" target="_blank">T5: Exploring the Limits of Transfer
-              Learning</a></li>
-          <li><a href="https://huggingface.co/models" target="_blank">Hugging Face: Overview of Transformer Models</a>
-          </li>
-          <li><a href="https://beta.openai.com/docs/" target="_blank">GPT Implementation in Python: OpenAI GPT API
-              Documentation</a></li>
-          <li><a href="https://huggingface.co/transformers/model_doc/gpt2.html" target="_blank">Hugging Face GPT-2
-              Implementation in PyTorch</a></li>
-        </ul>
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Exercise: Exploring NanoGPT for Text Generation (2p)</h1>
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-              <p>
-                You’ve been approached by a group of colleagues in your AI research group who are investigating the
-                performance and practicality of locally run GPT models. They're specifically interested in models that
-                are fully transparent and understandable from a code perspective. To help with this, they've recommended
-                using the <a href="https://github.com/karpathy/nanoGPT" target="_blank">NanoGPT</a> repository by Andrej
-                Karpathy, which is a small but complete GPT implementation, written from scratch. Your mission is to
-                explore this model by running it locally on your machine and experimenting with it to better understand
-                its capabilities.
-              </p>
-
-              <h2>Generating Text with Pre-trained Model (1 point)</h2>
-
-              <ul>
-                <li><b>Clone the NanoGPT Repository:</b> Follow the instructions on the NanoGPT GitHub repository to
-                  clone the code to your local machine.</li>
-                <li><b>Run the Pre-trained Model:</b> The repository comes with a small pre-trained GPT model on a
-                  Shakespearean dataset.</li>
-                <li>Your task is to generate text samples using this pre-trained model. You can do this by running the
-                  provided script that generates text from the Shakespeare model.</li>
-              </ul>
-
-              <p><b>Submission:</b><br> Share the generated text output from your run (minimum 100 characters).</p>
-
-              <h2>Fine-Tuning the GPT Model on Your Own Data (1 point)</h2>
-
-              <ul>
-                <li><b>Prepare Your Own Text:</b> Select a text dataset of your choice. It can be a personal collection
-                  of articles, blog posts, stories, or any form of coherent text (minimum 1,000 words).</li>
-                <li><b>Fine-Tune the NanoGPT Model:</b> Follow the instructions in the repository to fine-tune the GPT
-                  model using your own dataset. Adjust the hyperparameters, if necessary, to ensure that the model
-                  learns effectively from your data.</li>
-                <li><b>Generate New Text with a Prompt:</b> Once the model is fine-tuned, generate new text by providing
-                  a custom prompt related to your dataset.</li>
-              </ul>
-
-              <p><b>Submission:</b><br> Submit the prompt you used and the new text generated by your fine-tuned model
-                (minimum 100 characters).</p>
-
-              <h3>Tips:</h3>
-
-              <ul>
-                <li>Make sure you have all necessary dependencies installed, such as Python and PyTorch, as described in
-                  the repo.</li>
-                <li>Fine-tuning might take time, so choose your dataset wisely for faster experimentation.</li>
-                <li>Feel free to adjust the parameters during fine-tuning to see how the model’s performance changes.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
+        
 
         <!-- Exercise 5.5 -->
 
@@ -1841,12 +1843,16 @@ hear: 4
 
 
       </div>
-    </div>
-    
-    <h1 class="material-heading">
-      Historical Elements
 
-    </h1>
+      <h1 class="material-heading">
+        Historical Elements
+  
+      </h1>
+
+
+
+
+    </div>
 
 
     <div class="footer-wrapper">
