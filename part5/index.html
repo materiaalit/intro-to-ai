@@ -365,183 +365,7 @@
           objects of the same color.
         </p>
 
-        <h2 class="material-heading">
-          SIFT and SURF
 
-        </h2>
-
-        <p>
-          Good examples of commonly used feature extraction techniques for
-          image data include Scale-Invariant Feature Transform (SIFT) and
-          Speeded-Up Robust Features (SURF). We take a closer look at the
-          SURF technique. It can be broken into two or three stages:
-        <ol>
-          <li>
-            <b>Choosing interest points:</b> We identify a set of (x,y)
-            points by maximizing the determinant of a so called Hessian
-            matrix that characterizes the local intensity variation
-            around the point. The interest points tend to be located
-            at "blobs" in the image. (You are not required to decode the
-            details of this -- a rough idea is enough.)
-          <li>
-            <b>Feature descriptors:</b> The intensity variation around each
-            interest point is described by a feature descriptor which is a
-            64-dimensional vector (array of 64 real values). In addition,
-            the feature has a scale (size) and an orientation (dominant
-            direction).
-          <li>
-            <b>Feature matching:</b> If the problem is to match objects
-            between two images, then both of the above tasks are performed
-            on both images. We then find pairs of feature descriptors
-            (one extracted from image A and the other from image B) that
-            are sufficiently close to each other in Euclidean distance.
-        </ol>
-        </p>
-        <img src="../img/surf-example-mars-c8674a6e.png" width=100%><br><br>
-
-        <p>
-          Above is an example of detected features: interest point location,
-          scale, and orientation shown by the circles, and the type of
-          contrast shown by the color, i.e., dark on light background (red) or
-          light on dark background (blue). <i>Image credit:</i> NASA/Jet
-          Propulsion Laboratory/University of Arizona. Image from the edge of
-          the south polar residual cap on Mars.
-        </p>
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Pattern recognition A (1p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                <b>Python version</b><br><br>
-
-                We will use the SIFT method (because it turns out that the
-                SURF method is in fact patent-protected, while the patent of the
-                earlier SIFT method has expired!), but the idea is very much the
-                same as in the SURF method described in the lecture.
-              </p>
-
-              <p>
-                You can download the template here: <a href="../files/python-sift.zip">Python template</a>
-              </p>
-
-              <p>
-                To run it, you'll need to install the <a href="https://github.com/opencv/opencv">OpenCV</a> library. The
-                easiest way is to use the <a
-                  href="https://pypi.org/project/opencv-python/"><code>opencv-python</code></a> wrapper, which can be
-                installed by saying <code>pip install opencv-python</code></p>
-
-              <p>
-                After installing OpenCV &ndash; which is a great open-source
-                library for all kinds of computer vision tasks &ndash; you can run
-                the code in the template by <code>python
-	sift_match.py</code>. The code will take the two images
-                in <code>img1.jpg</code> and <code>img2.jpg</code>, extract
-                SIFT features from both of them, and find the 30 best
-                matches. The matches will be drawn as lines connecting the
-                keypoints in the two images.</p>
-
-              <p>After running the code, you can see the outcome in the file <code>sift_keypoints.jpg</code>.</p>
-
-              <p>Your task is to change the files <code>img1.jpg</code>
-                and <code>img2.jpg</code> (or edit the code to read different
-                files) in the template to another pair of images, and rerun the
-                code.</p>
-
-              <p>Try at least five different pairs of images, some of which include the same building, person, and/or
-                object. Try to find examples where the feature matching works, and examples where it doesn't.</p>
-
-
-              <b>Java version</b><br><br>
-
-              The Java template (download from TMC) for the pattern
-              recognition task implements SURF feature extraction and
-              matching. When you run the template, you should get the face
-              example presented at the lecture.
-              </p>
-
-              <p>
-                The red dots in the images are the locations of the SURF
-                interest points. The lines between points in the two images
-                represent matches, i.e., pairs of features whose descriptor
-                vectors are sufficiently close to each other to be classified as
-                belonging to the same or similar looking object.
-              </p>
-
-              <p>
-                Change the files <code>img1.jpg</code> and <code>img2.jpg</code> in
-                the <code>example</code> folder to another pair of images, and
-                rerun the template. <i>Note:</i> The images must be the same
-                height. (Width can be different.)
-              </p>
-
-              <p>
-                Try at least five different pairs of images, some of which include
-                the same building, person, and/or object. Try to find examples
-                where the feature matching works, and examples where it doesn't.
-              </p>
-
-
-            </div>
-          </div>
-        </div>
-
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Pattern recognition B (1p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                Use the same template as in the previous exercise.
-              </p>
-
-              <p>
-                Choose one or more images and do the following modifications (one
-                at a time):
-              <ul>
-                <li> change brightness, contrast, and color balance
-                <li> rotate the image
-                <li> crop and rescale
-                <li> add noise or blur
-              </ul>
-              Use your favorite image processing tool (iPhote, GIMP, Photoshop, etc).
-              </p>
-
-              <p>
-                Does SIFT/SURF recognize the objects in the image as the same despite
-                the alterations?
-              </p>
-
-              <p>
-                <i>An alternative (more fun) way:</i> Take multiple photos of the
-                same image from slightly different angles, different distances,
-                in different lighting conditions, with occlusion, etc.
-                Does SURF recognize the object despite such changes in
-                external conditions?
-              </p>
-
-
-            </div>
-          </div>
-        </div>
 
         <h2 class="material-heading">
           Deep learning and computer vision
@@ -1051,6 +875,193 @@
           </div>
         </div>
 
+
+
+
+        <h1 class="material-heading">
+          Historical Elements
+
+
+
+        </h1>
+
+        <h2 class="material-heading">
+          SIFT and SURF
+
+        </h2>
+
+        <p>
+          Good examples of commonly used feature extraction techniques for
+          image data include Scale-Invariant Feature Transform (SIFT) and
+          Speeded-Up Robust Features (SURF). We take a closer look at the
+          SURF technique. It can be broken into two or three stages:
+        <ol>
+          <li>
+            <b>Choosing interest points:</b> We identify a set of (x,y)
+            points by maximizing the determinant of a so called Hessian
+            matrix that characterizes the local intensity variation
+            around the point. The interest points tend to be located
+            at "blobs" in the image. (You are not required to decode the
+            details of this -- a rough idea is enough.)
+          <li>
+            <b>Feature descriptors:</b> The intensity variation around each
+            interest point is described by a feature descriptor which is a
+            64-dimensional vector (array of 64 real values). In addition,
+            the feature has a scale (size) and an orientation (dominant
+            direction).
+          <li>
+            <b>Feature matching:</b> If the problem is to match objects
+            between two images, then both of the above tasks are performed
+            on both images. We then find pairs of feature descriptors
+            (one extracted from image A and the other from image B) that
+            are sufficiently close to each other in Euclidean distance.
+        </ol>
+        </p>
+        <img src="../img/surf-example-mars-c8674a6e.png" width=100%><br><br>
+
+        <p>
+          Above is an example of detected features: interest point location,
+          scale, and orientation shown by the circles, and the type of
+          contrast shown by the color, i.e., dark on light background (red) or
+          light on dark background (blue). <i>Image credit:</i> NASA/Jet
+          Propulsion Laboratory/University of Arizona. Image from the edge of
+          the south polar residual cap on Mars.
+        </p>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Pattern recognition A (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                <b>Python version</b><br><br>
+
+                We will use the SIFT method (because it turns out that the
+                SURF method is in fact patent-protected, while the patent of the
+                earlier SIFT method has expired!), but the idea is very much the
+                same as in the SURF method described in the lecture.
+              </p>
+
+              <p>
+                You can download the template here: <a href="../files/python-sift.zip">Python template</a>
+              </p>
+
+              <p>
+                To run it, you'll need to install the <a href="https://github.com/opencv/opencv">OpenCV</a> library. The
+                easiest way is to use the <a
+                  href="https://pypi.org/project/opencv-python/"><code>opencv-python</code></a> wrapper, which can be
+                installed by saying <code>pip install opencv-python</code></p>
+
+              <p>
+                After installing OpenCV &ndash; which is a great open-source
+                library for all kinds of computer vision tasks &ndash; you can run
+                the code in the template by <code>python
+	sift_match.py</code>. The code will take the two images
+                in <code>img1.jpg</code> and <code>img2.jpg</code>, extract
+                SIFT features from both of them, and find the 30 best
+                matches. The matches will be drawn as lines connecting the
+                keypoints in the two images.</p>
+
+              <p>After running the code, you can see the outcome in the file <code>sift_keypoints.jpg</code>.</p>
+
+              <p>Your task is to change the files <code>img1.jpg</code>
+                and <code>img2.jpg</code> (or edit the code to read different
+                files) in the template to another pair of images, and rerun the
+                code.</p>
+
+              <p>Try at least five different pairs of images, some of which include the same building, person, and/or
+                object. Try to find examples where the feature matching works, and examples where it doesn't.</p>
+
+
+              <b>Java version</b><br><br>
+
+              The Java template (download from TMC) for the pattern
+              recognition task implements SURF feature extraction and
+              matching. When you run the template, you should get the face
+              example presented at the lecture.
+              </p>
+
+              <p>
+                The red dots in the images are the locations of the SURF
+                interest points. The lines between points in the two images
+                represent matches, i.e., pairs of features whose descriptor
+                vectors are sufficiently close to each other to be classified as
+                belonging to the same or similar looking object.
+              </p>
+
+              <p>
+                Change the files <code>img1.jpg</code> and <code>img2.jpg</code> in
+                the <code>example</code> folder to another pair of images, and
+                rerun the template. <i>Note:</i> The images must be the same
+                height. (Width can be different.)
+              </p>
+
+              <p>
+                Try at least five different pairs of images, some of which include
+                the same building, person, and/or object. Try to find examples
+                where the feature matching works, and examples where it doesn't.
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Pattern recognition B (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Use the same template as in the previous exercise.
+              </p>
+
+              <p>
+                Choose one or more images and do the following modifications (one
+                at a time):
+              <ul>
+                <li> change brightness, contrast, and color balance
+                <li> rotate the image
+                <li> crop and rescale
+                <li> add noise or blur
+              </ul>
+              Use your favorite image processing tool (iPhote, GIMP, Photoshop, etc).
+              </p>
+
+              <p>
+                Does SIFT/SURF recognize the objects in the image as the same despite
+                the alterations?
+              </p>
+
+              <p>
+                <i>An alternative (more fun) way:</i> Take multiple photos of the
+                same image from slightly different angles, different distances,
+                in different lighting conditions, with occlusion, etc.
+                Does SURF recognize the object despite such changes in
+                external conditions?
+              </p>
+
+
+            </div>
+          </div>
+        </div>
 
         <h2 class="material-heading">
           Formal languages and grammars
@@ -1736,7 +1747,7 @@ S &xrarr; [S]
         </div>
 
 
-        
+
 
         <!-- Exercise 5.5 -->
 
@@ -1843,14 +1854,6 @@ hear: 4
 
 
       </div>
-
-      <h1 class="material-heading">
-        Historical Elements
-  
-      </h1>
-
-
-
 
     </div>
 
