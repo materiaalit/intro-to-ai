@@ -712,6 +712,34 @@
         </ol>
         </p>
 
+        <h2 class="material-heading">Logistic Regression: The Foundation of Neural Networks</h2>
+
+        <p>
+            Logistic Regression is a statistical method traditionally used for binary classification tasks, where the objective is to categorize instances into one of two classes. Unlike linear regression, which predicts continuous outcomes, logistic regression models the probability of an outcome belonging to a particular class. This is achieved through the <i>sigmoid function</i>, which maps real-valued inputs to a range between 0 and 1:
+        </p>
+        
+        <p style="text-align: center;">
+            <i>P(y=1|x) = 1 / (1 + e<sup>−(β<sub>0</sub> + β<sub>1</sub>x)</sup>)</i>
+        </p>
+        
+        <p>
+            In this equation, <i>β<sub>0</sub></i> and <i>β<sub>1</sub></i> represent the model parameters, while <i>e</i> denotes the base of the natural logarithm. Logistic regression outputs a probability score, and a threshold (commonly 0.5) is used to assign a final class label. This makes logistic regression ideal for tasks such as spam detection, disease prediction, and customer segmentation.
+        </p>
+        
+        <p>
+            <strong>Why Logistic Regression is Important for Neural Networks:</strong> Logistic regression can be viewed as a simple neural network with no hidden layers, where the sigmoid function serves as the activation function for the output layer. This connection between logistic regression and neural networks highlights the transition from single-layer models to more sophisticated structures. By adding hidden layers, neural networks evolve from a simple logistic regression model into a multi-layered framework capable of learning complex, non-linear decision boundaries.
+        </p>
+        
+        <h2 class="material-heading">From Logistic Regression to Multi-Layer Neural Networks</h2>
+        
+        <p>
+            Building on logistic regression, neural networks expand the model’s ability to capture intricate patterns by incorporating multiple layers of interconnected nodes, or <i>neurons</i>. In a neural network, each neuron in one layer connects to neurons in the next, passing information through activation functions like the sigmoid function used in logistic regression. With each added layer, the model’s capacity to learn complex representations increases, allowing it to solve more challenging problems than a single-layer logistic regression model can.
+        </p>
+        
+        <p>
+            Thus, logistic regression serves as a stepping stone into neural networks, especially in binary classification tasks. By stacking layers and introducing various activation functions, neural networks transform simple logistic regression into a powerful, flexible model that can tackle multi-class classification, image recognition, natural language processing, and more.
+        </p>
+
         <h2 class="material-heading">
           Weights, Activation and Adaptation
 
@@ -768,6 +796,8 @@
             the self-organizing map
         </ol>
         </p>
+
+        
 
         <h2 class="material-heading">
           Feedforward Networks
