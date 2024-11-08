@@ -569,6 +569,44 @@
             posteriori</b> class value, i.e., the most probable class.
         </p>
 
+        <h2 class="material-heading">Linear Regression</h2>
+
+<p>
+    Linear Regression is a statistical method used in machine learning to model the relationship between a dependent variable (target) and one or more independent variables (features). The linear regression model assumes a linear relationship between the input variables and the output variable, which can be represented by the equation:
+</p>
+
+<p style="text-align: center;">
+    <i>y = β<sub>0</sub> + β<sub>1</sub>x + ε</i>
+</p>
+
+<p>
+    In this equation, <i>β<sub>0</sub></i> is the intercept, <i>β<sub>1</sub></i> is the coefficient for the feature <i>x</i>, and <i>ε</i> is the error term. The objective is to find the values of <i>β</i> that minimize the difference between the predicted and actual values of the target variable. Linear regression is widely used for tasks like predicting housing prices, stock prices, and demand forecasting due to its simplicity and interpretability.
+</p>
+
+<p><strong>Applications:</strong> Linear regression is popular in fields such as economics, finance, and biology for predictive modeling and trend analysis.</p>
+
+<h2 class="material-heading">Overfitting</h2>
+
+<p>
+    Overfitting occurs when a model learns not only the underlying patterns in the training data but also the noise and details that do not generalize to new data. An overfitted model will perform well on the training data but will likely have poor performance on unseen data, indicating a lack of generalization.
+</p>
+
+<p><strong>Symptoms of Overfitting:</strong></p>
+<ul>
+    <li>High accuracy on training data but low accuracy on validation or test data.</li>
+    <li>Complex models that capture data-specific patterns irrelevant to new data.</li>
+</ul>
+
+<p><strong>Preventive Techniques:</strong></p>
+<ul>
+    <li><strong>Cross-Validation:</strong> Splitting the dataset into multiple subsets to validate results across these sets helps ensure the model generalizes.</li>
+    <li><strong>Regularization:</strong> Techniques such as L1 or L2 regularization penalize model complexity to discourage overfitting.</li>
+    <li><strong>Pruning:</strong> For decision trees, pruning removes unnecessary branches that contribute little to prediction accuracy on new data.</li>
+</ul>
+
+<p>Understanding and managing overfitting is crucial for building robust machine learning models that perform well on unseen data.</p>
+
+        
         <h1 class="material-heading">
           Neural Networks
 
