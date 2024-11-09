@@ -146,17 +146,16 @@
                 Implementing the complete game engine with all the rules is somewhat
                 tedious, so we have done it for you. Also, since you've already
                 implemented alpha-beta pruning last week, you don't have to do it
-                again here. Instead, your task is to implement a <strong>
-                  heuristic evaluation function</strong>. The performance of the
+                again here. Instead, your task is to implement either a <strong>
+                  heuristic evaluation function</strong>, or a <strong> search algorithm </strong>. The performance of the
                 chess bot is in part determined by the goodness of the evaluation
-                function, so designing a good one is critical for creating a
-                competitive bot.
+                function or the speediness of the search function. 
+		Both search and evaluation are important for any good bot!
               </p>
 
               <p>
-                We challenge you to see how your evaluation function fares against
-                our own contender, <i>Deep Glue</i>. Deep Glue is included in the
-                template that we provide.
+                We challenge you to see how your evaluation/search function fares against
+                our own contender, <i>Deep Glue</i>, as well as against other students. 
               </p>
 
               <p>
@@ -167,23 +166,35 @@
                     href="https://python-chess.readthedocs.io/en/latest/index.html"><code>python-chess</code></a> by,
                   e.g., <code>pip install chess</code>.
                 <li>
-                  Download the Python template <a
-                    href="https://materiaalit.github.io/intro-to-ai/files/iai_chess_python.zip">here</a>.
+                  Download the Python template in moodle.
                 <li>
-                  Implement the function <code>your_heuristic(board: chess.Board)</code>
-                  in <code>your_heuristic.py</code>. The function will take as its
-                  input a board position of the <code>chess.Board</code> type.
+                  Implement the function <code>evaluate_board(board: chess.Board)</code> or
+		  <code>search_algorithm(board: chess.Board, evaluate_board)</code>
+                  in <code>studentname_studentnumber.py</code>. The evaluation function will take as its
+                  input a board position of the <code>chess.Board</code> type. 
+		  The search function will take the board position as well as an evaluation function,
+		  the same one you see in the <code>base.py</code>
                   See the comments in the code for some tips about how to access the
                   pieces and their positions (rank, file) on the board.
+		  The <code>base.py</code> includes an example engine you can test against.
               </ol>
               </p>
 
 
               <p>
-                Traditionally, we have had a great chess-bot tournament each year. We are updating the course this year
-                and it will be done in a limited way if possible. 😢 We will update contents regarding this soon. Let us
-                know if you are interested in
-                setting something like this up as a hobby!
+                After submission in moodle, a round-robin tournament will be performed, followed by 
+		a knockout match. This will be conducted for both evaluation and search performance. 
+		<li>
+		In the round-robin phase, each student playes against eachother four times, twice as white and twice as black. 
+		A score is assigned based on the outcome of the game: 1 for win, 0.5 for draw, 0 for loss, for both the evaluation 
+		and speed of the search function.
+		<li> 
+		In the knockout phase, players will be ranked based on their scores from the round robin, and a bracket is made. 
+		Mini-matches are performed against two players, consisting of four games again. If the score is tied, then one engine is 
+		randomly selected to play as white in an armageddon game, where white must win to advance. 
+		The winner of the match advances to the next round, until their is only one winner left. 
+		<li>
+		See moodle instructions for submission.
               </p>
 
 
