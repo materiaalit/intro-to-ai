@@ -909,6 +909,47 @@
 
 				<!-- Exercis 6.3 -->
 
+				<div class="solution" data-target='collapse'>
+					<div class="solution__header">
+						<a data-toggle="collapse" class="solution__toggle">
+							<i class="fa fa-magic solution__icon"></i>
+							<h1 class="solution__heading">Example solution</h1>
+							<i class="fa fa-caret-down solution__arrow"></i>
+						</a>
+					</div>
+					<div class="collapse">
+						<div class="solution__body">
+							<p>
+								The EU AI Act has requirements for high-risk AI systems in Section 2 and Obligations to
+								providers in Section 3. This would be considered a high-risk system according to the
+								definition in Section 1. The EU AI Act for high-risk systems could potentially prevent
+								the problems described in the case of Rite Aid by imposing strict requirements on the
+								deployment and use of facial recognition technology. Transparency and Informed Consent:
+								The EU AI Act requires transparency regarding the use of AI systems, including facial
+								recognition technology. Companies like Rite Aid would be obligated to inform consumers
+								about the use of such technology in their stores and obtain their informed consent
+								before deploying it. This would prevent situations where consumers are unaware of being
+								surveilled and wrongly accused. Data Quality and Accuracy: High-risk AI systems must
+								adhere to standards for data quality and accuracy. Rite Aid's use of low-quality images
+								and data in its facial recognition database would likely be in violation of these
+								standards, leading to more accurate identification and fewer false positives. Risk
+								Management and Mitigation: The EU AI Act mandates the implementation of risk management
+								systems to identify risks associated with AI systems. Rite Aid would be required to
+								conduct thorough risk assessments to identify potential harms, such as racial bias or
+								false positives, and implement measures to mitigate these risks before deploying facial
+								recognition technology. In addition: Human Oversight and Control (ensure that human
+								employees have the ability to intervene and override the decisions made by the facial
+								recognition technology, especially in cases where false positives). Non-Discrimination:
+								The EU AI Act prohibits discrimination and requires AI systems to be developed and
+								deployed in a non-discriminatory manner. Rite Aid's actions, which disproportionately
+								impacted people of color.
+							</p>
+
+						</div>
+					</div>
+				</div>
+
+
 
 				<div class="exercise">
 					<div class="exercise__header">
