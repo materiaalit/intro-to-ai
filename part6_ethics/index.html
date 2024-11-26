@@ -1,672 +1,860 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Introduction to Artificial Intelligence 2024 | Part 6</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    
-    <link href="../stylesheets/styles-b17821ab.css" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/xcode.min.css">
-    
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.css" />
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-47575342-7', 'auto');
-      ga('set', 'anonymizeIp', true);
-      ga('send', 'pageview');
-    </script>
-    
-  </head>
-  <body>
-    <div class="main-wrapper">
-      <div class="header-wrapper">
-        <div class="browser-support-warning" id="browser-support-warning" style="display: none;">
-	  Kaikki tämän materiaalin osat eivät välttämättä tuo nykyistä selaintasi. Voisitko harkita vaihtamista <a href="https://www.google.com/chrome/browser/desktop/" target="_blank" rel="noopener">Chrome</a> tai <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener">Firefox</a> selaimeen?
-	  <span class="browser-support-warning__close">Selvä!</span>
-	</div>
-	
-	
-        <nav class="navbar navbar-light bg-white">
-	  <a class="navbar-brand" href="http://mooc.fi" alt="MOOC" target="_blank" rel="noopener">
-	    <span class="icon-mooc"></span>
-	  </a>
-	  
-	  <ul class="nav navbar-nav hidden-md-down">
-	    <li class="nav-item ">
-              <a href="../" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=index.html&gt;')">Introduction</a>
-	    </li>
-	    <li class="nav-item ">
-              <a href="../part1/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part1.html&gt;')">Part 1</a>
-	    </li>
-	    <li class="nav-item ">
-              <a href="../part2/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part2.html&gt;')">Part 2</a>
-	    </li>
-	    <li class="nav-item ">
-              <a href="../part3/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part3.html&gt;')">Part 3</a>
-	    </li>
-	    <li class="nav-item ">
-              <a href="../part4/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part4.html&gt;')">Part 4</a>
-	    </li>
-	    <li class="nav-item ">
-              <a href="../part5/" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part5.html&gt;')">Part 5</a>
-	    </li>
-	    <li class="nav-item active">
-              <a href="./" class="nav-link" onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6_ethics.html&gt;')">Part 6</a>
-	    </li>
-	  </ul>
-	  
-	  <div class="float-xs-right navbar__buttons">
-	    <div class="dropdown" id="mobile-nav-dropdown">
-	      <button class="btn btn-secondary dropdown-toggle navbar__mobile-nav-toggle" data-toggle="dropdown">
-		<i class="fa fa-bars"></i>
-	      </button>
-	      
-	      <div class="dropdown-menu">
-	      </div>
-	    </div>
-	    
-	    <button class="btn btn-secondary" id="table-of-contents-toggle">
-	      <span class="hidden-md-down">Table of contents</span>
-	      <i class="fa fa-ellipsis-h hidden-lg-up"></i>
-	    </button>
-	    
-	    <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
-	  </div>
-	</nav>
-	
-      </div>
-      
-      <div class="content-wrapper">
-        <div class="container material" id="material">
 
-	  <div class="exercise-list">
-	    <div class="exercise-list__header">
-	      Exercises
-	    </div>
-	    
-	    <div class="exercise-list__content" id="exercise-list"></div>
-	    
-	  </div>
-	  
-	  
-          <h1 class="material-heading">
-	    Robotics
-	  </h1>
-	  
-	  <p>
-	    Robotics can be thought of as a Grand Challenge in AI: it
-	    requires that we address virtually all aspects of AI
-	    including
-	    <ul>
-	      <li> motor control
-	      <li> computer vision
-	      <li> speech recognition and synthesis
-	      <li> natural language processing
-	      <li> information retrieval
-	      <li> reasoning (logical and probabilistic)
-	      <li> search
-	      <li> ...
-	    </ul>
-	    And of course, machine learning, deep learning, and other
-	    techniques for developing any of the above are relevant in
-	    making better and more general purpose robots.
-	  </p>
-	  
-	  <div class="hint">
-	    <div class="hint__header">
-	      <i class="fa fa-info-circle hint__icon"></i>Sorry to disappoint you...
-	    </div>
-	    
-	    <div class="hint__body">
-	      
-	      <p>
-		We will not dive deeper into robotics in this course because
-		we think that learning robotics actually requires doing
-		robotics &mdash; just like learning programming without
-		actually doing programming is pointless.
-	      </p>
-	    </div>
-	  </div>
-	    
-	  <p>
-	    Perhaps just to point out a few things that we think are
-	    important about robotics: First of all, we already have
-	    plenty or robots in everyday use. Our favourite example
-	    is the dishwashing machine, of which the first models
-	    were invented in around 1850. The dishwashing machine is
-	    a robot in the sense that it has sensors that help it
-	    sense its real-world environment (the water temperature and its
-	    flow, the amount and dirtyness of the dishes, etc.) and
-	    actuators that enable it to affect its environment (heating
-	    the water, releasing the detergent, sploshing the water, etc.).
-	    With this definition, even a radiator thermostat is a robot,
-	    which is fine by us!
-	  </p>
-	  
-	  <p>
-	    Another thing to know about robotics is more difficult to
-	    explain in words, and is precisely the reason why we don't
-	    even try diving deeper into robotics in this
-	    course. Briefly, it's the hardness of operating in the
-	    real world. Sensors are never perfect and they malfunction
-	    all the time, which makes it really hard to keep track of
-	    the state of the system; for instance, the relative
-	    location of the robot and the objects around it. Likewise,
-	    the actuators such as motors that help the robot move
-	    itself around, are imperfect so that whenever the poor
-	    robot may try to move its hand or roll forward on its
-	    wheels exactly 10 cm, it would in reality end up moving 9
-	    or 11 cm.
-	  </p>
-	  
-	  <p>
-	    The latter issue implies that developing robust robotics
-	    solutions often requires operating on a whole another
-	    level, often on a "lower level" in some sense, than
-	    developing other kinds of AI applications that only have
-	    to deal with simulated environments or static data, not
-	    the messy real world.
-	  </p>
-	  
-	  <p>
-	    If you have a chance to try working with actual robots, we
-	    encourage you to do it. We used to do robotics in the
-	    course in the previous editions, using LEGO Mindstorms
-	    robots, but the robots we have in stock are becoming
-	    technically so outdated that programming them is a real
-	    pain in the butt. The latest LEGO models also don't seem
-	    to support sensible Python or even Java coding. (Let us
-	    know if you know
-	    better.) <a href="https://www.raspberrypi.org/">Raspberry
-	    PI</a> looks like a promising alternative. In case you'll
-	    have a chance to try any of these and build and program
-	    robots, you'll hopefully understand what we're trying to
-	    say here!
-	  </p>
+<head>
+	<title>Introduction to Artificial Intelligence 2024 | Part 6</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	  <p>
-	    With that, let's move on to the last major topic on the course.
-	  </p>
-	  
-	  
-	  <h1 class="material-heading">
-	    Ethics of AI
-	  </h1>
-	  
-	 
-	  </p>
-	  
-	  <p>
-	    Our last main topic on this course is the Ethics of AI.
-	    Just to get one thing off our chest, we must emphasize
-	    that this is indeed "last but not least"; in other words,
-	    the reason why ethics is discussed as the last topic, is
-	    by no means that it would be somehow a less fundamental,
-	    nice-to-know topic. This may have been what people &mdash;
-	    to be honest, even us &mdash; thought years ago, but as
-	    the impact of AI in the society is becoming more and more
-	    prominent, ethical concerns are also being brought to the
-	    surface.
-	  </p>
-	  
-	  <p>
-	    On a related note, the fact that the very material you are
-	    now reading is work in progress, reflects the fact that
-	    the field is very much in motion as more and more people
-	    are talking about it.
-	  </p>
-	  
-	  <div class="hint">
-	    <div class="hint__header">
-	      <i class="fa fa-info-circle hint__icon"></i>Calm down, an engineer has arrived!
-	    </div>
-	    
-	    <div class="hint__body">
-	      
-	      <p>
-		One thing that seems to happen repeatedly is that AI
-		people or other technologists arrive at the scene,
-		encounter a problem, and think they must be the first
-		to ever have thought about it. This tends to lead to
-		awkward situations where the work by other people, who
-		may have been studying the same issues, sometimes for
-		decades, are ignored.
-	      </p>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-	      <p>
-		When you deal with ethical issues related to
-		technology, you should make an effort to look for
-		earlier work on the topic. It may be difficult, since
-		people may have used different terminology, but it's
-		definitely worth at least trying. You're unlikely to be
-		the first to come across the issue. Keep an
-		eye out in particular for work in <a href="https://en.wikipedia.org/wiki/Science_and_technology_studies">Science and Technology Studies (STS)</a>.
-	      </p>		
-	      
-	    </div>
-	  </div>
-	  
-	  <h2 class="material-heading">
-	    Ethical AI or Ethics of AI?
-	  </h2>
+	<link href="../stylesheets/styles-b17821ab.css" rel="stylesheet" />
 
-	  <p>
-	    There are actually several ways in which AI and ethics meet.
-	    For instance, there is a topic called <b>machine ethics</b>,
-	    which is focused on building computational systems that
-	    behave in ethical ways or that have, in a very literal sense,
-	    a moral code. You have perhaps heard about
-	    <a href="https://en.wikipedia.org/wiki/Three_Laws_of_Robotics">
-	      the Three Laws of Robotics</a> from the sci-fi author
-	    Isaac Asimov's 1942 short story Runaround. Machine ethics
-	    focuses on this type of rules that could in principle
-	    encoded into AI systems.
-	  </p>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/xcode.min.css">
 
-	  <p>
-	    Machine ethics is a legitimate scientific field. However,
-	    it is disconnected from existing AI systems and their
-	    societal impact, because as you've probably noticed by
-	    now, modern AI systems don't operate on a level where
-	    rules like
-	    <i>"A robot may not injure a human being or, through
-	      inaction, allow a human being to come to harm"</i>,
-	      which is the First Law of Robotics according to Asimov.
-	  </p>
+	<link rel="stylesheet" type="text/css"
+		href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.css" />
 
-	  <p>
-	    What we will discuss in this part of the course is therefore
-	    <i>not</i> machine ethics, but the <b>ethics of AI</b>, by
-	    which we mean the broader viewpoint into the societal and
-	    ethical issues related to the use of AI systems. This
-	    entails that we shift focus from the technical aspects of
-	    the AI systems themselves to the entire socio-technical
-	    context that involves not only the AI system(s) but also
-	    the humans that are involved and affected by the use of
-	    such systems.
-	  </p>
+	<script>
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date(); a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+		ga('create', 'UA-47575342-7', 'auto');
+		ga('set', 'anonymizeIp', true);
+		ga('send', 'pageview');
+	</script>
 
-	  <div class="hint">
-	    <div class="hint__header">
-	      <i class="fa fa-info-circle hint__icon"></i>A Note of the Scope of AI Regulation
-	    </div>
-	    
-	    <div class="hint__body">
-	      
-	      <p>
-		As we've discussed, there is no commonly agreed
-		definition of AI. Therefore, any regulation that tries
-		to govern the use of AI will be somewhat hard to
-		define in an unambiguous way. In fact, it is our
-		personal opinion that AI <i>shouldn't</i> be regulated
-		as such, but that it should be regulated along with
-		any other technology, or in many cases, not even as
-		technology, but as human activity.</p>
+</head>
 
-	      <p>
-		Why would it make a difference, from an ethical or
-		legal point of view, whether something is done using
-		AI or without AI? We can't think of a single case,
-		where the use of AI should make something legal or
-		illegal. Any law that that depends on whether
-		something is AI or not is prone to finding loopholes
-		in the assumed definition of AI.
-	      </p>
-
-	      <p>
-		However, since the deployment of AI systems amplifies
-		some potential harms to people &mdash; mass
-		surveillance, deanonymization, loss of accountability,
-		complicated authorship questions, to name a few
-		&mdash; various regulatory stakeholders, most notably
-		the European Union, have decided to create AI
-		regulation. So the milk is most likely already
-		spilled. This will unavoidably lead to more work for
-		lawyers figuring out when the AI regulation applies
-		and when not, and how it will be consolidated with
-		existing sector-specific regulation. But that's what
-		lawyers do... &#129335;
-	      </p>
-	    </div>
-	  </div>
-
- <h2 class="material-heading"> EU AI Act	  </h2>
-		
- <p>
-	    <b> It is very important to study the EU AI ACT for example with available guide to the act online  <a href="https://artificialintelligenceact.eu/ai-act-explorer/">EU AI ACT Explorer</a>.
-	      </p>		 </b>
-
-High-level summary.
+<body>
+	<div class="main-wrapper">
+		<div class="header-wrapper">
+			<div class="browser-support-warning" id="browser-support-warning" style="display: none;">
+				Kaikki tämän materiaalin osat eivät välttämättä tuo nykyistä selaintasi. Voisitko harkita vaihtamista <a
+					href="https://www.google.com/chrome/browser/desktop/" target="_blank" rel="noopener">Chrome</a> tai
+				<a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank" rel="noopener">Firefox</a>
+				selaimeen?
+				<span class="browser-support-warning__close">Selvä!</span>
+			</div>
 
 
-Here we provide you with a high-level summary of the AI Act, however is important to consult the act directly  online for example using the <a href="https://artificialintelligenceact.eu/ai-act-explorer/">EU AI ACT Explorer</a>
+			<nav class="navbar navbar-light bg-white">
+				<a class="navbar-brand" href="http://mooc.fi" alt="MOOC" target="_blank" rel="noopener">
+					<span class="icon-mooc"></span>
+				</a>
 
-To explore the full text of the AI Act yourself, use our AI Act Explorer. Alternatively, if you want to know which parts of the text are most relevant to you, use our Compliance Checker.
-		
+				<ul class="nav navbar-nav hidden-md-down">
+					<li class="nav-item ">
+						<a href="../" class="nav-link"
+							onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=index.html&gt;')">Introduction</a>
+					</li>
+					<li class="nav-item ">
+						<a href="../part1/" class="nav-link"
+							onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part1.html&gt;')">Part
+							1</a>
+					</li>
+					<li class="nav-item ">
+						<a href="../part2/" class="nav-link"
+							onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part2.html&gt;')">Part
+							2</a>
+					</li>
+					<li class="nav-item ">
+						<a href="../part3/" class="nav-link"
+							onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part3.html&gt;')">Part
+							3</a>
+					</li>
+					<li class="nav-item ">
+						<a href="../part4/" class="nav-link"
+							onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part4.html&gt;')">Part
+							4</a>
+					</li>
+					<li class="nav-item ">
+						<a href="../part5/" class="nav-link"
+							onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part5.html&gt;')">Part
+							5</a>
+					</li>
+					<li class="nav-item active">
+						<a href="./" class="nav-link"
+							onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6_ethics.html&gt;')">Part
+							6</a>
+					</li>
+				</ul>
 
-		 <u><p><b>The AI Act Classifies AI According to Its Risk</p></b></u>
-    <ul>
-        <li>Unacceptable risk is prohibited (e.g., social scoring systems and manipulative AI).</li>
-        <li>Most of the text addresses high-risk AI systems, which are regulated.</li>
-        <li>A smaller section handles limited-risk AI systems, subject to lighter transparency obligations: developers and deployers must ensure that end-users are aware that they are interacting with AI (e.g., chatbots and deepfakes).</li>
-        <li>Minimal risk is unregulated (including the majority of AI applications currently available on the EU single market, such as AI-enabled video games and spam filters—at least in 2021; this is changing with generative AI).</li>
-    </ul>
+				<div class="float-xs-right navbar__buttons">
+					<div class="dropdown" id="mobile-nav-dropdown">
+						<button class="btn btn-secondary dropdown-toggle navbar__mobile-nav-toggle"
+							data-toggle="dropdown">
+							<i class="fa fa-bars"></i>
+						</button>
 
-  <p><u>The Majority of Obligations Fall on Providers (Developers) of High-Risk AI Systems</p></u>
-    <ul>
-        <li>Those that intend to place on the market or put into service high-risk AI systems in the EU, regardless of whether they are based in the EU or a third country.</li>
-        <li>Also, third-country providers where the high-risk AI system’s output is used in the EU.</li>
-    </ul>
+						<div class="dropdown-menu">
+						</div>
+					</div>
 
-    <p><u>Users Are Natural or Legal Persons That Deploy an AI System in a Professional Capacity</p></u>
-    <ul>
-        <li>Users (deployers) of high-risk AI systems have some obligations, though less than providers (developers).</li>
-        <li>This applies to users located in the EU and third-country users where the AI system’s output is used in the EU.</li>
-    </ul>
+					<button class="btn btn-secondary" id="table-of-contents-toggle">
+						<span class="hidden-md-down">Table of contents</span>
+						<i class="fa fa-ellipsis-h hidden-lg-up"></i>
+					</button>
 
-   <p><u>General Purpose AI (GPAI)</p></u>
-    <ul>
-        <li>All GPAI model providers must provide technical documentation, instructions for use, comply with the Copyright Directive, and publish a summary about the content used for training.</li>
-        <li>Free and open-license GPAI model providers only need to comply with copyright and publish the training data summary, unless they present a systemic risk.</li>
-        <li>All providers of GPAI models that present a systemic risk—open or closed—must also conduct model evaluations, adversarial testing, track and report serious incidents, and ensure cybersecurity protections.</li>
-    </ul>
+					<button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
+				</div>
+			</nav>
 
+		</div>
 
-  <p><strong>Prohibited AI Systems </strong>  <a href="https://artificialintelligenceact.eu/chapter/2/"><b>Chapter II</b></a>,&nbsp;<a
-href="https://artificialintelligenceact.eu/article/5/"><b>Art. 5</b></a></p> 
-    <ul>
-        <li>Deploying <strong>subliminal, manipulative, or deceptive techniques</strong> to distort behaviour and impair informed decision-making, causing significant harm.</li>
-        <li><strong>Exploiting vulnerabilities</strong> related to age, disability, or socio-economic circumstances to distort behaviour, causing significant harm.</li>
-        <li><strong>Biometric categorisation systems</strong> inferring sensitive attributes (race, political opinions, trade union membership, religious or philosophical beliefs, sex life, or sexual orientation), except labelling or filtering of lawfully acquired biometric datasets or when law enforcement categorises biometric data.</li>
-        <li><strong>Social scoring</strong>, i.e., evaluating or classifying individuals or groups based on social behaviour or personal traits, causing detrimental or unfavourable treatment of those people.</li>
-        <li><strong>Assessing the risk</strong> of an individual committing criminal offenses solely based on profiling or personality traits, except when used to augment human assessments based on objective, verifiable facts directly linked to criminal activity.</li>
-        <li><strong>Compiling facial recognition databases</strong> by untargeted scraping of facial images from the internet or CCTV footage.</li>
-        <li><strong>Inferring emotions</strong> in workplaces or educational institutions, except for medical or safety reasons.</li>
-        <li><strong>‘Real-time’ remote biometric identification (RBI)</strong> in publicly accessible spaces for law enforcement, except when:
-            <ul>
-                <li>Searching for missing persons, abduction victims, and people who have been human trafficked or sexually exploited;</li>
-                <li>Preventing substantial and imminent threat to life, or foreseeable terrorist attack; or</li>
-                <li>Identifying suspects in serious crimes (e.g., murder, rape, armed robbery, narcotic and illegal weapons trafficking, organised crime, and environmental crime, etc.).</li>
-            </ul>
-        </li>
-    </ul>
+		<div class="content-wrapper">
+			<div class="container material" id="material">
 
-<p><strong>Notes on remote biometric identification:</strong></p>
+				<div class="exercise-list">
+					<div class="exercise-list__header">
+						Exercises
+					</div>
 
-Using AI-enabled real-time RBI is only allowed when not using the tool would cause considerable harm and must account for affected persons’ rights and freedoms.
+					<div class="exercise-list__content" id="exercise-list"></div>
 
-Before deployment, police must complete a fundamental rights impact assessment and register the system in the EU database, though, in duly justified cases of urgency, deployment can commence without registration, provided that it is registered later without undue delay.
-
-Before deployment, they also must obtain authorisation from a judicial authority or independent administrative authority[1], though, in duly justified cases of urgency, deployment can commence without authorisation, provided that authorisation is requested within 24 hours. If authorisation is rejected, deployment must cease immediately, deleting all data, results, and outputs.
-		
- <h3 class="material-heading">High risk AI systems </h3><a href="https://artificialintelligenceact.eu/chapter/3/"><b>(Chapter III)</a>
-<p>Some AI systems are considered ‘High risk’ under the AI Act. Providers of those systems will be subject to additional requirements.</p>
-<u><p>Classification rules for high-risk AI systems </u>(<a href="https://artificialintelligenceact.eu/article/6/" >Art. 6</a>)</p>
-		
-<ul>
-        <li>Used as a safety component or a product covered by EU laws in <a href="https://artificialintelligenceact.eu/annex/1/" target="_blank">Annex I</a> AND required to undergo a third-party conformity assessment under those <a href="https://artificialintelligenceact.eu/annex/1/" target="_blank">Annex I</a> laws; OR</li>
-        <li>Those under <a href="https://artificialintelligenceact.eu/annex/3/" target="_blank">Annex III</a> use cases (below), except if:
-            <ul>
-                <li>The AI system performs a narrow procedural task;</li>
-                <li>Improves the result of a previously completed human activity;</li>
-                <li>Detects decision-making patterns or deviations from prior decision-making patterns and is not meant to replace or influence the previously completed human assessment without proper human review; or</li>
-                <li>Performs a preparatory task to an assessment relevant for the purpose of the use cases listed in <a href="https://artificialintelligenceact.eu/annex/3/" target="_blank">Annex III</a>.</li>
-            </ul>
-        </li>
-        <li>AI systems are always considered high-risk if it profiles individuals, i.e., automated processing of personal data to assess various aspects of a person’s life, such as work performance, economic situation, health, preferences, interests, reliability, behaviour, location or movement.</li>
-        <li>Providers whose AI system falls under the use cases in <a href="https://artificialintelligenceact.eu/annex/3/" target="_blank">Annex III</a> but believes it is <strong>not</strong> high-risk must document such an assessment before placing it on the market or putting it into service.</li>
-    </ul>
-
-<p>The Eu AI Act contains both Requirements to High Risk Systems, and Obligations of providers.</p>
-		<p> Section 2 contains : Requirements for High-Risk AI Systems, Article 8: Compliance with the Requirements, Article 9: Risk Management System, Article 10: Data and Data Governance, Article 11: Technical Documentation, Article 12: Record-Keeping, Article 13: Transparency and Provision of Information to Deployers, Article 14: Human Oversight, Article 15: Accuracy, Robustness and Cybersecurity</p>
-		<p></p>
-		
-		<u><p>Obligations for providers of high-risk AI systems</u> (Art. <a href="https://artificialintelligenceact.eu/article/8/" target="_blank">8</a>–<a href="https://artificialintelligenceact.eu/article/17/" target="_blank">17</a>)</p>
- 
-    <ul>
-        <li>Establish a <strong>risk management system</strong> throughout the high risk AI system’s lifecycle;</li>
-        <li>Conduct <strong>data governance</strong>, ensuring that training, validation and testing datasets are relevant, sufficiently representative and, to the best extent possible, free of errors and complete according to the intended purpose.</li>
-        <li>Draw up <strong>technical documentation</strong> to demonstrate compliance and provide authorities with the information to assess that compliance.</li>
-        <li>Design their high-risk AI system for <strong>record-keeping</strong> to enable it to automatically record events relevant for identifying national-level risks and substantial modifications throughout the system’s lifecycle.</li>
-        <li>Provide <strong>instructions for use</strong> to downstream deployers to enable the latter’s compliance.</li>
-        <li>Design their high-risk AI system to allow deployers to implement <strong>human oversight</strong>.</li>
-        <li>Design their high-risk AI system to achieve appropriate levels of <strong>accuracy, robustness, and cybersecurity</strong>.</li>
-        <li>Establish a <strong>quality management system</strong> to ensure compliance.</li>
-    </ul>
-
-		<h3 class="material-heading"><a href="https://artificialintelligenceact.eu/annex/3/" target="_blank">Annex III</a> Use Cases</h3>
-    <table>
-        <tr>
-            <td><strong>Non-banned biometrics:</strong> Remote biometric identification systems, excluding biometric verification that confirm a person is who they claim to be. Biometric categorisation systems inferring sensitive or protected attributes or characteristics. Emotion recognition systems.</td>
-        </tr>
-        <tr>
-            <td><strong>Critical infrastructure:</strong> Safety components in the management and operation of critical digital infrastructure, road traffic and the supply of water, gas, heating and electricity.</td>
-        </tr>
-        <tr>
-            <td><strong>Education and vocational training:</strong> AI systems determining access, admission or assignment to educational and vocational training institutions at all levels. Evaluating learning outcomes, including those used to steer the student’s learning process. Assessing the appropriate level of education for an individual. Monitoring and detecting prohibited student behaviour during tests.</td>
-        </tr>
-        <tr>
-            <td><strong>Employment, workers management and access to self-employment:</strong> AI systems used for recruitment or selection, particularly targeted job ads, analysing and filtering applications, and evaluating candidates. Promotion and termination of contracts, allocating tasks based on personality traits or characteristics and behaviour, and monitoring and evaluating performance.</td>
-        </tr>
-        <tr>
-            <td><strong>Access to and enjoyment of essential public and private services:</strong> AI systems used by public authorities for assessing eligibility to benefits and services, including their allocation, reduction, revocation, or recovery. Evaluating creditworthiness, except when detecting financial fraud. Evaluating and classifying emergency calls, including dispatch prioritising of police, firefighters, medical aid and urgent patient triage services. Risk assessments and pricing in health and life insurance.</td>
-        </tr>
-        <tr>
-            <td><strong>Law enforcement:</strong> AI systems used to assess an individual’s risk of becoming a crime victim. Polygraphs. Evaluating evidence reliability during criminal investigations or prosecutions. Assessing an individual’s risk of offending or re-offending not solely based on profiling or assessing personality traits or past criminal behaviour. Profiling during criminal detections, investigations or prosecutions.</td>
-        </tr>
-        <tr>
-            <td><strong>Migration, asylum and border control management:</strong> Polygraphs. Assessments of irregular migration or health risks. Examination of applications for asylum, visa and residence permits, and associated complaints related to eligibility. Detecting, recognising or identifying individuals, except verifying travel documents.</td>
-        </tr>
-        <tr>
-            <td><strong>Administration of justice and democratic processes:</strong> AI systems used in researching and interpreting facts and applying the law to concrete facts or used in alternative dispute resolution. Influencing elections and referenda outcomes or voting behaviour, excluding outputs that do not directly interact with people, like tools used to organise, optimise and structure political campaigns.</td>
-        </tr>
-    </table>
+				</div>
 
 
+				<h1 class="material-heading">
+					Robotics
+				</h1>
+
+				<p>
+					Robotics can be thought of as a Grand Challenge in AI: it
+					requires that we address virtually all aspects of AI
+					including
+				<ul>
+					<li> motor control
+					<li> computer vision
+					<li> speech recognition and synthesis
+					<li> natural language processing
+					<li> information retrieval
+					<li> reasoning (logical and probabilistic)
+					<li> search
+					<li> ...
+				</ul>
+				And of course, machine learning, deep learning, and other
+				techniques for developing any of the above are relevant in
+				making better and more general purpose robots.
+				</p>
+
+				<div class="hint">
+					<div class="hint__header">
+						<i class="fa fa-info-circle hint__icon"></i>Sorry to disappoint you...
+					</div>
+
+					<div class="hint__body">
+
+						<p>
+							We will not dive deeper into robotics in this course because
+							we think that learning robotics actually requires doing
+							robotics &mdash; just like learning programming without
+							actually doing programming is pointless.
+						</p>
+					</div>
+				</div>
+
+				<p>
+					Perhaps just to point out a few things that we think are
+					important about robotics: First of all, we already have
+					plenty or robots in everyday use. Our favourite example
+					is the dishwashing machine, of which the first models
+					were invented in around 1850. The dishwashing machine is
+					a robot in the sense that it has sensors that help it
+					sense its real-world environment (the water temperature and its
+					flow, the amount and dirtyness of the dishes, etc.) and
+					actuators that enable it to affect its environment (heating
+					the water, releasing the detergent, sploshing the water, etc.).
+					With this definition, even a radiator thermostat is a robot,
+					which is fine by us!
+				</p>
+
+				<p>
+					Another thing to know about robotics is more difficult to
+					explain in words, and is precisely the reason why we don't
+					even try diving deeper into robotics in this
+					course. Briefly, it's the hardness of operating in the
+					real world. Sensors are never perfect and they malfunction
+					all the time, which makes it really hard to keep track of
+					the state of the system; for instance, the relative
+					location of the robot and the objects around it. Likewise,
+					the actuators such as motors that help the robot move
+					itself around, are imperfect so that whenever the poor
+					robot may try to move its hand or roll forward on its
+					wheels exactly 10 cm, it would in reality end up moving 9
+					or 11 cm.
+				</p>
+
+				<p>
+					The latter issue implies that developing robust robotics
+					solutions often requires operating on a whole another
+					level, often on a "lower level" in some sense, than
+					developing other kinds of AI applications that only have
+					to deal with simulated environments or static data, not
+					the messy real world.
+				</p>
+
+				<p>
+					If you have a chance to try working with actual robots, we
+					encourage you to do it. We used to do robotics in the
+					course in the previous editions, using LEGO Mindstorms
+					robots, but the robots we have in stock are becoming
+					technically so outdated that programming them is a real
+					pain in the butt. The latest LEGO models also don't seem
+					to support sensible Python or even Java coding. (Let us
+					know if you know
+					better.) <a href="https://www.raspberrypi.org/">Raspberry
+						PI</a> looks like a promising alternative. In case you'll
+					have a chance to try any of these and build and program
+					robots, you'll hopefully understand what we're trying to
+					say here!
+				</p>
+
+				<p>
+					With that, let's move on to the last major topic on the course.
+				</p>
 
 
-		
-<h2 class="material-heading"> Ethics of Generative AI: Hallucinations, Bias, and Environmental Impact </h2>
-
-Along with the benefits, generative AI raises concerns about misuse and errors. There are some limitations where legal frameworks have not caught up with technological developments. To mitigate these risks and ensure the technology benefits society, the OECD works with governments to enable policies that ensure the ethical and responsible use of generative AI. (This section adapted and extended from <a href="https://oecd.ai/en/genai/issues/risks-and-unknowns"> OECD Policy Observatory for AI</a>).
-
-<u><p><strong>AI “hallucinations”, or convincing but inaccurate outputs</strong></p></u>
-<p>When large language models, or textual generative AI, create incorrect yet convincing outputs, it is called a hallucination. This is unintentional and can happen if a correct answer is not found in the training data. Beyond perpetuating inaccurate information, this can interfere with the model’s ability to learn new skills and even lead to a loss of skills.
-</p>
-		
-<u><p><strong>Fake and misleading content</strong></p></u>
-<p>While generative AI brings efficiencies to content creation, it also poses risks that must be considered carefully. One major concern is the potential for generating fake or misleading content. For example, generative AI can be used to create realistic-looking but entirely fabricated images or videos, which can be used to spread disinformation or deceive people. This poses challenges for the detection and verification of digital media.
-</p>
-		
-<u><p><strong>Intellectual property right infringement</strong></p></u>
-<p>Generative AI raises intellectual property rights issues, particularly concerning:</p>
-<ul>
-<li>unlicensed content in training data,</li>
-<li>potential copyright, patent, and trademark infringement of AI creations,</li>
-<li>and ownership of AI-generated works.</li>
-<li>Whether commercial entities can legally train ML models on copyrighted material is contested in Europe and the US. Several lawsuits were filed in the US against companies that allegedly trained their models on copyrighted data without authorisation to make and later store copies of the resulting images. These decisions will set legal precedents and impact the generative AI industry, from start-ups to multinational tech companies.</li>
-</ul>
-
-<u>	<p><strong>Job and labour market transformations</strong></p></u>
-<p>Generative AI is likely to transform labour markets and jobs, but exactly how is still uncertain and being debated among experts. Generative AI could automate tasks traditionally performed by humans, leading to job displacement in some industries and professions.
-</p>
-		
-<p>While some jobs might be automated or eliminated, generative AI could transform existing jobs. This could lead to humans performing tasks more efficiently and generating new creative possibilities. This transformation would lead to a shift in required skills.
-</p>
-		
-<p>Addressing these risks will require combining technical solutions, policy frameworks, and responsible practices to ensure that generative AI benefits society while minimising potential harm.
-</p>
-		
-<u><p><strong>Energy consumption and the environment</strong></p></u>
-<p>Generative AI requires tremendous computing power and consumes natural resources, leading to a significant ecological footprint. Poorly controlled use of generative AI in areas like climate modelling and environmental simulations could unintentionally exacerbate ecological challenges and undermine conservation efforts.
-</p>
-		
-<u><p><strong>Bias, stereotype amplification and privacy concerns</strong></p></u>
-<p>AI can analyse large amounts of data to extract precious information that humans could not see otherwise. But the risk is an amplification of existing biases present in the training data. If the training data contains biases, such as racial or gender stereotypes, the generative AI model may inadvertently produce biased outputs, such as misleading or inappropriate content. This can perpetuate and even amplify societal inequalities and discrimination.</p>
-
-Generative AI also raises privacy concerns. By training on large amounts of data, these models may inadvertently capture and reproduce private or sensitive information. For example, a language model trained on text data may reproduce personal details or confidential information.
-
-<u><p><strong>Potential future risks and concerns</strong> </p></u>
-<p>In the near term, generative AI can exacerbate challenges as synthetic content with varying quality and accuracy proliferates in digital spaces and is then used to train subsequent generative AI models, triggering a vicious cycle. Over the longer term, emergent behaviours such as increased agency, power-seeking, and pursuing hidden sub-goals to achieve a core objective might not align with human values and intent. If manifested, such behaviours could lead to systemic harms and collective disempowerment. 
-Given these risks, overreliance, trust and dependency on AI could cause deep, long-term harm to societies. And a concentration of AI resources in a few multinational tech companies and governments may lead to a global imbalance.</p>
-		<p><b>This part to be continued, in the meantime, please check out the lecture slides and watch the lecture recording on Moodle in case you missed the lecture... Here are the exercises nonetheless.</b></p>
-
-		
-	  <div class="exercise">
-	    <div class="exercise__header">
-	      <a data-toggle="collapse" class="exercise__toggle">
-		<i class="fa fa-pencil exercise__icon"></i>
-		<h1 class="exercise__heading">Calling Bullshit (2p)</h1>
-		
-		<i class="fa fa-caret-down exercise__arrow"></i>
-	      </a>
-	    </div>
-	    
-	    <div class="collapse">
-	      <div class="exercise__body">
-		
-		<p>
-		  In their blog
-		  post, <a href="https://aisnakeoil.substack.com/p/eighteen-pitfalls-to-beware-of-in">Eighteen
-		  pitfalls to beware of in AI journalism</a>, Sayash
-		  Kapoor and Arvind Narayanan present recurring
-		  problems in AI coverage in the press. You can find
-		  a list of the problems, or pitfalls, <a href="https://www.cs.princeton.edu/~sayashk/ai-hype/ai-reporting-pitfalls.pdf">here</a>.
-		</p>
-		
-		<p>
-		  Find three examples of news stories about AI. Try to
-		  find stories that fall into as many of the pitfalls
-		  as you can. Bonus points if the stories you find
-		  come from reputable sources like MIT Tech Review,
-		  the Atlantic, or (I dare you!) the University of
-		  Helsinki.
-		</p>
-
-		<p>
-		  In each case, propose ways to fix the stories as
-		  best as you can.
-		</p>
-	      </div>
-	    </div>
-	  </div>
+				<h1 class="material-heading">
+					Ethics of AI
+				</h1>
 
 
-	  <!-- Exercis 6.1 -->
+				</p>
 
-	  
-	  
-	  
-	  
-	  <div class="exercise">
-	    <div class="exercise__header">
-	      <a data-toggle="collapse" class="exercise__toggle">
-		<i class="fa fa-pencil exercise__icon"></i>
-		<h1 class="exercise__heading">The Great AI Debate (2p)</h1>
-		
-		<i class="fa fa-caret-down exercise__arrow"></i>
-	      </a>
-	    </div>
-	    
-	    <div class="collapse">
-	      <div class="exercise__body">
-		
-		<p>
-		  Ethics can be thought of not only a set of standards
-		  of right and wrong, but also as the process by which
-		  such standard can be deliberated and refined, usually
-		  through dialogue between the stakeholders (<a href="https://www.scu.edu/ethics/ethics-resources/ethical-decision-making/what-is-ethics/">see here</a>).
-		</p>
-		
-		<p>
-		  So let's "do ethics"!
-		</p>
+				<p>
+					Our last main topic on this course is the Ethics of AI.
+					Just to get one thing off our chest, we must emphasize
+					that this is indeed "last but not least"; in other words,
+					the reason why ethics is discussed as the last topic, is
+					by no means that it would be somehow a less fundamental,
+					nice-to-know topic. This may have been what people &mdash;
+					to be honest, even us &mdash; thought years ago, but as
+					the impact of AI in the society is becoming more and more
+					prominent, ethical concerns are also being brought to the
+					surface.
+				</p>
 
-		<p>
-		  Choose one of the following talking points:
-		  <ol>
-		    <li> AI-generated art is currently a hot topic
-		      with systems like DALL-E, Imagen, and Stable
-		      Diffusion being used to create amazign
-		      artwork. Who (or what) should be entitled to
-		      intellectual property rights in these cases?
-		    <li> The real-world impact of AI is growing all
-		      the time. <!--Social media filter algorithms have a
+				<p>
+					On a related note, the fact that the very material you are
+					now reading is work in progress, reflects the fact that
+					the field is very much in motion as more and more people
+					are talking about it.
+				</p>
+
+				<div class="hint">
+					<div class="hint__header">
+						<i class="fa fa-info-circle hint__icon"></i>Calm down, an engineer has arrived!
+					</div>
+
+					<div class="hint__body">
+
+						<p>
+							One thing that seems to happen repeatedly is that AI
+							people or other technologists arrive at the scene,
+							encounter a problem, and think they must be the first
+							to ever have thought about it. This tends to lead to
+							awkward situations where the work by other people, who
+							may have been studying the same issues, sometimes for
+							decades, are ignored.
+						</p>
+
+						<p>
+							When you deal with ethical issues related to
+							technology, you should make an effort to look for
+							earlier work on the topic. It may be difficult, since
+							people may have used different terminology, but it's
+							definitely worth at least trying. You're unlikely to be
+							the first to come across the issue. Keep an
+							eye out in particular for work in <a
+								href="https://en.wikipedia.org/wiki/Science_and_technology_studies">Science and
+								Technology Studies (STS)</a>.
+						</p>
+
+					</div>
+				</div>
+
+				<h2 class="material-heading">
+					Ethical AI or Ethics of AI?
+				</h2>
+
+				<p>
+					There are actually several ways in which AI and ethics meet.
+					For instance, there is a topic called <b>machine ethics</b>,
+					which is focused on building computational systems that
+					behave in ethical ways or that have, in a very literal sense,
+					a moral code. You have perhaps heard about
+					<a href="https://en.wikipedia.org/wiki/Three_Laws_of_Robotics">
+						the Three Laws of Robotics</a> from the sci-fi author
+					Isaac Asimov's 1942 short story Runaround. Machine ethics
+					focuses on this type of rules that could in principle
+					encoded into AI systems.
+				</p>
+
+				<p>
+					Machine ethics is a legitimate scientific field. However,
+					it is disconnected from existing AI systems and their
+					societal impact, because as you've probably noticed by
+					now, modern AI systems don't operate on a level where
+					rules like
+					<i>"A robot may not injure a human being or, through
+						inaction, allow a human being to come to harm"</i>,
+					which is the First Law of Robotics according to Asimov.
+				</p>
+
+				<p>
+					What we will discuss in this part of the course is therefore
+					<i>not</i> machine ethics, but the <b>ethics of AI</b>, by
+					which we mean the broader viewpoint into the societal and
+					ethical issues related to the use of AI systems. This
+					entails that we shift focus from the technical aspects of
+					the AI systems themselves to the entire socio-technical
+					context that involves not only the AI system(s) but also
+					the humans that are involved and affected by the use of
+					such systems.
+				</p>
+
+				<div class="hint">
+					<div class="hint__header">
+						<i class="fa fa-info-circle hint__icon"></i>A Note of the Scope of AI Regulation
+					</div>
+
+					<div class="hint__body">
+
+						<p>
+							As we've discussed, there is no commonly agreed
+							definition of AI. Therefore, any regulation that tries
+							to govern the use of AI will be somewhat hard to
+							define in an unambiguous way. In fact, it is our
+							personal opinion that AI <i>shouldn't</i> be regulated
+							as such, but that it should be regulated along with
+							any other technology, or in many cases, not even as
+							technology, but as human activity.</p>
+
+						<p>
+							Why would it make a difference, from an ethical or
+							legal point of view, whether something is done using
+							AI or without AI? We can't think of a single case,
+							where the use of AI should make something legal or
+							illegal. Any law that that depends on whether
+							something is AI or not is prone to finding loopholes
+							in the assumed definition of AI.
+						</p>
+
+						<p>
+							However, since the deployment of AI systems amplifies
+							some potential harms to people &mdash; mass
+							surveillance, deanonymization, loss of accountability,
+							complicated authorship questions, to name a few
+							&mdash; various regulatory stakeholders, most notably
+							the European Union, have decided to create AI
+							regulation. So the milk is most likely already
+							spilled. This will unavoidably lead to more work for
+							lawyers figuring out when the AI regulation applies
+							and when not, and how it will be consolidated with
+							existing sector-specific regulation. But that's what
+							lawyers do... &#129335;
+						</p>
+					</div>
+				</div>
+
+				<h2 class="material-heading"> EU AI Act </h2>
+
+				<p>
+					<b> It is very important to study the EU AI ACT for example with available guide to the act online
+						<a href="https://artificialintelligenceact.eu/ai-act-explorer/">EU AI ACT Explorer</a>.
+				</p> </b>
+
+				High-level summary.
+
+
+				Here we provide you with a high-level summary of the AI Act, however is important to consult the act
+				directly online for example using the <a href="https://artificialintelligenceact.eu/ai-act-explorer/">EU
+					AI ACT Explorer</a>
+
+				To explore the full text of the AI Act yourself, use our AI Act Explorer. Alternatively, if you want to
+				know which parts of the text are most relevant to you, use our Compliance Checker.
+
+
+				<u>
+					<p><b>The AI Act Classifies AI According to Its Risk</p></b>
+				</u>
+				<ul>
+					<li>Unacceptable risk is prohibited (e.g., social scoring systems and manipulative AI).</li>
+					<li>Most of the text addresses high-risk AI systems, which are regulated.</li>
+					<li>A smaller section handles limited-risk AI systems, subject to lighter transparency obligations:
+						developers and deployers must ensure that end-users are aware that they are interacting with AI
+						(e.g., chatbots and deepfakes).</li>
+					<li>Minimal risk is unregulated (including the majority of AI applications currently available on
+						the EU single market, such as AI-enabled video games and spam filters—at least in 2021; this is
+						changing with generative AI).</li>
+				</ul>
+
+				<p><u>The Majority of Obligations Fall on Providers (Developers) of High-Risk AI Systems</p></u>
+				<ul>
+					<li>Those that intend to place on the market or put into service high-risk AI systems in the EU,
+						regardless of whether they are based in the EU or a third country.</li>
+					<li>Also, third-country providers where the high-risk AI system’s output is used in the EU.</li>
+				</ul>
+
+				<p><u>Users Are Natural or Legal Persons That Deploy an AI System in a Professional Capacity</p></u>
+				<ul>
+					<li>Users (deployers) of high-risk AI systems have some obligations, though less than providers
+						(developers).</li>
+					<li>This applies to users located in the EU and third-country users where the AI system’s output is
+						used in the EU.</li>
+				</ul>
+
+				<p><u>General Purpose AI (GPAI)</p></u>
+				<ul>
+					<li>All GPAI model providers must provide technical documentation, instructions for use, comply with
+						the Copyright Directive, and publish a summary about the content used for training.</li>
+					<li>Free and open-license GPAI model providers only need to comply with copyright and publish the
+						training data summary, unless they present a systemic risk.</li>
+					<li>All providers of GPAI models that present a systemic risk—open or closed—must also conduct model
+						evaluations, adversarial testing, track and report serious incidents, and ensure cybersecurity
+						protections.</li>
+				</ul>
+
+
+				<p><strong>Prohibited AI Systems </strong> <a
+						href="https://artificialintelligenceact.eu/chapter/2/"><b>Chapter II</b></a>,&nbsp;<a
+						href="https://artificialintelligenceact.eu/article/5/"><b>Art. 5</b></a></p>
+				<ul>
+					<li>Deploying <strong>subliminal, manipulative, or deceptive techniques</strong> to distort
+						behaviour and impair informed decision-making, causing significant harm.</li>
+					<li><strong>Exploiting vulnerabilities</strong> related to age, disability, or socio-economic
+						circumstances to distort behaviour, causing significant harm.</li>
+					<li><strong>Biometric categorisation systems</strong> inferring sensitive attributes (race,
+						political opinions, trade union membership, religious or philosophical beliefs, sex life, or
+						sexual orientation), except labelling or filtering of lawfully acquired biometric datasets or
+						when law enforcement categorises biometric data.</li>
+					<li><strong>Social scoring</strong>, i.e., evaluating or classifying individuals or groups based on
+						social behaviour or personal traits, causing detrimental or unfavourable treatment of those
+						people.</li>
+					<li><strong>Assessing the risk</strong> of an individual committing criminal offenses solely based
+						on profiling or personality traits, except when used to augment human assessments based on
+						objective, verifiable facts directly linked to criminal activity.</li>
+					<li><strong>Compiling facial recognition databases</strong> by untargeted scraping of facial images
+						from the internet or CCTV footage.</li>
+					<li><strong>Inferring emotions</strong> in workplaces or educational institutions, except for
+						medical or safety reasons.</li>
+					<li><strong>‘Real-time’ remote biometric identification (RBI)</strong> in publicly accessible spaces
+						for law enforcement, except when:
+						<ul>
+							<li>Searching for missing persons, abduction victims, and people who have been human
+								trafficked or sexually exploited;</li>
+							<li>Preventing substantial and imminent threat to life, or foreseeable terrorist attack; or
+							</li>
+							<li>Identifying suspects in serious crimes (e.g., murder, rape, armed robbery, narcotic and
+								illegal weapons trafficking, organised crime, and environmental crime, etc.).</li>
+						</ul>
+					</li>
+				</ul>
+
+				<p><strong>Notes on remote biometric identification:</strong></p>
+
+				Using AI-enabled real-time RBI is only allowed when not using the tool would cause considerable harm and
+				must account for affected persons’ rights and freedoms.
+
+				Before deployment, police must complete a fundamental rights impact assessment and register the system
+				in the EU database, though, in duly justified cases of urgency, deployment can commence without
+				registration, provided that it is registered later without undue delay.
+
+				Before deployment, they also must obtain authorisation from a judicial authority or independent
+				administrative authority[1], though, in duly justified cases of urgency, deployment can commence without
+				authorisation, provided that authorisation is requested within 24 hours. If authorisation is rejected,
+				deployment must cease immediately, deleting all data, results, and outputs.
+
+				<h3 class="material-heading">High risk AI systems </h3><a
+					href="https://artificialintelligenceact.eu/chapter/3/">(Chapter III)</a>
+				<p>Some AI systems are considered ‘High risk’ under the AI Act. Providers of those systems will be
+					subject to additional requirements.</p>
+				<u>
+					<p>Classification rules for high-risk AI systems
+				</u>(<a href="https://artificialintelligenceact.eu/article/6/">Art. 6</a>)</p>
+
+				<ul>
+					<li>Used as a safety component or a product covered by EU laws in <a
+							href="https://artificialintelligenceact.eu/annex/1/" target="_blank">Annex I</a> AND
+						required to undergo a third-party conformity assessment under those <a
+							href="https://artificialintelligenceact.eu/annex/1/" target="_blank">Annex I</a> laws; OR
+					</li>
+					<li>Those under <a href="https://artificialintelligenceact.eu/annex/3/" target="_blank">Annex
+							III</a> use cases (below), except if:
+						<ul>
+							<li>The AI system performs a narrow procedural task;</li>
+							<li>Improves the result of a previously completed human activity;</li>
+							<li>Detects decision-making patterns or deviations from prior decision-making patterns and
+								is not meant to replace or influence the previously completed human assessment without
+								proper human review; or</li>
+							<li>Performs a preparatory task to an assessment relevant for the purpose of the use cases
+								listed in <a href="https://artificialintelligenceact.eu/annex/3/" target="_blank">Annex
+									III</a>.</li>
+						</ul>
+					</li>
+					<li>AI systems are always considered high-risk if it profiles individuals, i.e., automated
+						processing of personal data to assess various aspects of a person’s life, such as work
+						performance, economic situation, health, preferences, interests, reliability, behaviour,
+						location or movement.</li>
+					<li>Providers whose AI system falls under the use cases in <a
+							href="https://artificialintelligenceact.eu/annex/3/" target="_blank">Annex III</a> but
+						believes it is <strong>not</strong> high-risk must document such an assessment before placing it
+						on the market or putting it into service.</li>
+				</ul>
+
+				<p>The Eu AI Act contains both Requirements to High Risk Systems, and Obligations of providers.</p>
+				<p> Section 2 contains : Requirements for High-Risk AI Systems, Article 8: Compliance with the
+					Requirements, Article 9: Risk Management System, Article 10: Data and Data Governance, Article 11:
+					Technical Documentation, Article 12: Record-Keeping, Article 13: Transparency and Provision of
+					Information to Deployers, Article 14: Human Oversight, Article 15: Accuracy, Robustness and
+					Cybersecurity</p>
+				<p></p>
+
+				<u>
+					<p>Obligations for providers of high-risk AI systems
+				</u> (Art. <a href="https://artificialintelligenceact.eu/article/8/" target="_blank">8</a>–<a
+					href="https://artificialintelligenceact.eu/article/17/" target="_blank">17</a>)</p>
+
+				<ul>
+					<li>Establish a <strong>risk management system</strong> throughout the high risk AI system’s
+						lifecycle;</li>
+					<li>Conduct <strong>data governance</strong>, ensuring that training, validation and testing
+						datasets are relevant, sufficiently representative and, to the best extent possible, free of
+						errors and complete according to the intended purpose.</li>
+					<li>Draw up <strong>technical documentation</strong> to demonstrate compliance and provide
+						authorities with the information to assess that compliance.</li>
+					<li>Design their high-risk AI system for <strong>record-keeping</strong> to enable it to
+						automatically record events relevant for identifying national-level risks and substantial
+						modifications throughout the system’s lifecycle.</li>
+					<li>Provide <strong>instructions for use</strong> to downstream deployers to enable the latter’s
+						compliance.</li>
+					<li>Design their high-risk AI system to allow deployers to implement <strong>human
+							oversight</strong>.</li>
+					<li>Design their high-risk AI system to achieve appropriate levels of <strong>accuracy, robustness,
+							and cybersecurity</strong>.</li>
+					<li>Establish a <strong>quality management system</strong> to ensure compliance.</li>
+				</ul>
+
+				<h3 class="material-heading"><a href="https://artificialintelligenceact.eu/annex/3/"
+						target="_blank">Annex III</a> Use Cases</h3>
+				<table>
+					<tr>
+						<td><strong>Non-banned biometrics:</strong> Remote biometric identification systems, excluding
+							biometric verification that confirm a person is who they claim to be. Biometric
+							categorisation systems inferring sensitive or protected attributes or characteristics.
+							Emotion recognition systems.</td>
+					</tr>
+					<tr>
+						<td><strong>Critical infrastructure:</strong> Safety components in the management and operation
+							of critical digital infrastructure, road traffic and the supply of water, gas, heating and
+							electricity.</td>
+					</tr>
+					<tr>
+						<td><strong>Education and vocational training:</strong> AI systems determining access, admission
+							or assignment to educational and vocational training institutions at all levels. Evaluating
+							learning outcomes, including those used to steer the student’s learning process. Assessing
+							the appropriate level of education for an individual. Monitoring and detecting prohibited
+							student behaviour during tests.</td>
+					</tr>
+					<tr>
+						<td><strong>Employment, workers management and access to self-employment:</strong> AI systems
+							used for recruitment or selection, particularly targeted job ads, analysing and filtering
+							applications, and evaluating candidates. Promotion and termination of contracts, allocating
+							tasks based on personality traits or characteristics and behaviour, and monitoring and
+							evaluating performance.</td>
+					</tr>
+					<tr>
+						<td><strong>Access to and enjoyment of essential public and private services:</strong> AI
+							systems used by public authorities for assessing eligibility to benefits and services,
+							including their allocation, reduction, revocation, or recovery. Evaluating creditworthiness,
+							except when detecting financial fraud. Evaluating and classifying emergency calls, including
+							dispatch prioritising of police, firefighters, medical aid and urgent patient triage
+							services. Risk assessments and pricing in health and life insurance.</td>
+					</tr>
+					<tr>
+						<td><strong>Law enforcement:</strong> AI systems used to assess an individual’s risk of becoming
+							a crime victim. Polygraphs. Evaluating evidence reliability during criminal investigations
+							or prosecutions. Assessing an individual’s risk of offending or re-offending not solely
+							based on profiling or assessing personality traits or past criminal behaviour. Profiling
+							during criminal detections, investigations or prosecutions.</td>
+					</tr>
+					<tr>
+						<td><strong>Migration, asylum and border control management:</strong> Polygraphs. Assessments of
+							irregular migration or health risks. Examination of applications for asylum, visa and
+							residence permits, and associated complaints related to eligibility. Detecting, recognising
+							or identifying individuals, except verifying travel documents.</td>
+					</tr>
+					<tr>
+						<td><strong>Administration of justice and democratic processes:</strong> AI systems used in
+							researching and interpreting facts and applying the law to concrete facts or used in
+							alternative dispute resolution. Influencing elections and referenda outcomes or voting
+							behaviour, excluding outputs that do not directly interact with people, like tools used to
+							organise, optimise and structure political campaigns.</td>
+					</tr>
+				</table>
+
+
+
+
+
+				<h2 class="material-heading"> Ethics of Generative AI: Hallucinations, Bias, and Environmental Impact
+				</h2>
+
+				Along with the benefits, generative AI raises concerns about misuse and errors. There are some
+				limitations where legal frameworks have not caught up with technological developments. To mitigate these
+				risks and ensure the technology benefits society, the OECD works with governments to enable policies
+				that ensure the ethical and responsible use of generative AI. (This section adapted and extended from <a
+					href="https://oecd.ai/en/genai/issues/risks-and-unknowns"> OECD Policy Observatory for AI</a>).
+
+				<u>
+					<p><strong>AI “hallucinations”, or convincing but inaccurate outputs</strong></p>
+				</u>
+				<p>When large language models, or textual generative AI, create incorrect yet convincing outputs, it is
+					called a hallucination. This is unintentional and can happen if a correct answer is not found in the
+					training data. Beyond perpetuating inaccurate information, this can interfere with the model’s
+					ability to learn new skills and even lead to a loss of skills.
+				</p>
+
+				<u>
+					<p><strong>Fake and misleading content</strong></p>
+				</u>
+				<p>While generative AI brings efficiencies to content creation, it also poses risks that must be
+					considered carefully. One major concern is the potential for generating fake or misleading content.
+					For example, generative AI can be used to create realistic-looking but entirely fabricated images or
+					videos, which can be used to spread disinformation or deceive people. This poses challenges for the
+					detection and verification of digital media.
+				</p>
+
+				<u>
+					<p><strong>Intellectual property right infringement</strong></p>
+				</u>
+				<p>Generative AI raises intellectual property rights issues, particularly concerning:</p>
+				<ul>
+					<li>unlicensed content in training data,</li>
+					<li>potential copyright, patent, and trademark infringement of AI creations,</li>
+					<li>and ownership of AI-generated works.</li>
+					<li>Whether commercial entities can legally train ML models on copyrighted material is contested in
+						Europe and the US. Several lawsuits were filed in the US against companies that allegedly
+						trained their models on copyrighted data without authorisation to make and later store copies of
+						the resulting images. These decisions will set legal precedents and impact the generative AI
+						industry, from start-ups to multinational tech companies.</li>
+				</ul>
+
+				<u>
+					<p><strong>Job and labour market transformations</strong></p>
+				</u>
+				<p>Generative AI is likely to transform labour markets and jobs, but exactly how is still uncertain and
+					being debated among experts. Generative AI could automate tasks traditionally performed by humans,
+					leading to job displacement in some industries and professions.
+				</p>
+
+				<p>While some jobs might be automated or eliminated, generative AI could transform existing jobs. This
+					could lead to humans performing tasks more efficiently and generating new creative possibilities.
+					This transformation would lead to a shift in required skills.
+				</p>
+
+				<p>Addressing these risks will require combining technical solutions, policy frameworks, and responsible
+					practices to ensure that generative AI benefits society while minimising potential harm.
+				</p>
+
+				<u>
+					<p><strong>Energy consumption and the environment</strong></p>
+				</u>
+				<p>Generative AI requires tremendous computing power and consumes natural resources, leading to a
+					significant ecological footprint. Poorly controlled use of generative AI in areas like climate
+					modelling and environmental simulations could unintentionally exacerbate ecological challenges and
+					undermine conservation efforts.
+				</p>
+
+				<u>
+					<p><strong>Bias, stereotype amplification and privacy concerns</strong></p>
+				</u>
+				<p>AI can analyse large amounts of data to extract precious information that humans could not see
+					otherwise. But the risk is an amplification of existing biases present in the training data. If the
+					training data contains biases, such as racial or gender stereotypes, the generative AI model may
+					inadvertently produce biased outputs, such as misleading or inappropriate content. This can
+					perpetuate and even amplify societal inequalities and discrimination.</p>
+
+				Generative AI also raises privacy concerns. By training on large amounts of data, these models may
+				inadvertently capture and reproduce private or sensitive information. For example, a language model
+				trained on text data may reproduce personal details or confidential information.
+
+				<u>
+					<p><strong>Potential future risks and concerns</strong> </p>
+				</u>
+				<p>In the near term, generative AI can exacerbate challenges as synthetic content with varying quality
+					and accuracy proliferates in digital spaces and is then used to train subsequent generative AI
+					models, triggering a vicious cycle. Over the longer term, emergent behaviours such as increased
+					agency, power-seeking, and pursuing hidden sub-goals to achieve a core objective might not align
+					with human values and intent. If manifested, such behaviours could lead to systemic harms and
+					collective disempowerment.
+					Given these risks, overreliance, trust and dependency on AI could cause deep, long-term harm to
+					societies. And a concentration of AI resources in a few multinational tech companies and governments
+					may lead to a global imbalance.</p>
+				<p><b>This part to be continued, in the meantime, please check out the lecture slides and watch the
+						lecture recording on Moodle in case you missed the lecture... Here are the exercises
+						nonetheless.</b></p>
+
+
+				<div class="exercise">
+					<div class="exercise__header">
+						<a data-toggle="collapse" class="exercise__toggle">
+							<i class="fa fa-pencil exercise__icon"></i>
+							<h1 class="exercise__heading">Calling Bullshit (2p)</h1>
+
+							<i class="fa fa-caret-down exercise__arrow"></i>
+						</a>
+					</div>
+
+					<div class="collapse">
+						<div class="exercise__body">
+
+							<p>
+								In their blog
+								post, <a
+									href="https://aisnakeoil.substack.com/p/eighteen-pitfalls-to-beware-of-in">Eighteen
+									pitfalls to beware of in AI journalism</a>, Sayash
+								Kapoor and Arvind Narayanan present recurring
+								problems in AI coverage in the press. You can find
+								a list of the problems, or pitfalls, <a
+									href="https://www.cs.princeton.edu/~sayashk/ai-hype/ai-reporting-pitfalls.pdf">here</a>.
+							</p>
+
+							<p>
+								Find three examples of news stories about AI. Try to
+								find stories that fall into as many of the pitfalls
+								as you can. Bonus points if the stories you find
+								come from reputable sources like MIT Tech Review,
+								the Atlantic, or (I dare you!) the University of
+								Helsinki.
+							</p>
+
+							<p>
+								In each case, propose ways to fix the stories as
+								best as you can.
+							</p>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Exercis 6.1 -->
+
+
+
+
+
+				<div class="exercise">
+					<div class="exercise__header">
+						<a data-toggle="collapse" class="exercise__toggle">
+							<i class="fa fa-pencil exercise__icon"></i>
+							<h1 class="exercise__heading">The Great AI Debate (2p)</h1>
+
+							<i class="fa fa-caret-down exercise__arrow"></i>
+						</a>
+					</div>
+
+					<div class="collapse">
+						<div class="exercise__body">
+
+							<p>
+								Ethics can be thought of not only a set of standards
+								of right and wrong, but also as the process by which
+								such standard can be deliberated and refined, usually
+								through dialogue between the stakeholders (<a
+									href="https://www.scu.edu/ethics/ethics-resources/ethical-decision-making/what-is-ethics/">see
+									here</a>).
+							</p>
+
+							<p>
+								So let's "do ethics"!
+							</p>
+
+							<p>
+								Choose one of the following talking points:
+							<ol>
+								<li> AI-generated art is currently a hot topic
+									with systems like DALL-E, Imagen, and Stable
+									Diffusion being used to create amazign
+									artwork. Who (or what) should be entitled to
+									intellectual property rights in these cases?
+								<li> The real-world impact of AI is growing all
+									the time. <!--Social media filter algorithms have a
 		      decicise effect on what kinds of bubbles we live
 		      in, automatic decision making systems determine
 		      who gets a credit card and screen job
 		      applications, etc.--> Until recently, AI
-		      researchers were mostly oblivious to such issues
-		      and weren't really expected to consider the societal
-		      implications of their work.  Nowadays, some AI
-		      conferences (most prominently
-		      the <a href="https://nips.cc/">NeurIPS</a>
-		      conference, see <a href="https://arxiv.org/abs/2111.01705">this
-		      study</a>), require a broader impact statement
-		      or a checklist that asks the authors of
-		      submitted research articles to have a think
-		      about the impact of their work. Some argue that
-		      this is a path towards censorship and political
-		      ideology messing up with the academic freedom.
-		      Others argue that science can no longer pretend
-		      to be separate from the real world.
-		  </ol>
-		</p>
+									researchers were mostly oblivious to such issues
+									and weren't really expected to consider the societal
+									implications of their work. Nowadays, some AI
+									conferences (most prominently
+									the <a href="https://nips.cc/">NeurIPS</a>
+									conference, see <a href="https://arxiv.org/abs/2111.01705">this
+										study</a>), require a broader impact statement
+									or a checklist that asks the authors of
+									submitted research articles to have a think
+									about the impact of their work. Some argue that
+									this is a path towards censorship and political
+									ideology messing up with the academic freedom.
+									Others argue that science can no longer pretend
+									to be separate from the real world.
+							</ol>
+							</p>
 
-		<p>
-		  Your task is to have a debate about the topic of
-		  your choice (from the above two alternatives).
-		  You can have the debate with your alter ego, pretending
-		  to take two opposing views on the topic. Even better,
-		  you can ask your fellow student or someone else to
-		  assume the opponent's role.
-		</p>
+							<p>
+								Your task is to have a debate about the topic of
+								your choice (from the above two alternatives).
+								You can have the debate with your alter ego, pretending
+								to take two opposing views on the topic. Even better,
+								you can ask your fellow student or someone else to
+								assume the opponent's role.
+							</p>
 
-		<p>
-		  Document your dialogue by summarizing at least ten
-		  (10) arguments and counter-arguments in an
-		  alternating order like
-		  <dl>
-		    <dt>You</dt> <dd>&mdash; <i>I think X</i></dd>
-		    <dt>Your Opponent</dt> <dd>&mdash; <i>No, X is wrong because Y</i></dd>
-		    <dt>You</dt> <dd>&mdash; <i>That may be, but even so, there's Z...</i></dd>
-		  </dl>
-		  So both you and your opponent get to make at least
-		  five points. (And no, "you're a f**king idiot"
-		  does <b>not</b> count as an argument.)
-		</p>
+							<p>
+								Document your dialogue by summarizing at least ten
+								(10) arguments and counter-arguments in an
+								alternating order like
+							<dl>
+								<dt>You</dt>
+								<dd>&mdash; <i>I think X</i></dd>
+								<dt>Your Opponent</dt>
+								<dd>&mdash; <i>No, X is wrong because Y</i></dd>
+								<dt>You</dt>
+								<dd>&mdash; <i>That may be, but even so, there's Z...</i></dd>
+							</dl>
+							So both you and your opponent get to make at least
+							five points. (And no, "you're a f**king idiot"
+							does <b>not</b> count as an argument.)
+							</p>
 
-		<p>
-		  <i>Hint:</i> Remember to remain polite and respectful.
-		</p>
+							<p>
+								<i>Hint:</i> Remember to remain polite and respectful.
+							</p>
 
-		<p>
-		  <i>Hint 2:</i> In case you don't have an opponent
-		  available in real life, there's nothing wrong with
-		  trying social media like Twitter... Just remember
-		  the first hint.
-		</p>
-	      </div>
-	    </div>
-	  </div>
-	  
+							<p>
+								<i>Hint 2:</i> In case you don't have an opponent
+								available in real life, there's nothing wrong with
+								trying social media like Twitter... Just remember
+								the first hint.
+							</p>
+						</div>
+					</div>
+				</div>
 
-	  <!-- Exercis 6.2 -->
 
-	  
+				<!-- Exercis 6.2 -->
 
-	  
-	  
 
-	  
-<!--
+
+
+
+
+
+				<!--
 	  <h2 class="material-heading">
 	    Agent AI?
 	  </h2>
@@ -677,142 +865,149 @@ Given these risks, overreliance, trust and dependency on AI could cause deep, lo
 -->
 
 
-	  <div class="exercise">
-	    <div class="exercise__header">
-	      <a data-toggle="collapse" class="exercise__toggle">
-		<i class="fa fa-pencil exercise__icon"></i>
-		<h1 class="exercise__heading">Feedback (no points)</h1>
-		
-		<i class="fa fa-caret-down exercise__arrow"></i>
-	      </a>
-	    </div>
-	    
-	    <div class="collapse">
-	      <div class="exercise__body">
-		
-		<p>
-		  The development of this course relies on your
-		  feedback. 
-		</p>
-		      <p>
-		      First, submit anonymously through the university
-		      feedback system Norppa.
-		      </p>
-		   
-		
-	      </div>
-	    </div>
-	  </div>
-	  
+				<div class="exercise">
+					<div class="exercise__header">
+						<a data-toggle="collapse" class="exercise__toggle">
+							<i class="fa fa-pencil exercise__icon"></i>
+							<h1 class="exercise__heading">Feedback (no points)</h1>
+
+							<i class="fa fa-caret-down exercise__arrow"></i>
+						</a>
+					</div>
+
+					<div class="collapse">
+						<div class="exercise__body">
+
+							<p>
+								The development of this course relies on your
+								feedback.
+							</p>
+							<p>
+								First, submit anonymously through the university
+								feedback system Norppa.
+							</p>
 
 
-	</div>
-      </div>
-    </div>
-    
-    <div class="footer-wrapper">
-      <footer class="footer">
-	<div>
-	  This material is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 License</a>.
-	  
-	</div>
-	
-      </footer>
-      
-    </div>
+						</div>
+					</div>
+				</div>
 
-    <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-	<div class="modal-content">
-	  <form id="tmc-login-form">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Log in with your Test My Code Account</h4>
-            </div>
-            <div class="modal-body">
-              <div class="alert alert-info">
-		Don't have an account yet? <a href="https://tmc.mooc.fi/user/new" class="alert-link" target="_blank" rel="noopener">Create one!</a>
-              </div>
-	      
-              <div class="alert alert-danger" id="tmc-login-error" style="display: none;"></div>
-	      
-              <div class="form-group">
-		<label>Username</label>
-		<input type="text" id="tmc-login-username" class="form-control" placeholder="Username"/>
-              </div>
-	      
-              <div class="form-group">
-		<label>Password</label>
-		<input type="password" id="tmc-login-password" class="form-control" placeholder="Password"/>
-              </div>
-	      
-              <div class="form-group">
-		<label>Course</label>
-		
-		<div class="form-check">
-		  <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="tmcLoginCourse" value="intro-to-ai" checked>
-                    Introduction to Artificial Intelligence (intro-to-ai)
-		  </label>
+
+
+			</div>
 		</div>
-		
-		<small class="form-text text-muted">
-		  Course selection may affect the contents of the material.
-		</small>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <a class="btn btn-secondary" data-dismiss="modal">Close</a>
-              <button type="submit" class="btn btn-primary">Log in</button>
-            </div>
-	  </form>
 	</div>
-      </div>
-    </div>
-    
-    
-    <div class="table-of-contents-layer" id="table-of-contents-layer">
-    </div>
-    
-    <div class="table-of-contents" id="table-of-contents">
-      <h1 class="table-of-contents__heading">
-	Table of Contents
-      </h1>
-      
-      <div class="table-of-contents__content">
-	<ul id="table-of-contents-list"></ul>
-      </div>
-    </div>
-    
-    
-    <script>
-      window._QUIZNATOR_ENABLED = false;
-    </script>
-    
-    <!-- <script src="https://quiznator.mooc.fi/javascripts/plugin-loader.min.js"></script> -->
-    
-    
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-	    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	    crossorigin="anonymous"></script>
-    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
-    <script>
-      window.SD_SHOW_SURVEY = ['part6', 'part7'].indexOf(window.location.pathname.replace(/\//g,'')) >= 0;
-    </script>
-    
-    <script src="../javascripts/scripts-cb52849c.js"></script>
-    
-    <script src="https://use.fontawesome.com/ed2f73836b.js"></script>
-    
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.js"></script>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js'></script>
-    
-    <script>window.cookieconsent.initialise({"palette":{"popup":{"background":"#000"},"button":{"background":"#f1d600"}}});</script>
-  </body>
+
+	<div class="footer-wrapper">
+		<footer class="footer">
+			<div>
+				This material is licensed under a <a rel="license"
+					href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0 License</a>.
+
+			</div>
+
+		</footer>
+
+	</div>
+
+	<div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="tmc-login-form">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+								aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Log in with your Test My Code Account</h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-info">
+							Don't have an account yet? <a href="https://tmc.mooc.fi/user/new" class="alert-link"
+								target="_blank" rel="noopener">Create one!</a>
+						</div>
+
+						<div class="alert alert-danger" id="tmc-login-error" style="display: none;"></div>
+
+						<div class="form-group">
+							<label>Username</label>
+							<input type="text" id="tmc-login-username" class="form-control" placeholder="Username" />
+						</div>
+
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" id="tmc-login-password" class="form-control"
+								placeholder="Password" />
+						</div>
+
+						<div class="form-group">
+							<label>Course</label>
+
+							<div class="form-check">
+								<label class="form-check-label">
+									<input type="radio" class="form-check-input" name="tmcLoginCourse"
+										value="intro-to-ai" checked>
+									Introduction to Artificial Intelligence (intro-to-ai)
+								</label>
+							</div>
+
+							<small class="form-text text-muted">
+								Course selection may affect the contents of the material.
+							</small>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a class="btn btn-secondary" data-dismiss="modal">Close</a>
+						<button type="submit" class="btn btn-primary">Log in</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="table-of-contents-layer" id="table-of-contents-layer">
+	</div>
+
+	<div class="table-of-contents" id="table-of-contents">
+		<h1 class="table-of-contents__heading">
+			Table of Contents
+		</h1>
+
+		<div class="table-of-contents__content">
+			<ul id="table-of-contents-list"></ul>
+		</div>
+	</div>
+
+
+	<script>
+		window._QUIZNATOR_ENABLED = false;
+	</script>
+
+	<!-- <script src="https://quiznator.mooc.fi/javascripts/plugin-loader.min.js"></script> -->
+
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+
+	<script>
+		window.SD_SHOW_SURVEY = ['part6', 'part7'].indexOf(window.location.pathname.replace(/\//g, '')) >= 0;
+	</script>
+
+	<script src="../javascripts/scripts-cb52849c.js"></script>
+
+	<script src="https://use.fontawesome.com/ed2f73836b.js"></script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.1/cookieconsent.min.js"></script>
+	<script src='//cdnjs.cloudflare.com/ajax/libs/diff_match_patch/20121119/diff_match_patch.js'></script>
+
+	<script>window.cookieconsent.initialise({ "palette": { "popup": { "background": "#000" }, "button": { "background": "#f1d600" } } });</script>
+</body>
+
 </html>
