@@ -430,6 +430,8 @@
           Generative AI in Image Processing
         </h2>
 
+	<img src="../img/exercises/vae_gan_image.jpg" alt="vae_gan_image" width="60%">
+
         <p>
           Generative AI in image processing focuses on creating new images or enhancing existing ones by learning
           patterns from large datasets. Using techniques such as Generative Adversarial Networks (GANs) and Variational
@@ -437,6 +439,75 @@
           entirely new visuals. These models have become instrumental in industries like entertainment, advertising, and
           healthcare, enabling tasks such as image synthesis, inpainting, and super-resolution.
         </p>
+
+	<h3 class="material-heading">Auto Regression (AR)</h2>
+	
+	<p>
+	    Auto Regression (AR) is a statistical modeling technique widely used in time series analysis to predict future values based on past observations of the same variable. The AR model assumes that the value of a variable at any given time depends linearly on its past values and a stochastic (random) error term. The general form of an AR model of order <i>p</i> (AR(p)) is:
+	</p>
+	
+	<p style="text-align: center;">
+	    <i>y<sub>t</sub> = c + φ<sub>1</sub>y<sub>t-1</sub> + φ<sub>2</sub>y<sub>t-2</sub> + ... + φ<sub>p</sub>y<sub>t-p</sub> + ε<sub>t</sub></i>
+	</p>
+	
+	<p>
+	    Where:
+	    <ul>
+	        <li><i>y<sub>t</sub></i>: The value of the time series at time <i>t</i>.</li>
+	        <li><i>c</i>: A constant term.</li>
+	        <li><i>φ<sub>i</sub></i>: The coefficients for past values (<i>y<sub>t-i</sub></i>).</li>
+	        <li><i>p</i>: The order of the model, indicating how many past values are used.</li>
+	        <li><i>ε<sub>t</sub></i>: The error term, representing random noise.</li>
+	    </ul>
+	</p>
+	
+	<h3>Applications of Auto Regression</h3>
+	
+	<p>
+	    Auto Regression is used in various domains, including:
+	</p>
+	<ul>
+	    <li><b>Economic Forecasting:</b> Predicting stock prices, GDP growth, or unemployment rates.</li>
+	    <li><b>Weather Modeling:</b> Estimating temperature, rainfall, or other weather-related variables.</li>
+	    <li><b>Signal Processing:</b> Analyzing trends in audio, communication, or seismic signals.</li>
+	</ul>
+	
+	<h3>Assumptions of the AR Model</h3>
+	<p>
+	    To effectively use AR models, the following assumptions should hold:
+	</p>
+	<ul>
+	    <li>The time series is <b>stationary</b>, meaning its statistical properties (mean, variance) do not change over time.</li>
+	    <li>The errors (<i>ε<sub>t</sub></i>) are independently and identically distributed (i.i.d.) with a mean of zero.</li>
+	</ul>
+	
+	<h3>Choosing the Order (p)</h3>
+	<p>
+	    The order of the AR model, <i>p</i>, can significantly impact its performance. It is typically chosen using methods like:
+	</p>
+	<ul>
+	    <li><b>Akaike Information Criterion (AIC):</b> Balances model complexity and goodness of fit.</li>
+	    <li><b>Bayesian Information Criterion (BIC):</b> Penalizes complexity more heavily than AIC.</li>
+	    <li><b>Partial Autocorrelation Function (PACF):</b> Determines the most significant lags for the model.</li>
+	</ul>
+	
+	<h3>Limitations</h3>
+	<p>
+	    While AR models are powerful for stationary time series, they have limitations:
+	</p>
+	<ul>
+	    <li>Poor performance on non-stationary data unless transformed (e.g., through differencing).</li>
+	    <li>Limited to linear relationships and may not capture non-linear dynamics.</li>
+	</ul>
+	
+	<h3>Extension to ARIMA</h3>
+	<p>
+	    Auto Regression is a core component of more complex time series models like ARIMA (Auto Regressive Integrated Moving Average), which combines AR with moving averages and differencing to handle non-stationary data.
+	</p>
+	
+	<p>
+	    Overall, Auto Regression remains a foundational technique in time series analysis, providing a straightforward yet effective way to model and forecast data based on its own past behavior.
+	</p>
 
         <h3 class="material-heading">GAN</h3>
 
@@ -545,6 +616,8 @@
         </p>
 
         <h3 class="material-heading">Transformers and Attention Mechanisms</h3>
+
+	<img src="../img/exercises/transformers_architecture.jpg" alt="vae_gan_image" width="60%">
 
         <p>
           The introduction of Transformers marked a breakthrough in deep learning, primarily due to their attention
