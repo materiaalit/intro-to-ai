@@ -753,7 +753,9 @@
           Linear Models
         </h1>
 
-        <h3>Why Linear Models?</h3>
+        <h2 class="material-heading">
+          Why Linear Models?
+        </h2>
 
         <p>
           Imagine you have a set of objects <code>X</code>, and you want to assign a value to each object. For example, you might have a set of bank card transactions and want to determine which of these transactions were fraudulent. By dividing all transactions into two classes—labeling legitimate transactions as 0 and fraudulent ones as 1—you obtain a basic classification problem.
@@ -766,8 +768,10 @@
         <p>
           Thus, classification and regression tasks can be formulated as finding a mapping from the set of objects <code>X</code> to the set of possible targets.
         </p>
-        
-        <h3>Mathematical Formulation</h3>
+
+        <h2 class="material-heading">
+          Mathematical Formulation
+        </h2>
         
         <ul>
           <li>
@@ -806,8 +810,67 @@
           where <code>⟨x, w⟩</code> denotes the dot product of the feature vector <code>x</code> and the weight vector <code>w</code>.
         </p>
 
+        <h2 class="material-heading">
+          Advantages and Limitations of Linear Models
+        </h2>
+        
+        <h3>Advantages of Linear Models</h3>
+        
+        <p>
+          Beyond their simplicity, linear models have several other advantages. For instance, it is relatively easy to evaluate how specific features influence the prediction. If a weight <code>w<sub>i</sub></code> is positive, an increase in the <code>i</code>-th feature will:
+        </p>
+        
+        <ul>
+          <li>Increase the target value in regression tasks;</li>
+          <li>Shift the classification decision toward one of the classes in classification tasks.</li>
+        </ul>
+        
+        <p>
+          The magnitude of the weights also has a clear interpretation: the larger the weight <code>w<sub>i</sub></code>, the more "important" the <code>i</code>-th feature is for the final prediction. This interpretability makes linear models particularly valuable in industrial applications where errors can have significant consequences. For example, in scenarios where human lives depend on the model's decisions, it is critical to understand how the model makes decisions and the principles it follows.
+        </p>
+        
+        <p>
+          However, not all machine learning methods are equally interpretable. For example, understanding the behavior of artificial neural networks or gradient boosting models is significantly more challenging.
+        </p>
+        
+        <h3>Limitations of Linear Models</h3>
+        
+        <p>
+          Despite their advantages, blindly trusting the weights of linear models is not advisable for several reasons:
+        </p>
+        
+        <ol>
+          <li>
+            <b>Limited Function Class:</b> Linear models are a narrow class of functions and perform well on small datasets and simple tasks. However, for more complex problems, you may need to create additional features that are complex functions of the original ones. This process is called <b>feature engineering</b>. While feature engineering can improve model performance, excessive reliance on artificial features may undermine the interpretability of the model, depending on the judgment of the expert constructing it.
+          </li>
+          <li>
+            <b>Multicollinearity:</b> If features are approximately linearly dependent, the coefficients of the linear model may lose their physical meaning. This issue, along with techniques to address it, will be discussed later in the section on regularization.
+          </li>
+          <li>
+            <b>Scale Dependency:</b> Statements like "this coefficient is small, so this feature is not important" should be treated with caution. The scale of the feature might require a compensatory small coefficient. Additionally, a weak dependency might become crucial in specific situations. These conclusions should be supported by data, for example, through statistical tests (discussed briefly in the section on probabilistic models).
+          </li>
+          <li>
+            <b>Data Sensitivity:</b> The specific values of the weights can vary depending on the training dataset. However, as the dataset size increases, the weights will gradually converge to those of the "best" linear model that could be constructed with infinite data.
+          </li>
+        </ol>
 
+        <h2 class="material-heading">
+          Linear Classification
+        </h2>
+        
+        <p>
+          Let’s now discuss the task of classification. To begin, we’ll focus on binary classification with two classes. Generalizing this problem to classification with <code>K</code> classes is straightforward.
+        </p>
+        
+        <p>
+          In this case, our targets <code>y</code> encode membership in either the positive or negative class, represented by the set <code>{-1, 1}</code>. (In this section, we will use this convention to denote classes, though in practice you may often encounter labels such as <code>{0, 1}</code>.) The feature vectors <code>x</code> remain elements of <code>ℝ<sup>D</sup></code>.
+        </p>
+        
+        <p>
+          Our goal is to train a linear model so that the hyperplane it defines separates objects of one class from those of the other as effectively as possible.
+        </p>
 
+        <img src="../img/material/part4/Linear Classification.png" width=100%>
 
 
 
