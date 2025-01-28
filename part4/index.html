@@ -576,10 +576,6 @@
         <p>
           A smaller subset of problems falls under <b>unsupervised learning</b>, where only the data is available, and the target labels are unknown or do not exist. In these cases, finding the "correct" answers is not necessarily the goal. A classic example is <b>clustering</b>, where objects are grouped based on shared but unknown (and ideally interpretable) properties. For example, clustering documents in a digital library by topic or grouping news articles into major storylines.
         </p>
-
-        <h2 class="material-heading">
-          Think About It: Identifying Problem Types
-        </h2>
         
         <p>
           Determine the type of the following tasks. When possible, try to assign them to more specific subcategories of machine learning tasks.
@@ -587,53 +583,62 @@
         
         <ol>
           <li>
-            <b>Predicting the exchange rate of the euro to the dollar for the next day.</b>
-            <div class="collapse">
-              <div class="exercise__body">
-                <p>This is a regression task. The model predicts a continuous value, even if it’s represented with a limited number of decimal places.</p>
-              </div>
-            </div>
+            Predicting the exchange rate of the euro to the dollar for the next day.
           </li>
           <li>
-            <b>Text stylization:</b> Translating informal text into bureaucratic language.  
+            Text stylization: Translating informal text into bureaucratic language.  
             For example: <i>“Pippin and Merry were kidnapped!”</i> ↦ <i>“Citizens Took, Peregrin Paladinovich, born 2990, and Brandybuck, Meriadoc Saradokovich, born 2982, were kidnapped by unidentified individuals.”</i>
-            <div class="collapse">
-              <div class="exercise__body">
-                <p>This task involves generating new objects based on existing ones.</p>
-              </div>
-            </div>
           </li>
           <li>
-            <b>Detecting cats in an image.</b>
-            <p>
-              Depending on the objective, this could be:  
-              <ul>
-                <li>A regression task: Predicting the coordinates of the bounding box surrounding the cat;</li>
-                <li>A classification task: Determining whether a cat is present in the image or not.</li>
-              </ul>
-            </p>
+            Detecting cats in an image.
           </li>
           <li>
-            <b>Training a robotic cat to jump onto a table from any position.</b>
-            <p>
-              This task can be approached in different ways:  
-              <ul>
-                <li>By building a physical model of the robot's movement and calculating the optimal sequence of actions;</li>
-                <li>By using machine learning to create a simulation and train a model to predict optimal movements. The model adjusts its behavior based on performance in the simulation.</li>
-              </ul>
-              This paradigm is known as <b>reinforcement learning</b>, which will be discussed in more detail later in the course.  
-              <i>Note:</i> This is not supervised learning because generating a vast number of labeled trajectories and outcomes would be computationally expensive and impractical.
-            </p>
+            Training a robotic cat to jump onto a table from any position.
           </li>
           <li>
-            <b>Finding sets of products frequently purchased together in a supermarket.</b>
-            <div class="collapse">
-              <div class="exercise__body">
-                <p>This is an <b>unsupervised learning</b> task, specifically clustering or association rule mining.</p>
-              </div>
-            </div>
+            Finding sets of products frequently purchased together in a supermarket.
           </li>
         </ol>
+        
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Show Answers</h1>
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+              <ol>
+                <li>
+                  This is a regression task. The model predicts a continuous value, even if it’s represented with a limited number of decimal places.
+                </li>
+                <li>
+                  This task involves generating new objects based on existing ones.
+                </li>
+                <li>
+                  Depending on the objective, this could be:
+                  <ul>
+                    <li>A regression task: Predicting the coordinates of the bounding box surrounding the cat;</li>
+                    <li>A classification task: Determining whether a cat is present in the image or not.</li>
+                  </ul>
+                </li>
+                <li>
+                  This task can be approached in different ways:
+                  <ul>
+                    <li>By building a physical model of the robot's movement and calculating the optimal sequence of actions;</li>
+                    <li>By using machine learning to create a simulation and train a model to predict optimal movements. The model adjusts its behavior based on performance in the simulation.</li>
+                  </ul>
+                  This paradigm is known as <b>reinforcement learning</b>. It is not supervised learning because generating a vast number of labeled trajectories and outcomes would be computationally expensive and impractical.
+                </li>
+                <li>
+                  This is an <b>unsupervised learning</b> task, specifically clustering or association rule mining.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
         
         <h3>Additional Question</h3>
         
@@ -641,13 +646,22 @@
           Ranking is a task where the target is an ordered finite set (<code>Y = {1, ..., K}</code>). At first glance, ranking could be treated as either classification (with <code>K</code> classes) or regression. Why is this not the case?
         </p>
         
-        <div class="collapse">
-          <div class="exercise__body">
-            <p>
-              For ranking tasks, models typically predict a continuous value, which is then used to sort objects. However, it is not considered regression because the loss functions and metrics are fundamentally different.  
-              In ranking, the exact predicted values are irrelevant—what matters is that more relevant objects receive higher scores.  
-              For instance, the task “predict the 10 most relevant objects” differs significantly from classification. As new objects are introduced, the relevance order can change entirely, invalidating any fixed mapping of objects to positions.
-            </p>
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Show Explanation</h1>
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+              <p>
+                For ranking tasks, models typically predict a continuous value, which is then used to sort objects. However, it is not considered regression because the loss functions and metrics are fundamentally different.  
+                In ranking, the exact predicted values are irrelevant—what matters is that more relevant objects receive higher scores.  
+                For instance, the task “predict the 10 most relevant objects” differs significantly from classification. As new objects are introduced, the relevance order can change entirely, invalidating any fixed mapping of objects to positions.
+              </p>
+            </div>
           </div>
         </div>
 
