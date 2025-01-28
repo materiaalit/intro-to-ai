@@ -526,8 +526,137 @@
           <li><b>Labels (or targets):</b> These include captions for images, diagnoses, or information about user behavior, which serve as the outputs the model is trained to predict.</li>
         </ul>
 
+        <h2 class="material-heading">
+          Problem Formulation
+        </h2>
+        
+        <p>
+          The tasks described above are examples of <b>supervised learning</b> problems, as the correct answers (targets) for each object in the training dataset are known in advance. Supervised learning tasks are categorized based on the nature of the set <code>Y</code>, which represents all possible answers (targets):
+        </p>
+        
+        <ol>
+          <li>
+            <b>Regression (<code>Y = ℝ</code> or <code>Y = ℝ<sup>M</sup></code>):</b>  
+            In regression tasks, the target values are continuous. Examples include predicting the duration of a car-sharing trip, estimating demand for a specific product on a given day, or forecasting the weather in a city (e.g., temperature, humidity, and pressure as a vector of continuous values).
+          </li>
+          <li>
+            <b>Binary Classification (<code>Y = {0, 1}</code>):</b>  
+            Binary classification involves predicting one of two possible outcomes. Examples include determining whether a user will click on an ad, if a client will repay a loan on time, whether a student will pass their exams, whether a patient will develop a specific condition, or if a banana is present in an image.
+          </li>
+          <li>
+            <b>Multiclass Classification (<code>Y = {1, ..., K}</code>):</b>  
+            Multiclass classification assigns each object to one of <code>K</code> possible classes. For example, categorizing scientific articles into subject domains such as mathematics, biology, or psychology.
+          </li>
+          <li>
+            <b>Multilabel Classification (<code>Y = {0, 1}<sup>K</sup></code>):</b>  
+            In multilabel classification, an object can belong to multiple classes simultaneously. For instance, assigning tags to a restaurant where multiple tags (e.g., "Italian," "Vegetarian") may apply at the same time.
+          </li>
+          <li>
+            <b>Ranking (<code>Y</code> is a finite, ordered set):</b>  
+            Ranking tasks involve ordering objects based on relevance or some comparative metric. A common example is search engine result ranking, where documents are sorted by relevance to a query. Importantly, the relevance score is meaningful only in the context of comparing two documents, rather than as an absolute value.
+          </li>
+        </ol>
+        
+        <p>
+          More complex output types are also possible. For instance:
+        </p>
+        
+        <ul>
+          <li>
+            <b>Image Segmentation:</b> Predicting which object or object type each pixel in an image belongs to.
+          </li>
+          <li>
+            <b>Machine Translation:</b> Generating sentences (or entire texts) in one language as translations of input text in another.
+          </li>
+          <li>
+            <b>Generative Modeling:</b> Producing realistic new objects either from scratch or based on existing data. Examples include image resolution enhancement or applying Snapchat or Instagram filters to faces.
+          </li>
+        </ul>
+        
+        <p>
+          A smaller subset of problems falls under <b>unsupervised learning</b>, where only the data is available, and the target labels are unknown or do not exist. In these cases, finding the "correct" answers is not necessarily the goal. A classic example is <b>clustering</b>, where objects are grouped based on shared but unknown (and ideally interpretable) properties. For example, clustering documents in a digital library by topic or grouping news articles into major storylines.
+        </p>
+
+        <h2 class="material-heading">
+          Think About It: Identifying Problem Types
+        </h2>
+        
+        <p>
+          Determine the type of the following tasks. When possible, try to assign them to more specific subcategories of machine learning tasks.
+        </p>
+        
+        <ol>
+          <li>
+            <b>Predicting the exchange rate of the euro to the dollar for the next day.</b>
+            <div class="collapse">
+              <div class="exercise__body">
+                <p>This is a regression task. The model predicts a continuous value, even if it’s represented with a limited number of decimal places.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <b>Text stylization:</b> Translating informal text into bureaucratic language.  
+            For example: <i>“Pippin and Merry were kidnapped!”</i> ↦ <i>“Citizens Took, Peregrin Paladinovich, born 2990, and Brandybuck, Meriadoc Saradokovich, born 2982, were kidnapped by unidentified individuals.”</i>
+            <div class="collapse">
+              <div class="exercise__body">
+                <p>This task involves generating new objects based on existing ones.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <b>Detecting cats in an image.</b>
+            <p>
+              Depending on the objective, this could be:  
+              <ul>
+                <li>A regression task: Predicting the coordinates of the bounding box surrounding the cat;</li>
+                <li>A classification task: Determining whether a cat is present in the image or not.</li>
+              </ul>
+            </p>
+          </li>
+          <li>
+            <b>Training a robotic cat to jump onto a table from any position.</b>
+            <p>
+              This task can be approached in different ways:  
+              <ul>
+                <li>By building a physical model of the robot's movement and calculating the optimal sequence of actions;</li>
+                <li>By using machine learning to create a simulation and train a model to predict optimal movements. The model adjusts its behavior based on performance in the simulation.</li>
+              </ul>
+              This paradigm is known as <b>reinforcement learning</b>, which will be discussed in more detail later in the course.  
+              <i>Note:</i> This is not supervised learning because generating a vast number of labeled trajectories and outcomes would be computationally expensive and impractical.
+            </p>
+          </li>
+          <li>
+            <b>Finding sets of products frequently purchased together in a supermarket.</b>
+            <div class="collapse">
+              <div class="exercise__body">
+                <p>This is an <b>unsupervised learning</b> task, specifically clustering or association rule mining.</p>
+              </div>
+            </div>
+          </li>
+        </ol>
+        
+        <h3>Additional Question</h3>
+        
+        <p>
+          Ranking is a task where the target is an ordered finite set (<code>Y = {1, ..., K}</code>). At first glance, ranking could be treated as either classification (with <code>K</code> classes) or regression. Why is this not the case?
+        </p>
+        
+        <div class="collapse">
+          <div class="exercise__body">
+            <p>
+              For ranking tasks, models typically predict a continuous value, which is then used to sort objects. However, it is not considered regression because the loss functions and metrics are fundamentally different.  
+              In ranking, the exact predicted values are irrelevant—what matters is that more relevant objects receive higher scores.  
+              For instance, the task “predict the 10 most relevant objects” differs significantly from classification. As new objects are introduced, the relevance order can change entirely, invalidating any fixed mapping of objects to positions.
+            </p>
+          </div>
+        </div>
 
 
+
+
+
+
+        
 
         
 
