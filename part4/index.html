@@ -665,6 +665,79 @@
           </div>
         </div>
 
+        <h2 class="material-heading">
+          Model and Learning Algorithm
+        </h2>
+        
+        <p>
+          A <b>model</b> is a framework or representation used to describe the world. For instance, the idea that "the Earth is flat" is a model, and it’s not as flawed as it might seem. This model is often useful when dealing with phenomena at the scale of a single city, where the curvature of the Earth can be ignored. However, if we attempt to calculate the shortest route from Paris to Los Angeles, the flat Earth model would yield incorrect results, conflicting with available data. In such cases, we need to replace it with a more accurate model, such as "the Earth is round" or "the Earth is an ellipsoid," depending on the required level of precision and the limitations of our measurement tools.
+        </p>
+        
+        <p>
+          For example, a highly precise model such as "the Earth resembles a geoid with surface irregularities corresponding to mountain ranges" is excellent for certain applications. However, this level of detail might be excessively complex for most practical tasks and computationally too demanding.
+        </p>
+        
+        <p>
+          In the initial sections of this course, we will primarily focus on <b>predictive models</b>, which aim to capture the relationship between the feature representation <code>x</code> of an object and its target <code>y</code>. These models can be expressed as <code>y = f(x)</code>. Occasionally, we will also deal with <b>data models</b>, such as describing a feature with a normal distribution.
+        </p>
+        
+        <p>
+          Predictive models are often chosen from a <b>parametric family</b> <code>y = f_w(x)</code>, where <code>w</code> represents the parameters that are optimized using data.
+        </p>
+
+        <p>
+          In addition to choosing a model, selecting an appropriate learning algorithm is equally crucial. A <b>learning algorithm</b> is a procedure that transforms a training dataset into a trained model. For instance, in the example above, we used gradient descent to find the zero gradient for a constant model. As we will see later, gradient-based methods are widely used for training various models. These methods form a rich class of optimization techniques, making it challenging to choose the best one in some cases.
+        </p>
+        
+        <p>
+          Consider a binary classification task for points in a two-dimensional space, where we use a linear model. The metric for evaluation is <b>accuracy</b>, which measures the proportion of correct predictions. As a learning algorithm, we can use gradient descent:
+        </p>
+        
+        <p>
+          <code>w<sub>t+1</sub> = w<sub>t</sub> - α∇<sub>w</sub>L</code>
+        </p>
+        
+        <p>
+          Here, <code>α</code> is the optimization step size, a coefficient influencing the speed and stability of the algorithm. Notably, different choices of <code>α</code> lead to different learning algorithms, potentially yielding varying results:
+        </p>
+        
+        <ul>
+          <li>If <code>α</code> is too small, the descent may fail to reach the optimum.</li>
+          <li>If <code>α</code> is too large, the algorithm may "overshoot" the optimum and oscillate around it without ever converging.</li>
+        </ul>
+        
+        <p>
+          We see that the choice of both the model and the learning algorithm is critical.
+        </p>
+        
+        <p>
+          Now, for the training dataset, we need to determine the optimal decision boundary <code>y = w<sub>1</sub>x + w<sub>0</sub></code>. The parameters <code>w<sub>1</sub></code> and <code>w<sub>0</sub></code> are adjustable (trainable) parameters of the model, which the learning algorithm will infer from the dataset. However, there is a problem: the <b>accuracy</b> metric is not differentiable. To address this, we need to use a differentiable function <code>L(X, y, w)</code>, whose minimization approximately corresponds to optimizing the probability. Such a function is called a <b>loss function</b> or simply <b>loss</b>.
+        </p>
+
+        <h2 class="material-heading">
+          Model Selection and Overfitting
+        </h2>
+        
+        <p>
+          It might seem that we exaggerated the challenges of machine learning. After all, for any machine learning task, one could construct a "perfect" model by simply memorizing the entire training dataset along with its labels. Such a model could achieve flawless performance on any metric, but it would provide little value. The ultimate goal is to identify patterns in the data that allow the model to generalize and make accurate predictions on unseen data.
+        </p>
+        
+        <p>
+          A key consideration is the model’s <b>generalization ability</b>, which reflects how well the model learns patterns that apply beyond the training dataset and delivers reliable predictions on new, unseen data. To safeguard against poor generalization, the dataset is typically split into two parts: the <b>training set</b> and the <b>test set</b>. The training set is used to train the model, while the metrics are evaluated on the test set.
+        </p>
+        
+        <p>
+          This approach helps distinguish models that merely overfit the training data from those that successfully generalize. A model that generalizes has effectively captured meaningful patterns in the data and can make useful predictions for objects it has never encountered.
+        </p>
+        
+        <p>
+          Consider, for example, three regression models trained on the same synthetic dataset with a single feature. The yellow points represent the training dataset. In this scenario, we assume there is an underlying "true" relationship (shown as a dashed line) that is distorted by noise (e.g., measurement errors or the influence of other factors).
+        </p>
+        <img src="../img/material/part4/three_regression_models.webp" width=100%>
+
+
+
+
 
 
 
