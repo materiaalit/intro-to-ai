@@ -430,16 +430,7 @@
       </div>
     </div>
 
-            
-
-        <h1 class="material-heading">
-          Machine Learning
-
-        </h1>
-
-        <p>
-        </p>
-
+        
         <div class="hint">
           <div class="hint__header">
             <i class="fa fa-info-circle hint__icon"></i>Learning objectives of Part 4
@@ -475,13 +466,11 @@
 
           </div>
         </div>
-
-
         
         <!-- Main content -->
-        <h2 class="material-heading">
+        <h1 class="material-heading">
           What is Machine Learning?
-        </h2>
+        </h1>
 
         <p>
           Lets recap our knowledge about what Machine Learning (ML) is and go futher into Classical ML.
@@ -733,11 +722,103 @@
         <p>
           Consider, for example, three regression models trained on the same synthetic dataset with a single feature. The yellow points represent the training dataset. In this scenario, we assume there is an underlying "true" relationship (shown as a dashed line) that is distorted by noise (e.g., measurement errors or the influence of other factors).
         </p>
+        
         <img src="../img/material/part4/three_regression_models.webp" width=100%>
 
+        <p>
+          The leftmost linear model is insufficient: it does what it can but poorly approximates the relationship, especially for small and large values of <code>x</code>. On the right, we see a model that "memorized" the entire training dataset (indeed, to compute this function’s value, we would need to know the coordinates of all the original points) instead of modeling the underlying dependency. Finally, the central model, while not passing through the training data points, approximates the true dependency reasonably well.
+        </p>
+        
+        <p>
+          A model that excessively fits the data is referred to as <b>overfitted</b>.
+        </p>
+        
+        <p>
+          As model complexity increases, the error on the training dataset decreases. In many cases, a highly complex model will behave like one that has "memorized the entire training dataset," but it will fail to generalize. The patterns learned will be overly specific and tailored to the training data. This behavior is evident in the three graphs:
+        </p>
+        
+        <ul>
+          <li>
+            The linear function on the left is very simple but only roughly approximates the true relationship.
+          </li>
+          <li>
+            On the right, we see a highly intricate function that perfectly fits the training data points but is clearly too eccentric to reflect any natural dependency.
+          </li>
+          <li>
+            The optimal generalization is achieved with a model that is neither too simple nor too complex, as shown in the central graph.
+          </li>
+        </ul>
+
+        <h1 class="material-heading">
+          Linear Models
+        </h1>
+
+        <h3>Why Linear Models?</h3>
+
+        <p>
+          Imagine you have a set of objects <code>X</code>, and you want to assign a value to each object. For example, you might have a set of bank card transactions and want to determine which of these transactions were fraudulent. By dividing all transactions into two classes—labeling legitimate transactions as 0 and fraudulent ones as 1—you obtain a basic classification problem.
+        </p>
+        
+        <p>
+          Now consider another situation: you have geological survey data and want to estimate the potential of various deposits. In this case, your model might evaluate the expected annual profitability of a mine based on geological data. This is an example of a regression problem. The numbers that we want to assign to objects from our set are sometimes called <b>targets</b>.
+        </p>
+        
+        <p>
+          Thus, classification and regression tasks can be formulated as finding a mapping from the set of objects <code>X</code> to the set of possible targets.
+        </p>
+        
+        <h3>Mathematical Formulation</h3>
+        
+        <ul>
+          <li>
+            <b>Classification:</b> <code>X → {0, 1, ..., K}</code>, where <code>0, ..., K</code> are class labels.
+          </li>
+          <li>
+            <b>Regression:</b> <code>X → R</code>.
+          </li>
+        </ul>
+        
+        <p>
+          Clearly, simply assigning arbitrary numbers to objects is not meaningful. We want to identify fraudulent transactions quickly or decide where to build a mine. This requires a criterion of quality. The goal is to find a mapping that best approximates the true relationship between objects and their targets. However, determining what "best" means is a complex question, which we will revisit often.
+        </p>
+        
+        <p>
+          For now, a simpler question arises: <i>Among which mappings will we search for the best one?</i> There are countless possible mappings, but we can simplify the task by agreeing to search only within a predefined parameterized family of functions. This section focuses on the simplest such family—linear functions of the form:
+        </p>
+        
+        <p>
+          <code>y = w<sub>1</sub>x<sub>1</sub> + ... + w<sub>D</sub>x<sub>D</sub> + w<sub>0</sub></code>,
+        </p>
+        
+        <p>
+          where <code>y</code> is the target variable, <code>(x<sub>1</sub>, ..., x<sub>D</sub>)</code> is the feature vector corresponding to an object in the dataset, and <code>w<sub>1</sub>, ..., w<sub>D</sub>, w<sub>0</sub></code> are the model parameters. The features are also called <b>features</b> (from the English "features").
+        </p>
+        
+        <p>
+          The vector <code>w = (w<sub>1</sub>, ..., w<sub>D</sub>)</code> is often referred to as the <b>weight vector</b>, since the model's prediction can be viewed as a weighted sum of the object's features. The term <code>w<sub>0</sub></code> is called the <b>bias</b> or <b>intercept</b>. More compactly, a linear model can be expressed as:
+        </p>
+        
+        <p>
+          <code>y = ⟨x, w⟩ + w<sub>0</sub></code>,
+        </p>
+        
+        <p>
+          where <code>⟨x, w⟩</code> denotes the dot product of the feature vector <code>x</code> and the weight vector <code>w</code>.
+        </p>
 
 
 
+
+
+
+
+
+
+
+
+
+
+        
 
 
 
@@ -1038,7 +1119,6 @@
         
         <h1 class="material-heading">
           Neural Networks
-
         </h1>
 
         <p>
