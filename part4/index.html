@@ -980,15 +980,137 @@
           While linear models are rarely used in practice today, understanding their components and how they are constructed remains highly valuable and relevant.
         </p>
 
+        <h1 class="material-heading">
+          Metric methods
+        </h1>
 
-
-
-
+        <h2 class="material-heading">
+          K-Nearest Neighbors (KNN) Algorithm: Fast Nearest Neighbor Search
+        </h2>
         
+        <p>
+          The essence of metric methods is well captured by the saying: "Tell me who your friends are, and I’ll tell you who you are." Algorithms in this class have almost no training phase. Instead, they simply store the entire training dataset and, during prediction, find objects similar to the target.
+        </p>
+        
+        <p>
+          This process is called <b>lazy learning</b> because no actual training occurs. Metric models are also non-parametric, as they do not make explicit assumptions about the global laws governing the data. For instance:
+        </p>
+        
+        <ul>
+          <li>Linear regression assumes that the underlying relationship is linear (with unknown coefficients recovered from the dataset).</li>
+          <li>Linear binary classification assumes the existence of a hyperplane that separates the classes reasonably well.</li>
+        </ul>
+        
+        <p>
+          Metric methods, in contrast, are <b>local</b>: they assume that an object's properties can be inferred by examining its neighbors.
+        </p>
+        
+        <p>
+          These characteristics can be particularly useful when dealing with complex datasets for which we cannot devise a global model. However, due to lazy learning, the algorithm becomes impractical for large datasets. Despite this limitation, these algorithms are simple to understand, quite accurate, and highly interpretable, making them a common baseline in many tasks.
+        </p>
+        
+        <p>
+          In this section, we will discuss one of the most well-known metric algorithms—the <b>k-nearest neighbors (KNN)</b> method. This approach is primarily engineering-focused due to its lack of a training phase and is rarely used in practice today. However, many techniques underlying the algorithm are applied in other methods.
+        </p>
+        
+        <p>
+          For example, the <b>nearest neighbor search</b> algorithms, which are integral to the method, have much broader applications. Additionally, KNN is a very simple and easily interpretable algorithm, making it valuable to study. We will explore its advantages, disadvantages, areas of application, and possible generalizations in more detail.
+        </p>
 
 
+        <p>
+          The <b>nearest neighbor</b> (NN) classifier is among the simplest
+          possible classifiers. In the training stage, if you can call it
+          that, all the training data is simply stored. When given a new
+          instance, x<sup>(test)</sup>, we find the training data point
+          x<sup>(NN)</sup> which is closest to x<sup>(test)</sup> and
+          output its class label y<sup>(NN)</sup> as the predicted class
+          label. An example is given in the following diagram (panels a and b).
+        </p>
 
+        <img src="../img/diagrams/nearestneighbors_diagram1-f375dbbf.png" width=90%><br><br>
 
+        <p>
+          In the k-nearest neighbor (k-NN) classifier, the idea is very
+          similar but here it is not only the single nearest point that is
+          used. Instead, we find the k nearest training data points, and
+          choose the majority class among them as the predicted label.
+          This is illustrated in panel c of the above diagram.
+        </p>
+
+          <p>
+            An interesting question related to (among other things) the NN
+            classifier is the definition of <i>distance</i> or <i>similarity</i>
+            between instances. In the illustration above, we implicitly assumed
+            that the Euclidean distance is used. However, this may not always be
+            reasonable or even possible: the type of the input x may be, e.g.,
+            a string of characters (of possibly different lengths). 
+            Below are the other possible metrics. We wont dive deeper into them, but it's important to know that Euclidean distance is thus most common, but not the only option.
+          </p>
+
+        <img src="../img/material/part4/metrics_knn.webp" width=80%>
+
+        <p>
+          Let us now proceed to a more formal description of the algorithm. We will first consider the task of multi-class classification, leaving regression for later.
+        </p>
+        
+        <p>
+          Suppose we are given a training dataset <code>X = {(x<sub>i</sub>, y<sub>i</sub>)<sub>i=1</sub><sup>N</sup>}</code>, where <code>x<sub>i</sub> ∈ X</code> and <code>y<sub>i</sub> ∈ Y = {1, ..., C}</code>. Additionally, let a symmetric distance function <code>ρ: X × X → [0, +∞)</code> be defined. Assume we want to classify a new object <code>u</code>. To do so, we find the <code>k</code> nearest neighbors of <code>u</code> in terms of the distance <code>ρ</code> from the training dataset:
+        </p>
+        
+        <p>
+          <code>X<sub>k</sub>(u) = {x<sub>u(1)</sub>, ..., x<sub>u(k)</sub>}</code>, such that:
+        </p>
+        
+        <p>
+          <code>∀ x<sub>in</sub> ∈ X<sub>k</sub>(u), ∀ x<sub>out</sub> ∈ X ∖ X<sub>k</sub>(u): ρ(u, x<sub>in</sub>) ≤ ρ(u, x<sub>out</sub>).</code> (1)
+        </p>
+        
+        <p>
+          Let the class label of the object <code>x<sub>u(i)</sub></code> be denoted by <code>y<sub>u(i)</sub></code>. The class of the new object <code>u</code> is then naturally defined as the most frequently occurring class among the objects in <code>X<sub>k</sub>(u)</code>:
+        </p>
+        
+        <p>
+          <code>a(u) = argmax<sub>y ∈ Y</sub> ∑<sub>i=1</sub><sup>k</sup> I[y<sub>u(i)</sub> = y].</code> (2)
+        </p>
+        
+        <p>
+          This formula might seem intimidating at first, but it’s quite simple: for each class label <code>y ∈ Y</code>, the number of neighbors of <code>u</code> with that label is calculated by summing over all neighbors the indicators of the events where the neighbor’s label equals <code>y</code>.
+        </p>
+        
+        <h3>Estimating Class Probabilities</h3>
+        
+        <p>
+          This algorithm also allows us to estimate class probabilities. To do so, we simply compute the class frequencies among the neighbors:
+        </p>
+        
+        <p>
+          <code>P(u ∼ y) = (1 / k) ∑<sub>i=1</sub><sup>k</sup> I[y<sub>u(i)</sub> = y].</code>
+        </p>
+        
+        <p>
+          While this function satisfies the properties of a probability (it is non-negative, additive, and bounded by 1), it is merely a heuristic.
+        </p>
+        
+        <h3>Overfitting in KNN</h3>
+        
+        <p>
+          Despite the lack of a formal training phase, the KNN algorithm can easily overfit. You can observe this yourself by using a small number of neighbors (e.g., one or two), which results in highly complex class boundaries. This occurs because the parameters of the algorithm effectively include the entire training dataset, which can be quite large. As a result, the algorithm can easily adapt too closely to the specific data it has been given.
+        </p>
+
+        <h2 class="material-heading">
+          Interactive Example
+        </h2>
+        
+        <p>
+          You can explore an interactive example of how the KNN algorithm works by visiting the link below:
+        </p>
+        
+        <p>
+          <a href="https://yastatic.net/s3/academy/ml/knn_clf/knn_clf.html" target="_blank">
+            Interactive Example of KNN Algorithm
+          </a>
+        </p>
 
         
 
@@ -1096,60 +1218,6 @@
           spam filter in Part 3), and third, the perceptron neural network
           classifier.
         </p>
-
-        <h2 class="material-heading">
-          k-Nearest Neighbor (k-NN) Classifier
-
-        </h2>
-
-        <p>
-          The <b>nearest neighbor</b> (NN) classifier is among the simplest
-          possible classifiers. In the training stage, if you can call it
-          that, all the training data is simply stored. When given a new
-          instance, x<sup>(test)</sup>, we find the training data point
-          x<sup>(NN)</sup> which is closest to x<sup>(test)</sup> and
-          output its class label y<sup>(NN)</sup> as the predicted class
-          label. An example is given in the following diagram (panels a and b).
-        </p>
-
-        <img src="../img/diagrams/nearestneighbors_diagram1-f375dbbf.png" width=90%><br><br>
-
-        <p>
-          In the k-nearest neighbor (k-NN) classifier, the idea is very
-          similar but here it is not only the single nearest point that is
-          used. Instead, we find the k nearest training data points, and
-          choose the majority class among them as the predicted label.
-          This is illustrated in panel c of the above diagram.
-        </p>
-
-        <div class="hint">
-          <div class="hint__header">
-            <i class="fa fa-info-circle hint__icon"></i>Faraway, So Close!
-          </div>
-
-          <div class="hint__body">
-
-            <p>
-              An interesting question related to (among other things) the NN
-              classifier is the definition of <i>distance</i> or <i>similarity</i>
-              between instances. In the illustration above, we implicitly assumed
-              that the Euclidean distance is used. However, this may not always be
-              reasonable or even possible: the type of the input x may be, e.g.,
-              a string of characters (of possibly different lengths).</p>
-
-            <p>
-              You should therefore choose the distance metric on a case-by-case
-              basis. In the MNIST digit recognition case, we discussed the
-              potential problems due to defining image similarity by counting
-              pixel-by-pixel matches -- this was concluded to be sensitive to
-              shifting or scaling the images. Fortunately, the MNIST data has
-              been preprocessed by centering and scaling the images to alleviate
-              some of these issues.
-            </p>
-
-
-          </div>
-        </div>
 
         <h2 class="material-heading">
           Naive Bayes Classifier
