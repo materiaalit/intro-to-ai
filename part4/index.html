@@ -810,6 +810,38 @@
           where <code>⟨x, w⟩</code> denotes the dot product of the feature vector <code>x</code> and the weight vector <code>w</code>.
         </p>
 
+        <p>
+          Now that we have chosen a family of functions to search for a solution, the task becomes significantly simpler. Instead of finding an abstract mapping, we now search for a specific vector <code>(w<sub>0</sub>, w<sub>1</sub>, ..., w<sub>D</sub>) ∈ ℝ<sup>D+1</sup></code>.
+        </p>
+        
+        <div class="note">
+          <p>
+            <b>Note:</b> To apply a linear model, each object must already be represented as a vector of numerical features <code>(x<sub>1</sub>, ..., x<sub>D</sub>)</code>. Naturally, raw data such as text or graphs cannot be directly input into a linear model. It is necessary to first derive numerical features for these data types. A model is called linear if it is linear with respect to these numerical features.
+          </p>
+        </div>
+        
+        <p>
+          Let’s analyze how such a model would work if <code>D = 1</code>, meaning our objects differ by only one numerical feature. In this case, our linear model takes a very simple form: 
+        </p>
+        
+        <p>
+          <code>y = w<sub>1</sub>x<sub>1</sub> + w<sub>0</sub></code>.
+        </p>
+        
+        <p>
+          For a regression task, we aim to approximate the target value <code>y</code> as a linear function of the variable <code>x</code>. But what does linearity mean for a classification task?
+        </p>
+        
+        <p>
+          Consider the example of detecting fraudulent transactions. Suppose we know exactly one numerical variable: the transaction amount. For binary classification (legitimate vs. potentially fraudulent transactions), we will search for a decision rule: wherever the function's value is positive, we predict one class; where it is negative, we predict the other. In our example, the simplest rule would be a threshold transaction amount above which a transaction is flagged as suspicious.
+        </p>
+
+        <img src="../img/material/part4/regression-vs-classification_simple-comparison-image_v3.png" width=80%>
+
+        <p>
+          In the case of higher dimensions, instead of a line there will be a hyperplane with a similar meaning.
+        </p>
+
         <h2 class="material-heading">
           Advantages and Limitations of Linear Models
         </h2>
@@ -870,8 +902,9 @@
           Our goal is to train a linear model so that the hyperplane it defines separates objects of one class from those of the other as effectively as possible.
         </p>
 
-        <img src="../img/material/part4/Linear Classification.png" width=30%>
-
+        <div style="text-align: center;">
+          <img src="../img/material/part4/Linear Classification.png" width=30%>
+        </div>
 
 
 
