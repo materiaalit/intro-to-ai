@@ -836,7 +836,7 @@
           Consider the example of detecting fraudulent transactions. Suppose we know exactly one numerical variable: the transaction amount. For binary classification (legitimate vs. potentially fraudulent transactions), we will search for a decision rule: wherever the function's value is positive, we predict one class; where it is negative, we predict the other. In our example, the simplest rule would be a threshold transaction amount above which a transaction is flagged as suspicious.
         </p>
 
-        <img src="../img/material/part4/regression-vs-classification_simple-comparison-image_v3.png" width=50%>
+        <img src="../img/material/part4/regression-vs-classification_simple-comparison-image_v3.png" width=60%>
 
         <p>
           In the case of higher dimensions, instead of a line there will be a hyperplane with a similar meaning.
@@ -899,14 +899,86 @@
         </p>
         
         <p>
-          Our goal is to train a linear model so that the hyperplane it defines separates objects of one class from those of the other as effectively as possible.
+          Goal of a linear model is to be trained in way that the hyperplane it defines separates objects of one class from those of the other as effectively as possible.
         </p>
 
-        <img src="../img/material/part4/Linear Classification.png" width=50%>
+        <img src="../img/material/part4/Linear Classification.png" width=30%>
 
+        <h2 class="material-heading">
+          Logistic Regression
+        </h2>
+        
+        <p>
+          In this section, we will denote classes as 0 and 1.
+        </p>
+        
+        <p>
+          Logistic regression arises from the desire to view classification as a task of predicting probabilities. A good example is predicting clicks on the internet (e.g., in advertisements or search results). The presence of a click in a training log does not guarantee that, under the exact same conditions, a user will click on the object again. Instead, objects have an inherent "clickability," representing the true probability of a click for a given object. Each click in the training examples is considered a realization of this random variable, and we assume that, in the limit, the ratio of positive to negative examples at any point will converge to this probability.
+        </p>
+        
+        <p>
+          The challenge is that probability, by definition, is a value between 0 and 1, and there is no straightforward way to train a linear model while ensuring this constraint is satisfied. To address this, we can train the linear model to predict a value related to probability but unconstrained, ranging from <code>(−∞, ∞)</code>, and then transform the model's output into a probability. This value is the <b>logit</b> (or log-odds)—the logarithm of the ratio of the probability of a positive event to a negative event:
+        </p>
+        
+        <p>
+          <code>log(p / (1 − p))</code>.
+        </p>
+        
+        <p>
+          If the model's output is <code>log(p / (1 − p))</code>, then calculating the desired probability is straightforward:
+        </p>
+        
+        <p>
+          <code>⟨w, x<sub>i</sub>⟩ = log(p / (1 − p))</code>
+        </p>
+        
+        <p>
+          <code>e<sup>⟨w, x<sub>i</sub>⟩</sup> = p / (1 − p)</code>
+        </p>
+        
+        <p>
+          Solving for <code>p</code>, we get:
+        </p>
+        
+        <p>
+          <code>p = 1 / (1 + e<sup>−⟨w, x<sub>i</sub>⟩</sup>)</code>
+        </p>
+        
+        <p>
+          The function on the right-hand side is called the <b>sigmoid function</b> and is defined as:
+        </p>
+        
+        <p>
+          <code>σ(z) = 1 / (1 + e<sup>−z</sup>)</code>
+        </p>
+        
+        <p>
+          Thus, <code>p = σ(⟨w, x<sub>i</sub>⟩)</code>.
+        </p>
 
+        <p>
+          Now that we have the probability of the positive class, how do we transition to predicting the class itself? In other methods, it was sufficient to compute the sign of the prediction. However, in logistic regression, all predictions are positive and fall within the range of 0 to 1. So, what should we do?
+        </p>
+        
+        <p>
+          An intuitive—but not entirely correct (or even incorrect)—approach is to use a threshold of <code>0.5</code>. A more accurate method is to select this threshold separately, specifically for the trained regression model, by minimizing the desired metric on a held-out test dataset. For example, you could adjust the threshold to ensure that the proportion of positive and negative classes aligns closely with real-world distributions.
+        </p>
+        
+        <p>
+          It is worth noting that this method is called <b>logistic regression</b>, not logistic classification, because it predicts real numbers—logits—rather than discrete classes.
+        </p>
 
-
+        <h2 class="material-heading">
+          Summary
+        </h2>
+        
+        <p>
+          A linear model can be viewed as a single-layer neural network. As a result, many techniques originally developed for linear models are now reused in deep learning tasks. Moreover, fundamental approaches to regression, classification, and optimization are essentially the same.
+        </p>
+        
+        <p>
+          While linear models are rarely used in practice today, understanding their components and how they are constructed remains highly valuable and relevant.
+        </p>
 
 
 
