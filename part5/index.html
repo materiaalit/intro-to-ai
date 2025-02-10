@@ -319,7 +319,7 @@
 	  Even the most complex neural networks are composed of relatively simple blocks, such as linear transformations and activation functions. This modular nature allows them to be represented as a <b>computational graph</b>, where intermediate nodes correspond to transformations.
 	</p>
 
-	<img src="../img/material/part5/computational_graph.webp" width="80%" alt="Computational Graph for Logistic Regression">
+	<img src="../img/material/part5/computational_graph.jpg" width="80%" alt="Computational Graph for Logistic Regression">
 	
 	<p>
 	  The image above illustrates the computational graph for logistic regression. More complex neural networks follow a similar structure but involve deeper stacks of transformations.
@@ -333,7 +333,7 @@
 	  Computational graphs can be even more complex, including nonlinear connections between layers:
 	</p>
 	
-	<img src="../img/material/part5/complex_computational_graph.png" width="50%" alt="Example of a Complex Computational Graph">
+	<img src="../img/material/part5/complex_computational_graph.webp" width="80%" alt="Example of a Complex Computational Graph">
 	
 	<p>
 	  Let's break down what happens in a fully connected neural network.
@@ -361,31 +361,56 @@
 
 	<div class="hint">
 	  <div class="hint__header">
-	    <a data-toggle="collapse" class="hint__toggle">
-	      <i class="fa fa-lightbulb hint__icon"></i>
-	      <h3 class="hint__heading">Terminology Note</h3>
-	      <i class="fa fa-caret-down hint__arrow"></i>
-	    </a>
+	    <i class="fa fa-info-circle hint__icon"></i> Terminology Note
 	  </div>
-	  <div class="collapse">
-	    <div class="hint__body">
-	      <p>
-	        Unfortunately, there is no universally agreed-upon terminology in the literature.
-	      </p>
-	      <p>
-	        For example, we could define a <b>single indivisible layer</b> as the combination of a linear layer and an activation function—since we almost never use a purely linear layer without non-linearity. In fact, in frameworks like <b>Keras</b>, activation functions can be specified directly as a parameter within a linear layer.
-	      </p>
-	      <p>
-	        Additionally, some sources refer to what we call <b>intermediate representations</b> as layers. However, we believe that intermediate results <code>X<sub>i</sub></code> are better described as representations because they constitute new feature descriptions of the original input objects.
-	      </p>
-	      <p>
-	        Furthermore, in all major neural network frameworks, layers are defined as transformations rather than stored representations. For this reason, we consider layers to be the transformations that link intermediate representations.
-	      </p>
-	    </div>
+
+	  <div class="hint__body">
+	    <p>
+	      Unfortunately, there is no universally agreed-upon terminology in the literature.
+	    </p>
+	    <p>
+	      For example, we could define a <b>single indivisible layer</b> as the combination of a linear layer and an activation function—since we almost never use a purely linear layer without non-linearity. In fact, in frameworks like <b>Keras</b>, activation functions can be specified directly as a parameter within a linear layer.
+	    </p>
+	    <p>
+	      Additionally, some sources refer to what we call <b>intermediate representations</b> as layers. However, we believe that intermediate results <code>X<sub>i</sub></code> are better described as representations because they constitute new feature descriptions of the original input objects.
+	    </p>
+	    <p>
+	      Furthermore, in all major neural network frameworks, layers are defined as transformations rather than stored representations. For this reason, we consider layers to be the transformations that link intermediate representations.
+	    </p>
 	  </div>
 	</div>
 
+	<h3>Real-World Example: GoogLeNet (Inception-v1)</h3>
+
+	<p>
+	  Here is a real-life example of a complex neural network. <b>GoogLeNet</b> (also known as <b>Inception-v1</b>) achieved <i>state-of-the-art</i> (SotA) results in the <b>ILSVRC 2014 ImageNet challenge</b>.
+	</p>
 	
+	<img src="../img/material/part5/googlenet_architecture.webp" width="60%" alt="GoogLeNet (Inception-v1) Architecture">
+	
+	<p>
+	  In the diagram above, each block represents a relatively simple transformation, while the white blocks indicate the inputs and outputs of the computational graph.
+	</p>
+	
+	<p>
+	  Modern neural networks have grown even more complex, but they are still composed of relatively simple building blocks—just like GoogLeNet.
+	</p>
+	
+	<p>
+	  <b>Note:</b> In general, a neural network can be thought of as a complex function—or equivalently, a <b>computational graph</b>. In some highly non-trivial cases, breaking it down into layers may not make sense.
+	</p>
+	
+	<p>
+	  One such example is <b>weight-agnostic neural networks (WANN)</b>, introduced in the paper
+	  <a href="https://weightagnostic.github.io/" target="_blank">Weight Agnostic Neural Networks, NeurIPS 2019</a>.
+	</p>
+	
+	<img src="../img/material/part5/wann_structure.webp" width="50%" alt="Weight Agnostic Neural Networks Structure">
+	
+	<p>
+	  The illustration above shows the structure of WANNs, which challenge the traditional assumption that neural networks require weight tuning to perform well.
+	</p>
+
 	<p>
 	  A neural network composed exclusively of linear layers and activation functions is called a <b>fully connected neural network</b> or a <b>multilayer perceptron (MLP)</b>.
 	  Lets talk more about the perceptrone and multilayer perceptron.
