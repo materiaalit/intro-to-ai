@@ -817,12 +817,210 @@
         </div>
 
 
+<!--
+	<h1 class="material-heading">Convolutional Neural Networks</h1>
+	
+	<p>
+	  In this section, we introduce <b>convolutional neural networks (CNNs)</b> using image recognition as an example. 
+	  CNNs have become the <b>standard approach</b> in the field due to their efficiency and effectiveness in processing structured spatial data.
+	</p>
 
-	      
+	<h2 class="material-heading">Data Format</h2>
+	
+	<p>
+	  In most cases, images are represented as an <b>ordered set of pixels</b>, where each pixel consists of a vector of three <b>color channels</b>:
+	</p>
+	
+	<ul>
+	  <li><b>Red (R)</b> - Intensity of the red channel</li>
+	  <li><b>Green (G)</b> - Intensity of the green channel</li>
+	  <li><b>Blue (B)</b> - Intensity of the blue channel</li>
+	</ul>
+	
+	<p>
+	  This representation is often referred to as the <b>RGB format</b>. Each channel stores intensity values (usually ranging from 0 to 255), and the combination of these three channels defines the color of each pixel.
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/rgb_representation.png" width="50%" alt="RGB Image Representation">
+	</div>
+	
+	<p>
+	  Images are typically stored as a <b>3D tensor</b> with dimensions:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>Height × Width × Channels</code> (e.g., <code>32 × 32 × 3</code> for a small color image)
+	</p>
+	
+	<p>
+	  For grayscale images, there is only a single intensity channel instead of three:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>Height × Width × 1</code> (e.g., <code>28 × 28 × 1</code> for a typical MNIST digit)
+	</p>
+	
+	<p>
+	  Understanding how image data is structured is crucial for designing convolutional neural networks, as they leverage this spatial hierarchy for efficient feature extraction.
+	</p>
 
+	<img src="../img/material/part5/rgb_example.svg" width="80%">
 
+	<p>
+	  Each color intensity is represented as a value between <b>0 and 1</b>. However, to optimize memory usage, images are typically stored in an <b>8-bit format</b>, where values are uniformly discretized in the range <b>0 to 255</b>.
+	</p>
+	
+	<ul>
+	  <li><b>Black:</b> <code>(0, 0, 0)</code> — all color channels at minimum intensity.</li>
+	  <li><b>White:</b> <code>(255, 255, 255)</code> — all color channels at maximum intensity.</li>
+	  <li><b>Other colors:</b> A mix of red, green, and blue intensities.</li>
+	</ul>
+	
+	<p>
+	  When displayed on a computer screen, images are structured as <b>rows of pixels</b> of the same width, rather than as a single flattened vector. Humans perceive images in this structured 2D format rather than as raw numerical sequences.
+	</p>
+	
+	<p>
+	  The width <code>W</code> represents the number of pixels per row, and the height <code>H</code> indicates the number of pixel rows. 
+	  This means that an image can be represented as a <b>tensor</b> of shape:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>H × W × 3</code> (for color images, where each pixel has 3 color channels)
+	</p>
+	
+	<p>
+	  These images are typically stored in an <b>unsigned 8-bit integer (uint8)</b> format, which allows for efficient storage while preserving sufficient color depth.
+	</p>
 
+	
+	<img src="../img/material/part5/rgb_example2.svg" width="80%">
 
+	<h2 class="material-heading">MLP for Image Classification</h2>
+	
+	<p>
+	  The simplest way to build a neural network for image classification is to <b>flatten</b> the image into a vector and use a standard <b>multilayer perceptron (MLP)</b> with cross-entropy as the loss function.
+	</p>
+	
+	<p>
+	  However, this approach has several drawbacks.
+	</p>
+	
+	<h4>Drawback #1: Number of Parameters</h4>
+	
+	<p>
+	  In the first layer, the number of parameters is calculated as:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>H × W × C × C<sub>out</sub></code>
+	</p>
+	
+	<p>
+	  where <code>C<sub>out</sub></code> represents the number of neurons in the first layer. 
+	</p>
+	
+	<ul>
+	  <li>If <code>C<sub>out</sub></code> is too small, important information may be lost, especially for high-resolution images (e.g., <code>1920 × 1080</code>).</li>
+	  <li>If <code>C<sub>out</sub></code> is too large, the model will have an excessive number of parameters (and this is only the first layer), leading to <b>overfitting</b>, difficult optimization, and other related challenges.</li>
+	</ul>
+	
+	<h4>Drawback #2: Lack of Structural Awareness</h4>
+	
+	<p>
+	  What do we mean by "structure"? Let's illustrate with an example using an image of a puppy:
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/puppy.webp" width="80%" alt="Original Puppy Image">
+	</div>
+	
+	<p>
+	  If we shift the image a few pixels, we still recognize it as a puppy:
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/puppy_shifted.webp" width="80%" alt="Shifted Puppy Image">
+	</div>
+	
+	<p>
+	  Similarly, scaling the image does not change our perception:
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/puppy_scaled.webp" width="80%" alt="Scaled Puppy Image">
+	</div>
+	
+	<p>
+	  The same holds true if the image is rotated or flipped:
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/puppy_rotated.webp" width="80%" alt="Rotated Puppy Image">
+	</div>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/puppy_flipped.webp" width="80%" alt="Flipped Puppy Image">
+	</div>
+	
+	<p>
+	  The challenge is that an MLP must <b>learn on its own</b> that its predictions should remain invariant to these transformations. In practice, this usually requires increasing the number of neurons in hidden layers (as suggested by the <b>universal approximation theorem</b>), which is already problematic due to the parameter explosion mentioned earlier.
+	</p>
+	
+	<p>
+	  To address these issues, we introduce a new <b>building block</b>—the <b>convolution operation</b>.
+	</p>
+
+	<h2 class="material-heading">Convolutions</h2>
+
+	<p>
+	  Let's try to solve at least one problem—<b>invariance to translation</b>. A puppy can appear anywhere in an image, and we cannot guarantee that our model has "learned" to detect puppies best in a specific part of the image. 
+	  Therefore, for a more <b>robust</b> prediction, it makes sense to shift the image in all possible directions (filling empty areas with zeros):
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/convolution_shift.jpg" width="80%" alt="Shifting the Image in All Directions">
+	</div>
+	
+	<p>
+	  Then, for each shift, we predict the probability that a puppy is present in the image. The obtained predictions can be aggregated in various ways—using the <b>mean</b>, <b>maximum</b>, etc.
+	</p>
+	
+	<h3>Another Perspective on This Operation</h3>
+	
+	<p>
+	  Let's look at this operation from a different angle. Consider an image that is three times larger than the original, where the puppy image is centered:
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/padded_image.webp" width="50%" alt="Padded Image">
+	</div>
+	
+	<p>
+	  Now, let's take a window the same size as the original image and slide it across all possible positions within the enlarged image:
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/sliding_window.jpg" width="50%" alt="Sliding Window Operation">
+	</div>
+	
+	<p>
+	  It is easy to see that this operation is equivalent to shifting the original image relative to the window.
+	</p>
+	
+	<h3>Defining the Convolution Operation</h3>
+	
+	<p>
+	  Now, let’s consider the simplest model based on this principle—a kind of <b>ensemble of linear models</b>. We flatten each shifted image into a vector and take the <b>dot product</b> with a weight vector (for simplicity, the same weights for all shifts). This results in a linear operator, which has a special name: <b>convolution</b>.
+	</p>
+	
+	<p>
+	  Convolution is one of the most important components of convolutional neural networks (CNNs). The weights of the convolution, structured as a tensor (in this case, of shape <code>H × W × 3</code>), form its <b>kernel</b>.
+	  The region of the image currently being processed is referred to as the <b>convolution window</b>.
+	</p>
+
+-->
 
 
 
