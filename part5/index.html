@@ -816,8 +816,6 @@
           </div>
         </div>
 
-
-<!--
 	<h1 class="material-heading">Convolutional Neural Networks</h1>
 	
 	<p>
@@ -1019,8 +1017,201 @@
 	  Convolution is one of the most important components of convolutional neural networks (CNNs). The weights of the convolution, structured as a tensor (in this case, of shape <code>H × W × 3</code>), form its <b>kernel</b>.
 	  The region of the image currently being processed is referred to as the <b>convolution window</b>.
 	</p>
+	
+	<h1 class="material-heading">Neural Networks for Sequential Data</h1>
+	
+	<p>
+	  In this section, we explore neural networks designed for processing data in the form of sequences of tokens.
+	  Such data can come from <b>music, videos, time series, robot motion trajectories, or protein amino acid sequences</b>.
+	  However, one of the richest sources of sequential data is <b>Natural Language Processing (NLP)</b>.
+	</p>
 
--->
+	<p>
+	  As the name suggests, <b>Natural Language Processing (NLP)</b> is a branch of data science focused on analyzing texts written in human languages.
+	  NLP plays a role in many everyday applications, such as asking Siri or Alexa to play a song, using autocomplete in search engines, or checking spelling and grammar in documents.
+	</p>
+	
+	<ul>
+	  <li>Document classification (by topic, category, genre, etc.).</li>
+	  <li>Spam detection.</li>
+	  <li>Part-of-speech tagging.</li>
+	  <li>Spellchecking and typo correction.</li>
+	  <li>Keyword extraction and synonym/antonym detection.</li>
+	  <li>Named entity recognition (detecting names, geographic locations, dates, phone numbers, addresses).</li>
+	  <li>Sentiment analysis (detecting emotional tone in text).</li>
+	  <li>Information retrieval and ranking relevant documents based on search queries.</li>
+	  <li>Summarization (automatic generation of concise text summaries).</li>
+	  <li>Machine translation (automated language translation).</li>
+	  <li>Dialogue systems and chatbots.</li>
+	  <li>Question-answering systems (choosing the correct answer or generating responses).</li>
+	  <li>Speech recognition (Automated Speech Recognition, ASR).</li>
+	</ul>
+
+	<p>
+	  There are several ways neural networks process sequential data:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>Many-to-one:</b> A sequence of objects is input, and a single object is output.
+	    <br><b>Example:</b> Text or video classification.
+	    <br><b>Example 2:</b> Thematic classification—given a sentence of arbitrary length, generate a probability vector indicating the likelihood of predefined topics being present in the sentence.
+	    The output vector has a fixed dimension equal to the number of topics.
+	  </li>
+	
+	  <li>
+	    <b>One-to-many:</b> A single object is input, and a sequence of objects is output.
+	    <br><b>Example:</b> Generating a caption for an image (image captioning).
+	  </li>
+	
+	  <li>
+	    <b>Many-to-many:</b> Both the input and output are sequences of variable length.
+	    <br><b>Examples:</b> Machine translation, text summarization, generating article headlines.
+	  </li>
+	
+	  <li>
+	    <b>Synchronized many-to-many:</b> Both input and output sequences have the same length, with explicit alignment between input and output tokens.
+	    <br><b>Examples:</b> Generating frame-by-frame subtitles for videos, <b>PoS-tagging</b> (part-of-speech tagging—predicting the part of speech for each word in a sentence).
+	  </li>
+	</ul>
+
+	<h2 class="material-heading">Word Embeddings</h2>
+	
+	<p>
+	  Before discussing the architectures commonly used for processing text, we need to understand how text data can be encoded.
+	  Since neural networks require numerical inputs, we must first convert text into a vectorized representation. 
+	  There are two fundamental approaches to text vectorization:
+	</p>
+	
+	<ul>
+	  <li><b>Vectorizing the entire text</b>, transforming it into a single vector.</li>
+	  <li><b>Vectorizing individual structural units</b>, converting the text into a sequence of vectors.</li>
+	</ul>
+	
+	<p>
+	  Early statistical approaches followed the first method, treating text as an unordered collection ("bag") of tokens, 
+	  typically words. This means that sentences like <i>"I don't like ML"</i> and <i>"I like don't ML"</i> would receive 
+	  identical vector representations, losing important structural information. Therefore, we will only briefly mention these approaches.
+	</p>
+	
+	<div class="hint">
+	  <div class="hint__header">
+	    <i class="fa fa-info-circle hint__icon"></i> A Brief Look at Statistical Approaches
+	  </div>
+	
+	  <div class="hint__body">
+	    <p>
+	      The most straightforward method is called <b>Bag-of-Words (BoW)</b>. In this approach, a text is represented as 
+	      a frequency vector of token occurrences, excluding predefined "stop-words" such as personal pronouns, articles, and other common words.
+	    </p>
+	
+	    <p>
+	      A slightly more advanced version is <b>TF-IDF (Term Frequency-Inverse Document Frequency)</b>. 
+	      This method considers not only token frequency in a document but also its relevance across a collection of texts <code>D</code>.
+	      The TF-IDF representation of a document <code>d</code> is the product:
+	    </p>
+	
+	    <p style="text-align: center;">
+	      <code>TF(t, d) ⋅ IDF(t, D)</code>
+	    </p>
+	
+	    <p>
+	      Let's break down each component:
+	    </p>
+	
+	    <ul>
+	      <li>
+	        <b>Term Frequency (TF):</b> 
+	        <br>
+	        <code>TF(t, d) = (n_t) / (Σ_k n_k)</code>, 
+	        <br>
+	        where <code>n_t</code> is the number of occurrences of token <code>t</code> in document <code>d</code>, 
+	        and the denominator represents the total word count in <code>d</code>. This measures how frequently a token appears in a document.
+	      </li>
+	
+	      <li>
+	        <b>Inverse Document Frequency (IDF):</b>
+	        <br>
+	        <code>IDF(t, D) = log(|D| / |{d_i ∈ D | t ∈ d_i}|)</code>,
+	        <br>
+	        where <code>|{d_i ∈ D | t ∈ d_i}|</code> counts the number of documents in the collection <code>D</code> that contain token <code>t</code>.
+	        This factor penalizes overly common words while assigning higher importance to rarer, more informative tokens.
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+
+	<h2 class="material-heading">Word Embeddings with Context</h2>
+	
+	<p>
+	  Let's now explore another approach—mapping words to vectors (embeddings).
+	</p>
+	
+	<p>
+	  Suppose that the same word is always represented by the same vector, regardless of its position or surrounding text. 
+	  How can we encode the meaning of a word in its vector representation? 
+	  The answer aligns with one of the core ideas of representation learning: <b>use context</b>.
+	</p>
+	
+	<p>
+	  Just as in foreign language learning, where unfamiliar words can be inferred from surrounding text, we can define word meaning 
+	  by the words that frequently appear near it.
+	</p>
+	
+	<h3>Word2vec: Learning Word Representations</h3>
+	
+	<p>
+	  One of the most famous implementations of this idea is <b>Word2vec</b>, introduced by 
+	  <a href="https://arxiv.org/abs/1301.3781" target="_blank">T. Mikolov in 2013</a> 
+	  in the paper <i>Efficient Estimation of Word Representations in Vector Space</i>.
+	</p>
+	
+	<p>
+	  The authors proposed two training strategies:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>CBOW (Continuous Bag-of-Words):</b> The model learns to predict the <b>central word</b> based on its surrounding context 
+	    (e.g., two words before and after the target word).
+	  </li>
+	  <li>
+	    <b>Skip-gram:</b> The model learns to predict the <b>context words</b> given a central word 
+	    (e.g., the two neighboring words on each side).
+	  </li>
+	</ul>
+	
+	<p>
+	  The dimensionality of word embeddings is a <b>hyperparameter</b> and is selected empirically. 
+	  The original paper suggests using an embedding size of <b>300</b>. 
+	  These learned representations preserve semantic relationships between words.
+	</p>
+	
+	<p>
+	  We won't go into detail about the inner workings of Word2vec and its modern variations here. 
+	  For a deeper dive, we recommend the <a href="https://lena-voita.github.io/nlp_course/word_embeddings.html" target="_blank">NLP course by Lena Voita</a>.
+	</p>
+	
+	<h3>Examples of Word Embeddings</h3>
+	
+	<p>
+	  Below are some examples of words and their top-10 nearest neighbors in the embedding space (trained on a dataset of Quora Questions using Word2vec):
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>quantum:</b> electrodynamics, computation, relativity, theory, equations, theoretical, particle, mathematical, mechanics, physics.
+	  </li>
+	  <li>
+	    <b>personality:</b> personalities, traits, character, persona, temperament, demeanor, narcissistic, trait, antisocial, charisma.
+	  </li>
+	  <li>
+	    <b>triangle:</b> triangles, equilateral, isosceles, rectangle, circle, choke (guess why?), quadrilateral, hypotenuse, bordered, polygon.
+	  </li>
+	  <li>
+	    <b>art:</b> arts, museum, paintings, painting, gallery, sculpture, photography, contemporary, exhibition, artist.
+	  </li>
+	</ul>
 
 
 
