@@ -1376,7 +1376,341 @@
 	</p>
 
 
+	<h2 class="material-heading">The Attention Mechanism</h2>
+	
+	<p>
+	  How does a human translate sentences from one language to another? 
+	  Typically, a translator focuses on the word they are currently writing. 
+	  We want neural networks to incorporate a similar intuition. 
+	  Let's explore how this can be implemented in machine translation.
+	</p>
+	
+	<p>
+	  In a standard <b>seq2seq model</b> for machine translation, all information about the input sentence is compressed 
+	  into a <b>context vector</b>. However, different words in the sentence carry different levels of importance 
+	  and should be weighted accordingly. Moreover, when generating different parts of the translation, 
+	  the model should focus on different parts of the input sentence.
+	</p>
+	
+	<p>
+	  For instance, the first word in a translated phrase is often related to the first words of the input sentence. 
+	  Sometimes, a single word in the translation conveys the meaning of multiple words scattered throughout the original text 
+	  (anyone familiar with German separable verbs?).
+	</p>
+	
+	<h3>How Attention Works</h3>
+	
+	<p>
+	  The <b>attention mechanism</b> implements this idea by providing the decoder with access to all tokens 
+	  of the input sentence at each generation step. Let’s examine the classic attention model 
+	  introduced by <a href="https://arxiv.org/abs/1409.0473" target="_blank">Bahdanau et al., 2014</a>.
+	</p>
+	
+	<p>
+	  Let <code>(h_0, h_1, ..., h_n)</code> represent the encoder's hidden states and 
+	  <code>(s_0, s_1, ..., s_m)</code> be the decoder's hidden states. 
+	  Note that <code>h_n = s_0</code>, which is the context vector.
+	</p>
+	
+	<p>
+	  At each step <code>i</code> in the decoder, we compute <b>attention scores</b> by multiplying 
+	  <code>s_i</code> with the hidden states <code>(h_0, h_1, ..., h_n)</code> of the encoder:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>e_i = [⟨s_i, h_0⟩, ⟨s_i, h_1⟩, ..., ⟨s_i, h_n⟩] = [s_i h_0^T, ..., s_i h_n^T]</code>
+	</p>
+	
+	<p>
+	  These <code>n</code> values indicate how important each input token <code>(0...n)</code> 
+	  is for generating the <code>i</code>-th token in the translation.
+	</p>
 
+	<p>
+	  We then convert these attention scores into a probability distribution using <b>softmax</b>:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>α_i = softmax(e_i)</code>
+	</p>
+	
+	<p>
+	  These <code>α_i</code> values are used as weights to compute the final attention vector:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>a_i = ∑ (α_j * h_j)  for  j=0 to n</code>
+	</p>
+	
+	<p>
+	  Instead of just using the decoder’s hidden state <code>s_i</code> at step <code>i</code>, 
+	  we now use the concatenation of <code>[s_i, a_i]</code>. 
+	  This means that at every step, the decoder has weighted access to all tokens of the input sentence.
+	</p>
+	
+	<h3>Types of Attention Mechanisms</h3>
+	
+	<p>
+	  There are several variations of attention mechanisms:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>Basic Dot-Product Attention:</b> 
+	    <code>e_i = [s_i h_j^T] for j=0 to n</code>.
+	  </li>
+	  <li>
+	    <b>Multiplicative Attention:</b> 
+	    <code>e_i = [s_i W h_j^T] for j=0 to n</code>, where <code>W</code> is a learnable weight matrix.
+	  </li>
+	  <li>
+	    <b>MLP-Based Attention:</b> 
+	    <code>e_ij = tanh(h_j W1 + s_i W2) v</code>, where <code>W1</code>, <code>W2</code> are learnable weight matrices and <code>v</code> is a learnable weight vector.
+	  </li>
+	</ul>
+
+	<p>
+	  A key property of attention is that its weights capture relationships between words 
+	  in different languages during translation. This makes it possible to analyze and visualize which 
+	  parts of the input contribute most to each output token.
+	</p>
+
+	<h2 class="material-heading">Self-Attention</h2>
+	
+	<p>
+	  In the previous section, we discussed the application of the attention mechanism in the decoder, 
+	  but it turns out that it can also be useful for the encoder.
+	</p>
+	
+	<p>
+	  The <b>self-attention mechanism</b> is used to look at other words in the input sequence while encoding a specific word. 
+	  This mechanism was initially introduced in the paper <a href="https://arxiv.org/abs/1706.03762" target="_blank">"Attention Is All You Need"</a> as a core component of the <b>Transformer</b> architecture.
+	</p>
+	
+	<p>
+	  The effectiveness of transformers was demonstrated in the task of machine translation. 
+	  Today, transformers and self-attention have gained enormous popularity and are used not only in NLP but also in other domains, 
+	  such as computer vision (<b>Vision Transformer</b>, <b>Video Transformer</b>, <b>Multimodal Transformer for Video Retrieval</b>, etc.).
+	</p>
+
+	<p>
+	  Let's focus on the self-attention mechanism. Suppose we have the following two sentences:
+	</p>
+	
+	<blockquote>
+	  "Mom washed the window. She held a cloth in her hands."
+	</blockquote>
+	
+	<p>
+	  Does the pronoun "She" refer to the mother or the window? For a human, this is a very simple question, 
+	  but for a machine learning model, it is not. <b>Self-attention</b> helps the model learn the relationships 
+	  between tokens in a sequence, modeling the "meaning" of other relevant words when processing the current token.
+	</p>
+
+	<p>
+	  What happens inside the self-attention module? First, three vectors are formed from the input vector 
+	  (for example, the embedding of each token): 
+	</p>
+	
+	<ul>
+	  <li><b>Query (Q)</b>: Represents the token that is searching for related information.</li>
+	  <li><b>Key (K)</b>: Represents the tokens that may provide relevant information.</li>
+	  <li><b>Value (V)</b>: Contains the actual information of the tokens.</li>
+	</ul>
+	
+	<p>
+	  These vectors are obtained by multiplying the input vector by the matrices 
+	  <code>W_Q</code>, <code>W_K</code>, and <code>W_V</code>, 
+	  whose weights are learned along with all other parameters of the model using backpropagation.
+	</p>
+
+	<p>
+	  The purpose of these three abstractions is to separate the embeddings that define the 
+	  <b>"direction"</b> of attention (query, key) and the actual meaning of the token (value). 
+	  The query vector defines the starting point of the self-attention mechanism (from which token attention is directed), 
+	  while the key vector defines the target token (to which the attention is directed). 
+	  Thus, the same token can act as both a starting and an ending point in the attention mechanism: 
+	  self-attention is calculated between all tokens in the selected fragment of text.
+	</p>
+
+	<p>
+	  The process occurs as follows:
+	</p>
+	
+	<ol>
+	  <li>
+	    Each token is sequentially fixed as the <b>query</b>.
+	  </li>
+	  <li>
+	    The <b>query</b> vector of the current token is dot-multiplied with the <b>key</b> vectors of all tokens in the sequence.
+	  </li>
+	  <li>
+	    The resulting values indicate how relevant each token is for encoding the current query token.
+	  </li>
+	  <li>
+	    These values are normalized using <b>softmax</b> to obtain a probability distribution.
+	  </li>
+	  <li>
+	    A weighted sum of the <b>value</b> vectors is computed, where the weights come from the softmax probabilities.
+	  </li>
+	  <li>
+	    The final output is the <b>attention-weighted representation</b> for the given token.
+	  </li>
+	</ol>
+	
+	<p>
+	  The calculated numbers indicate how important other tokens are for encoding the query token in a specific position.
+	</p>
+	
+	<p>
+	  The obtained values are then normalized and passed through softmax to create a probability distribution. 
+	  Then, a weighted sum of the value vectors is computed, where the weights are the probabilities obtained in the previous step. 
+	  The resulting vector is the output of the self-attention layer for a single token.
+	</p>
+
+	<p>
+	  In practice, self-attention is not computed separately for each token. Instead, 
+	  matrix computations are used. For example, instead of calculating query, key, and value vectors 
+	  for each token individually, we stack the embeddings of input tokens into a matrix <b>X</b> 
+	  and compute the matrices:
+	</p>
+	
+	<ul>
+	  <li><b>Q = W<sub>Q</sub> * X</b></li>
+	  <li><b>K = W<sub>K</sub> * X</b></li>
+	  <li><b>V = W<sub>V</sub> * X</b></li>
+	</ul>
+	
+	<p>
+	  Then, the same steps described in the previous section are performed, but for matrices. 
+	  We compute the final matrix <b>Z</b> using the formula:
+	</p>
+	
+	<p>
+	  <b>Z = softmax(QK<sup>T</sup> / norm_const) * V</b>
+	</p>
+	
+	<p>
+	  In the original paper 
+	  <a href="https://arxiv.org/pdf/1706.03762" target="_blank">Vaswani et al., 2017</a>, 
+	  the normalization constant was chosen as 8 (the square root of the key vector dimension). 
+	  This normalization led to more stable gradients during training.
+	</p>
+
+	<p>
+	  Interestingly, self-attention is typically computed in parallel across multiple 
+	  attention blocks. This scheme is called <b>multi-head self-attention</b>. 
+	  Self-attention is computed multiple times with different weight matrices, 
+	  and the resulting matrices are concatenated and multiplied by an additional 
+	  weight matrix <b>W<sub>O</sub></b>.
+	</p>
+
+	<p>
+	  This allows different self-attention heads to focus on different types of relationships. 
+	  For example:
+	</p>
+	
+	<ul>
+	  <li>One head may capture feature representations.</li>
+	  <li>Another head may focus on actions.</li>
+	  <li>A third head may identify object-subject relationships.</li>
+	</ul>
+	
+	<p>
+	  Since different heads can be computed in parallel, the input embedding matrix is 
+	  mapped into different subspaces of representation. This significantly enhances 
+	  the self-attention mechanism's ability to model relationships between words.
+	</p>
+	
+	<p>
+	  The multi-head self-attention computation can be represented as:
+	</p>
+	
+	<p style="text-align: center;">
+	  <b>MultiHead(Q, K, V) = Concat(head<sub>1</sub>, head<sub>2</sub>, ..., head<sub>n</sub>) * W<sub>O</sub></b>
+	</p>
+	
+	<p>
+	  Where:
+	</p>
+	
+	<p style="text-align: center;">
+	  <b>head<sub>i</sub>(Q, K, V) = softmax(QK<sup>T</sup> / norm_const) * V</b>
+	</p>
+	
+	<h3>Implementations & Further Reading</h3>
+	
+	<p>
+	  There are many implementations of self-attention, including:
+	</p>
+	
+	<ul>
+	  <li><a href="https://pytorch.org/docs/stable/generated/torch.nn.MultiheadAttention.html" target="_blank">PyTorch MultiheadAttention</a></li>
+	  <li><a href="https://www.tensorflow.org/tutorials/text/transformer" target="_blank">TensorFlow Implementation</a></li>
+	  <li>A <a href="https://nlp.seas.harvard.edu/2018/04/03/attention.html" target="_blank">Jupyter notebook</a> from the Harvard NLP group explaining the Transformer architecture in detail.</li>
+	  <li>An excellent visual explanation in the article <a href="https://jalammar.github.io/illustrated-transformer/" target="_blank">"Illustrated Transformer"</a> by Jay Alammar.</li>
+	</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	      
 
 
 
