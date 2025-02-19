@@ -1000,7 +1000,7 @@
 	</p>
 	
 	<div style="text-align: center;">
-	  <img src="../img/material/part5/sliding_window.jpg" width="50%" alt="Sliding Window Operation">
+	  <img src="../img/material/part5/sliding_window.jpg" width="80%" alt="Sliding Window Operation">
 	</div>
 	
 	<p>
@@ -1214,7 +1214,166 @@
 	</ul>
 
 
+	<h2 class="material-heading">Recurrent Neural Networks</h2>
+	
+	<p>
+	  Now that we have represented text as a sequence of vectors corresponding to words or their fragments, how do we process it? 
+	  One possible approach is to treat a sequence of <code>k</code> vectors of dimension <code>d</code> as an "image" of size <code>k×1</code> with <code>d</code> "channels," 
+	  allowing us to use familiar convolutional neural networks (CNNs) with 1D convolutions instead of 2D.
+	</p>
+	
+	<p>
+	  In some cases, this method can work, but there are several issues to consider:
+	</p>
+	
+	<ul>
+	  <li>
+	    Although images can also vary in size, it is rare in datasets to find both 
+	    <code>1920×1080</code> and <code>3×3</code> images side by side.
+	    However, in a collection of restaurant reviews, we may encounter both novel-length critiques and short comments like <i>"It's fine."</i>
+	    While global pooling can help handle overly long sentences (with some information loss), very short sentences may cause problems, 
+	    especially if we neglect proper padding.
+	  </li>
+	  <li>
+	    A more philosophical observation: images are homogeneous, with no preferred direction.
+	    In contrast, text is written and read sequentially.
+	    It seems logical to leverage this structure: when processing a token, we should consider previous tokens as part of its context.
+	  </li>
+	</ul>
+	
+	<p>
+	  This last idea leads directly to the concept of <b>Recurrent Neural Networks (RNNs)</b>:
+	</p>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/recurrent_network.webp" width="50%" alt="Recurrent Neural Network">
+	</div>
+	
+	<h3>Understanding RNNs</h3>
+	
+	<p>
+	  To retain information from previous tokens, we introduce the concept of <b>internal memory</b> or <b>hidden state</b> (<code>h_n</code>).
+	  In the simplest case, the hidden state is represented as a fixed-dimensional vector.
+	  At each discrete time step, the network receives input data (e.g., a token embedding), updating its hidden state accordingly.
+	</p>
+	
+	<p>
+	  The update is performed as follows:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>h_n = tanh(h_(n-1) W1 + x_n W2)</code>
+	</p>
+	
+	<p>
+	  After updating the hidden state, the network predicts an output signal, for example:
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>y_n = h_n W3</code>
+	</p>
+	
+	<p>
+	  Note that the weights <code>W_i</code> remain the same across all iterations.
+	  You can think of this as repeatedly feeding each new <code>x_n</code> and <code>h_(n-1)</code> into the same layer, which loops back onto itself.
+	</p>
+	
+	<p>
+	  A recurrent network can be trained by minimizing the total error across all predicted outputs <code>y_n</code> of the network.
+	</p>
 
+	<p>
+	  It is easy to imagine a neural network with multiple recurrent layers: the first RNN layer processes the original sequence, 
+	  the second RNN receives the outputs of the first network, the third RNN processes the outputs of the second, and so on. 
+	  Such architectures are called <b>deep recurrent neural networks (deep RNNs)</b>.
+	</p>
+
+	<h2 class="material-heading">Sequence-to-Sequence (Seq2Seq) Models</h2>
+
+	<p>
+	  You may have noticed that so far, we haven't discussed tasks related to generating sequences.
+	</p>
+	
+	<p>
+	  Indeed, the models we have covered so far do not allow generating sequences of arbitrary length.
+	  But how can we translate from one language to another? 
+	  We do not know the exact length of the translated phrase in advance, and there is usually no one-to-one word correspondence between the original sentence and its translation.
+	</p>
+	
+	<p>
+	  A natural solution to the <b>sequence-to-sequence (seq2seq)</b> problem is to use an <b>encoder-decoder architecture</b>.
+	  This consists of:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>Encoder:</b> Processes the input sequence and encodes its information into a <b>context vector</b>.
+	  </li>
+	  <li>
+	    <b>Decoder:</b> Generates a new sequence based on the encoded representation.
+	  </li>
+	</ul>
+	
+	<div style="text-align: center;">
+	  <img src="../img/material/part5/seq2seq.png" width="50%" alt="Seq2Seq Model">
+	</div>
+	
+	<p>
+	  The encoder extracts meaningful features from the input and compresses them into a fixed-length representation, 
+	  while the decoder learns to expand this representation into an output sequence. 
+	  This approach is widely used in tasks such as <b>machine translation, text summarization, and chatbot responses</b>.
+	</p>
+	
+	<p>
+	  The <b>encoder</b> reads the input sentence token by token and processes them using recurrent network blocks. 
+	  The hidden state of the final block becomes the <b>context vector</b>. 
+	  Often, the encoder reads the sentence in reverse order—this ensures that the last token the encoder sees closely aligns 
+	  with the first tokens the decoder will generate. 
+	  This makes it easier for the decoder to begin reconstructing the sentence, as having a few correct initial tokens significantly simplifies further generation.
+	</p>
+	
+	<p>
+	  The <b>decoder</b> has an architecture similar to the encoder.
+	  However, each decoder block must take into account both the tokens generated so far and the information about the original sentence.
+	  The hidden state vector of the initial decoder block (<code>g_0</code>) is initialized using the context vector.
+	</p>
+	
+	<p>
+	  Thus, the decoder receives a compressed representation of the input sentence.
+	  The sentence is generated as follows:
+	</p>
+	
+	<ul>
+	  <li>
+	    The first decoder block receives a <b>start-of-sequence token</b> (e.g., <code>&lt;BOS&gt;</code>, begin of sentence).
+	  </li>
+	  <li>
+	    The output of the first block is the first token of the new sequence.
+	  </li>
+	  <li>
+	    This predicted token is then fed into the next decoder block as input.
+	  </li>
+	  <li>
+	    The process repeats until either:
+	    <ul>
+	      <li>The model generates an <b>end-of-sequence token</b> (e.g., <code>&lt;EOS&gt;</code>, end of sentence).</li>
+	      <li>The sequence reaches a predefined maximum length.</li>
+	    </ul>
+	  </li>
+	</ul>
+	
+	<p>
+	  In this way, the decoder functions as a <b>language model</b>, generating the sentence token by token while considering the previous context.
+	</p>
+	
+	<p>
+	  Naturally, the encoder can be made more sophisticated. 
+	  For instance, we can use a <b>multi-layer bidirectional network</b>, as long as its output remains a single context vector.
+	</p>
+	
+	<p>
+	  The decoder, however, is more constrained—it must generate words one by one in a single direction.
+	</p>
 
 
 
