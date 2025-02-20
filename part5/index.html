@@ -1801,7 +1801,7 @@
 	  <a href="https://arxiv.org/pdf/1706.03762" target="_blank">paper</a>:
 	</p>
 	
-	<img src="transformer_architecture_image.svg" alt="Transformer Architecture" width="90%">
+	<img src="../img/material/part5/transformer_architecture_image.svg" alt="Transformer Architecture" width="90%">
 
 	<h3>Transformer Encoder and Decoder</h3>
 	
@@ -1809,7 +1809,7 @@
 	  On the left side of the diagram, we see the structure of the encoder. It sequentially applies <code>N</code> blocks to the input sequence:
 	</p>
 	
-	<img src="transformer_encoder.svg" alt="Transformer Encoder Structure" width="60%">
+	<img src="../img/material/part5/transformer_encoder.svg" alt="Transformer Encoder Structure" width="60%">
 	
 	<p>
 	  Each block outputs a sequence of the same length. It contains two key layers: 
@@ -1855,7 +1855,7 @@
 	  <li><b>v<sub>i</sub></b> — the actual stored values.</li>
 	</ul>
 	
-	<img src="img/material/part5/self_attention_queries.webp" alt="Self-Attention Queries and Keys" width="60%">
+	<img src="../img/material/part5/self_attention_queries.webp" alt="Self-Attention Queries and Keys" width="60%">
 
 	<p>
 	  The closeness of a query to a key can be determined using a dot product:
@@ -1892,7 +1892,7 @@
 	  sequence, while the keys and values come from the input (i.e., from the encoder's outputs).
 	</p>
 	
-	<img src="img/material/part5/decoder_attention.webp" alt="Decoder Cross-Attention" width="60%">
+	<img src="../img/material/part5/decoder_attention.webp" alt="Decoder Cross-Attention" width="60%">
 	
 	<p>
 	  Another key feature of the decoder's attention is that, in the form described above, 
@@ -1908,7 +1908,7 @@
 	  mask has a lower triangular shape.
 	</p>
 	
-	<img src="img/material/part5/attention_mask.svg" alt="Autoregressive Attention Mask" width="50%">
+	<img src="../img/material/part5/attention_mask.svg" alt="Autoregressive Attention Mask" width="50%">
 	
 	<h2 class="material-heading">Multi-Head Attention</h2>
 	
@@ -1928,7 +1928,7 @@
 	  parts of the input sequence and capture multiple relationships in parallel.
 	</p>
 	
-	<img src="img/material/part5/multi_head_attention.svg" alt="Multi-Head Attention Mechanism" width="60%">
+	<img src="../img/material/part5/multi_head_attention.svg" alt="Multi-Head Attention Mechanism" width="60%">
 	
 	<h2 class="material-heading">Efficiency</h2>
 	
@@ -1962,18 +1962,220 @@
 	  <a href="https://arxiv.org/abs/2004.05150" target="_blank">Longformer</a>:
 	</p>
 	
-	<img src="img/material/part5/longformer_comparison.webp" alt="Longformer vs Standard Transformer Efficiency" width="60%">
+	<img src="../img/material/part5/longformer_comparison.webp" alt="Longformer vs Standard Transformer Efficiency" width="60%">
 
+	<h2 class="material-heading">Fully Connected Layer and Normalization</h2>
+	
+	<p>
+	  The second component of the transformer block is the <strong>feed-forward network (FFN)</strong>, 
+	  which consists of two fully connected layers applied independently to each element of the 
+	  input sequence. In modern architectures, the size of the intermediate representation 
+	  (i.e., the output of the first layer) is often significantly larger—typically four times 
+	  the output size of the block.
+	</p>
+	
+	<p>
+	  Because of this, the computational cost of FFN should not be underestimated: despite 
+	  the quadratic complexity of self-attention, in large models or for short sequences, 
+	  the FFN can take significantly more time than self-attention. Mathematically, the FFN is 
+	  represented as:
+	</p>
+	
+	<p class="math">
+	  FFN(x) = act(xW_1 + b_1)W_2 + b_2
+	</p>
+	
+	<p>
+	  The activation function <span class="math">act</span> in the FFN has varied over time. 
+	  Initially, ReLU was widely used, but the community later adopted 
+	  <a href="https://arxiv.org/abs/1606.08415v4" target="_blank">GELU</a> 
+	  (Gaussian Error Linear Unit), which follows the formula:
+	</p>
+	
+	<p class="math">
+	  GELU(x) = x \cdot \Phi(x)
+	</p>
+	
+	<p>
+	  where <span class="math">\Phi</span> is the cumulative distribution function 
+	  of the standard normal distribution.
+	</p>
+	
+	<img src="../img/material/part5/gelu.svg" alt="GELU" width="60%">
 
+	<p>
+	  Let's say a few words about <strong>layer normalization</strong>: as demonstrated in 
+	  several research <a href="https://aclanthology.org/2020.emnlp-main.463/" target="_blank">papers</a>, its placement within the residual connection is crucial.
+	  The standard transformer architecture employs the <strong>PostLN</strong> formulation, 
+	  where normalization is applied <em>after</em> the residual connection.
+	</p>
+	
+	<p>
+	  However, this approach can be quite unstable when training deep models with 
+	  a large number of layers. Instead, an alternative approach, 
+	  <strong>PreLN</strong> (shown on the right in the image below), 
+	  applies normalization to the <em>input</em> of the residual connection.
+	</p>
+	
+	<img src="../img/material/part5/transformer_layer_norm.svg" alt="PostLN vs. PreLN Layer Normalization" width="60%">
 
+	<h2 class="material-heading">BERT and GPT</h2>
+	
+	<p>
+	  Transformer-based models wouldn’t be as interesting if almost all modern NLP tasks 
+	  weren’t being solved using this architecture. The rapid rise in popularity of 
+	  <strong>self-attention</strong> was driven by two well-known model families: 
+	  <strong>BERT</strong> and <strong>GPT</strong>. These can be seen as the 
+	  <em>encoder</em> and <em>decoder</em> of the Transformer, which later evolved 
+	  into independent architectures.
+	</p>
+	
+	<p>
+	  Chronologically, <a href="https://openai.com/research/language-unsupervised" 
+	  target="_blank"><strong>GPT</strong></a> (Generative Pretrained Transformer) 
+	  was introduced first. It is a standard language model implemented as a stack 
+	  of Transformer <strong>decoder</strong> layers.
+	</p>
+	
+	<p>
+	  The training objective is simply <strong>next-token prediction</strong>, 
+	  meaning it performs multi-class classification over a vocabulary at each step.
+	  A key feature of GPT is the use of a <em>lower-triangular attention mask</em>: 
+	  without it, future tokens would be visible to past ones, causing a data leakage issue.
+	</p>
+	
+	<p>
+	  The trained model can be used for <strong>text generation</strong> and tasks 
+	  that rely on it. Even <strong>ChatGPT</strong>, which is fine-tuned with 
+	  special instruction-based training, differs only slightly from the base GPT model.
+	</p>
+	
+	<img src="../img/material/part5/gpt_architecture.svg" alt="GPT Model Architecture" width="60%">
 
+	<p>
+	  As the name suggests, the <strong>Bidirectional Encoder Representations from Transformers (BERT)</strong> 
+	  model differs from GPT in its <strong>bidirectional attention</strong>: this means that while processing 
+	  the input sequence, all tokens can leverage information from each other.
+	</p>
+	
+	<p>
+	  This makes BERT particularly suitable for tasks where predictions need to be made based on 
+	  the entire input without text generation. Examples include <strong>sentence classification</strong> 
+	  and <strong>document similarity search</strong>. However, BERT does not generate text from scratch. 
+	</p>
+	
+	<p>
+	  Instead, BERT is trained with two key objectives:
+	</p>
+	
+	<ul>
+	  <li>
+	    <strong>Masked Language Modeling (MLM):</strong> Predicting randomly masked words based on their 
+	    surrounding context (illustrated in the image below).
+	  </li>
+	  <li>
+	    <strong>Next Sentence Prediction (NSP):</strong> Determining whether two text fragments logically 
+	    follow each other.
+	  </li>
+	</ul>
+	
+	<img src="../img/material/part5/bert_mlm_nsp.webp" alt="BERT Masked Language Model and Next Sentence Prediction" width="60%">
 
+	<p>
+	  The key difference between <strong>BERT</strong> and <strong>GPT</strong> models is not just in their training objectives 
+	  or applications but primarily in the <strong>type of attention mechanisms</strong> they use. This distinction is illustrated 
+	  in the image below.
+	</p>
+	
+	<img src="../img/material/part5/bert_vs_gpt_attention.webp" alt="BERT vs GPT Attention Mechanisms" width="60%">
+	
+	<h2 class="material-heading">Training Nuances</h2>
+	
+	<p>
+	  Unfortunately, if you simply implement a <strong>Transformer</strong> neural network and attempt to train it using 
+	  conventional hyperparameters from other architectures, you are highly likely to encounter failure. 
+	  The optimization process for such models often requires adjustments, and neglecting these details can 
+	  result in significant quality degradation or even unstable training.
+	</p>
 
+	<p>
+	  One critical factor is the <strong>batch size</strong>. Almost all modern Transformer models are trained on 
+	  extremely large batches, sometimes reaching <strong>millions of tokens</strong> in the largest language models. 
+	  Since no modern GPU can handle such large batches in a single step, techniques like 
+	  <a href="https://sebastianraschka.com/blog/2023/llm-grad-accumulation.html#what-is-gradient-accumulation" target="_blank">
+	  gradient accumulation</a> are commonly used to accumulate gradients over micro-batches before performing an update.
+	</p>
+	
+	<p>
+	  Recent research also suggests <a href="https://openreview.net/forum?id=B1Yy1BxCZ" target="_blank">
+	  increasing the batch size dynamically</a> during training. The idea is that during early training stages, 
+	  making more frequent gradient descent steps is crucial, while in later stages, it is more important 
+	  to have an accurate gradient estimation.
+	</p>
 
+	<img src="../img/material/part5/batches_BLEU.webp" alt="batches BLEU" width="60%">
+	
+	<p>
+	  Another crucial factor is the choice of <strong>optimizer</strong> and <strong>learning rate schedule</strong>. 
+	  Training a Transformer with standard <strong>SGD</strong> is highly unlikely to succeed. 
+	  In the original Transformer paper, the <strong>Adam</strong> optimizer was used, and to this day, 
+	  it remains the standard choice.
+	</p>
+	
+	<p>
+	  However, for large batch sizes, Adam sometimes struggles, leading researchers to use alternatives 
+	  such as <a href="https://arxiv.org/abs/1904.00962" target="_blank">LAMB</a>, which normalizes weight updates 
+	  for each layer to stabilize training.
+	</p>
 
+	<h2 class="material-heading">Transformers Beyond Text</h2>
+	
+	<p>
+	  Naturally, the remarkable success of this family of architectures in various text-related tasks 
+	  did not go unnoticed by researchers in other domains. One of the most prominent areas where 
+	  Transformer-based models have found new applications is undoubtedly <strong>computer vision</strong>.
+	</p>
+	
+	<p>
+	  For example, the <a href="https://arxiv.org/abs/2010.11929" target="_blank">ViT (Vision Transformer)</a> 
+	  architecture once broke classification accuracy records on image datasets by leveraging the 
+	  self-attention mechanism for images divided into multiple <strong>patches</strong>—square-shaped segments.
+	</p>
+	
+	<p>
+	  As the authors of the paper explain, the idea of using Transformer architecture in vision 
+	  emerged after observing the success of such models in <strong>NLP</strong>. 
+	  The use of a general approach like <strong>self-attention</strong> allows architectures to 
+	  bypass the need for explicitly encoding task-specific properties (also known as 
+	  <em>inductive bias</em>), provided there is sufficient training time, 
+	  a large number of parameters, and an extensive dataset.
+	</p>
 
+	<img src="../img/material/part5/vision_transformer.webp" alt="Vision Transformer" width="70%">
 
-
+	<h2 class="material-heading">Transformers in Image Generation and Reinforcement Learning</h2>
+	
+	<p>
+	  Transformers also serve as the foundation for the generative component of <strong>DALL-E</strong>— 
+	  a model that sparked a wave of research in text-to-image generation in recent years. Conceptually, 
+	  DALL-E is quite simple: it can be viewed as an autoregressive <strong>"language model"</strong> 
+	  that generates an image one <strong>"visual token"</strong> at a time.
+	</p>
+	
+	<p>
+	  Transformers are also applied in <strong>reinforcement learning</strong>. A notable example is the 
+	  <a href="https://arxiv.org/abs/2106.01345" target="_blank">Decision Transformer</a> paper, 
+	  which proposes using autoregressive modeling with this architecture to construct an agent.
+	</p>
+	
+	<p>
+	  The authors demonstrated that the same approach used for text generation can be applied to 
+	  predicting actions in a dynamic environment. As shown in the image below, the model 
+	  sequentially receives standard triplets of encoded states, current actions, and rewards, 
+	  and at each step, it outputs the next action.
+	</p>
+	
+	<img src="../img/material/part5/decision_transformer.svg" alt="Decision Transformer in RL" width="70%">
 
 
 
