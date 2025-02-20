@@ -2273,7 +2273,7 @@
         </div>
 
 
-	<h1>Introduction to Generative Modeling</h1>
+	<h1 class="material-heading">Introduction to Generative Modeling</h1>
 	
 	<p>
 	  Up until now, you have studied machine learning models that primarily predict certain characteristics of objects, 
@@ -2351,7 +2351,7 @@
 	  description, the images would be <code>x</code>, and the text would be <code>y</code>.
 	</p>
 
-	<h2>Interpolations in Latent Space</h2>
+	<h2 class="material-heading">Interpolations in Latent Space</h2>
 	
 	<p>
 	  Most generative models allow sampling of new objects. Typically, after training a generative 
@@ -2560,15 +2560,376 @@
 	  in real-world applications, as we have described throughout this section.
 	</p>
 
+	<h1 class="material-heading">Variational Autoencoder (VAE)</h1>
+	
+	<p>
+	  In machine learning, there is a broad field dedicated to training generative models.
+	  Their goal is to learn the distribution from which the objects in the training dataset
+	  could have been sampled.
+	</p>
+	
+	<p>
+	  A trained generative model can sample new objects from the learned distribution that
+	  do not belong to the original dataset. Most commonly, this is associated with the task
+	  of generating new images: from handwritten digits to face-swapping in videos using
+	  deepfake technology.
+	</p>
+	
+	<p>
+	  The model we will discuss in this section is called a <strong>Variational Autoencoder</strong> or
+	  <strong>VAE</strong>. It belongs to the family of generative models.
+	</p>
+	
+	<h3>Problem Statement</h2>
+	
+	<p>
+	  Let's imagine that we need to draw a horse. How would we do it?
+	</p>
+	
+	<p>
+	  We would probably start by outlining the general silhouette of the horse, defining its
+	  size and pose, and then adding details such as the mane, tail, hooves, and choosing the
+	  coat color. It seems that, during the process of learning to draw, we identify a core
+	  set of factors that are most important for generating a new image: overall shape, size,
+	  color, and so on. Then, while drawing, we simply assign specific values to these factors.
+	</p>
+	
+	<p>
+	  However, the same combination of factors can lead to different images—after all, drawing
+	  the same thing twice in exactly the same way is nearly impossible.
+	</p>
+	
+	<p>
+	  Let's try to formalize this process. Suppose we have a dataset <strong>D</strong> in the
+	  high-dimensional space of the original data <strong>X<sub>N</sub></strong>, consisting of objects
+	  we want to generate, and a lower-dimensional space <strong>Z<sub>M</sub></strong> of hidden
+	  (latent) variables that encode the underlying factors in the data.
+	</p>
+	
+	<p>
+	  The generative process consists of two sequential stages (see the image below):
+	</p>
+	
+	<ul>
+	  <li>Sampling <strong>z ∈ Z<sub>M</sub></strong> from the distribution <strong>p(z)</strong> (red).</li>
+	  <li>Sampling <strong>x ∈ X<sub>N</sub></strong> from the distribution <strong>p(x | z)</strong> (blue).</li>
+	</ul>
+	
+	<img src="../img/material/part5/vae-generative-process.webp" alt="VAE Generative Process" />
+
+	<p>
+	  In terms of drawing pictures of horses, we first mentally sample some <strong>z</strong> 
+	  (size, shape, color, etc.), then draw all the necessary details, which means sampling 
+	  from the distribution <strong>p(x | z)</strong>. Ultimately, we hope that the result 
+	  will resemble a horse.
+	</p>
+	
+	<p>
+	  Thus, constructing a generative model in our case means being able to sample objects 
+	  using the described two-stage process that are similar to those in the training dataset <strong>D</strong>.
+	</p>
+	
+	<p>
+	  More formally, we want our model to maximize the likelihood <strong>p(x)</strong> of 
+	  elements from the training set <strong>D</strong> during the described generation process:
+	</p>
+	
+	<div class="math-formula">
+	  \[
+	  p(x) = \int_{Z_M} p(x | z) p(z) \,dz \rightarrow \max
+	  \]
+	</div>
+
+	<p>
+	  Variational Autoencoders (VAE) are a type of generative model that learns to represent 
+	  data in a lower-dimensional latent space. Unlike traditional autoencoders, which simply 
+	  compress and reconstruct input data, VAEs model the underlying probability distribution 
+	  of the data, allowing them to generate entirely new samples similar to those seen during 
+	  training.
+	</p>
+	
+	<p>
+	  The VAE consists of two neural networks: an <b>encoder</b> and a <b>decoder</b>. 
+	  The encoder maps input data into a lower-dimensional <i>latent space</i>, where each 
+	  input is represented as a probability distribution (mean and variance) rather than 
+	  a fixed point. The decoder then reconstructs the original data from a sampled latent 
+	  representation.
+	</p>
+
+	<img src="../img/material/part5/vae_arcitecture.webp" alt="VAE" />
+	
+	<p>
+	  A key feature of VAEs is the <b>reparameterization trick</b>, which allows gradients to 
+	  be computed during training. Instead of directly sampling from the learned distribution, 
+	  VAE samples from a standard normal distribution and then applies a transformation using 
+	  the learned mean and variance. This makes backpropagation possible and enables the model 
+	  to learn an optimal latent representation.
+	</p>
+
+	<p>
+	  Without going into too much detail, the general training algorithm for a Variational Autoencoder (VAE) 
+	  can be summarized as follows:
+	</p>
+
+	<pre>
+	dataset = np.array(...)
+	
+	epsilon = RandomDistribution(...)
+	
+	# Encoder q_phi(z|x) — neural network with parameters phi
+	encoder = Encoder()
+	
+	# Decoder p_theta(x|z) — neural network with parameters theta
+	decoder = Decoder()
+	
+	for step in range(max_steps):
+	
+	     # Sample a batch of input data and random noise
+	     batch_x = sample_batch(dataset)
+	     batch_noise = sample_batch(epsilon)
+	
+	     # Compute parameters of the latent distribution q(z | x) using the encoder
+	     latent_distribution_parameters = encoder(batch_x)
+	
+	     # Perform reparameterization (sample from q(z | x))
+	     z = reparameterize(latent_distribution_parameters, batch_noise)
+	
+	     # The decoder outputs parameters of the output distribution
+	     output_distribution_parameters = decoder(z)
+	
+	     # Compute ELBO and update model parameters
+	     L = -ELBO(
+	        latent_distribution_parameters, 
+	        output_distribution_parameters, 
+	        batch_x
+	     )
+	
+	     L.backward()
+	</pre>
+	
+	<p>
+	  This process continues for multiple training steps, optimizing the encoder and decoder 
+	  to generate realistic samples from the learned latent space.
+	</p>
+
+	
+	<p>
+	  VAEs are widely used in tasks such as image generation, interpolation between objects, and 
+	  controlled transformations (e.g., modifying facial expressions or object attributes). They 
+	  serve as a foundation for many modern generative models and are applied in areas like 
+	  text generation, anomaly detection, and medical image synthesis.
+	</p>
+
+	<h1 class="material-heading">Generative Adversarial Networks (GAN)</h1>
+	
+	<h2 class="material-heading">Introduction</h2>
+	
+	<p>
+	  Generative Adversarial Networks (GANs) are a broad class of generative models 
+	  that are trained alongside another network that attempts to distinguish 
+	  generated objects from real ones. 
+	</p>
+	
+	<p>
+	  In this section, we will cover the fundamentals of GANs, provide an intuitive 
+	  explanation of their working principles, and explore numerous techniques 
+	  and modifications that enhance the original approach in the most successful models.
+	</p>
+	
+	<p>
+	  Additionally, we will showcase various practical applications where 
+	  Generative Adversarial Networks have been effectively utilized.
+	</p>
+
+	<p>
+	  The simplest and most effective design of generative models that can only sample 
+	  but not estimate density is the transformation of one set of random variables into another.
+	</p>
+
+	<h2 class="material-heading">Fundamentals of GAN Training</h2>
+	
+	<p>
+	  Generative Adversarial Networks (GANs) are implicit generative models. 
+	  This means they do not explicitly estimate the probability density of the data 
+	  but instead learn to sample from the data distribution.
+	</p>
+	
+	<img src="../img/material/part5/gan-training-basics.svg" alt="GAN Training Fundamentals">
+	
+	<p>
+	  A classical analogy for how GANs learn is the scenario of a counterfeiter and a policeman. 
+	  The counterfeiter's goal is to create counterfeit banknotes that the policeman cannot distinguish from real ones. 
+	  The policeman's task is to learn how to differentiate the counterfeit banknotes from the authentic ones.
+	</p>
+	
+	<p>
+	  To understand how GANs train, imagine the following thought experiment:
+	  Suppose the counterfeiter and the policeman are friends who decide to improve their skills together. 
+	  The counterfeiter creates several fake banknotes and shows them to the policeman. 
+	  The policeman then evaluates them and informs the counterfeiter which ones he thinks are fake and which ones appear real. 
+	  The counterfeiter remembers this feedback and improves the fake banknotes accordingly for the next round. 
+	  At the same time, the policeman also learns: he keeps track of the fake notes he has seen to refine his ability to distinguish real from fake.
+	</p>
+	
+	<p>
+	  Imagine that this process repeats multiple times. 
+	  What happens as a result? Each time, the counterfeiter produces banknotes that become harder and harder to differentiate from real ones. 
+	  Similarly, the policeman's ability to detect counterfeit money improves continuously.
+	</p>
+	
+	<p>
+	  The key question for understanding GANs: 
+	  At what point can we say that the counterfeiter is truly skilled at forging banknotes?
+	</p>
+	
+	<p>
+	  The answer: When the counterfeiter is able to fool even a highly trained policeman. 
+	  At the beginning of the experiment, the policeman may not be very skilled at detecting counterfeits, 
+	  so low-quality fake banknotes might deceive him. 
+	  However, our ultimate goal is to develop a counterfeiter who can produce banknotes 
+	  that are indistinguishable from the original ones, even for a professional expert.
+	</p>
+	      
+	<p>
+	  While GANs are powerful, they come with several challenges:
+	</p>
+	
+	<ul>
+	  <li><strong>Mode Collapse:</strong> The generator may learn to produce limited variations of outputs instead of generating diverse samples.</li>
+	  <li><strong>Training Instability:</strong> The generator and discriminator must remain balanced—if one improves too quickly, the other may fail to learn.</li>
+	  <li><strong>Vanishing Gradients:</strong> If the discriminator becomes too good, the generator may stop receiving meaningful feedback for improvement.</li>
+	</ul>
+	
+	<p>
+	  To address these challenges, researchers have introduced various modifications to the standard GAN framework:
+	</p>
+	
+	<ul>
+	  <li><strong>Wasserstein GAN (WGAN):</strong> Improves stability by changing the loss function, making training more efficient.</li>
+	  <li><strong>Conditional GAN (cGAN):</strong> Allows control over the generated output by conditioning on additional input (e.g., class labels).</li>
+	  <li><strong>StyleGAN:</strong> Used for high-quality image generation, particularly in human face synthesis.</li>
+	  <li><strong>CycleGAN:</strong> Enables image-to-image translation without paired training data (e.g., converting horse images to zebra images).</li>
+	</ul>
+	
+	<h3> Applications of GANs</h3>
+	
+	<p>
+	  GANs have numerous real-world applications, including:
+	</p>
+	
+	<ul>
+	  <li><strong>Image Synthesis:</strong> Generating realistic human faces, artwork, and objects.</li>
+	  <li><strong>Data Augmentation:</strong> Enhancing datasets for training machine learning models.</li>
+	  <li><strong>Style Transfer:</strong> Applying artistic styles to photos or modifying image features.</li>
+	  <li><strong>Super-Resolution:</strong> Enhancing low-resolution images to improve detail and clarity.</li>
+	  <li><strong>Deepfake Technology:</strong> Replacing faces in videos with AI-generated counterparts.</li>
+	</ul>
+	
+	<img src="../img/material/part5/gan-applications.webp" alt="Applications of GANs">
+	
+	<p>
+	  Generative Adversarial Networks (GANs) have revolutionized deep learning by enabling machines to generate highly realistic synthetic data. 
+	  While training GANs is challenging, improvements like WGAN, StyleGAN, and CycleGAN have enhanced their stability and effectiveness. 
+	  With applications ranging from image generation to deepfake technology, GANs continue to be a vital part of modern AI research and development.
+	</p>
 
 
+<!-- <h2> Exercise on Stable diffusion</h2> -->
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Image Generation Using Stable Diffusion (1p)</h1>
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>As most diffusion models are quite big and difficult to run on local hardware, we will use open-source
+                free diffusion models for image generation. As it turns out there are quite a lot of websites that host
+                diffusion models that can generate any image given a texual prompt. <a
+                  href="https://medium.com/rendernet/top-5-free-stable-diffusion-generation-websites-in-2023-d76f54e38831">Here
+                  is medium article about this.</a> Though most of these websites have limited number of tries for
+                generating images, we will use one that has unlimited use for learning purposes.</p>
+
+              <p><b>Open the Stable Diffusion 2.1 Demo from hugging face:</b><br>
+                Go to <a href="https://huggingface.co/spaces/stabilityai/stable-diffusion" target="_blank">Stable
+                  Diffusion 2.1 Demo</a> in your web
+                browser.</p>
+
+              <p><b>Task 1: Test out Image generation ability of the model.</b></p>
+              <ul>
+                <li>Start with the default example exercises at the bottom of the website.</li>
+                <li>Change the <code>prompt</code> and <code>negative prompt</code> next to the "Generate image" box.
+                </li>
+                <li>Observe how it generates images.</li>
+              </ul>
+
+              <p><b>Task 2: Use advanced settings.</b></p>
+              <ul>
+                <li>Change the "Guidance Scale" slider under "Advanced settings". (It goes up from 0 to 50)</li>
+                <li>Observe how changing the "Guidance Scale" changes the results. </li>
+                <li>Why does this happen? Find out the idea behind <code>prompt</code> and <code>negative prompt</code>
+                  in diffusion models.</li>
+              </ul>
+
+              <p><b>Task 3: Generate realistic images of people holding things.</b></p>
+
+              <ul>
+                <li>Write this sentence to the <code>prompt</code> section. "A person holding an apple in their hand."
+                  (Without the quotes).</li>
+                <li>Change the <code>negative prompt</code> and "Guidance Scale" however you see fit to create the most
+                  realistic looking picture possible. Try out at least 5 combinations.</li>
+                <li> Notice that for some reason, diffusion models are really bad at generating hands and fingers (For
+                  now, at least!). Try to find out why that is the case. </li>
+              </ul>
+
+              <p><b>Submission:</b><br>
+                Take a screenshot of each configuration of <code>prompt</code> and <code>negative prompts</code> with
+                the corresponding generated pictures (at least 5!). Write short answers to the questions provided above.
+                Add these in a file and show it to during the exercise session.</p>
 
 
+            </div>
+          </div>
+        </div>
 
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Detecting AI Generated Images (1p)</h1>
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
 
-
-
-
+          <div class="collapse">
+            <div class="exercise__body">
+              <p>The model that we used above it severely underpowered and a bit old at this point. The newer diffuision
+                models like DALL-E-3 or Midjourney 6.1 can already produce images that have already advanced from silly
+                mistakes like weird hand positions. Now, we need to be more aware of the latest capabilities of these
+                image generation models. </p>
+              <p><b>Task: Methods of identifying AI generated images. </b></p>
+              <ul>
+                <li>Try out DALL-E-3 model by writing this prompt in <a href="https://chatgpt.com/">ChatGPT website</a>.
+                  "Create an image of A person holding an apple in their hand." (Without the quotes)</li>
+                <li>Observe the differences between the pictures generated by this model and the stable diffusion model
+                  that you tried on previous exercise.</li>
+                <li>Try out different combinations of prompts(at least 5) just like the previous exercise in <a
+                    href="https://chatgpt.com/">ChatGPT</a>. Do these pictures still show the same level of artifacts
+                  and visible mistakes like the previously generated pictures?</li>
+              </ul>
+              <p><b>Submission:</b><br>
+                Search for ways to detect if a image has been created using generative AI. Try to find at least 3
+                articles about it from the internet. Write a small report (No more than 1 page) about the methods used
+                to detect AI generated images and how reliable they are. Add the articles you have read as reference.
+              </p>
+            </div>
+          </div>
+        </div>
 
 
 
