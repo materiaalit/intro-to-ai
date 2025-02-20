@@ -1448,27 +1448,6 @@
 	  This means that at every step, the decoder has weighted access to all tokens of the input sentence.
 	</p>
 	
-	<h3>Types of Attention Mechanisms</h3>
-	
-	<p>
-	  There are several variations of attention mechanisms:
-	</p>
-	
-	<ul>
-	  <li>
-	    <b>Basic Dot-Product Attention:</b> 
-	    <code>e_i = [s_i h_j^T] for j=0 to n</code>.
-	  </li>
-	  <li>
-	    <b>Multiplicative Attention:</b> 
-	    <code>e_i = [s_i W h_j^T] for j=0 to n</code>, where <code>W</code> is a learnable weight matrix.
-	  </li>
-	  <li>
-	    <b>MLP-Based Attention:</b> 
-	    <code>e_ij = tanh(h_j W1 + s_i W2) v</code>, where <code>W1</code>, <code>W2</code> are learnable weight matrices and <code>v</code> is a learnable weight vector.
-	  </li>
-	</ul>
-
 	<p>
 	  A key property of attention is that its weights capture relationships between words 
 	  in different languages during translation. This makes it possible to analyze and visualize which 
@@ -1638,8 +1617,6 @@
 	  <b>head<sub>i</sub>(Q, K, V) = softmax(QK<sup>T</sup> / norm_const) * V</b>
 	</p>
 	
-	<h3>Implementations & Further Reading</h3>
-	
 	<p>
 	  There are many implementations of self-attention, including:
 	</p>
@@ -1651,14 +1628,341 @@
 	  <li>An excellent visual explanation in the article <a href="https://jalammar.github.io/illustrated-transformer/" target="_blank">"Illustrated Transformer"</a> by Jay Alammar.</li>
 	</ul>
 
+	<h2 class="material-heading">Working with Text Data</h2>
+	
+	<h3>Text Preprocessing</h3>
+	
+	<p>
+	  Before applying the architectures described above (or even simple approaches like TF-IDF or word2vec), 
+	  it is essential to understand how to preprocess text data effectively.
+	</p>
+	
+	<p>
+	  The first step in text processing is representing coherent text as a sequence of tokens. 
+	  Initially, it makes sense to split the text into sentences, followed by breaking it down into words 
+	  or character-based n-grams. This process is called <b>tokenization</b>. Tokenization can be performed manually 
+	  using regular expressions or by utilizing built-in methods from libraries like <b>NLTK</b>.
+	</p>
+	
+	<h4>Lemmatization</h4>
+	
+	<p>
+	  Once we obtain an ordered list of words in the text, the next step is to normalize different 
+	  grammatical forms of the same word. This can be achieved using <b>lemmatization</b>. 
+	  Lemmatization is an algorithm that converts words into their base (dictionary) form 
+	  by applying morphological analysis and knowledge of language-specific rules.
+	</p>
+	
+	<p><b>Example of Lemmatization:</b></p>
+	
+	<div style="background-color: #f4f4f4; padding: 10px; border-radius: 5px;">
+	  <p><i>"dogs, dog, with a dog, by dogs → dog"</i></p>
+	</div>
+	
+	<h4>Stemming</h4>
+	
+	<p>
+	  Another way to reduce word forms to a common root is <b>stemming</b>. 
+	  Stemming is a more heuristic-based process that operates without contextual knowledge, dictionaries, 
+	  or morphological rules. Unlike lemmatization, stemming does not recognize that words with 
+	  alternating letters share the same root (unless explicitly programmed) or that words like 
+	  "is", "will be", and "was" are different forms of the verb "to be".
+	</p>
+	
+	<p>
+	  While stemming is a <b>less precise</b> method compared to lemmatization, 
+	  it is significantly <b>faster</b>, making it useful in applications where speed is a priority.
+	</p>
+	
+	<h4>Stopword Removal</h4>
+	
+	<p>
+	  Another crucial step in text preprocessing is the removal of <b>stopwords</b>. 
+	  Stopwords include interjections, conjunctions, prepositions, articles, and other words 
+	  that may introduce noise into machine learning models. In some cases, generic vocabulary words 
+	  are also removed, leaving only domain-specific terms.
+	</p>
+	
+	<p>
+	  There is no universal list of stopwords, but a good starting point is the built-in stopword list 
+	  available in the <b>NLTK</b> library.
+	</p>
 
 
+	<h2 class="material-heading">Text Data Augmentation</h2>
+	
+	<p>
+	  Data augmentation is often used to increase the amount of training data and improve the generalization ability of models. 
+	  While data augmentation in computer vision is relatively straightforward and can be performed on-the-fly (scaling, cropping, 
+	  rotation, noise addition, etc.), text augmentation is more complex due to grammar, syntax, and language-specific nuances.
+	</p>
+	
+	<p>
+	  Text augmentation is less "automatic" compared to image augmentation. Ideally, a proper augmentation method 
+	  should preserve the meaning of the sentence while rephrasing it naturally. Below are some popular techniques for augmenting text data:
+	</p>
+	
+	<ul>
+	  <li><b>Back translation:</b> Translate the original text into another language and then translate it back. This helps retain 
+	  context while generating a synonymous version of the phrase.</li>
+	
+	  <li><b>Synonym replacement:</b> Replace a word with a synonym or a semantically similar word. This can be done using synonym 
+	  dictionaries or by searching for similar words in an embedding space (e.g., word2vec, fastText, or contextualized embeddings 
+	  from pre-trained models like BERT, ELMo, GPT-2/GPT-3).</li>
+	
+	  <li><b>Synonym insertion:</b> Randomly insert a synonym of a word somewhere in the sentence.</li>
+	
+	  <li><b>Abbreviation expansion and contraction:</b> Replace an abbreviation with its full form and vice versa.</li>
+	
+	  <li><b>Random word operations:</b> Randomly insert, delete, replace, or shuffle words within a sentence.</li>
+	
+	  <li><b>Sentence shuffling:</b> Randomly change the order of sentences in a paragraph.</li>
+	
+	  <li><b>Character-level modifications:</b> Randomly replace letters with nearby keyboard characters, introduce spelling 
+	  or punctuation errors, or change the letter case.</li>
+	
+	  <li><b>MixUp for text:</b> In classification tasks, combine the feature representations of two objects and mix their class labels with the same weights 
+	  to create a new object with features <code>x_ij</code> and a class label <code>y_ij</code>:
+	    <br>
+	    <code>x_ij = λ * x_i + (1−λ) * x_j</code><br>
+	    <code>y_ij = λ * y_i + (1−λ) * y_j</code>
+	    <br><br>
+	    For text, feature representations can be mixed at the word level (choosing the nearest word in the word embeddings space) 
+	    or at the sentence level. Another approach is to sample words from two different texts with probabilities <code>λ</code> 
+	    and <code>1−λ</code>.
+	  </li>
+	
+	  <li><b>Syntax tree-based augmentation:</b> Use a syntactic parse tree to generate augmented variations of a sentence.</li>
+	
+	  <li><b>Text generation with language models:</b> Generate new text using pre-trained language models like GPT-3.</li>
+	</ul>
+	
+	<p>
+	  For more details on some of these text augmentation techniques, check out the 
+	  <a href="https://arxiv.org/abs/1901.11196" target="_blank">Easy Data Augmentation (EDA) paper</a>. 
+	  Many of the methods mentioned above and in the paper are implemented in the 
+	  <a href="https://github.com/makcedward/nlpaug" target="_blank">NLPAug library</a>, 
+	  which simplifies text augmentation in practical applications.
+	</p>
 
+	<h1 class="material-heading">Transformers</h1>
+	
+	<p>
+	  No discussion of modern neural networks would be complete without mentioning transformer models. 
+	  In fact, almost all groundbreaking achievements in deep learning in recent years rely on this architecture. 
+	  But what makes it so special, and why are transformers successfully applied to such a wide range of tasks?
+	</p>
+	
+	<p>
+	  Let's find out.
+	</p>
 
+	<h2 class="material-heading">Why Do We Need Attention?</h2>
+	
+	<p>
+	  First, let's recall that before 2017 (when the original paper introducing the transformer architecture was published), 
+	  the primary approach for handling sequences was using recurrent neural networks (RNNs). However, this approach has 
+	  several well-known limitations:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>Memory bottleneck:</b> RNNs store all information about the sequence in a hidden state, 
+	    which is updated at each step. If the model needs to "remember" something that happened 
+	    hundreds of steps earlier, this information must be retained in the hidden state without being 
+	    replaced by new data. This means either having an extremely large hidden state or accepting 
+	    inevitable information loss.
+	  </li>
+	
+	  <li>
+	    <b>Sequential processing:</b> Training recurrent networks is difficult to parallelize. 
+	    To compute the hidden state of the RNN layer at step <code>i+1</code>, 
+	    you must first compute the state for step <code>i</code>. Thus, processing a batch 
+	    of sequences with a length of 1000 requires 1000 sequential operations, 
+	    making training time-consuming and inefficient on GPUs, which are optimized for parallel computations.
+	  </li>
+	</ul>
+	
+	<p>
+	  These issues make it challenging to apply RNNs to truly long sequences: even if you wait for 
+	  training to finish, your model, by design, will inevitably lose information from the beginning of the text. 
+	  Ideally, we want a way to "read" a sequence such that at any moment, the model can refer to 
+	  any previous point in constant time, without losing information.
+	</p>
+	
+	<p>
+	  This is exactly what the self-attention mechanism at the core of transformers enables. 
+	  As we will see later, thanks to its scalability and versatility, this mechanism has proven 
+	  effective not only for natural language processing but also in many other domains.
+	</p>
+	
+	<p>
+	  Below is the architecture of the transformer model, as presented in the original 
+	  <a href="https://arxiv.org/pdf/1706.03762" target="_blank">paper</a>:
+	</p>
+	
+	<img src="transformer_architecture_image.svg" alt="Transformer Architecture" width="90%">
 
+	<h3>Transformer Encoder and Decoder</h3>
+	
+	<p>
+	  On the left side of the diagram, we see the structure of the encoder. It sequentially applies <code>N</code> blocks to the input sequence:
+	</p>
+	
+	<img src="transformer_encoder.svg" alt="Transformer Encoder Structure" width="60%">
+	
+	<p>
+	  Each block outputs a sequence of the same length. It contains two key layers: 
+	  <b>multi-head attention</b> and <b>feed-forward</b>. 
+	  After each of these layers, the input is added back to the output (this standard approach 
+	  is called a <i>residual connection</i>), and then the activations pass through a 
+	  <b>layer normalization</b> layer. This part is labeled as "Add & Norm" in the diagram.
+	</p>
+	
+	<p>
+	  The decoder follows a similar structure, but each of its <code>N</code> blocks contains 
+	  two <b>multi-head attention</b> layers, one of which incorporates the encoder's outputs.
+	</p>
+	
+	<p>
+	  Now, let's take a closer look at each of the key components of this mechanism.
+	</p>
 
+	<h2 class="material-heading">Attention Layer</h2>
+	
+	<p>
+	  The first part of the Transformer block is the <b>self-attention layer</b>. 
+	  Unlike standard attention mechanisms, its output consists of new representations for 
+	  elements from the same input sequence, where each element directly interacts with every 
+	  other element.
+	</p>
+	
+	<p>
+	  More specifically, the computation of attention for a sequence involves three trainable 
+	  matrices: <b>W<sub>Q</sub>, W<sub>K</sub>, W<sub>V</sub></b>. Each input element representation 
+	  <code>x<sub>i</sub></code> is multiplied by these matrices, producing row vectors 
+	  <code>q<sub>i</sub>, k<sub>i</sub>, v<sub>i</sub></code> (where <code>i</code> is the index of 
+	  the element). These vectors are referred to as <b>query, key, and value</b>, respectively.
+	</p>
+	
+	<p>
+	  Their roles can be loosely described as follows:
+	</p>
+	
+	<ul>
+	  <li><b>q<sub>i</sub></b> — the query to a database.</li>
+	  <li><b>k<sub>i</sub></b> — the keys of stored values in the database, used for lookup.</li>
+	  <li><b>v<sub>i</sub></b> — the actual stored values.</li>
+	</ul>
+	
+	<img src="img/material/part5/self_attention_queries.webp" alt="Self-Attention Queries and Keys" width="60%">
 
+	<p>
+	  The closeness of a query to a key can be determined using a dot product:
+	</p>
+	
+	<p style="text-align: center;">
+	  self-attention weights<sub>i</sub> = softmax(C ⟨q<sub>i</sub>, k<sub>1</sub>⟩, C ⟨q<sub>i</sub>, k<sub>2</sub>⟩, …),
+	</p>
+	
+	<p>
+	  where <b>C</b> is a normalization constant. In the original paper, the normalization constant was chosen as 
+	  the square root of the key and value dimension <b>√d<sub>k</sub></b>.
+	</p>
+	
+	<p>
+	  Now, we sum the values <b>v<sub>i</sub></b> with the obtained coefficients. This is the output of the self-attention 
+	  layer. In matrix form, it can be written as:
+	</p>
+	
+	<p style="text-align: center;">
+	  self-attention(Q, K, V) = softmax (QK<sup>T</sup> / √d<sub>k</sub>) V,
+	</p>
+	
+	<p>
+	  where <b>Q, K, V</b> are matrices of queries, keys, and values, respectively, with <b>q<sub>i</sub>, k<sub>i</sub>, v<sub>i</sub></b> 
+	  stored as row vectors, and softmax is applied row-wise.
+	</p>
 
+	<h2 class="material-heading">Attention Layer in the Decoder</h2>
+	
+	<p>
+	  As mentioned earlier, one of the attention layers in the decoder is a 
+	  <b>cross-attention layer</b>, where the queries are taken from the output 
+	  sequence, while the keys and values come from the input (i.e., from the encoder's outputs).
+	</p>
+	
+	<img src="img/material/part5/decoder_attention.webp" alt="Decoder Cross-Attention" width="60%">
+	
+	<p>
+	  Another key feature of the decoder's attention is that, in the form described above, 
+	  each token would have access to the entire sequence, which is undesirable for the decoder. 
+	  Indeed, during generation, we produce tokens one step at a time, and having access to 
+	  future tokens during training would lead to information leakage and poor model performance.
+	</p>
+	
+	<p>
+	  To prevent this issue, an <b>autoregressive mask</b> is applied to attention during training, 
+	  manually setting weights for future tokens to <code>-∞</code> before the softmax operation, 
+	  ensuring their probabilities become zero after softmax. As shown in the image below, this 
+	  mask has a lower triangular shape.
+	</p>
+	
+	<img src="img/material/part5/attention_mask.svg" alt="Autoregressive Attention Mask" width="50%">
+	
+	<h2 class="material-heading">Multi-Head Attention</h2>
+	
+	<p>
+	  A single set of matrices <b>Q</b>, <b>K</b>, and <b>V</b> can capture only one type 
+	  of dependencies between tokens, and these matrices extract only a limited range 
+	  of information from the input representations. To address this limitation, 
+	  the authors of the Transformer architecture introduced the concept of 
+	  <b>multi-head attention</b>.
+	</p>
+	
+	<p>
+	  Instead of using a single attention mechanism, multiple parallel attention 
+	  layers (or "heads") with different learned weights are applied simultaneously. 
+	  The results from all heads are then concatenated and passed through a 
+	  linear transformation. This allows the model to attend to different 
+	  parts of the input sequence and capture multiple relationships in parallel.
+	</p>
+	
+	<img src="img/material/part5/multi_head_attention.svg" alt="Multi-Head Attention Mechanism" width="60%">
+	
+	<h2 class="material-heading">Efficiency</h2>
+	
+	<p>
+	  The approach of processing entire sequences using attention eliminates the concept 
+	  of a hidden state that updates recurrently. Instead, each token can directly 
+	  "read" any part of the sequence that is most useful for prediction. In particular, 
+	  the absence of recurrence allows us to apply the layer to the entire sequence 
+	  simultaneously, leveraging matrix multiplications that parallelize efficiently.
+	</p>
+	
+	<p>
+	  However, we must consider memory and time complexity costs: since each element in 
+	  the sequence interacts with every other element, it is easy to show that the 
+	  computational complexity of self-attention is 
+	  <span class="math">O(n^2)</span> with respect to sequence length. Additionally, 
+	  naive implementations that construct a full attention matrix also require 
+	  <span class="math">O(n^2)</span> memory.
+	</p>
+	
+	<p>
+	  Optimizing the computational efficiency of attention has led to numerous 
+	  research efforts, both engineering-focused and architectural. Some approaches 
+	  reduce self-attention runtime to linear complexity or significantly improve 
+	  memory efficiency by leveraging GPU memory hierarchy.
+	</p>
+	
+	<p>
+	  For example, the graphs below compare the runtime and memory consumption of 
+	  a standard transformer with the mechanism introduced in 
+	  <a href="https://arxiv.org/abs/2004.05150" target="_blank">Longformer</a>:
+	</p>
+	
+	<img src="img/material/part5/longformer_comparison.webp" alt="Longformer vs Standard Transformer Efficiency" width="60%">
 
 
 
