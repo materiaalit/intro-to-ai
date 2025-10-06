@@ -114,92 +114,66 @@
 
         </div>
 
-
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Check & Mate! (2p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                Last week we practiced game algorithms, Minimax and alpha-beta
-                pruning, on the simple game of tic-tac-toe. Tic-tac-toe is a good
-                choice for understanding the basic principles and simulating the
-                algorithms step-by-step. However, it is hardly a very cool
-                AI application.
-              </p>
-
-              <p>
-                Now we'll change gears and go for what used to be thought as a some
-                kind of a "grand challenge" for AI, namely chess!
-              </p>
-
-              <p>
-                Implementing the complete game engine with all the rules is somewhat
-                tedious, so we have done it for you. Also, since you've already
-                implemented alpha-beta pruning last week, you don't have to do it
-                again here. Instead, your task is to implement either a <strong>
-                  heuristic evaluation function</strong>, or a <strong> search algorithm </strong>. The performance of the
-                chess bot is in part determined by the goodness of the evaluation
-                function or the speediness of the search function. 
-		Both search and evaluation are important for any good bot!
-              </p>
-
-              <p>
-                We challenge you to see how your evaluation/search function fares against
-                our own contender, <i>Deep Glue</i>, as well as against other students. 
-              </p>
-
-              <p>
-                <b>Python instructions</b>
-              <ol>
-                <li>
-                  Install <a
-                    href="https://python-chess.readthedocs.io/en/latest/index.html"><code>python-chess</code></a> by,
-                  e.g., <code>pip install chess</code>.
-                <li>
-                  Download the Python template in moodle.
-                <li>
-                  Implement the function <code>evaluate_board(board: chess.Board)</code> or
-		  <code>search_algorithm(board: chess.Board, evaluate_board)</code>
-                  in <code>studentname_studentnumber.py</code>. The evaluation function will take as its
-                  input a board position of the <code>chess.Board</code> type. 
-		  The search function will take the board position as well as an evaluation function,
-		  the same one you see in the <code>base.py</code>
-                  See the comments in the code for some tips about how to access the
-                  pieces and their positions (rank, file) on the board.
-		  The <code>base.py</code> includes an example engine you can test against.
-              </ol>
-              </p>
-
-
-              <p>
-                After submission in moodle, a round-robin tournament will be performed, followed by 
-		a knockout match. This will be conducted for both evaluation and search performance. 
-		<li>
-		In the round-robin phase, each student playes against eachother four times, twice as white and twice as black. 
-		A score is assigned based on the outcome of the game: 1 for win, 0.5 for draw, 0 for loss, for both the evaluation 
-		and speed of the search function.
-		<li> 
-		In the knockout phase, players will be ranked based on their scores from the round robin, and a bracket is made. 
-		Mini-matches are performed against two players, consisting of four games again. If the score is tied, then one engine is 
-		randomly selected to play as white in an armageddon game, where white must win to advance. 
-		The winner of the match advances to the next round, until their is only one winner left. 
-		<li>
-		See moodle instructions for submission.
-              </p>
-
-
-            </div>
-          </div>
+			
+			
+			<div class="exercise">
+			  <div class="exercise__header">
+			    <a data-toggle="collapse" class="exercise__toggle">
+			      <i class="fa fa-line-chart exercise__icon"></i>
+			      <h1 class="exercise__heading">Customer Churn Challenge (2p)</h1>
+			      <i class="fa fa-caret-down exercise__arrow"></i>
+			    </a>
+			  </div>
+			
+			  <div class="collapse">
+			    <div class="exercise__body">
+			
+			      <p>
+			        You will learn how to model customer churn for a telecom company. This problem matters in practice, because if we can predict that a customer is likely to leave, we can try to retain the customer with a targeted offer. On the data page you will find two files. <code>train.csv</code> contains feature columns and the target variable <code>Churn</code>. <code>test.csv</code> contains the same feature columns without the target. Your task is to upload predicted probabilities of churn for every row of <code>test.csv</code>. An example submission is in <code>sample_submission.csv</code>.
+			      </p>
+			
+			      <h2>Task</h2>
+			      <p>
+			        Train a model on <code>train.csv</code>. For each row in <code>test.csv</code>, output the probability that the customer will churn. The file must contain two columns named <code>id</code> and <code>Churn</code>. The values of <code>Churn</code> must be probabilities between zero and one.
+			      </p>
+			
+			      <h2>Files</h2>
+			      <ul>
+			        <li><code>train.csv</code> feature columns and the target column <code>Churn</code></li>
+			        <li><code>test.csv</code> the same feature columns without the target</li>
+			        <li><code>sample_submission.csv</code> the required submission format</li>
+			      </ul>
+			
+			      <h2>Continuation</h2>
+			      <ol>
+			        <li>Open the <a href="https://colab.research.google.com/drive/1hGpBZBmPSfoRkrc5CbDpDA-zE5ZWPIZi?usp=sharing" target="_blank" rel="noopener">baseline notebook</a> for instructions and a simple starter model.</li>
+			        <li>Explore the data, check class balance, and build a clean validation scheme.</li>
+			        <li>Train a baseline model such as logistic regression or a simple tree model, then iterate.</li>
+			        <li>Export predicted probabilities for <code>test.csv</code> in the exact format shown below and submit on Kaggle.</li>
+			      </ol>
+			
+			      <h2>Submission format</h2>
+			      <pre><code>id,Churn
+			10001,0.137
+			10002,0.842
+			10003,0.023
+			...</code></pre>
+			
+			      <h2>Evaluation</h2>
+			      <p>
+			        Submissions are scored by ROC AUC on a hidden split. The public leaderboard shows a subset of the test set. The final ranking uses a private subset that is revealed after the deadline.
+			      </p>
+			
+			      <h2>Timeline and grading</h2>
+			      <ul>
+			        <li>To earn two points, join the Kaggle competition and submit any valid solution.</li>
+			        <li>You can keep improving your score until the last lecture of the course, final standings will be shown in class.</li>
+			      </ul>
+			
+			
+			    </div>
+			  </div>
+			</div>
         </div>
 
         <h1 class="material-heading">
