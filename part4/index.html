@@ -553,6 +553,31 @@
         </div>
 
         <h2 class="material-heading">
+          Example: handwritten digit recognition (MNIST)
+        </h2>
+        
+        <p>
+          A classic example of a multiclass classification problem is handwritten digit recognition. 
+          Each input is a small bitmap image of a digit and the task is to assign it to one of the ten classes 
+          <code>0, 1, ..., 9</code>.
+        </p>
+        
+        <p>
+          In the <a href="http://yann.lecun.com/exdb/mnist/" target="_blank">MNIST</a> dataset, each image is 
+          28 &times; 28 pixels. We can flatten the image into a feature vector of length 784, where each element 
+          represents the value of one pixel (for example, black or white in a binarized version of the data).
+        </p>
+        
+        <img src="../img/diagrams/MNISTsamples-80d9261b.png" width="88%" alt="MNIST digit samples">
+        
+        <p>
+          <i>Figure:</i> Samples of handwritten digits from the widely used MNIST dataset. The correct labels have been 
+          decided by humans and are shown above each image. In some cases the labels are debatable 
+          (for example the second image from the left may look more like a 4 than a 7).
+        </p>
+
+
+        <h2 class="material-heading">
           Model and Learning Algorithm
         </h2>
         
@@ -1393,8 +1418,8 @@
         <p>
           The naive Bayes classifier is actually already familiar to you from
           the spam filter problem in Part 3. Here we will see how the same
-          idea can be applied to handwritten digit recognition. In the
-          spam filter application, the class variable was binary (spam/ham) and
+          idea can be applied to the handwritten digit recognition task from the MNIST dataset introduced above.
+          In the spam filter application, the class variable was binary (spam/ham) and
           the feature variables were the words in the message. In the
           digit recognition application, the class variable has ten
           different values (0,...,9), and the feature variables are the
@@ -1404,6 +1429,7 @@
           The value X<sub>j</sub>=&ndash;1 is used for the black color
           for convenience.
         </p>
+
 
         <p>
           Here too, the feature variables are assumed to be independent of
