@@ -1122,9 +1122,9 @@ state:  ---    |     |          state:  |     |    ---
                 Now it's time for this week's highlight: implementing a real AI
                 application. It will require some effort, and programming can often
                 be slow and frustrating, but stay focused, don't hesitate to ask for
-                help, and you'll be ok. Next week, we'll continue working on the
-                same application, so your hard work now will make your life easier
-                next week.
+                help, and you'll be ok. Later in this part, we'll continue working
+                on the same application using A* search, so your hard work now
+                will make that follow-up easier.
               </p>
 
               <p>
@@ -1971,7 +1971,7 @@ state:  ---    |     |          state:  |     |    ---
 	    case, Min wins with three Os in a row.  Strictly speaking, this
 	    already causes pruning to occur in Node (3): it is a Min node, and
 	    thus it updates its beta value, and the beta value becomes
-	    &ndash;1. The test <code>alpha =-1 &le; beta=-1</code> (line 7
+	    &ndash;1. The test <code>alpha =-1 &le; beta=-1</code> (line 6
 	    in the pseudocode) triggers the return condition. However, the
 	    effect is null since there wouldn't have been any other children of
 	    Node (3) anyway.
@@ -1981,14 +1981,14 @@ state:  ---    |     |          state:  |     |    ---
 	    Next, Node (3) returns the value &ndash;1 to its parent, Node (2).
 	    As a Max node, Node (2) would update its alpha value but since the
 	    value returned by the child is &ndash;1 which is already the same
-	    as the current alpha value, no update occurs (line 6 in the
+	    as the current alpha value, no update occurs (line 5 in the
 	    pseudocode). The processing of nodes (4) and (6) is analogous to
 	    that of nodes (3) and (5) respectively.
 	  </p>
 	  <p>
 	    Interesting things start to happen in the root node when the value
 	    &ndash;1 is returned from Node (2). The root node is a Min node and
-	    it updates its beta value to be <code>beta=-1</code> (line 6 in the
+	    it updates its beta value to be <code>beta=-1</code> (line 5 in the
 	    pseudocode), and therefore, the test <code>alpha=-1 &le;
 	    beta=-1</code> again triggers pruning and the other branches of the
 	    tree need not be traversed at all!
@@ -2011,7 +2011,7 @@ state:  ---    |     |          state:  |     |    ---
         <p>
           Notice that while the left-to-right order of the children of each
           node, i.e., the order in which the children are processed in the
-          loop on lines 4--7, is arbitrary, it can have significant impact
+          loop on lines 4--6, is arbitrary, it can have significant impact
           on which branches are pruned.
         </p>
 
@@ -2056,7 +2056,7 @@ state:  ---    |     |          state:  |     |    ---
                   above. To see whether you gain any speed-up, you can see how
                   long the algorithm runs (or how many recursive function calls
                   are performed) with or without alpha-beta pruning -- simply
-                  comment out line 7 with the test <code>alpha >= beta</code> to
+                  comment out line 6 with the test <code>alpha >= beta</code> to
                   revert back to vanilla Minimax.
               </ol>
 
