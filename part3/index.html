@@ -1261,10 +1261,11 @@ Gain(S, Color) = 0.811 - (2/4)&middot;0 - (2/4)&middot;1 = 0.311
     <div class="exercise__body">
 
       <p>
-        The data below are categorical (named weather attributes) rather than the
-        real-valued <code>X</code>, <code>Y</code> of the figures. Using entropy
-        and information gain as defined above, choose the predicate at the root:
-        should we play tennis today, given the weather?
+        A decision tree is built one split at a time, and at each step the algorithm
+        needs to decide which attribute to split on next. The standard way to make that
+        choice is to prefer the attribute that reduces <b>entropy</b> the most — i.e.,
+        the one with the highest <b>information gain</b>. Let's compute this by hand on
+        a small, famous dataset: should we play tennis today, given the weather?
       </p>
 
       <table class="table">
@@ -1286,12 +1287,16 @@ Gain(S, Color) = 0.811 - (2/4)&middot;0 - (2/4)&middot;1 = 0.311
       </table>
 
       <p>
-        For a yes/no label with a fraction <code>p</code> of "Yes" examples,
+        Recall the entropy of a binary variable with a fraction <code>p</code> of
+        positive examples:
       <pre>
 Entropy(S) = -p&middot;log&#8322;(p) - (1-p)&middot;log&#8322;(1-p)
+</pre>
+        and the information gain from splitting a set <code>S</code> on attribute
+        <code>A</code>, which has values <code>v &isin; Values(A)</code>:
+      <pre>
 Gain(S, A) = Entropy(S) - &sum;<sub>v</sub> (|S<sub>v</sub>| / |S|) &middot; Entropy(S<sub>v</sub>)
 </pre>
-        with <code>0&middot;log(0) = 0</code> on a pure subset.
       </p>
 
       <ol>
@@ -1300,28 +1305,33 @@ Gain(S, A) = Entropy(S) - &sum;<sub>v</sub> (|S<sub>v</sub>| / |S|) &middot; Ent
           5 "No").
         </li>
         <li>
-          <b>Outlook (guided).</b> Splitting on <code>Outlook</code> gives
-          three subsets: <code>Sunny</code> (2 Yes, 3 No), <code>Overcast</code> (4 Yes,
-          0 No), and <code>Rain</code> (3 Yes, 2 No). Compute the entropy of each
-          subset, then combine them with the formula above to get
-          <code>Gain(S, Outlook)</code>.
+          Split on <code>Outlook</code>: <code>Sunny</code> (2 Yes, 3 No),
+          <code>Overcast</code> (4 Yes, 0 No), <code>Rain</code> (3 Yes, 2 No).
+          Compute the entropy of each subset, then <code>Gain(S, Outlook)</code>.
         </li>
         <li>
-          Now do the same computation yourself for the remaining three attributes:
-          <code>Gain(S, Temperature)</code>, <code>Gain(S, Humidity)</code>, and
-          <code>Gain(S, Wind)</code>.
+          Do the same for the other three attributes.
+          <code>Temperature</code>: <code>Hot</code> (2 Yes, 2 No), <code>Mild</code>
+          (4 Yes, 2 No), <code>Cool</code> (3 Yes, 1 No).
+          <code>Humidity</code>: <code>High</code> (3 Yes, 4 No), <code>Normal</code>
+          (6 Yes, 1 No).
+          <code>Wind</code>: <code>Weak</code> (6 Yes, 2 No), <code>Strong</code>
+          (3 Yes, 3 No).
+          Compute <code>Gain(S, Temperature)</code>, <code>Gain(S, Humidity)</code>,
+          and <code>Gain(S, Wind)</code>.
         </li>
         <li>
-          Which attribute should become the <b>root</b> of the decision tree? Does this
-          match your intuition about which piece of weather information is most
-          decisive for whether you'd play tennis?
+          Which attribute has the highest information gain? That one becomes the
+          <b>root</b> of the decision tree. Does this match your intuition about
+          which piece of weather information is most decisive for whether you'd
+          play tennis?
         </li>
       </ol>
 
       <p>
-        <i>Bonus (no extra points):</i> the <code>Overcast</code> branch above is
-        "pure" — every example under it says "Yes". What does that mean for how the
-        tree-building algorithm should treat that branch: does it need to split further?
+        <i>Bonus:</i> every <code>Overcast</code> day in the table is "Yes"
+        (entropy 0). What does that mean for how the tree-building algorithm should
+        treat that branch: does it need to split further?
       </p>
 
     </div>
@@ -1358,21 +1368,21 @@ Gain(S, A) = Entropy(S) - &sum;<sub>v</sub> (|S<sub>v</sub>| / |S|) &middot; Ent
         <b>Temperature:</b> <code>Entropy(Hot) = 1.0</code>,
         <code>Entropy(Mild) &approx; 0.918</code>, <code>Entropy(Cool) &approx; 0.811</code>.
         <br>
-        <code>Gain(S, Temperature) &approx; 0.029</code>
+        <code>Gain(S, Temperature) = 0.940 - [4/14&middot;1.0 + 6/14&middot;0.918 + 4/14&middot;0.811] &approx; 0.029</code>
       </p>
 
       <p>
         <b>Humidity:</b> <code>Entropy(High) &approx; 0.985</code>,
         <code>Entropy(Normal) &approx; 0.592</code>.
         <br>
-        <code>Gain(S, Humidity) &approx; 0.151</code>
+        <code>Gain(S, Humidity) = 0.940 - [7/14&middot;0.985 + 7/14&middot;0.592] &approx; 0.151</code>
       </p>
 
       <p>
         <b>Wind:</b> <code>Entropy(Weak) &approx; 0.811</code>,
         <code>Entropy(Strong) = 1.0</code>.
         <br>
-        <code>Gain(S, Wind) &approx; 0.048</code>
+        <code>Gain(S, Wind) = 0.940 - [8/14&middot;0.811 + 6/14&middot;1.0] &approx; 0.048</code>
       </p>
 
       <p>
