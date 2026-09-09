@@ -966,7 +966,7 @@
 	
 	    <p>
 	      A slightly more advanced version is <b>TF-IDF (Term Frequency-Inverse Document Frequency)</b>. 
-	      This method considers not only token frequency in a document but also its relevance across a collection of texts <code>D</code>.
+	      This method uses token frequency in a document. It also uses how rare the token is across a collection of texts <code>D</code>.
 	      The TF-IDF representation of a document <code>d</code> is the product:
 	    </p>
 	
@@ -1327,8 +1327,8 @@
 	
 	<p>
 	  The effectiveness of transformers was demonstrated in the task of machine translation. 
-	  Today, transformers and self-attention have gained enormous popularity and are used not only in NLP but also in other domains, 
-	  such as computer vision (<b>Vision Transformer</b>, <b>Video Transformer</b>, <b>Multimodal Transformer for Video Retrieval</b>, etc.).
+	  Today transformers and self-attention are used in NLP. They are also used in other domains,
+	  such as computer vision (<b>Vision Transformer</b>, <b>Video Transformer</b>, <b>Multimodal Transformer for Video Retrieval</b>).
 	</p>
 
 	<p>
@@ -1651,8 +1651,8 @@
 	
 	<p>
 	  This is exactly what the self-attention mechanism at the core of transformers enables. 
-	  As we will see later, thanks to its scalability and versatility, this mechanism has proven 
-	  effective not only for natural language processing but also in many other domains.
+	  As we will see later, this mechanism is effective for natural language processing.
+	  The same idea later transferred to many other domains.
 	</p>
 	
 	<p>
@@ -2036,15 +2036,15 @@
 	
 	<img src="../img/material/part5/decision_transformer.svg" alt="Decision Transformer in RL" width="70%">
 
-	<h2 class="material-heading">Exploring NanoGPT for Text Generation</h2>
+	<h2 class="material-heading">Running Language Models Locally</h2>
 
         <p>
-          In this section, you'll get hands-on experience running the LLM models you've been learning about. For this
-          task, we'll use a custom, lightweight local LLM model that's small enough to run on a personal laptop (though
-          you're welcome to try out larger models if you have the hardware!). This approach gives you a clearer
-          understanding of how models like ChatGPT generate answers and highlights the significant computing cost
-          associated with running them.
-
+          The exercises below let you run language models on your own computer.
+          Running a small or quantized model does not require an expensive GPU.
+          Training a modern large language model from scratch is a very different
+          task: it requires enormous datasets, memory, and costly clusters of GPUs.
+          We will therefore use small models to explore the same basic ideas on an
+          accessible scale.
         </p>
 
         <!-- Exercise 5.1 -->
@@ -2052,7 +2052,7 @@
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">NanoGPT: Generating Text with Pre-trained Model (1p)</h1>
+              <h1 class="exercise__heading">Running a Local Language Model with Ollama (0.5p)</h1>
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
           </div>
@@ -2060,35 +2060,46 @@
           <div class="collapse">
             <div class="exercise__body">
               <p>
-                You've been approached by a group of colleagues in your AI research group who are investigating the
-                performance and practicality of locally run GPT models. They're specifically interested in models that
-                are fully transparent and understandable from a code perspective. To help with this, they've recommended
-                using the <a href="https://github.com/karpathy/nanoGPT" target="_blank">NanoGPT</a> repository by Andrej
-                Karpathy, which is a small but complete GPT implementation, written from scratch. Your mission is to
-                explore this model by running it locally on your machine and experimenting with it to better understand
-                its capabilities.
+                <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>
+                is a tool for downloading and running language models locally. After a
+                model has been downloaded, its prompts and responses can be processed
+                on your computer instead of being sent to a hosted chatbot. This
+                exercise requires no programming.
               </p>
 
-              <ul>
-                <li><b>Clone the NanoGPT Repository:</b> Follow the instructions on the NanoGPT GitHub repository to
-                  clone the code to your local machine.</li>
-                <li><b>Run the Pre-trained Model:</b> The repository comes with a small pre-trained GPT model on a
-                  Shakespearean dataset.</li>
-                <li>Your task is to generate text samples using this pre-trained model. You can do this by running the
-                  provided script that generates text from the Shakespeare model.</li>
-              </ul>
-
-              <p><b>Submission:</b><br> Share the generated text output from your run (minimum 100 characters).</p>
-
-              <h3>Tips:</h3>
-
-              <ul>
-                <li>Make sure you have all necessary dependencies installed, such as Python and PyTorch, as described in
-                  the repo.</li>
-                <li>Fine-tuning might take time, so choose your dataset wisely for faster experimentation.</li>
-                <li>Feel free to adjust the parameters during fine-tuning to see how the model's performance changes.
+              <ol>
+                <li>
+                  Install Ollama by following its
+                  <a href="https://docs.ollama.com/quickstart" target="_blank" rel="noopener">official quickstart</a>.
+                  It is available for Linux, macOS, and Windows.
                 </li>
-              </ul>
+                <li>
+                  Open a terminal and start the small Gemma 3 model:
+                  <pre class="sh_bash code-highlight"><code>ollama run gemma3:1b</code></pre>
+                  The initial download is approximately 815 MB. If the model runs
+                  very slowly or Ollama reports insufficient memory, try the smaller
+                  alternative
+                  <code>ollama run qwen3:0.6b</code>.
+                </li>
+                <li>
+                  Give the model these three kinds of prompts:
+                  <ul>
+                    <li>a factual question about a topic you know well;</li>
+                    <li>a request to explain a difficult idea to a 12-year-old;</li>
+                    <li>a creative request, such as writing a short story.</li>
+                  </ul>
+                </li>
+                <li>
+                  Examine the answers. Find one response that is useful and one
+                  response that is incomplete, incorrect, or otherwise limited.
+                </li>
+              </ol>
+
+              <p><b>Results:</b><br>
+                Keep a screenshot showing Ollama running locally, the prompts and
+                answers for your useful and limited examples, and 3&ndash;5 sentences
+                explaining what the small local model did well and where it struggled.
+                Also state one privacy advantage of running a model locally.</p>
             </div>
           </div>
         </div>
@@ -2098,36 +2109,208 @@
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">NanoGPT: Fine-Tuning the GPT Model on Your Own Data (1p)</h1>
+              <h1 class="exercise__heading">Generating Text with GPT-2 and Hugging Face (0.5p)</h1>
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
           </div>
 
           <div class="collapse">
             <div class="exercise__body">
-              <p>In the previous exercise you were introduced to NanoGPT and got a chance to get familiar with it. In this exercise, you will fine-tune the NanoGPT model with your own data. </p> 
-              <ul>
-                <li><b>Prepare Your Own Text:</b> Select a text dataset of your choice. It can be a personal collection
-                  of articles, blog posts, stories, or any form of coherent text (minimum 1,000 words).</li>
-                <li><b>Fine-Tune the NanoGPT Model:</b> Follow the instructions in the repository to fine-tune the GPT
-                  model using your own dataset. Adjust the hyperparameters, if necessary, to ensure that the model
-                  learns effectively from your data.</li>
-                <li><b>Generate New Text with a Prompt:</b> Once the model is fine-tuned, generate new text by providing
-                  a custom prompt related to your dataset.</li>
-              </ul>
+              <p>
+                Hugging Face Transformers is a library for using pretrained models.
+                Follow the
+                <a href="https://huggingface.co/docs/transformers/en/model_doc/gpt2"
+                  target="_blank" rel="noopener">official GPT-2 example</a>.
+                GPT-2 is older, but it clearly demonstrates autoregressive
+                generation: at each step, the model predicts the next token
+                from the preceding context.
+              </p>
 
-              <p><b>Submission:</b><br> Submit the prompt you used and the new text generated by your fine-tuned model
-                (minimum 100 characters).</p>
-
-              <h3>Tips:</h3>
-
-              <ul>
-                <li>Make sure you have all necessary dependencies installed, such as Python and PyTorch, as described in
-                  the repo.</li>
-                <li>Fine-tuning might take time, so choose your dataset wisely for faster experimentation.</li>
-                <li>Feel free to adjust the parameters during fine-tuning to see how the model's performance changes.
+              <ol>
+                <li>
+                  In a fresh Python environment, install the required libraries:
+                  <pre class="sh_bash code-highlight"><code>python -m pip install torch transformers</code></pre>
                 </li>
-              </ul>
+                <li>
+                  Save and run the following program. The model runs on the CPU by
+                  default:
+                  <pre class="sh_python code-highlight"><code>from transformers import pipeline, set_seed
+
+set_seed(42)
+generator = pipeline("text-generation", model="openai-community/gpt2")
+
+prompt = "Artificial intelligence will"
+for result in generator(
+    prompt,
+    max_new_tokens=60,
+    num_return_sequences=2,
+    do_sample=True,
+    temperature=0.8,
+):
+    print(result["generated_text"])
+    print("---")</code></pre>
+                </li>
+                <li>
+                  Replace the prompt with one of your own. Then run it once with
+                  <code>temperature=0.3</code> and once with
+                  <code>temperature=1.2</code>. Lower temperature usually makes the
+                  output more predictable; higher temperature makes it more varied
+                  but may also make it less coherent.
+                </li>
+              </ol>
+
+              <p><b>Results:</b><br>
+                Keep the two outputs generated from your own prompt and explain in
+                2&ndash;3 sentences how changing the temperature affected them.</p>
+            </div>
+          </div>
+        </div>
+
+        <h3>NanoGPT: a small and transparent GPT implementation</h3>
+
+        <p>
+          Andrej Karpathy's
+          <a href="https://github.com/karpathy/nanoGPT" target="_blank" rel="noopener">nanoGPT</a>
+          is deprecated and no longer maintained. The repository is still useful
+          because it is small enough to inspect. The core ideas are still the ones
+          used in modern GPT systems: Transformer blocks, causal self-attention,
+          next-token prediction, sampling, and fine-tuning.
+        </p>
+
+        <p>
+          To make these exercises reproducible, use the fixed commit shown below
+          instead of the changing default branch. We use the smallest GPT-2
+          checkpoint and short runs so a laptop CPU is enough.
+        </p>
+
+        <!-- Exercise 5.3 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">NanoGPT: Generating Text with a Pre-trained Model (1p)</h1>
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+              <p>
+                Hugging Face hid most implementation details behind
+                <code>pipeline()</code>. NanoGPT lets you run the same pretrained
+                GPT-2 checkpoint through a compact implementation whose model and
+                sampling code you can inspect.
+              </p>
+
+              <ol>
+                <li>
+                  Clone NanoGPT and check out the fixed course version:
+                  <pre class="sh_bash code-highlight"><code>git clone https://github.com/karpathy/nanoGPT.git
+cd nanoGPT
+git checkout 3adf61e1</code></pre>
+                </li>
+                <li>
+                  Use a fresh Python environment and install the packages needed for
+                  this exercise:
+                  <pre class="sh_bash code-highlight"><code>python -m pip install torch numpy transformers tiktoken</code></pre>
+                </li>
+                <li>
+                  Generate two continuations with the smallest pretrained GPT-2 model:
+                  <pre class="sh_bash code-highlight"><code>python sample.py --init_from=gpt2 --device=cpu --dtype=float32 \
+  --start="Artificial intelligence will" --num_samples=2 \
+  --max_new_tokens=100 --temperature=0.8 --top_k=50</code></pre>
+                  The checkpoint is downloaded automatically the first time.
+                </li>
+                <li>
+                  Open <code>sample.py</code> and find the variables
+                  <code>start</code>, <code>temperature</code>, and
+                  <code>top_k</code>. You do not need to understand the whole file.
+                  Identify where the program passes these values to the model's
+                  generation method.
+                </li>
+                <li>
+                  Use your own prompt and compare <code>temperature=0.3</code> with
+                  <code>temperature=1.2</code>.
+                </li>
+              </ol>
+
+              <p><b>Results:</b><br>
+                Keep one output from each temperature setting, the line from
+                <code>sample.py</code> where generation is called, and 3&ndash;4
+                sentences comparing NanoGPT with the Hugging Face
+                <code>pipeline()</code> interface. Which is easier to use, and which
+                makes the generation process easier to inspect?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bonus Exercise 4 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Bonus Exercise 4: NanoGPT Fine-Tuning on Shakespeare (1p)</h1>
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+              <p>
+                <b>This is a bonus exercise.</b> It is more technical and may
+                take longer than the other exercises in this part. Complete it if
+                you want to see how fine-tuning adapts a pretrained model to a
+                specific dataset.
+              </p>
+
+              <p>
+                Fine-tuning adapts a pretrained model to a new dataset by continuing
+                its training with a smaller learning rate. You will follow NanoGPT's
+                existing Shakespeare fine-tuning example. We use the 124-million-
+                parameter GPT-2 model instead of the example's GPT-2 XL model so the
+                exercise can run on a CPU. Keep the run short.
+              </p>
+
+              <ol>
+                <li>
+                  From the same NanoGPT directory and Python environment used in the
+                  previous exercise, prepare the included Tiny Shakespeare dataset:
+                  <pre class="sh_bash code-highlight"><code>python data/shakespeare/prepare.py</code></pre>
+                </li>
+                <li>
+                  Before fine-tuning, generate a baseline sample:
+                  <pre class="sh_bash code-highlight"><code>python sample.py --init_from=gpt2 --device=cpu --dtype=float32 \
+  --start="ROMEO:" --num_samples=1 --max_new_tokens=100</code></pre>
+                </li>
+                <li>
+                  Fine-tune the small GPT-2 checkpoint for a short run:
+                  <pre class="sh_bash code-highlight"><code>python train.py config/finetune_shakespeare.py \
+  --init_from=gpt2 --device=cpu --compile=False --dtype=float32 \
+  --block_size=128 --batch_size=1 --gradient_accumulation_steps=1 \
+  --max_iters=20 --eval_interval=10 --eval_iters=10</code></pre>
+                  Runtime depends on your computer. If one iteration is exceptionally
+                  slow, you may stop after 10 iterations and use the checkpoint already
+                  saved in <code>out-shakespeare</code>.
+                </li>
+                <li>
+                  Generate text from the fine-tuned checkpoint using the same prompt:
+                  <pre class="sh_bash code-highlight"><code>python sample.py --out_dir=out-shakespeare --device=cpu \
+  --dtype=float32 --start="ROMEO:" --num_samples=1 \
+  --max_new_tokens=100</code></pre>
+                </li>
+                <li>
+                  Compare the baseline and fine-tuned samples. Look for changes in
+                  vocabulary, character names, formatting, and writing style.
+                </li>
+              </ol>
+
+              <p><b>Results:</b><br>
+                Keep the baseline and fine-tuned samples, the final training and
+                validation losses printed by NanoGPT, and 3&ndash;5 sentences explaining
+                how fine-tuning changed the output. Clearly distinguish
+                <i>pretraining</i> (learning general language patterns from a large
+                corpus) from <i>fine-tuning</i> (adapting an existing model to a
+                smaller, specialized dataset).</p>
 
             </div>
           </div>
@@ -2278,6 +2461,71 @@
 	  <strong>smiling expressions</strong> in human face generation. We will explore these 
 	  methods in more detail in the sections dedicated to specific models.
 	</p>
+
+        <!-- Exercise 5.5 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Exploring a Simple Autoencoder with TensorFlow (2p)</h1>
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+              <p>
+                This exercise uses TensorFlow's complete
+                <a href="https://www.tensorflow.org/tutorials/generative/autoencoder"
+                  target="_blank" rel="noopener">Intro to Autoencoders</a>
+                tutorial. Open it in Google Colab using the
+                <i>Run in Google Colab</i> link at the top of the tutorial. You do
+                not need to create a notebook or implement the model from scratch.
+              </p>
+
+              <p>
+                Complete only the section titled <b>First example: Basic
+                autoencoder</b>. The later denoising and anomaly-detection examples
+                are not required.
+              </p>
+
+              <ol>
+                <li>
+                  Run the basic example unchanged with
+                  <code>latent_dim = 64</code>. Save the final training and
+                  validation losses and a screenshot comparing original and
+                  reconstructed Fashion-MNIST images.
+                </li>
+                <li>
+                  Find the encoder and decoder definitions. Identify the original
+                  number of pixel values in each image, the size of the latent
+                  representation, and the number of pixel values reconstructed by
+                  the decoder.
+                </li>
+                <li>
+                  Change only <code>latent_dim</code> from <code>64</code> to
+                  <code>2</code>, recreate and retrain the model, and produce the
+                  reconstruction plot again.
+                </li>
+                <li>
+                  Compare the two runs. Explain why compressing an image into only
+                  two numbers usually loses more information than compressing it
+                  into 64 numbers.
+                </li>
+                <li>
+                  Explain why the training call uses the images as both the input
+                  and the target. What does the model learn even though it is not
+                  given class labels?
+                </li>
+              </ol>
+
+              <p><b>Results:</b><br>
+                Keep the reconstruction screenshots and final losses for both
+                latent dimensions. Include short answers to Tasks 2, 4, and 5
+                (approximately half a page in total).</p>
+            </div>
+          </div>
+        </div>
 
 	<h2 class="material-heading">Applications of Generative Models</h2>
 	
@@ -2689,7 +2937,7 @@
 	<img src="../img/material/part5/gan-applications.webp" alt="Applications of GANs" width="70%">
 	
 	<p>
-	  Generative Adversarial Networks (GANs) have revolutionized deep learning by enabling machines to generate highly realistic synthetic data. 
+	  Generative Adversarial Networks (GANs) generate highly realistic synthetic data. 
 	  While training GANs is challenging, improvements like WGAN, StyleGAN, and CycleGAN have enhanced their stability and effectiveness. 
 	  With applications ranging from image generation to deepfake technology, GANs continue to be a vital part of modern AI research and development.
 	</p>
@@ -2748,47 +2996,77 @@
                   now, at least!). Try to find out why that is the case. </li>
               </ul>
 
-              <p><b>Submission:</b><br>
-                Take a screenshot of each configuration of <code>prompt</code> and <code>negative prompts</code> with
+              <p><b>Results:</b><br>
+                Keep a screenshot of each configuration of <code>prompt</code> and <code>negative prompts</code> with
                 the corresponding generated pictures (at least 5!). Write short answers to the questions provided above.
-                Add these in a file and show it to during the exercise session.</p>
+                Add these to a file.</p>
 
 
             </div>
           </div>
         </div> -->
 
-        <!-- Exercise 5.3 -->
+        <!-- Exercise 5.6 -->
         <div class="exercise">
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Detecting AI Generated Images (1p)</h1>
+              <h1 class="exercise__heading">Detecting AI-Generated Images (1p)</h1>
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
           </div>
 
           <div class="collapse">
             <div class="exercise__body">
-              <p>The model that we used above it severely underpowered and a bit old at this point. The newer diffuision
-                models like DALL-E-3 or Midjourney 6.1 can already produce images that have already advanced from silly
-                mistakes like weird hand positions. Now, we need to be more aware of the latest capabilities of these
-                image generation models. </p>
-              <p><b>Task: Methods of identifying AI generated images. </b></p>
-              <ul>
-                <li>Try out DALL-E-3 model by writing this prompt in <a href="https://chatgpt.com/">ChatGPT website</a>.
-                  "Create an image of A person holding an apple in their hand." (Without the quotes)</li>
-                <li>Observe the differences between the pictures generated by this model and the stable diffusion model
-                  that you tried on previous exercise.</li>
-                <li>Try out different combinations of prompts(at least 5) just like the previous exercise in <a
-                    href="https://chatgpt.com/">ChatGPT</a>. Do these pictures still show the same level of artifacts
-                  and visible mistakes like the previously generated pictures?</li>
-              </ul>
-              <p><b>Submission:</b><br>
-                Search for ways to detect if a image has been created using generative AI. Try to find at least 3
-                articles about it from the internet. Write a small report (No more than 1 page) about the methods used
-                to detect AI generated images and how reliable they are. Add the articles you have read as reference.
+              <p>
+                This exercise uses
+                <a href="https://www.whichfaceisreal.com/" target="_blank" rel="noopener">Which Face Is Real?</a>,
+                an existing educational activity from the University of Washington's
+                <a href="https://www.callingbullshit.org/tools.html" target="_blank" rel="noopener">Calling Bullshit</a>
+                course. It compares real photographs with faces generated by an older
+                StyleGAN model.
               </p>
+
+              <p>
+                Visual clues can help with a particular generator. There is no
+                universal visual detector. Newer models may not make the same
+                mistakes, and editing or compression can hide them. A missing clue
+                is no proof that an image is real.
+              </p>
+
+              <ol>
+                <li>
+                  Complete ten rounds of Which Face Is Real without reading its
+                  detection guide. Record how many answers were correct and which
+                  visual clues influenced your decisions.
+                </li>
+                <li>
+                  Read the site's
+                  <a href="https://www.whichfaceisreal.com/learn.html" target="_blank" rel="noopener">guide to StyleGAN artifacts</a>,
+                  then complete ten more rounds. Record your new result.
+                </li>
+                <li>
+                  Identify two clues that helped with these StyleGAN images. For each
+                  clue, explain why it might fail when applied to images from a newer
+                  generator.
+                </li>
+                <li>
+                  Read the
+                  <a href="https://contentcredentials.org/" target="_blank" rel="noopener">Content Credentials</a>
+                  introduction. Compare visual inspection with provenance information,
+                  such as signed creation history, and with invisible watermarks.
+                  Remember that missing credentials or watermarks do not prove that an
+                  image is genuine.
+                </li>
+              </ol>
+
+              <p><b>Results:</b><br>
+                Record your scores before and after reading the guide and write a short
+                report (approximately half a page). Note the clues you used and whether
+                the guide changed your score. Explain why visual inspection alone is
+                not enough. Your report should also mention source checking, provenance
+                or watermark information, automated forensic tools, and human judgment.
+                No single method identifies every AI-generated image.</p>
             </div>
           </div>
         </div>
