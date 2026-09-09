@@ -81,6 +81,11 @@
               onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
               6</a>
           </li>
+          <li class="nav-item ">
+            <a href="../part7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+              7</a>
+          </li>
         </ul>
 
         <div class="float-xs-right navbar__buttons">
@@ -108,46 +113,13 @@
 
     <div class="content-wrapper">
       <div class="container material" id="material">
-        <div class="exercise-list">
-          <div class="exercise-list__header">
-            Exercises
-          </div>
-
-          <div class="exercise-list__content" id="exercise-list"></div>
-
-        </div>
-
-
-
-        <h1 class="material-heading">
-          What is AI?
-
+        <h1>
+          Philosophy, problem solving as search, games
         </h1>
-
-        <p>
-          In this first part, we will discuss what we mean when we talk about AI.
-          It turns out that there is no exact definition at all, but that the
-          field is rather being redefined at all times.
-        </p>
-
-        <p>
-          We will also briefly discuss the philosophical aspects of AI: whether
-          intelligent behavior implies or requires the existence of a ''mind'', and
-          in what extent is consciousness replicable as a computational process.
-          However, this course is first and foremost focused on building
-          practically useful AI tools, and we will quickly push considerations
-          about consciousness aside as they tend to be only in the way when
-          designing working solutions to real problems.
-        </p>
-
-        <p>
-          The technical topics covered in Part 1 are problem-solving by
-          search, including the A* algorithm, and games.
-        </p>
 
         <div class="hint">
           <div class="hint__header">
-            <i class="fa fa-info-circle hint__icon"></i>Learning objectives of Part 1
+            <i class="fa fa-info-circle hint__icon"></i>Learning objectives
           </div>
 
           <div class="hint__body">
@@ -175,6 +147,8 @@
                     <li>can describe the contrast between "Good Old Fashioned
                       AI" (GOFAI) and modern AI approaches
                     <li>know the main-stream developments in the history of AI
+                    <li>can explain the idea of artificial general intelligence (AGI)
+                      and distinguish it from narrow AI
                   </ul>
                 </td>
               </tr>
@@ -184,8 +158,8 @@
                 </td>
                 <td>
                   <ul>
-                    <li>can formulate a problem as a graph and apply search algorithms to solve it
-                    <li>can explain and implement A* search
+                    <li>can formulate a problem as a graph and apply breadth-first and depth-first search
+                    <li>can explain informed search and implement A* search
                     <li>can formulate a simple game (such as tic-tac-toe) as a game tree
                     <li>can explain and implement the minimax algorithm and depth-limited alpha-beta pruning
                     <li>can design a reasonable heuristic evaluation function in a game (e.g., chess)
@@ -197,6 +171,42 @@
 
           </div>
         </div>
+
+        <div class="exercise-list">
+          <div class="exercise-list__header">
+            Exercises
+          </div>
+
+          <div class="exercise-list__content" id="exercise-list"></div>
+
+        </div>
+
+
+        <h1 class="material-heading">
+          What is AI?
+
+        </h1>
+
+        <p>
+          In this first part, we will discuss what we mean when we talk about AI.
+          It turns out that there is no exact definition at all, but that the
+          field is rather being redefined at all times.
+        </p>
+
+        <p>
+          We will also briefly discuss the philosophical aspects of AI: whether
+          intelligent behavior implies or requires the existence of a ''mind'', and
+          in what extent is consciousness replicable as a computational process.
+          However, this course is first and foremost focused on building
+          practically useful AI tools, and we will quickly push considerations
+          about consciousness aside as they tend to be only in the way when
+          designing working solutions to real problems.
+        </p>
+
+        <p>
+          The technical topics covered in Part 1 are problem-solving by
+          search, including the A* algorithm, and games.
+        </p>
 
 
         <h2 class="material-heading">

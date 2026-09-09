@@ -80,6 +80,11 @@
               onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
               6</a>
           </li>
+          <li class="nav-item ">
+            <a href="../part7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+              7</a>
+          </li>
         </ul>
 
         <div class="float-xs-right navbar__buttons">
@@ -107,78 +112,13 @@
 
     <div class="content-wrapper">
       <div class="container material" id="material">
-        <div class="exercise-list">
-          <div class="exercise-list__header">
-            Exercises
-          </div>
+        <h1>
+          Neural Networks
+        </h1>
 
-          <div class="exercise-list__content" id="exercise-list"></div>
-
-        </div>
-
-
-
-
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Plastic Film Folding Machine (1p)</h1>
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-        
-          <div class="collapse">
-            <div class="exercise__body">
-              <p>
-                On a machine that folds plastic film, the temperature can be varied between 130°C and 185°C. To explore how temperature influences fold thickness, a dataset of 12 temperature and thickness values is collected. Refer to the plot for details.
-              </p>
-
-              <img src="../img/exercises/exersice_4_4_plot.png" alt="Plastic Film Folding Plot" width="60%">
-        
-                <li>
-                  <b>Determine the correct parameter estimates:</b> Based on the figure, identify the correct estimates for the parameters in the linear regression model (where β̂₀ and β̂₁ are model's coefs and σ̂  - standard deviation):
-                  <ol type="A">
-                    <li>β̂₀ = 0, β̂₁ = -0.9, σ̂ = 36</li>
-                    <li>β̂₀ = 0, β̂₁ = 0.9, σ̂ = 3.6</li>
-                    <li>β̂₀ = 252, β̂₁ = -0.9, σ̂ = 3.6</li>
-                    <li>β̂₀ = -252, β̂₁ = -0.9, σ̂ = 36</li>
-                    <li>β̂₀ = 252, β̂₁ = -0.9, σ̂ = 36</li>
-                  </ol>
-                </li>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Excercise 4.4 -->
-
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-        
-          <div class="collapse">
-            <div class="solution__body">
-        
-          <p>
-        Correct Answer: (C) β̂₀ = 252, β̂₁ = -0.9, σ̂ = 3.6
-           - Explanation: From the plot, the intercept (β̂₀) must be 252 as the line crosses near that value. The slope (β̂₁) is negative and approximately -0.9, and the standard deviation (σ̂) is closer to 3.6 than 36.
-          </p>
-              
-        </div>
-      </div>
-    </div>
-
-        
         <div class="hint">
           <div class="hint__header">
-            <i class="fa fa-info-circle hint__icon"></i>Learning objectives of Part 4
+            <i class="fa fa-info-circle hint__icon"></i>Learning objectives
           </div>
 
           <div class="hint__body">
@@ -192,19 +132,22 @@
                   Objectives (after the course, you ...)
                 </td>
               </tr>
-              <td>
-                Machine learning
-              </td>
-              <td>
-                <ul>
-                  <li>can distinguish between unsupervised and supervised machine learning scenarios
-                  <li>can implement at least two supervised classification methods (e.g., naive Bayes, nearest neighbour
-                    classifier)
-                  <li>know the main types of neural networks (feed-forward, recurrent, self-organizing map) and their
-                    main principles
-                  <li>can implement the perceptron algorithm in a simple binary classification problem
-                </ul>
-              </td>
+              <tr>
+                <td>
+                  Neural networks
+                </td>
+                <td>
+                  <ul>
+                    <li>can explain the perceptron and implement the perceptron algorithm
+                      for a simple binary classification problem
+                    <li>can describe multilayer perceptrons and forward propagation
+                    <li>can explain why neural networks use activation functions
+                    <li>can describe backpropagation as the mechanism that provides
+                      gradients for optimization
+                    <li>can explain word embeddings, attention, and self-attention
+                      at a conceptual level
+                  </ul>
+                </td>
               </tr>
             </table>
 
@@ -212,7 +155,167 @@
           </div>
         </div>
 
+        <div class="exercise-list">
+          <div class="exercise-list__header">
+            Exercises
+          </div>
 
+          <div class="exercise-list__content" id="exercise-list"></div>
+
+        </div>
+
+
+
+
+
+        <!-- Exercise 4.1 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Perceptron (programming) (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Use the Perceptron template on TMC. (You'll find the necessary data files in the
+                TMC template.)
+              </p>
+
+              <p>
+                The file <code>mnist-x.data</code> contains 6000 images from the popular
+                <a href="http://yann.lecun.com/exdb/mnist/">MNIST dataset</a>, each
+                of which is given on a single line in the file. Each image consists
+                of 28 &times; 28 pixels listed row-by-row, so each line in the file
+                contains 784 values. Each pixel is either black (&ndash;1) or white
+                (1). The file
+                <code>mnist-y.data</code> contains the correct class value (0-9) of each
+                of the 6000 images.
+              </p>
+
+              <p>
+                Use the first 5000 images as training data and the last 1000 as test data.
+              <ol>
+                <li>
+                  Implement the perceptron algorithm in the <code>Perceptron</code> class.
+                <li>
+                  Modify the <code>train()</code> method in
+                  class <code>Perceptron</code> so that it learns to distinguish
+                  number 3 from number 5. (Notice that the
+                  variable <code>targetChar</code> can be set to be one of these
+                  classes while <code>oppositeChar</code> should be the
+                  other. This will set the class label as 1 and &ndash;1 as is
+                  required in the Perceptron algorithm. Images representing other
+                  numbers are ignored.) Try to get a classification error around
+                  5&ndash;15 %.
+                <li>
+                  Try other pairs of number than 3 vs 5. Which numbers are easiest to
+                  classify and which are the hardest?
+              </ol>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 4.3 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Tensorflow Playground: Basic Exploration of Neural Networks (0.5p)</h1>
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p><b>Open the TensorFlow Playground:</b><br>
+                Go to <a href="https://playground.tensorflow.org" target="_blank">TensorFlow Playground</a> in your web
+                browser.</p>
+
+              <p><b>Task 1: Build a Simple Neural Network</b></p>
+              <ul>
+                <li>Start with the default dataset (two circles) and network settings.</li>
+                <li>Use one hidden layer with one neuron to classify the points.</li>
+                <li>Observe the decision boundary and how the network performs.</li>
+              </ul>
+
+              <p><b>Task 2: Add More Neurons</b></p>
+              <ul>
+                <li>Increase the number of neurons in the hidden layer to three neurons.</li>
+                <li>Observe the changes in the decision boundary and how well the network classifies the data.</li>
+                <li>How does the performance change with more neurons?</li>
+              </ul>
+
+              <p><b>Task 3: Add More Layers</b></p>
+              <ul>
+                <li>Add a second hidden layer with two neurons.</li>
+                <li>Compare the performance to the previous network with just one hidden layer. How does adding more
+                  layers affect the learning?</li>
+              </ul>
+
+              <p><b>Submission:</b><br>
+                Take a screenshot of each configuration (one neuron, three neurons, two layers). Briefly describe (2-3
+                sentences) how each change affected the decision boundary and model performance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 4.4 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Tensorflow Playground: Experimenting with Complex Data and Advanced
+                Features (0.5p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+              <p>After trying out tensorflow playground, now it is time for doing a bit more complex task. This will be
+                useful in gaining an intuitive understanding of how machine learning models work.</p>
+
+              <p><b>Task 1: Investigate Different Datasets</b></p>
+              <ul>
+                <li>Change the dataset to "Spirals" using the dropdown menu.</li>
+                <li>Experiment with different network architectures to successfully classify the data:</li>
+                <li>Start with one hidden layer and four neurons.</li>
+                <li>Gradually increase the number of neurons and layers until the network correctly classifies the
+                  spirals.</li>
+                <li>What is the minimum number of layers and neurons needed to classify the spirals accurately?</li>
+              </ul>
+
+              <p><b>Task 2: Adjusting Activation Functions and Learning Rate</b></p>
+              <ul>
+                <li>Change the activation function from "ReLU" to "tanh" and observe how it affects the network's
+                  ability to learn.</li>
+                <li>Now, adjust the learning rate slider and observe how different learning rates (e.g., 0.01, 0.1, 3)
+                  impact the training speed and model accuracy.</li>
+              </ul>
+
+              <p><b>Task 3: Experiment with Regularization</b></p>
+              <ul>
+                <li>Add L2 regularization to your network and observe how it impacts the decision boundary and prevents
+                  overfitting.</li>
+                <li>Try increasing the regularization strength to see its effects on training.</li>
+              </ul>
+
+              <p><b>Submission:</b><br>
+                Share screenshots of your experiments with the "Spirals" dataset and different network configurations.
+                Briefly describe (2-3 sentences) how changing the activation function, learning rate, and regularization
+                influenced the network's performance.</p>
+            </div>
+          </div>
+        </div>
 
         
         <!-- Main content -->
