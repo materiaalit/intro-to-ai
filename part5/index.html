@@ -170,6 +170,10 @@
           information from other positions. Episode 9 develops this mechanism and shows why it became the foundation
           of the Transformer.
         </p>
+
+        <h2 class="material-heading">One word, different context</h2>
+        <p>Consider the word <i>bank</i> in “the bank approved the loan” and “we sat on the river bank.” A static lookup gives the same initial vector in both sentences. Attention creates a contextual representation by combining information from the surrounding tokens with different strengths.</p>
+        <svg viewBox="0 0 960 330" role="img" aria-label="Attention connects the word bank to different context words in two sentences" style="width:100%;max-width:960px"><g font-family="Roboto, sans-serif" text-anchor="middle"><text x="480" y="35" font-size="23">Context changes which words matter</text><g font-size="21"><text x="100" y="105">the</text><text x="245" y="105">bank</text><text x="420" y="105">approved</text><text x="590" y="105">the</text><text x="750" y="105">loan</text><path d="M245 118 C300 180 650 180 750 118" fill="none" stroke="#7b3fa1" stroke-width="9" opacity=".85"/><path d="M245 118 C290 150 365 150 420 118" fill="none" stroke="#2878a5" stroke-width="5" opacity=".75"/><text x="100" y="245">river</text><text x="245" y="245">bank</text><text x="420" y="245">was</text><text x="590" y="245">covered</text><text x="750" y="245">in reeds</text><path d="M245 230 C210 175 135 175 100 230" fill="none" stroke="#2f8a50" stroke-width="10" opacity=".85"/><path d="M245 230 C345 165 650 165 750 230" fill="none" stroke="#c58a00" stroke-width="4" opacity=".7"/></g><text x="480" y="305" font-size="19">Thicker connections illustrate greater attention weight</text></g></svg>
 	<h2 class="material-heading">Why Do We Need Attention?</h2>
 	
 	<p>
@@ -386,7 +390,11 @@
           residual connections and normalization form complete encoder and decoder architectures. It then compares
           BERT-style representation learning with GPT-style autoregressive generation and considers applications beyond text.
         </p>
-	<h2 class="material-heading">Fully Connected Layer and Normalization</h2>
+
+        <h2 class="material-heading">From tokens to contextual predictions</h2>
+        <svg viewBox="0 0 980 250" role="img" aria-label="A transformer maps tokens through embeddings and repeated blocks to contextual outputs" style="width:100%;max-width:980px"><defs><marker id="tf-arrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs><g font-family="Roboto, sans-serif" text-anchor="middle" font-size="20"><rect x="25" y="75" width="145" height="80" rx="10" fill="#e4f2fb"/><text x="98" y="108">tokens</text><text x="98" y="135">+ positions</text><rect x="220" y="75" width="145" height="80" rx="10" fill="#f1e7fb"/><text x="293" y="108">embedding</text><text x="293" y="135">vectors</text><rect x="415" y="45" width="220" height="140" rx="10" fill="#fff1c9" stroke="#c58a00"/><text x="525" y="88">repeated blocks</text><text x="525" y="120">attention</text><text x="525" y="150">feed-forward layers</text><rect x="685" y="75" width="130" height="80" rx="10" fill="#e7f6e7"/><text x="750" y="108">contextual</text><text x="750" y="135">vectors</text><rect x="865" y="75" width="90" height="80" rx="10" fill="#e4f2fb"/><text x="910" y="108">task</text><text x="910" y="135">output</text><path d="M170 115 H210 M365 115 H405 M635 115 H675 M815 115 H855" stroke="#555" stroke-width="3" marker-end="url(#tf-arrow)"/></g></svg>
+        <p>The same general pipeline supports different objectives. An encoder can produce contextual representations for classification or retrieval. An autoregressive decoder uses a causal mask and predicts the next token repeatedly. Encoder-decoder models transform one sequence into another, as in translation. The details below explain the operations repeated inside each block.</p>
+	<h2 class="material-heading">Inside the Transformer block</h2>
 	
 	<p>
 	  The second component of the transformer block is the <strong>feed-forward network (FFN)</strong>, 
@@ -901,6 +909,8 @@ git checkout 3adf61e1</code></pre>
           additional training.
         </p>
 
+        <svg viewBox="0 0 980 285" role="img" aria-label="A broadly pretrained foundation model can be adapted to several downstream uses" style="width:100%;max-width:980px"><defs><marker id="fm-arrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs><g font-family="Roboto, sans-serif" text-anchor="middle"><rect x="35" y="85" width="190" height="105" rx="12" fill="#e4f2fb"/><text x="130" y="125" font-size="21">broad data</text><text x="130" y="155" font-size="21">general objective</text><path d="M225 137 H330" stroke="#555" stroke-width="3" marker-end="url(#fm-arrow)"/><rect x="340" y="60" width="250" height="155" rx="16" fill="#f1e7fb" stroke="#7b3fa1" stroke-width="3"/><text x="465" y="125" font-size="25">foundation model</text><text x="465" y="160" font-size="19">shared representations</text><path d="M590 100 H705 M590 137 H705 M590 174 H705" stroke="#555" stroke-width="3" marker-end="url(#fm-arrow)"/><rect x="715" y="35" width="220" height="55" rx="9" fill="#e7f6e7"/><rect x="715" y="110" width="220" height="55" rx="9" fill="#fff1c9"/><rect x="715" y="185" width="220" height="55" rx="9" fill="#e4f2fb"/><text x="825" y="70" font-size="20">prompt or retrieve</text><text x="825" y="145" font-size="20">fine-tune or adapt</text><text x="825" y="220" font-size="20">embed or generate</text><text x="465" y="265" font-size="19">One pretrained model supports many downstream systems</text></g></svg>
+
         <h2 class="material-heading">Transfer and adaptation</h2>
         <table class="table"><tr><th>Method</th><th>What changes</th><th>Main trade-off</th></tr>
           <tr><td>Prompting</td><td>The input instructions and examples</td><td>Fast, but sensitive to wording and model capability</td></tr>
@@ -927,8 +937,9 @@ git checkout 3adf61e1</code></pre>
           test grounding, robustness and performance across modalities rather than assess language quality alone.
         </p>
 
+        <svg viewBox="0 0 960 300" role="img" aria-label="Text, image, audio, and sensor data connect through learned representations" style="width:100%;max-width:960px"><g font-family="Roboto, sans-serif" text-anchor="middle"><circle cx="480" cy="145" r="88" fill="#f1e7fb" stroke="#7b3fa1" stroke-width="3"/><text x="480" y="135" font-size="23">shared or aligned</text><text x="480" y="167" font-size="23">representation</text><g font-size="22"><rect x="55" y="45" width="165" height="65" rx="10" fill="#e4f2fb"/><text x="138" y="85">text</text><rect x="55" y="190" width="165" height="65" rx="10" fill="#fff1c9"/><text x="138" y="230">images</text><rect x="740" y="45" width="165" height="65" rx="10" fill="#e7f6e7"/><text x="823" y="85">audio</text><rect x="740" y="190" width="165" height="65" rx="10" fill="#f9e3df"/><text x="823" y="230">video/actions</text></g><path d="M220 78 L395 115 M220 222 L395 175 M740 78 L565 115 M740 222 L565 175" stroke="#555" stroke-width="4"/></g></svg>
+
         <h2 class="material-heading">Generative models</h2>
-	<h1 class="material-heading">Introduction to Generative Modeling</h1>
 	
 	<p>
 	  Up until now, you have studied machine learning models that primarily predict certain characteristics of objects, 
