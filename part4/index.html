@@ -144,7 +144,11 @@
                     <li>can explain why neural networks use activation functions
                     <li>can describe backpropagation as the mechanism that provides
                       gradients for optimization
-                    <li>can explain word embeddings, attention, and self-attention
+                    <li>can explain the roles of loss, backpropagation, and optimization
+                      in neural-network training
+                    <li>can distinguish training, validation, and test data and explain
+                      underfitting and overfitting
+                    <li>can explain representation learning and word embeddings
                       at a conceptual level
                   </ul>
                 </td>
@@ -155,99 +159,731 @@
           </div>
         </div>
 
-        <!-- Teaching content: Episodes 7 and 8 -->
-        <h1 class="material-heading">Episode 7: From perceptrons to multilayer networks</h1>
-
+        <!-- Full teaching content: Episodes 7 and 8 -->
+        <h1 class="material-heading">Episode 7: Neural networks from the perceptron to multilayer models</h1>
         <p>
-          Neural networks are models whose parameters are learned from examples. They are built by composing simple
-          transformations. This makes it possible to learn useful intermediate representations instead of requiring
-          every feature to be designed by hand.
+          This episode develops neural networks from a single linear neuron to a trainable multilayer model. MNIST
+          provides a running example: each image contains 28 &times; 28 pixel values and the task is to predict one of
+          ten digit classes.
         </p>
-
-        <h2 class="material-heading">The perceptron</h2>
-
-        <p>
-          A perceptron receives an input vector <i>x</i>, multiplies each input by a learned weight, adds a bias, and
-          applies a threshold. In compact form, it predicts from <i>w</i><sup>T</sup><i>x</i> + <i>b</i>. During
-          training, the weights are adjusted when the prediction is wrong. A perceptron can learn a linear decision
-          boundary, but it cannot represent every classification problem.
-        </p>
-
-        <h2 class="material-heading">Multilayer perceptrons</h2>
-
-        <p>
-          A multilayer perceptron combines neurons into an input layer, one or more hidden layers, and an output
-          layer. Each layer transforms the representation produced by the previous layer. Width gives a layer more
-          units with which to represent patterns, while depth allows the model to build more complex transformations
-          from simpler ones.
-        </p>
-
-        <p>
-          A <b>forward pass</b> applies these transformations from the input to the prediction. For a layer, the main
-          calculation is a linear transformation followed by an activation function:
-        </p>
-
         <p style="text-align:center">
-          <i>h</i> = activation(<i>Wx</i> + <i>b</i>)
+          <img src="../img/diagrams/MNISTsamples-80d9261b.png" width="88%" alt="Examples of handwritten digits from MNIST">
         </p>
+        <p class="image-caption">Examples from MNIST. Even human readers may disagree about ambiguous handwriting.</p>
+	<h1 class="material-heading">Introduction to Neural Networks</h1>
 
-        <h2 class="material-heading">Why activation functions matter</h2>
+	<p>
+	  In this part, you will be introduced to <b>neural networks</b>—a family of models that, since 2012, have steadily achieved dominance in new applications, becoming the de facto standard in many fields.
+	</p>
+	
+	<p>
+	  Neural networks were first conceptualized in the 1970s. However, the technical capabilities and understanding required to train large-scale neural networks only emerged around 2011, providing a significant boost to their development. The collective set of neural network approaches and the broader scientific study of them is referred to as <b>deep learning</b>.
+	</p>
+	
+	<p>
+	  Deep learning is based on two key ideas:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>End-to-End Learning:</b> Traditionally, machine learning solutions involved complex pipelines where each component was trained separately to solve part of a problem. Deep learning, however, enables training the entire system as a single entity, allowing all layers to be optimized together rather than stacking separate models on top of one another.
+	  </li>
+	  <li>
+	    <b>Representation Learning:</b> This approach automates the extraction of informative features that account for data structure, often leveraging unstructured or unlabeled data. Instead of relying on human experts to engineer features, deep learning models can learn them directly from raw data—sometimes even utilizing vast external data sources, such as all the texts on the internet.
+	  </li>
+	</ul>
+	
+	<p>
+	  Despite their flexibility, modern deep learning models are highly complex and bear little resemblance to their elegant predecessors from 2012. The evolution of neural networks has been driven by industrial demands, advances in computational power, and the increasing availability of large-scale datasets.
+	</p>
+	
+	<p>
+	  At the same time, theoretical understanding often struggles to keep pace with practical advancements. Many deep learning methods rely on empirical experimentation rather than rigorous mathematical proofs. The field is filled with engineering heuristics—ideas that work in practice but lack formal justification beyond the phrase: <i>"it works this way, but not the other way."</i> This has led to skepticism among some researchers.
+	</p>
+	
+	<p>
+	  Despite theoretical uncertainties, the results achieved with neural networks over the past decade are remarkable and impossible to ignore. Particularly impressive progress has been made in analyzing data with inherent structure, such as:
+	</p>
+	
+	<ul>
+	  <li><b>Natural Language Processing (NLP):</b> Language models, text classification, and translation.</li>
+	  <li><b>Computer Vision:</b> Object detection, image recognition, and generative models.</li>
+	  <li><b>Audio and Speech Processing:</b> Speech recognition and synthesis.</li>
+	  <li><b>Graph-Based Learning:</b> Applications in recommendation systems, fraud detection, and social network analysis.</li>
+	</ul>
+	
+	<p>
+	  As neural networks continue to evolve, the scientific community is also developing theoretical frameworks to better understand their remarkable capabilities. In a later section, we will explore these theoretical perspectives in detail.
+	</p>
+
+
+	<h2 class="material-heading">Introduction to Fully Connected Neural Networks</h2>
+	
+	<p>
+	  An <b>artificial neural network</b> (ANN) is a complex differentiable function that maps input features to output predictions. All parameters in a neural network can be tuned simultaneously and interdependently, allowing the network to be trained in an <b>end-to-end</b> manner.
+	</p>
+	
+	<p>
+	  In most cases, a neural network consists of a sequence of differentiable parametric transformations. This structure enables learning powerful representations of data, improving performance in tasks such as classification, regression, and generative modeling.
+	</p>
+	
+	<p>
+	  A careful observer might notice that this definition also applies to <b>logistic regression</b> and <b>linear regression</b>. This is a valid observation—both of these models can be considered simple neural networks that map input features to predictions or logits.
+	</p>
+	
+	<hr>
+	
+	<p>
+	  Neural networks are best understood as compositions of simpler transformations. They are typically constructed from modular components (layers) that stack together to form deeper and more expressive models. The two fundamental building blocks of neural networks are:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>Linear Layer (Dense Layer):</b> A linear transformation applied to input data. This layer consists of learnable parameters—a weight matrix <code>W</code> and a bias vector <code>b</code>:
+	    <p style="text-align:center;">
+	      <code>x ↦ xW + b</code>, where <code>W ∈ ℝ<sup>d×k</sup></code>, <code>x ∈ ℝ<sup>d</sup></code>, and <code>b ∈ ℝ<sup>k</sup></code>.
+	    </p>
+	    <p>
+	      This transformation maps a <code>d</code>-dimensional input vector to a <code>k</code>-dimensional output.
+	    </p>
+	  </li>
+	  <li>
+	    <b>Activation Function:</b> A nonlinear function applied element-wise to the output of a layer. Activation functions introduce non-linearity, allowing neural networks to learn more complex patterns. Common activation functions include:
+	    <ul>
+	      <li><b>ReLU (Rectified Linear Unit):</b> <code>ReLU(x) = max(0, x)</code></li>
+	      <li><b>Sigmoid Function:</b> <code>σ(x) = 1 / (1 + e<sup>-x</sup>)</code></li>
+	    </ul>
+	    <p>
+	      Activation functions enable neural networks to generate more informative feature representations. We will explore different types of activation functions and their properties in a later section.
+	    </p>
+	  </li>
+	</ul>
+	
+	<p>
+	  Even the most complex neural networks are composed of relatively simple blocks, such as linear transformations and activation functions. This modular nature allows them to be represented as a <b>computational graph</b>, where intermediate nodes correspond to transformations.
+	</p>
+
+	<img src="../img/material/part5/computational_graph.jpg" width="80%" alt="Computational Graph for Logistic Regression">
+	
+	<p>
+	  The image above illustrates the computational graph for logistic regression. More complex neural networks follow a similar structure but involve deeper stacks of transformations.
+	</p>
+	
+	<p>
+	  Doesn't this structure resemble a layered cake of transformations? This is why they are called <b>layers</b>.
+	</p>
+	
+	<p>
+	  Computational graphs can be even more complex, including nonlinear connections between layers:
+	</p>
+	
+	<img src="../img/material/part5/complex_computational_graph.webp" width="80%" alt="Example of a Complex Computational Graph">
+	
+	<p>
+	  Let's break down what happens in a fully connected neural network.
+	</p>
+	
+	<p>
+	  <b>Input</b> refers to the data fed into the neural network. Typically, inputs are structured as a matrix ("objects-features") or a tensor (a multi-dimensional array). In some cases, a network may have multiple inputs. For example, if a neural network processes an image along with additional metadata, these inputs may be handled differently, making it logical to define multiple entry points in the computational graph.
+	</p>
+
+	<p>
+	  The input data <code>X<sub>0</sub></code> is then processed through two linear layers, generating intermediate (hidden) representations <code>X<sub>1</sub></code> and <code>X<sub>2</sub></code>. These are also referred to as <b>activations</b> in the literature (not to be confused with activation functions).
+	</p>
+	
+	<p>
+	  Each of these representations, <code>X<sub>1</sub></code> and <code>X<sub>2</sub></code>, undergoes a nonlinear transformation, producing new intermediate representations, <code>X<sub>3</sub></code> and <code>X<sub>4</sub></code>. The transition from <code>X<sub>0</sub></code> to these new matrices (or tensors) can be viewed as generating more informative feature representations of the original data.
+	</p>
+	
+	<p>
+	  The representations <code>X<sub>3</sub></code> and <code>X<sub>4</sub></code> are then concatenated, meaning the feature representations for all objects are combined.
+	</p>
+	
+	<p>
+	  Next, another linear layer and an additional activation function are applied. The final result is passed to the output layer, which delivers the network's prediction to the user.
+	</p>
+
+	<div class="hint">
+	  <div class="hint__header">
+	    <i class="fa fa-info-circle hint__icon"></i> Terminology Note
+	  </div>
+
+	  <div class="hint__body">
+	    <p>
+	      Unfortunately, there is no universally agreed-upon terminology in the literature.
+	    </p>
+	    <p>
+	      For example, we could define a <b>single indivisible layer</b> as the combination of a linear layer and an activation function—since we almost never use a purely linear layer without non-linearity. In fact, in frameworks like <b>Keras</b>, activation functions can be specified directly as a parameter within a linear layer.
+	    </p>
+	    <p>
+	      Additionally, some sources refer to what we call <b>intermediate representations</b> as layers. However, we believe that intermediate results <code>X<sub>i</sub></code> are better described as representations because they constitute new feature descriptions of the original input objects.
+	    </p>
+	    <p>
+	      Furthermore, in all major neural network frameworks, layers are defined as transformations rather than stored representations. For this reason, we consider layers to be the transformations that link intermediate representations.
+	    </p>
+	  </div>
+	</div>
+	<h2 class="material-heading">
+          Feedforward Networks
+        </h2>
 
         <p>
-          Without nonlinear activation functions, stacking layers would still produce only a linear model. ReLU is
-          widely used because it is simple and works well in many settings. Sigmoid maps values between zero and one,
-          while tanh maps them between minus one and one. The activation function influences how easily the network
-          trains and what kinds of decision boundaries it can learn.
-        </p>
-
-        <h1 class="material-heading">Episode 8: Learning representations</h1>
-
-        <h2 class="material-heading">Training a neural network</h2>
-
-        <p>
-          Training begins with a loss function that measures the difference between predictions and target values.
-          Backpropagation applies the chain rule to calculate how each parameter contributed to that loss. An
-          optimizer then uses the resulting gradients to update the parameters. For this course, the important idea
-          is the division of labour: the forward pass produces a prediction, the loss evaluates it, backpropagation
-          supplies gradients, and the optimizer updates the model.
+          The simplest kind of ANNs from the point of view of their
+          theoretical analysis are feedforward networks. Often the network
+          architecture is composed of <b>layers</b>. The input layer consists
+          of neurons that get their inputs directly from the data. So for
+          example, in an image recognition task, the input layer would use the
+          pixel values of the input image as the inputs of the input
+          layer. The network typically also has <b>hidden layers</b> that use
+          the other neurons' outputs as their input, and whose output is used
+          as the input to other layers of neurons. Finally, the output layer
+          produces the output of the whole network. All the neurons on a given
+          layer get inputs from neurons on only a single (lower) layer.
         </p>
 
         <p>
-          Performance on the training data alone is not enough. We use separate validation and test data to evaluate
-          whether a network generalizes to new examples. Excessive model capacity or training can lead to overfitting.
-          Regularization, suitable model size, and early stopping can reduce this problem.
+          We will return to multilayer networks in a little while, but first
+          we'll study the simplest possible neural "network" which consists of
+          a single neuron.
         </p>
 
-        <h2 class="material-heading">Embeddings</h2>
+        <h3 class="material-heading">
+          Perceptron: The Mother of all ANNs
+        </h3>
 
         <p>
-          An embedding represents a discrete item, such as a word, as a vector of learned numbers. Items used in
-          similar contexts tend to acquire similar vectors. Embeddings therefore replace arbitrary identifiers with
-          representations in which distance and direction can encode useful relationships. The same idea is used for
-          text tokens, images, users, products, and many other kinds of data.
-        </p>
-
-        <h2 class="material-heading">Attention and self-attention</h2>
-
-        <p>
-          Attention allows a model to give different weights to different pieces of information when producing a
-          representation or prediction. In self-attention, each item in a sequence can use information from the other
-          items in that sequence. For example, the representation of a pronoun can depend strongly on the earlier noun
-          to which it refers.
+          A <b>perceptron</b> is a feedforward neural network that consists of
+          a single basic neuron. It was among the very first formal models of
+          neural computation and because of its fundamental role in the
+          history of neural networks, it wouldn't be unfair to call it the
+          "Mother of all Artificial Neural Networks". It can be used as a
+          simple classifier in binary classification tasks. A classic neural
+          network method is the Perceptron algorithm, introduced by Rosenblatt
+          in 1957, which can be used to train a perceptron.
         </p>
 
         <p>
-          Self-attention is the central operation in Transformers. Here, it is enough to understand its purpose and
-          the roles of queries, keys, and values. Part 5 explains how Transformers use this operation and how
-          pretrained models become foundation models for many downstream applications.
+          The perceptron neuron is simply the above basic neuron model with
+          the step function as the activation function.
         </p>
 
-        <h2 class="material-heading">Summary</h2>
+        <p>
+          In the Perceptron algorithm, for which pseudocode is given below,
+          each misclassification leads to an update in the parameter vector w.
+          If the predicted output of the neuron is 1 when the correct class is
+          y=&ndash;1, then the input vector x is subtracted from the weight
+          vector. Similarly, if the predicted output is &ndash;1 when the
+          correct class is y=1, then the input vector x is added to the weight
+          vector. (Recall
+          that <a href="https://www.mathsisfun.com/algebra/vectors.html">vector
+            subtraction and addition</a> simply means the element-wise
+          subtraction or addition of the two vectors.)
+        </p>
+
+        <pre class="sh_java code-highlight"><code>perceptron(data):
+1:  w = [0, ...,0]               # array of size p
+2:  while error(data, w) > 0:
+3:     (x,y) = choose_random_item(data)
+4:     z = w[0]x[0] + ... + w[p-1]x[p-1]
+5:     if z ≥ 0 and y = -1:      # -1 classified as 1
+6:        w = w − x              # subtract vector x
+7:     if z < 0 and y = 1:       # 1 classified as -1
+8:        w = w + x              # add vector x
+9:  return(w)
+</code></pre>
 
         <p>
-          Neural networks learn layered representations by combining linear transformations with nonlinear activation
-          functions. Training adjusts their parameters using gradients. Embeddings and attention extend representation
-          learning to structured inputs such as language and prepare the ground for the modern architectures in Part 5.
+          In practice, it is impractical to choose random training data
+          points on line 3 of the algorithm because this may lead to choosing
+          correctly labeled examples most of the time, which is a waste of
+          time since they lead to no updates in the weights. Instead, a
+          better method is to iterate through the training data and as soon as
+          a misclassified item is found, do the required update.
+        </p>
+
+        <p>
+          It can be theoretically proven that if the data is <b>linearly
+            separable</b>, then the algorithm is guaranteed to stop after a
+          finite number of steps and produce a weigth vector that correctly
+          classifies all the training instances.
+        </p>
+
+        <h3 class="material-heading">
+          Multilayer perceptrons
+        </h3>
+
+        <p>
+          The main problem with the Perceptron algorithm is the assumption
+          that the data are linearly separable. In practice, this tends not to
+          be the case, and various variants of the algorithm have been
+          proposed to deal with this issue. Two main directions are:
+        <ol>
+          <li>
+            Applying a non-linear transformation on the original input
+            data may produce a representation where the data are
+            linearly separable. The so called "kernel trick" leads to
+            a class of methods known collectively as <a href="https://en.wikipedia.org/wiki/Kernel_method">kernel
+              methods</a>, among which the
+            support vector machine (SVM) is the best known.
+          <li>
+            The model can be extended by coupling a number of basic
+            neurons together to obtain neural networks that can represent
+            complex, non-linear decision boundaries. A classical example
+            of this is the <b>multilayer perceptron</b> (MLP).
+        </ol>
+        </p>
+
+        <p>
+          An illustration showing that the second option leads to non-linear
+          decision boundaries is given by the following video:
+        <ul>
+          <li> Vimeo: <a href="https://vimeo.com/7932084">Two Spirals Problem</a>
+        </ul>
+        </p>
+
+        <p>
+          Optimizing the weights of a multilayer perceptron is much harder than
+          optimizing the weigths of a single perceptron neuron. The second
+          coming of neural networks in the late 1980s was largely due to
+          the difficulties faced by the then prevailing logic-based approach
+          (so called expert systems) but also due to the invention of the
+          <b>backpropagation algorithm</b> in the 1970s-1980s.
+        </p>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>Meanwhile in Helsinki (1970)
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              The path(s) leading to the backpropagation algorithm are rather long
+              and winding. An interesting part of the history is related to the CS
+              department of the University of Helsinki. About three years after
+              the founding of the department in
+              1967, <a href="http://people.idsia.ch/~juergen/linnainmaa1970thesis.pdf">a
+                Master's thesis</a> was written by a student called Seppo
+              Linnainmaa. The topic of the thesis was "Cumulative rounding error
+              of algorithms as a Taylor approximation of individual rounding
+              errors" (the thesis was written in Finnish, so this is a translation
+              of the actual title "Algoritmin kumulatiivinen py&ouml;ristysvirhe
+              yksitt&auml;isten py&ouml;ristysvirheiden
+              Taylor-kehitelm&auml;n&auml;").
+            </p>
+
+            <p>
+              The automatic differentiation method developed in the thesis was
+              later applied by other researchers to quantify the sensitivity of
+              the output of a multilayer neural network with respect to the
+              individual weights, which is the key idea in backpropagation.
+            </p>
+
+
+          </div>
+        </div>
+
+        <p>
+          After its discovery, the Perceptron algorithm received a lot of
+          attention, not least because of optimistic statements made by
+          its inventor, Frank Rosenblatt. A classic example of AI hyperbole
+          is a New York Times article published on July 8th, 1958:
+        <blockquote style="margin-left: 40px; margin-right: 60px; background-color: #ecf0f1">
+          <p>The Navy revealed the embryo of an electronic computer today
+            that it expects will be able to walk, talk, see, reproduce itself
+            and be conscious of its existence. Later perceptrons will be able
+            to recognize people and call out their names and instantly
+            translate speech in one language to speech and writing in
+            another language, it was predicted.</p>
+        </blockquote>
+        The history of the debate that eventually lead to almost complete
+        abandoning of the neural network approach in the 1960s for more than
+        two decades is extremely fascinating. The
+        article <a href="https://doi.org/10.1177%2F030631296026003005">"A
+          Sociological Study of the Official History of the Perceptrons
+          Controversy"</a> by Mikel Olazaran (Social Studies of Science, 1996)
+        reviews the events from a sociology of science point of view.
+        Reading it today is quite thought provoking -- and slightly
+        chilling. Take for example a September 29th
+        2017 <a href="https://www.technologyreview.com/s/608911/is-ai-riding-a-one-trick-pony/">article
+          in the MIT Technology Review</a>, where Jordan Jacobs, co-founder of
+        a multimillion dollar <a href="http://vectorinstitute.ai/">Vector
+          institute for AI</a> compares Geoffrey Hinton (a figure-head of the
+        current deep learning boom) to Einstein because of his contributions
+        to the discovery of the power of the backpropagation algorithm in
+        the 1980s and later.
+        </p>
+
+        <p>
+          According to Hinton and Jacobs, we are on the brink of the final
+          breakthrough. Sound familiar?
+        </p>
+
+        <p>
+          Please note that neural network enthusiasts are not at all the only
+          ones inclined towards optimism. The rise and fall of the logic-based
+          "expert systems" approach to AI had all the same hallmark features
+          of an AI-hype, including promising results in restricted domains,
+          gullible journalists, clueless investors in their cabinets, and
+          too much speed to notice how "minor obstacles" were piling up and
+          becoming big problems. The outcome both in the early 1960s and late
+          1980s was a collapse in the research funding, "AI Winter".
+        </p>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>What Should I Learn about Neural Networks?
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              The learning objectives related to neural networks are on a
+              relatively high level: you should understand the basic idea (the
+              learning method and the activation principle) in feedforward networks.
+              You should also learn what types of applications they are good for. An
+              exception is the perceptron classifier, which you should study in
+              more detail -- that's why there is an exercise about it.
+            </p>
+
+          </div>
+        </div>
+
+	<h2 class="material-heading">
+          Forward & Backward Propagation
+        </h2>
+	
+	<p>
+	  Information in a neural network can flow in two directions.
+	</p>
+	
+	<p>
+	  The process of applying a neural network to data—computing the output for a given input—is called <b>forward propagation</b> (or <b>forward pass</b>). 
+	  During this stage, the input representation is transformed into the target representation, with intermediate (hidden) representations sequentially constructed by applying layers to previous representations.
+	  This sequential nature is why the process is called "forward" propagation.
+	</p>
+
+	<p>
+	  <b>Backward propagation</b> (or <b>backward pass</b>) is the process in which information (typically the prediction error of the target representation) moves in reverse—from the final layer (or even the loss function) back to the input through all transformations.
+	</p>
+	
+	<p>
+	  The backpropagation mechanism plays a fundamental role in training neural networks, enabling gradient-based optimization by propagating error signals backward through the computational graph.
+	</p>
+
+	<h2 class="material-heading">Popular Activation Functions</h2>
+	
+	<p>
+	  At first glance, it might seem possible to stack multiple linear layers in sequence without any additional modifications.
+	  However, this approach is ineffective because after each linear layer, an <b>activation function</b> must be applied. But why?
+	</p>
+	
+	<p>
+	  Let's analyze a neural network with two consecutive linear layers. What happens if no non-linear activation function is placed between them?
+	</p>
+	
+	<p style="text-align: center;">
+	  <code>
+	    y = X<sub>out</sub> = X<sub>1</sub>W<sub>2</sub> + b<sub>2</sub> = (X<sub>0</sub>W<sub>1</sub> + b<sub>1</sub>)W<sub>2</sub> + b<sub>2</sub>
+	    <br>
+	    = X<sub>0</sub>W<sub>1</sub>W<sub>2</sub> + b<sub>1</sub>W<sub>2</sub> + b<sub>2</sub>
+	    <br>
+	    = X<sub>0</sub>W' + b'
+	  </code>
+	</p>
+	
+	<p>
+	  The composition of two linear transformations results in another linear transformation. In other words, stacking two linear layers without an activation function is mathematically equivalent to using a single linear layer.
+	</p>
+	
+	<p>
+	  Adding an <b>activation function</b> after each linear layer introduces <b>non-linearity</b> into the transformation, resolving this issue.
+	  Furthermore, selecting the right activation function ensures that the transformation has desirable properties, such as stability and smooth gradient flow.
+	</p>
+	
+	<p>
+	  The following are some of the most commonly used activation functions:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>Sigmoid (Logistic Function):</b> 
+	    <p style="text-align: center;">
+	      <code>σ(x) = 1 / (1 + exp(-x))</code>
+	    </p>
+	    <p>
+	      The sigmoid function maps input values to the range (0, 1), making it useful for binary classification tasks.
+	    </p>
+	  </li>
+	
+	  <li>
+	    <b>ReLU (Rectified Linear Unit):</b>
+	    <p style="text-align: center;">
+	      <code>ReLU(x) = max(0, x)</code>
+	    </p>
+	    <p>
+	      ReLU is widely used due to its simplicity and effectiveness in reducing the vanishing gradient problem.
+	    </p>
+	  </li>
+	</ul>
+
+	<img src="../img/material/part5/activation_functions.webp" width="80%" alt="Comparison of Popular Activation Functions">
+
+	<h3>
+          Exploring the Tensorflow Playground
+        </h3>
+
+        <p>
+          Yo deepen your understanding of how neural networks work, you've asked
+          to investigate the TensorFlow Playground—an interactive visualisation tool that allows you to
+          experiment with small neural networks directly in your browser. Your goal is to explore how different
+          configurations of neural networks affect their ability to learn and solve classification problems.
+        </p>
+        <h2 class="material-heading">Training, validation and generalization</h2>
+        <p>
+          A low training loss does not guarantee useful predictions on new data. We use training data to update the
+          parameters, validation data to choose settings such as network size and learning rate, and a test set only
+          for the final estimate. A network underfits when it cannot capture the relevant pattern. It overfits when it
+          learns details of the training sample that do not generalize.
+        </p>
+        <p>
+          Regularization can penalize large weights, randomly drop activations during training, augment the data or
+          stop training when validation performance deteriorates. Data leakage is a separate problem: information
+          from validation or test examples must not influence training or preprocessing choices.
+        </p>
+        <div class="hint"><div class="hint__header"><i class="fa fa-info-circle hint__icon"></i>Episode 7 checkpoint</div>
+        <div class="hint__body"><ul>
+          <li>Why cannot several linear layers without activations solve a nonlinear problem?</li>
+          <li>What information moves forward, and what information moves backward during training?</li>
+          <li>Why should the test set remain untouched while model choices are made?</li>
+        </ul></div></div>
+        <h1 class="material-heading">Episode 8: Representation learning and word embeddings</h1>
+        <p>
+          Hidden layers learn intermediate representations that support the final task. A representation is shaped by
+          the training data, architecture and objective: it preserves information useful for the task and may discard
+          other information. Episode 8 examines this idea through language, where discrete symbols must become vectors
+          before a neural network can process them.
+        </p>
+	<h1 class="material-heading">Neural Networks for Sequential Data</h1>
+	
+	<p>
+	  In this section, we explore neural networks designed for processing data in the form of sequences of tokens.
+	  Such data can come from <b>music, videos, time series, robot motion trajectories, or protein amino acid sequences</b>.
+	  However, one of the richest sources of sequential data is <b>Natural Language Processing (NLP)</b>.
+	</p>
+
+	<p>
+	  As the name suggests, <b>Natural Language Processing (NLP)</b> is a branch of data science focused on analyzing texts written in human languages.
+	  NLP plays a role in many everyday applications, such as asking Siri or Alexa to play a song, using autocomplete in search engines, or checking spelling and grammar in documents.
+	</p>
+	
+	<ul>
+	  <li>Document classification (by topic, category, genre, etc.).</li>
+	  <li>Spam detection.</li>
+	  <li>Part-of-speech tagging.</li>
+	  <li>Spellchecking and typo correction.</li>
+	  <li>Keyword extraction and synonym/antonym detection.</li>
+	  <li>Named entity recognition (detecting names, geographic locations, dates, phone numbers, addresses).</li>
+	  <li>Sentiment analysis (detecting emotional tone in text).</li>
+	  <li>Information retrieval and ranking relevant documents based on search queries.</li>
+	  <li>Summarization (automatic generation of concise text summaries).</li>
+	  <li>Machine translation (automated language translation).</li>
+	  <li>Dialogue systems and chatbots.</li>
+	  <li>Question-answering systems (choosing the correct answer or generating responses).</li>
+	  <li>Speech recognition (Automated Speech Recognition, ASR).</li>
+	</ul>
+
+	<p>
+	  There are several ways neural networks process sequential data:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>Many-to-one:</b> A sequence of objects is input, and a single object is output.
+	    <br><b>Example:</b> Text or video classification.
+	    <br><b>Example 2:</b> Thematic classification—given a sentence of arbitrary length, generate a probability vector indicating the likelihood of predefined topics being present in the sentence.
+	    The output vector has a fixed dimension equal to the number of topics.
+	  </li>
+	
+	  <li>
+	    <b>One-to-many:</b> A single object is input, and a sequence of objects is output.
+	    <br><b>Example:</b> Generating a caption for an image (image captioning).
+	  </li>
+	
+	  <li>
+	    <b>Many-to-many:</b> Both the input and output are sequences of variable length.
+	    <br><b>Examples:</b> Machine translation, text summarization, generating article headlines.
+	  </li>
+	
+	  <li>
+	    <b>Synchronized many-to-many:</b> Both input and output sequences have the same length, with explicit alignment between input and output tokens.
+	    <br><b>Examples:</b> Generating frame-by-frame subtitles for videos, <b>PoS-tagging</b> (part-of-speech tagging—predicting the part of speech for each word in a sentence).
+	  </li>
+	</ul>
+
+	<h2 class="material-heading">Word Embeddings</h2>
+	
+	<p>
+	  Before discussing the architectures commonly used for processing text, we need to understand how text data can be encoded.
+	  Since neural networks require numerical inputs, we must first convert text into a vectorized representation. 
+	  There are two fundamental approaches to text vectorization:
+	</p>
+	
+	<ul>
+	  <li><b>Vectorizing the entire text</b>, transforming it into a single vector.</li>
+	  <li><b>Vectorizing individual structural units</b>, converting the text into a sequence of vectors.</li>
+	</ul>
+	
+	<p>
+	  Early statistical approaches followed the first method, treating text as an unordered collection ("bag") of tokens, 
+	  typically words. This means that sentences like <i>"I don't like ML"</i> and <i>"I like don't ML"</i> would receive 
+	  identical vector representations, losing important structural information. Therefore, we will only briefly mention these approaches.
+	</p>
+	
+	<div class="hint">
+	  <div class="hint__header">
+	    <i class="fa fa-info-circle hint__icon"></i> A Brief Look at Statistical Approaches
+	  </div>
+	
+	  <div class="hint__body">
+	    <p>
+	      The most straightforward method is called <b>Bag-of-Words (BoW)</b>. In this approach, a text is represented as 
+	      a frequency vector of token occurrences, excluding predefined "stop-words" such as personal pronouns, articles, and other common words.
+	    </p>
+	
+	    <p>
+	      A slightly more advanced version is <b>TF-IDF (Term Frequency-Inverse Document Frequency)</b>. 
+	      This method uses token frequency in a document. It also uses how rare the token is across a collection of texts <code>D</code>.
+	      The TF-IDF representation of a document <code>d</code> is the product:
+	    </p>
+	
+	    <p style="text-align: center;">
+	      <code>TF(t, d) ⋅ IDF(t, D)</code>
+	    </p>
+	
+	    <p>
+	      Let's break down each component:
+	    </p>
+	
+	    <ul>
+	      <li>
+	        <b>Term Frequency (TF):</b> 
+	        <br>
+	        <code>TF(t, d) = (n_t) / (Σ_k n_k)</code>, 
+	        <br>
+	        where <code>n_t</code> is the number of occurrences of token <code>t</code> in document <code>d</code>, 
+	        and the denominator represents the total word count in <code>d</code>. This measures how frequently a token appears in a document.
+	      </li>
+	
+	      <li>
+	        <b>Inverse Document Frequency (IDF):</b>
+	        <br>
+	        <code>IDF(t, D) = log(|D| / |{d_i ∈ D | t ∈ d_i}|)</code>,
+	        <br>
+	        where <code>|{d_i ∈ D | t ∈ d_i}|</code> counts the number of documents in the collection <code>D</code> that contain token <code>t</code>.
+	        This factor penalizes overly common words while assigning higher importance to rarer, more informative tokens.
+	      </li>
+	    </ul>
+	  </div>
+	</div>
+
+	<h2 class="material-heading">Word Embeddings with Context</h2>
+	
+	<p>
+	  Let's now explore another approach—mapping words to vectors (embeddings).
+	</p>
+	
+	<p>
+	  Suppose that the same word is always represented by the same vector, regardless of its position or surrounding text. 
+	  How can we encode the meaning of a word in its vector representation? 
+	  The answer aligns with one of the core ideas of representation learning: <b>use context</b>.
+	</p>
+	
+	<p>
+	  Just as in foreign language learning, where unfamiliar words can be inferred from surrounding text, we can define word meaning 
+	  by the words that frequently appear near it.
+	</p>
+	
+	<h3>Word2vec: Learning Word Representations</h3>
+	
+	<p>
+	  One of the most famous implementations of this idea is <b>Word2vec</b>, introduced by 
+	  <a href="https://arxiv.org/abs/1301.3781" target="_blank">T. Mikolov in 2013</a> 
+	  in the paper <i>Efficient Estimation of Word Representations in Vector Space</i>.
+	</p>
+	
+	<p>
+	  The authors proposed two training strategies:
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>CBOW (Continuous Bag-of-Words):</b> The model learns to predict the <b>central word</b> based on its surrounding context 
+	    (e.g., two words before and after the target word).
+	  </li>
+	  <li>
+	    <b>Skip-gram:</b> The model learns to predict the <b>context words</b> given a central word 
+	    (e.g., the two neighboring words on each side).
+	  </li>
+	</ul>
+	
+	<p>
+	  The dimensionality of word embeddings is a <b>hyperparameter</b> and is selected empirically. 
+	  The original paper suggests using an embedding size of <b>300</b>. 
+	  These learned representations preserve semantic relationships between words.
+	</p>
+	
+	<p>
+	  We won't go into detail about the inner workings of Word2vec and its modern variations here. 
+	  For a deeper dive, we recommend the <a href="https://lena-voita.github.io/nlp_course/word_embeddings.html" target="_blank">NLP course by Lena Voita</a>.
+	</p>
+	
+	<h3>Examples of Word Embeddings</h3>
+	
+	<p>
+	  Below are some examples of words and their top-10 nearest neighbors in the embedding space (trained on a dataset of Quora Questions using Word2vec):
+	</p>
+	
+	<ul>
+	  <li>
+	    <b>quantum:</b> electrodynamics, computation, relativity, theory, equations, theoretical, particle, mathematical, mechanics, physics.
+	  </li>
+	  <li>
+	    <b>personality:</b> personalities, traits, character, persona, temperament, demeanor, narcissistic, trait, antisocial, charisma.
+	  </li>
+	  <li>
+	    <b>triangle:</b> triangles, equilateral, isosceles, rectangle, circle, choke (guess why?), quadrilateral, hypotenuse, bordered, polygon.
+	  </li>
+	  <li>
+	    <b>art:</b> arts, museum, paintings, painting, gallery, sculpture, photography, contemporary, exhibition, artist.
+	  </li>
+	</ul>
+
+        <h2 class="material-heading">Static and contextual representations</h2>
+        <p>
+          A static embedding gives each word type one vector, so “bank” has the same representation in “river bank”
+          and “bank account.” A contextual model instead computes a representation for each occurrence from the
+          surrounding sequence. Contextual representations prepare the ground for attention and Transformers, which
+          are introduced in Episode 9.
+        </p>
+        <h2 class="material-heading">What an embedding does not guarantee</h2>
+        <p>
+          Embeddings reflect statistical regularities in their training data. Their nearest neighbours can expose
+          useful semantic structure, but also stereotypes, historical inequalities and gaps in coverage. Vector
+          similarity is therefore evidence about patterns in data, not proof that a model understands a concept in
+          the human sense.
+        </p>
+        <div class="hint"><div class="hint__header"><i class="fa fa-info-circle hint__icon"></i>Episode 8 checkpoint</div>
+        <div class="hint__body"><ul>
+          <li>What information does a one-hot representation preserve, and what does it lack?</li>
+          <li>Why do words used in similar contexts tend to become neighbours in an embedding space?</li>
+          <li>Why might the best representation depend on the downstream task?</li>
+        </ul></div></div>
+        <h2 class="material-heading">Connection to Part 5</h2>
+        <p>
+          Part 5 begins from the limitation of static embeddings: the meaning required at one position often depends
+          on other positions. Episode 9 introduces attention and self-attention; Episodes 10 and 11 develop
+          Transformers, pretraining, transfer and foundation-model applications.
         </p>
 
         <div class="exercise-list">
