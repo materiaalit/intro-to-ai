@@ -76,9 +76,14 @@
               5</a>
           </li>
           <li class="nav-item ">
-            <a href="../part6_ethics/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6_ethics.html&gt;')">Part
+            <a href="../part6/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
               6</a>
+          </li>
+          <li class="nav-item ">
+            <a href="../part7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+              7</a>
           </li>
         </ul>
 
@@ -97,7 +102,9 @@
             <i class="fa fa-ellipsis-h hidden-lg-up"></i>
           </button>
 
+          <!-- TMC login disabled. Original button:
           <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
+          -->
         </div>
       </nav>
 
@@ -105,334 +112,13 @@
 
     <div class="content-wrapper">
       <div class="container material" id="material">
-        <div class="exercise-list">
-          <div class="exercise-list__header">
-            Exercises
-          </div>
+        <h1>
+          Neural Networks
+        </h1>
 
-          <div class="exercise-list__content" id="exercise-list"></div>
-
-        </div>
-
-
-
-
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Bayesian networks (pencil-and-paper) (2p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                In Part 3, we briefly discussed how Bayesian networks lead to compact
-                representation of probabilistic models.
-              <ol>
-                <li>
-                  Consider a model with N=4 variables, each of which has k possible
-                  values (0,1,...,k&ndash;1). How many different elementary events are there
-                  in the domain? One less is the number of probabilities that we'd have
-                  to determine in order to fully specify the model. (For example, in the
-                  Car model of Part 3, with N=6 and k=2, this number was 63.)
-                <li>
-                  How many parameters would we have to define to specify the model using
-                  an "empty" Bayesian network, i.e, a network with no edges at all?
-                <li>
-                  What is the maximum number of parameters we'd have to define in a
-                  Bayesian network in this domain (N variables with k values each)?
-                  Remember that the graph has to be a DAG, i.e., no directed cycles are
-                  allowed.
-                <li>
-                  <i>Optional:</i> Generalize to arbitrary values of N. It may be helpful to
-                  recall the sum of a geometric series 1+k+k<sup>2</sup>+...+k<sup>N&ndash;1</sup> =
-                  (k<sup>N</sup>&ndash;1)/(k&ndash;1), where k&ne;1.
-              </ol>
-              </p>
-
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Excercise 4.1 -->
-
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-        
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-          <div class="collapse">
-            <div class="solution__body">
-          <p>
-            <ol>
-              <li>
-                The number of combinations is k<sup>N</sup> = k<sup>4</sup>.
-                Since the probabilities of the elementary events must sum to
-                one, it is enough to give k<sup>4</sup>&ndash;1 probability
-                values to define the model this way.<br><br>
-              <li>
-                In an empty network, we only need to specify the distributions
-                of each variable. Since each variable has k possible values, we
-                need k&ndash;1 probabilities per variable, and the total number
-                is N(k&ndash;1) = 4(k&ndash;1).<br><br>
-              <li>
-                The more edges there are in the network, the more parameters are
-                required in order to specify all the conditional
-                distributions. Thus, we need to calculate how many parameters
-                there are in the "full" network. A full network has one node
-                with no parents, one node with one parent, one node with two
-                parents, etc.<br><br>
-                For a node with m parents, the number of possible parent
-                configurations is k<sup>m</sup> (since we assumed that the
-                number of values that each parent can take is k). To specify
-                the conditional distribution for all parent configurations,
-                we thus need k<sup>m</sup>(k&ndash;1) probability parameters.<br><br>
-                Summing up the numbers over the N=4 nodes, we thus get k&ndash;1
-                + k(k&ndash;1) + k<sup>2</sup>(k&ndash;1) +
-                k<sup>3</sup>(k&ndash;1).
-                <br><br>
-              <li>
-                For general N, the above formula becomes<br><br>
-                (1 + k + k<sup>2</sup> + ... + k<sup>N&ndash;1</sup>)(k&ndash;1)
-                = k<sup>N</sup>&ndash;1,
-                <br><br>
-                where we used the formula for the sum of a geometric series.
-            </ol>
-        
-            </div>
-          </div>
-        </div>
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Bayesian networks: Car (programming) (2p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                Please note that there will be no template solution in TMC for this week’s exercises. Implement your solutions from scratch.
-              </p>  
-
-              <p>
-                Implement an algorithm for generating data from the Car network
-                discussed in Part 3. You should generate n tuples, each of which is
-                a six element list of bits (or Boolean values). You should start by
-                choosing the value of B so that it takes value 1
-                (or <code>True</code>) with probability 0.9. After choosing the
-                value of B, choose the value of R. If B=0, then R=0 with probability
-                1. If B=1, then R=0 with probability 0.1. Continue this way,
-                choosing the probabilities from the CPTs, until you have generated a
-                complete tuple.
-              </p>
-
-              <p>
-                Generate a sample of n=100 000 tuples. Use it to approximate the following
-                conditional probabilities:
-              <ol>
-                <li>
-                  P(B | R,G,&not;S)
-                <li>
-                  P(S | R,I,G)
-                <li>
-                  P(S | &not;R,I,G)
-              </ol>
-              <strong>
-                and (don't forget this part):
-              </strong>
-              <ol start=4><br>
-                <li>
-                  Give an interpretation to the above probabilities. Are they in line with
-                  your intuition? In other words, do they make sense?
-              </ol>
-              </p>
-
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Excercise 4.2 -->
-
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-          <div class="collapse">
-            <div class="solution__body">
-        
-          <p>
-            An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/auto.py">here</a>.
-          </p>
-        
-        
-            </div>
-          </div>
-        </div>
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Bayesian networks: Earthquake (programming) (1p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                Consider the following scenario. You live in an area where
-                earthquakes happen on the average every 111th day. Another annoying
-                thing is that a burglar breaks into your home on the average once a
-                year. Both events occur independently of each other and uniformly
-                throughout the year (so any day is like another).
-              </p>
-
-              <p>
-                In case of an earthquake, your home alarm goes off with probability 0.81.
-                If your home is broken into, the alarm goes off with probability 0.92.
-                If these both should occur at the same time, the alarm goes off with
-                probability 0.97. If nothing special is going on, there's a false alarm
-                with probability 0.0095.
-              </p>
-
-              <p>
-                Now modify the algorithm from the previous exercise so that you can generate
-                data from variables [E]arthquake, [B]urglar, [A]larm. Generate a sample of
-                n=100 000 tuples.
-              <ol>
-                <li>
-                  Among the tuples with A=1, what is the fraction where B=1?
-                <li>
-                  Among the tuples with A=1 and E=1, what is the fraction where B=1?
-              </ol>
-              <strong>
-                and (don't forget these):
-              </strong>
-              <ol start=3><br>
-                <li>
-                  Give an interpretation to your answers for items 1 & 2. What
-                  probabilities do they approximate?
-                <li>
-                  Are they in line with your intuition? In other words, do they
-                  make sense? In particular: which of the fractions is bigger and
-                  why?
-                <li>
-                  Repeat the experiment a couple of times to get a feeling of how much
-                  the results change just by chance. (This is the nature of the Monte
-                  Carlo approximation.) Experiment with different values of n. How does
-                  it affect the variability?
-              </ol>
-              </p>
-
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Excercise 4.3 -->
-
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-        
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-          <div class="collapse">
-            <div class="solution__body">
-          <p>
-            An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/earthquake.py">here</a>.
-          </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Plastic Film Folding Machine (1p)</h1>
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-        
-          <div class="collapse">
-            <div class="exercise__body">
-              <p>
-                On a machine that folds plastic film, the temperature can be varied between 130°C and 185°C. To explore how temperature influences fold thickness, a dataset of 12 temperature and thickness values is collected. Refer to the plot for details.
-              </p>
-
-              <img src="../img/exercises/exersice_4_4_plot.png" alt="Plastic Film Folding Plot" width="60%">
-        
-                <li>
-                  <b>Determine the correct parameter estimates:</b> Based on the figure, identify the correct estimates for the parameters in the linear regression model (where β̂₀ and β̂₁ are model's coefs and σ̂  - standard deviation):
-                  <ol type="A">
-                    <li>β̂₀ = 0, β̂₁ = -0.9, σ̂ = 36</li>
-                    <li>β̂₀ = 0, β̂₁ = 0.9, σ̂ = 3.6</li>
-                    <li>β̂₀ = 252, β̂₁ = -0.9, σ̂ = 3.6</li>
-                    <li>β̂₀ = -252, β̂₁ = -0.9, σ̂ = 36</li>
-                    <li>β̂₀ = 252, β̂₁ = -0.9, σ̂ = 36</li>
-                  </ol>
-                </li>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Excercise 4.4 -->
-
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-        
-          <div class="collapse">
-            <div class="solution__body">
-        
-          <p>
-        Correct Answer: (C) β̂₀ = 252, β̂₁ = -0.9, σ̂ = 3.6
-           - Explanation: From the plot, the intercept (β̂₀) must be 252 as the line crosses near that value. The slope (β̂₁) is negative and approximately -0.9, and the standard deviation (σ̂) is closer to 3.6 than 36.
-          </p>
-              
-        </div>
-      </div>
-    </div>
-
-        
         <div class="hint">
           <div class="hint__header">
-            <i class="fa fa-info-circle hint__icon"></i>Learning objectives of Part 4
+            <i class="fa fa-info-circle hint__icon"></i>Learning objectives
           </div>
 
           <div class="hint__body">
@@ -446,19 +132,22 @@
                   Objectives (after the course, you ...)
                 </td>
               </tr>
-              <td>
-                Machine learning
-              </td>
-              <td>
-                <ul>
-                  <li>can distinguish between unsupervised and supervised machine learning scenarios
-                  <li>can implement at least two supervised classification methods (e.g., naive Bayes, nearest neighbour
-                    classifier)
-                  <li>know the main types of neural networks (feed-forward, recurrent, self-organizing map) and their
-                    main principles
-                  <li>can implement the perceptron algorithm in a simple binary classification problem
-                </ul>
-              </td>
+              <tr>
+                <td>
+                  Neural networks
+                </td>
+                <td>
+                  <ul>
+                    <li>can explain the perceptron and implement the perceptron algorithm
+                      for a simple binary classification problem
+                    <li>can describe multilayer perceptrons and forward propagation
+                    <li>can explain why neural networks use activation functions
+                    <li>can describe backpropagation as the mechanism that provides
+                      gradients for optimization
+                    <li>can explain word embeddings, attention, and self-attention
+                      at a conceptual level
+                  </ul>
+                </td>
               </tr>
             </table>
 
@@ -466,7 +155,171 @@
           </div>
         </div>
 
+        <div class="exercise-list">
+          <div class="exercise-list__header">
+            Exercises
+          </div>
 
+          <div class="exercise-list__content" id="exercise-list"></div>
+
+        </div>
+
+
+
+
+
+        <!-- Exercise 4.1 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Perceptron (programming) (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Use the Perceptron template on TMC. (You'll find the necessary data files in the
+                TMC template.)
+              </p>
+
+              <p>
+                The file <code>mnist-x.data</code> contains 6000 images from the popular
+                <a href="http://yann.lecun.com/exdb/mnist/">MNIST dataset</a>, each
+                of which is given on a single line in the file. Each image consists
+                of 28 &times; 28 pixels listed row-by-row, so each line in the file
+                contains 784 values. Each pixel is either black (&ndash;1) or white
+                (1). The file
+                <code>mnist-y.data</code> contains the correct class value (0-9) of each
+                of the 6000 images.
+              </p>
+
+              <p>
+                Use the first 5000 images as training data and the last 1000 as test data.
+              <ol>
+                <li>
+                  Implement the perceptron algorithm in the <code>Perceptron</code> class.
+                <li>
+                  Modify the <code>train()</code> method in
+                  class <code>Perceptron</code> so that it learns to distinguish
+                  number 3 from number 5. (Notice that the
+                  variable <code>targetChar</code> can be set to be one of these
+                  classes while <code>oppositeChar</code> should be the
+                  other. This will set the class label as 1 and &ndash;1 as is
+                  required in the Perceptron algorithm. Images representing other
+                  numbers are ignored.) Try to get a classification error around
+                  5&ndash;15 %.
+                <li>
+                  Try other pairs of number than 3 vs 5. Which numbers are easiest to
+                  classify and which are the hardest?
+              </ol>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 4.3 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Tensorflow Playground: Basic Exploration of Neural Networks (0.5p)</h1>
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p><b>Open the TensorFlow Playground:</b><br>
+                Go to <a href="https://playground.tensorflow.org" target="_blank">TensorFlow Playground</a> in your web
+                browser.</p>
+
+              <p><b>Task 1: Build a Simple Neural Network</b></p>
+              <ul>
+                <li>Start with the default dataset (two circles) and network settings.</li>
+                <li>Use one hidden layer with one neuron to classify the points.</li>
+                <li>Observe the decision boundary and how the network performs.</li>
+              </ul>
+
+              <p><b>Task 2: Add More Neurons</b></p>
+              <ul>
+                <li>Increase the number of neurons in the hidden layer to three neurons.</li>
+                <li>Observe the changes in the decision boundary and how well the network classifies the data.</li>
+                <li>How does the performance change with more neurons?</li>
+              </ul>
+
+              <p><b>Task 3: Add More Layers</b></p>
+              <ul>
+                <li>Add a second hidden layer with two neurons.</li>
+                <li>Compare the performance to the previous network with just one hidden layer. How does adding more
+                  layers affect the learning?</li>
+              </ul>
+
+              <p><b>Results:</b><br>
+                Keep a screenshot of each configuration (one neuron, three neurons, two layers). Briefly describe (2-3
+                sentences) how each change affected the decision boundary and model performance.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 4.4 -->
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Tensorflow Playground: Experimenting with Complex Data and Advanced
+                Features (0.5p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+              <p>
+                After the basic playground exercise, switch to a harder dataset
+                such as <b>Spirals</b>. The tasks below help you see how
+                architecture choices, activation functions, learning rates, and
+                regularization affect what the network can learn.
+              </p>
+
+              <p><b>Task 1: Investigate Different Datasets</b></p>
+              <ul>
+                <li>Change the dataset to "Spirals" using the dropdown menu.</li>
+                <li>Experiment with different network architectures to successfully classify the data:</li>
+                <li>Start with one hidden layer and four neurons.</li>
+                <li>Gradually increase the number of neurons and layers until the network correctly classifies the
+                  spirals.</li>
+                <li>What is the minimum number of layers and neurons needed to classify the spirals accurately?</li>
+              </ul>
+
+              <p><b>Task 2: Adjusting Activation Functions and Learning Rate</b></p>
+              <ul>
+                <li>Change the activation function from "ReLU" to "tanh" and observe how it affects the network's
+                  ability to learn.</li>
+                <li>Now, adjust the learning rate slider and observe how different learning rates (e.g., 0.01, 0.1, 3)
+                  impact the training speed and model accuracy.</li>
+              </ul>
+
+              <p><b>Task 3: Experiment with Regularization</b></p>
+              <ul>
+                <li>Add L2 regularization to your network and observe how it impacts the decision boundary and prevents
+                  overfitting.</li>
+                <li>Try increasing the regularization strength to see its effects on training.</li>
+              </ul>
+
+              <p><b>Results:</b><br>
+                Keep screenshots of your experiments with the "Spirals" dataset and different network configurations.
+                Briefly describe (2-3 sentences) how changing the activation function, learning rate, and regularization
+                influenced the network's performance.</p>
+            </div>
+          </div>
+        </div>
 
         
         <!-- Main content -->
@@ -1624,27 +1477,17 @@
         </p>
         
         <h1 class="material-heading">
-          Conclusion of Part 4: Classical Machine Learning Methods
+          Conclusion
         </h1>
         
         <p>
-          In this part, we explored a range of classical machine learning methods, including decision trees, ensemble methods such as bagging, boosting, and random forests, as well as techniques like stacking and blending. These approaches form the foundation of machine learning and are widely used in various practical applications due to their interpretability, flexibility, and ability to handle tabular data effectively.
+          This part introduced neural networks: the perceptron, multilayer networks,
+          and how depth and width change what a model can fit. The TensorFlow
+          Playground exercises were meant to make those effects visible.
         </p>
         
         <p>
-          We also examined the principles and implementation details of algorithms like the k-nearest neighbors (KNN) method and the naive Bayes classifier. These algorithms, despite their simplicity, provide powerful baselines for classification and regression tasks, offering a balance between computational efficiency and accuracy.
-        </p>
-        
-        <p>
-          A key takeaway from this part is the importance of understanding the trade-offs between bias and variance, which play a crucial role in model selection and performance optimization. Ensemble methods, such as random forests and gradient boosting, demonstrate how combining multiple models can lead to more robust predictions by reducing variance and, in some cases, bias.
-        </p>
-        
-        <p>
-          As machine learning evolves, many of these classical methods continue to serve as benchmarks and foundational tools in solving real-world problems. They are particularly effective for structured data and remain a critical part of any machine learning practitioner's toolkit.
-        </p>
-        
-        <p>
-          In the next part, we will delve into deep learning, exploring how neural networks and their advanced architectures have revolutionized machine learning, particularly in domains such as image recognition, natural language processing, and more.
+          The next part covers modern architectures and foundation-model applications.
         </p>
 
 
@@ -1662,7 +1505,10 @@
     </div>
   </div>
 
+  <!-- TMC login disabled. Original modal selector:
   <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
+  -->
+  <div class="modal fade" id="tmc-login-modal-disabled" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form id="tmc-login-form">

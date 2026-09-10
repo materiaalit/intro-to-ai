@@ -77,9 +77,14 @@
               5</a>
           </li>
           <li class="nav-item ">
-            <a href="../part6_ethics/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6_ethics.html&gt;')">Part
+            <a href="../part6/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
               6</a>
+          </li>
+          <li class="nav-item ">
+            <a href="../part7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+              7</a>
           </li>
         </ul>
 
@@ -98,7 +103,9 @@
             <i class="fa fa-ellipsis-h hidden-lg-up"></i>
           </button>
 
+          <!-- TMC login disabled. Original button:
           <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
+          -->
         </div>
       </nav>
 
@@ -106,46 +113,13 @@
 
     <div class="content-wrapper">
       <div class="container material" id="material">
-        <div class="exercise-list">
-          <div class="exercise-list__header">
-            Exercises
-          </div>
-
-          <div class="exercise-list__content" id="exercise-list"></div>
-
-        </div>
-
-
-
-        <h1 class="material-heading">
-          What is AI?
-
+        <h1>
+          Philosophy, problem solving as search, games
         </h1>
-
-        <p>
-          In this first part, we will discuss what we mean when we talk about AI.
-          It turns out that there is no exact definition at all, but that the
-          field is rather being redefined at all times.
-        </p>
-
-        <p>
-          We will also briefly discuss the philosophical aspects of AI: whether
-          intelligent behavior implies or requires the existence of a ''mind'', and
-          in what extent is consciousness replicable as a computational process.
-          However, this course is first and foremost focused on building
-          practically useful AI tools, and we will quickly push considerations
-          about consciousness aside as they tend to be only in the way when
-          designing working solutions to real problems.
-        </p>
-
-        <p>
-          The technical topics covered in Part 1 are problem-solving by
-          search, including the A* algorithm, and games.
-        </p>
 
         <div class="hint">
           <div class="hint__header">
-            <i class="fa fa-info-circle hint__icon"></i>Learning objectives of Part 1
+            <i class="fa fa-info-circle hint__icon"></i>Learning objectives
           </div>
 
           <div class="hint__body">
@@ -173,6 +147,8 @@
                     <li>can describe the contrast between "Good Old Fashioned
                       AI" (GOFAI) and modern AI approaches
                     <li>know the main-stream developments in the history of AI
+                    <li>can explain the idea of artificial general intelligence (AGI)
+                      and distinguish it from narrow AI
                   </ul>
                 </td>
               </tr>
@@ -182,8 +158,8 @@
                 </td>
                 <td>
                   <ul>
-                    <li>can formulate a problem as a graph and apply search algorithms to solve it
-                    <li>can explain and implement A* search
+                    <li>can formulate a problem as a graph and apply breadth-first and depth-first search
+                    <li>can explain informed search and implement A* search
                     <li>can formulate a simple game (such as tic-tac-toe) as a game tree
                     <li>can explain and implement the minimax algorithm and depth-limited alpha-beta pruning
                     <li>can design a reasonable heuristic evaluation function in a game (e.g., chess)
@@ -195,6 +171,42 @@
 
           </div>
         </div>
+
+        <div class="exercise-list">
+          <div class="exercise-list__header">
+            Exercises
+          </div>
+
+          <div class="exercise-list__content" id="exercise-list"></div>
+
+        </div>
+
+
+        <h1 class="material-heading">
+          What is AI?
+
+        </h1>
+
+        <p>
+          In this first part, we will discuss what we mean when we talk about AI.
+          It turns out that there is no exact definition at all, but that the
+          field is rather being redefined at all times.
+        </p>
+
+        <p>
+          We will also briefly discuss the philosophical aspects of AI: whether
+          intelligent behavior implies or requires the existence of a ''mind'', and
+          in what extent is consciousness replicable as a computational process.
+          However, this course is first and foremost focused on building
+          practically useful AI tools, and we will quickly push considerations
+          about consciousness aside as they tend to be only in the way when
+          designing working solutions to real problems.
+        </p>
+
+        <p>
+          The technical topics covered in Part 1 are problem-solving by
+          search, including the A* algorithm, and games.
+        </p>
 
 
         <h2 class="material-heading">
@@ -482,7 +494,7 @@ Goertzel, B. (2007). Artificial General Intelligence: Concept, State of the Art,
 Goertzel explores the theoretical underpinnings of AGI, emphasizing the ability to self-improve and recursively enhance capabilities as a defining feature of AGI.
 </p>
 <p>Philosophical Definition
-AGI is a hypothetical intelligence that possesses not only problem-solving skills but also self-awareness, consciousness, and the ability to set its own goals.
+AGI is a hypothetical intelligence with problem-solving skill. The philosophical definition also requires self-awareness, consciousness, and the ability to set its own goals.
 Searle, J. R. (1980). Minds, Brains, and Programs. Behavioral and Brain Sciences, 3(3), 417–457.
 Searle’s discussion of consciousness and the distinction between "strong AI" (akin to AGI) and "weak AI" aligns with the philosophical perspective, especially in terms of self-awareness and intentionality.
 </p>
@@ -1023,9 +1035,8 @@ state:  ---    |     |          state:  |     |    ---
                 <li> Compare the search methods on two accounts: <i>a)</i>
                   what is the length of the path that each algorithm finds,
                   <i>b)</i> what is the number of states visited during the
-                  search. <b>Note:</b> It is important to note that these are
-                  two different things (the length of the path, and the number
-                  of visited states.)
+                  search. <b>Note:</b> path length and number of visited states
+                  are different things.
                 <li> Does the result depend on the order in which the neighbors
                   of each node are added into the list?
               </ol>
@@ -1122,7 +1133,7 @@ state:  ---    |     |          state:  |     |    ---
                 Now it's time for this week's highlight: implementing a real AI
                 application. It will require some effort, and programming can often
                 be slow and frustrating, but stay focused, don't hesitate to ask for
-                help, and you'll be ok. Later in this part, we'll continue working
+                help, and you'll be ok. Later we'll continue working
                 on the same application using A* search, so your hard work now
                 will make that follow-up easier.
               </p>
@@ -1413,7 +1424,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
 
-        <!-- Exercise 2.1 -->
+        <!-- Exercise 1.5 -->
 
 	  <div class="solution" data-target='collapse'>
         <div class="solution__header">
@@ -1657,7 +1668,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
 
-        <!-- Exercise 2.2 -->
+        <!-- Exercise 1.6 -->
 
         <div class="solution" data-target='collapse'>
 	  <div class="solution__header">
@@ -1945,7 +1956,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
 
-        <!-- Exercise 2.3 -->
+        <!-- Exercise 1.7 -->
 
 <div class="solution" data-target='collapse'>
 	  <div class="solution__header">
@@ -2068,7 +2079,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
 
-        <!-- Exercise 2.4 -->
+        <!-- Exercise 1.8 -->
 
 <div class="solution" data-target='collapse'>
 	  <div class="solution__header">
@@ -2111,7 +2122,10 @@ state:  ---    |     |          state:  |     |    ---
     </div>
   </div>
 
+  <!-- TMC login disabled. Original modal selector:
   <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
+  -->
+  <div class="modal fade" id="tmc-login-modal-disabled" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form id="tmc-login-form">

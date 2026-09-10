@@ -76,9 +76,14 @@
               5</a>
           </li>
           <li class="nav-item ">
-            <a href="part6_ethics/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6_ethics.html&gt;')">Part
+            <a href="part6/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
               6</a>
+          </li>
+          <li class="nav-item ">
+            <a href="part7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+              7</a>
           </li>
         </ul>
 
@@ -97,7 +102,9 @@
             <i class="fa fa-ellipsis-h hidden-lg-up"></i>
           </button>
 
+          <!-- TMC login disabled. Original button:
           <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
+          -->
         </div>
       </nav>
 
@@ -106,9 +113,7 @@
     <div class="content-wrapper">
       <div class="container material" id="material">
 
-        <img width=100% src="img/Kuvituskuva-9-04d31f34.jpg">
-        <br>
-        <p align=right><small>Photo: Veikko Somerpuro</small></p>
+        <img width="100%" src="img/intro_cover.jpg" alt="Introduction to AI">
 
         <h1 class="material-heading">
           Introduction to AI
@@ -189,7 +194,7 @@
         <table class="table">
           <tr>
             <th>
-              Theme
+              Part
             </th>
             <th>
               Objectives (after the course, you ...)
@@ -197,7 +202,7 @@
           </tr>
           <tr>
             <td>
-              Philosophy and history of AI
+              Philosophy, problem solving as search, games
             </td>
             <td>
               <ul>
@@ -209,17 +214,10 @@
                 <li>can describe the contrast between "Good Old Fashioned
                   AI" (GOFAI) and modern AI approaches
                 <li>know the main-stream developments in the history of AI
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              Games and search
-            </td>
-            <td>
-              <ul>
-                <li>can formulate a problem as a graph and apply search algorithms to solve it
-                <li>can explain and implement A* search
+                <li>can explain the idea of artificial general intelligence (AGI)
+                  and distinguish it from narrow AI
+                <li>can formulate a problem as a graph and apply breadth-first and depth-first search
+                <li>can explain informed search and implement A* search
                 <li>can formulate a simple game (such as tic-tac-toe) as a game tree
                 <li>can explain and implement the minimax algorithm and depth-limited alpha-beta pruning
                 <li>can design a reasonable heuristic evaluation function in a game (e.g., chess)
@@ -228,13 +226,15 @@
           </tr>
           <tr>
             <td>
-              Reasoning under uncertainty
+              Probabilistic inference
             </td>
             <td>
               <ul>
                 <li>can express uncertain knowledge in a simple situation using a probabilistic model
                 <li>can apply the Bayes theorem to calculate posterior probabilities given evidence in a simple scenario
-                <li>can estimate probability values from a sample
+                <li>can explain how naive Bayes classification uses conditional independence
+                <li>can estimate model parameters from data and classify new observations
+                <li>can describe important implementation details of probabilistic classifiers
                 <li>can represent a problem solving situation as a Bayesian network
                 <li>can apply an approximate (Monte Carlo) technique to perform inference in a Bayesian network
               </ul>
@@ -242,41 +242,82 @@
           </tr>
           <tr>
             <td>
-              Machine learning
+              Classical Machine Learning
             </td>
             <td>
               <ul>
                 <li>can distinguish between unsupervised and supervised machine learning scenarios
-                <li>can implement at least two supervised classification methods (e.g., naive Bayes, nearest neighbour
-                  classifier)
-                <li>know the main types of neural networks (feed-forward, recurrent, self-organizing map) and their main
-                  principles
-                <li>can implement the perceptron algorithm in a simple binary classification problem
+                <li>can explain linear models for regression and classification
+                <li>can implement a nearest-neighbor classifier
+                <li>can compute information gain and use it to choose a decision-tree split
+                <li>can describe the idea of ensembles (bagging, random forests, boosting)
+                <li>can apply naive Bayes as a classical classifier (e.g. handwritten digits)
               </ul>
             </td>
           </tr>
           <tr>
             <td>
-              Natural language processing
+              Neural Networks
             </td>
             <td>
               <ul>
-                <li>can generate sentences from a given context-free grammar
-                <li>can parse a sentence using the Cocke-Younger-Kasami algorithm
+                <li>can explain the perceptron and implement the perceptron algorithm
+                  for a simple binary classification problem
+                <li>can describe multilayer perceptrons and forward propagation
+                <li>can explain why neural networks use activation functions
+                <li>can describe backpropagation as the mechanism that provides
+                  gradients for optimization
+                <li>can explain word embeddings, attention, and self-attention
+                  at a conceptual level
               </ul>
             </td>
           </tr>
           <tr>
             <td>
-              Digital Signal Processing and Robotics
+              Modern Architectures and Foundation-Model Applications
             </td>
             <td>
               <ul>
-                <li>can describe the principles of at least one pattern recognition method
-                <li>can apply at least one pattern recognition method in practice
-                <li>appreciate the difficulty of implementing an autonomous robot in the real world
-                <li>implement simple functionalities, e.g., following a line on the floor, using a robot with limited
-                  sensor capabilities
+                <li>can explain the motivation for attention and the high-level idea
+                  of transformer encoders and decoders, BERT, and GPT
+                <li>can describe representative transformer applications beyond text
+                <li>can distinguish discriminative and generative models and explain
+                  latent representations, interpolation, sampling, and generation
+                <li>can explain how a simple dimension-reducing autoencoder learns
+                  a latent representation
+                <li>can describe the conceptual mechanism of GANs and a simple application
+                <li>can explain what foundation models are and how transfer learning
+                  is used to adapt pretrained models
+                <li>can describe representative text, image, and multimodal
+                  foundation-model applications
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Agents
+            </td>
+            <td>
+              <ul>
+                <li>can explain what an agent is and the idea of bounded rationality
+                <li>can describe common agent architectures
+                <li>can describe learning agents and agentic frameworks
+                <li>can explain reinforcement learning and multi-agent systems
+                  at a conceptual level
+                <li>can discuss alignment at a conceptual level
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Ethics and Trustworthy AI
+            </td>
+            <td>
+              <ul>
+                <li>can discuss accountability, fairness, privacy, and environmental impact of AI
+                <li>can explain the idea of explainable AI and the role of causal modelling
+                <li>can describe AI for science at a conceptual level
+                <li>can outline the purpose of the EU AI Act
               </ul>
             </td>
           </tr>
@@ -502,7 +543,10 @@
     </div>
   </div>
 
+  <!-- TMC login disabled. Original modal selector:
   <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
+  -->
+  <div class="modal fade" id="tmc-login-modal-disabled" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form id="tmc-login-form">

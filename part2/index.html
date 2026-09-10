@@ -76,9 +76,14 @@
               5</a>
           </li>
           <li class="nav-item ">
-            <a href="../part6_ethics/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6_ethics.html&gt;')">Part
+            <a href="../part6/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
               6</a>
+          </li>
+          <li class="nav-item ">
+            <a href="../part7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+              7</a>
           </li>
         </ul>
 
@@ -97,7 +102,9 @@
             <i class="fa fa-ellipsis-h hidden-lg-up"></i>
           </button>
 
+          <!-- TMC login disabled. Original button:
           <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
+          -->
         </div>
       </nav>
 
@@ -105,180 +112,40 @@
 
     <div class="content-wrapper">
       <div class="container material" id="material">
-        <div class="exercise-list">
-          <div class="exercise-list__header">
-            Exercises
-          </div>
-
-          <div class="exercise-list__content" id="exercise-list"></div>
-
-        </div>
-
-
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">TravelPlanner v2.0 (AStar) (2p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                This week's first exercise is a continuation of the TravelPlanner
-                from last week. The only difference is the change of algorithm:
-                instead of breadth-first search, you should now implement A*
-                search.
-              </p>
-
-              <p>
-                The cost associated with each transition from one stop to the next
-                is the time required for the transition. This includes both the time
-                spent waiting for the tram and the actual travel time. In our imaginary
-                scenario, all trams leave at regular 10 minute intervals from their
-                first stop (each line is given both ways, so another tram will leave
-                at the same time from the other end).
-              </p>
-
-              <p>
-                Your route query will be given in the form:
-              <pre>
-        CityMap.search(departureStop, destinationStop, departureTime)
-</pre>
-              where the departure time can be given in minutes since the last full
-              10 minutes since the timetable of our tram network is so regular.
-              </p>
-
-              <p>
-                You'll need to complete the following steps (these instructions apply
-                directly to Python but the general idea is the same in other
-                languages):
-              <ol>
-                <li> Implement a <code>State</code> class (the python TMC extension
-                  already has a template for this) with
-                  method <code>heuristic(Stop s)</code>, which calculates a
-                  lower bound on the time required to reach the destination
-                  from stop <code>s</code>. A lower bound can be obtained by
-                  computing the distance between the two stops, and dividing it by
-                  the maximum speed of the tram which you can assume to be 260
-                  coordinate points per minute.
-                <li> Also implement method <code>__lt__(self, other)</code>
-                  in class <code>State</code> so that it can be used to
-                  order the nodes in the priotity queue based on <code>cost
-	+ h(node)</code> as described in Part 1. Here the nodes are
-                  states that are defined by the stop and the time since
-                  departure.
-                <li> Implement the A* search in class <code>CityMap</code>.
-                  The <code>PriorityQueue</code> data structure comes in handy. An
-                  instance of the <code>State</code> class should be given as
-                  an argument to the <code>search</code> method.
-              </ol>
-              </p>
-
-              <p>
-                As before, you should return the obtained route as a backward-linked
-                list of states.</p>
-
-
-              <p>
-                The <code>CityMap</code> class in the TMC exercise provides
-                functionality for listing the neighboring stops and for getting the
-                minimum time required to get there (including the waiting time).
-              </p>
-
-              <p>
-                More instructions are provided in the TMC exercise in the method descriptions. You'll find the stop
-                information in <code>network.json</code>
-                and the route descriptions in <code>lines.json</code>, both of which
-                are self-explanatory.
-              </p>
-
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Exercise 2.1 -->
-
-	  <div class="solution" data-target='collapse'>
-        <div class="solution__header">
-          <a data-toggle="collapse" class="solution__toggle">
-            <i class="fa fa-magic solution__icon"></i>
-            <h1 class="solution__heading">Example solution</h1>
-      
-            <i class="fa fa-caret-down solution__arrow"></i>
-          </a>
-        </div>
-        <div class="collapse">
-          <div class="solution__body">
-      
-      <p>
-        Example solutions for <a href="https://materiaalit.github.io/intro-to-ai/files/AStar_model_python.zip">Python</a>.
-      </p>
-          </div>
-        </div>
-      </div>
-	
-
-        <h1 class="material-heading">
-          Games
-
+        <h1>
+          Probabilistic inference
         </h1>
-
-        <p>
-          This week, we will study a classic AI problem: games.
-          The simplest scenario, which we will focus on for the sake of
-          clarity, are two-player, perfect-information games such as
-          tic-tac-toe and chess.
-        </p>
-
-        <p>
-          Another topic that we'll be able to get started with, and continue
-          on next week, is reasoning under uncertainty using probability.
-        </p>
 
         <div class="hint">
           <div class="hint__header">
-            <i class="fa fa-info-circle hint__icon"></i>Learning objectives of Part 2
+            <i class="fa fa-info-circle hint__icon"></i>Learning objectives
           </div>
 
           <div class="hint__body">
 
             <table class="table">
               <tr>
-                <th>
+                <td>
                   Theme
-                </th>
-                <th>
+                </td>
+                <td>
                   Objectives (after the course, you ...)
-                </th>
-              </tr>
-              <tr>
-                <td>
-                  Games and search (continued from last week)
-                </td>
-                <td>
-                  <ul>
-                    <li>can formulate a simple game (such as tic-tac-toe) as a game tree
-                    <li>can explain and implement the minimax algorithm and depth-limited alpha-beta pruning
-                    <li>can design a reasonable heuristic evaluation function in a game (e.g., chess)
-                  </ul>
                 </td>
               </tr>
               <tr>
                 <td>
-                  Reasoning under uncertainty (to be continued next week)
+                  Reasoning under uncertainty
                 </td>
                 <td>
                   <ul>
                     <li>can express uncertain knowledge in a simple situation using a probabilistic model
                     <li>can apply the Bayes theorem to calculate posterior probabilities given evidence in a simple
                       scenario
+                    <li>can explain how naive Bayes classification uses conditional independence
+                    <li>can estimate model parameters from data and classify new observations
+                    <li>can describe important implementation details of probabilistic classifiers
+                    <li>can represent a problem solving situation as a Bayesian network
+                    <li>can apply an approximate (Monte Carlo) technique to perform inference in a Bayesian network
                   </ul>
                 </td>
               </tr>
@@ -288,657 +155,15 @@
           </div>
         </div>
 
-        <h1 class="material-heading">
-          Games
-
-        </h1>
-
-        <p>
-          Maxine and Minnie are true game enthusiasts. They just love games.
-          Especially two-person, perfect information games such as tic-tac-toe
-          or chess.
-        </p>
-
-        <p>
-          One day they were playing tic-tac-toe. Maxine, or Max as her
-          friends call her, was playing with X. Minnie, or Min as her
-          friends call her, had the Os. The situation was
-        <pre>
-       O| |O
-       -+-+-
-       X| |
-       -+-+-
-       X|O|
-</pre>
-        Max was looking at the board and contemplating her next move, as it
-        was her turn, when she suddenly buried her face in her hands in
-        despair, looking quite like Garry Kasparov playing Deep Blue in
-        1997.
-        </p>
-
-        <p>
-          Yes, Min was close to getting three Os on the top row, but Max could
-          easily put a stop to that plan. So why was Max so pessimistic?
-        </p>
-
-        <h2 class="material-heading">
-          Game Trees
-
-        </h2>
-
-        <p>
-          To analyse games and optimal strategies, we will introduce the
-          concept of a <b>game tree</b>. The game tree is similar to a search
-          tree, such as the one in the Sudoku example discussed at the
-          lecture. (Remember that you should also study the lecture slides in
-          addition to this material. Some material may be discussed in one but
-          not the other.) The different states of the game are represented by
-          nodes in the game tree. The "children" of each node N are the
-          possible states that can be achieved from the state corresponding to
-          N. In board games, the state of the game is defined by the board
-          position and whose turn it is.
-        </p>
-
-        <p>
-          Consider, for example, the following game tree which begins
-          not at the root but in the middle of the game (because otherwise,
-          the tree would be way too big to display).
-          <br>
-          <img width=80% src="../img/diagrams/tictactoe-tree-905ef5b4.png">
-          <br>
-          The game continues at the board position shown in the root node,
-          numbered as (1) at the top, with Min's turn to place O at any of the
-          three vacant cells. Nodes (2)--(4) show the board positions
-          resulting from each of the three choices respectively. In the next
-          step, each node has two possible choices for Max to play X each,
-          and so the tree branches again.
-        </p>
-
-        <p>
-          The game ends when either player gets a row of three, or when there
-          are no more vacant cells. When starting from the above starting
-          position, the game always ends in a row of three.
-        </p>
-
-        <p>
-          Now consider nodes (5)--(10) on the second layer from the bottom.
-          In nodes (7) and (9), the game is over, and Max wins with three X's
-          in a row. In the remaining nodes, (5), (6), (8), and (10), the game
-          is also practically over, since Min only needs to place her O
-          in the only remaining cell to win. We can thus decide that the
-          end result, or the <b>value</b> of the game in each of the nodes
-          on the second level from the bottom is determined. For the
-          nodes that end in Max's victory, we'll say that the value
-          equals +1, and for the nodes that end in Min's victory, we'll say
-          that the value is -1.
-        </p>
-
-        <p>
-          More interestingly, let's now consider the next level of nodes
-          towards the root, nodes (2)--(4). Since we decided that both of the
-          children of (2), i.e., nodes (5) and (6), lead to Min's victory, we
-          can without hesitation attach the value -1 to node (2) as well. For
-          node (3), the left child (7) leads to Max's victory, +1, but the
-          right child (8) leads to Min winning, -1. However, it is Max's turn
-          to play, and she will of course choose the left child without
-          hesitation. Thus, every time we reach the state in node (3), Max
-          wins. Thus we can attach the value +1 to node (3).
-        </p>
-
-        <p>
-          The same holds for node (4): again, since Max can choose where to
-          put her X, she can always ensure victory, and we attach the value
-          +1 to node (4).
-        </p>
-
-        <p>
-          So far, we have decided that the value of node (2) is -1, which
-          means that if we end up in such a board position, Min can ensure
-          winning, and that the reverse holds for nodes (3) and (4): their
-          value is +1, which means that Max can be sure to win if she only
-          plays her own turn wisely.
-        </p>
-
-        <p>
-          Finally, we can deduce that since Min is an experienced player, she
-          can reach the same conclusion, and thus she only has one real
-          option: give Max an impish grin and play the O in the middle of the
-          board.
-        </p>
-
-        <p>
-          In the diagram below, we have included the value of each node as
-          well as the optimal game play starting at Min's turn in the root
-          node.
-          <br>
-          <img width=80% src="../img/diagrams/tictactoe-values-71fdd825.png">
-        </p>
-
-        <p>
-          The value of the root node, which is said to be the <b>value of the
-            game</b>, tells us who wins (and how much, if the outcome is not
-          just plain win or lose): Max wins if the value of the game is +1,
-          Min if the value is -1, and if the value is 0, then the game will
-          end in a draw. This all is based on the assumption that both players
-          choose what is best for them.
-        </p>
-
-        <p>
-          The optimal play can also be deduced from the values of the nodes:
-          at any <b>Min node</b>, i.e., node where it is Min's turn, the
-          optimal choices are given by those children whose value is minimal,
-          and conversely, at any <b>Max node</b>, where it is Max's turn, the
-          optimal choices are given the the children whose value is maximal.
-        </p>
-
-        <h2 class="material-heading">
-          Minimax Algorithm
-
-        </h2>
-
-        <p>
-          We can exploit the above concept of the value of the game to obtain
-          an algorithm with optimal game play in, theoretically speaking, any
-          deterministic, two-person, perfect-information game. Given a state
-          of the game, the algorithm simply computes the values of the
-          children of the given state and chooses the one that has the maximum
-          value if it is Max's turn, and the one that has the minimum value if
-          it is Min's turn.
-        </p>
-
-        <p>
-          The algorithm can be implemented using the neat recursive
-          functions below for Max and Min nodes respectively. This is
-          known as the <b>Minimax algorithm</b> (see <a href="https://en.wikipedia.org/wiki/Minimax">Wikipedia:
-            Minimax</a>).
-        </p>
-
-        <pre class="sh_java code-highlight"><code>    max_value(node):
-1:     if end_state(node): return value(node)
-2:     v = -Inf
-3:     for each child in node.children():
-4:        v = max(v, min_value(child))
-5:     return v
-</code></pre>
-
-        <pre class="sh_java code-highlight"><code>    min_value(node):
-1:     if end_state(node): return value(node)
-2:     v = +Inf
-3:     for each child in node.children():
-4:        v = min(v, max_value(child))
-5:     return v
-</code></pre>
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Why so serious, Max? (1p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
+        <div class="exercise-list">
+          <div class="exercise-list__header">
+            Exercises
           </div>
 
-          <div class="collapse">
-            <div class="exercise__body">
+          <div class="exercise-list__content" id="exercise-list"></div>
 
-              <p>
-                Let's return to the tic-tac-toe game described in the beginning
-                of this section. To narrow down the space of possible end-games
-                to consider, we can observe that Max must clearly place an X on
-                the top row to avoid imminent defeat:
-              <pre>
-       O|X|O
-       -+-+-
-       X| |
-       -+-+-
-       X|O|
-  </pre>
-              Now it's Min's turn to play an O. Evaluate the value of this state
-              of the game as well as the other states in the game tree where the
-              above position is the root, using the Minimax algorithm.
-              </p>
-
-
-            </div>
-          </div>
         </div>
 
-        <!-- Exercise 2.2 -->
-
-        <div class="solution" data-target='collapse'>
-	  <div class="solution__header">
-	    <a data-toggle="collapse" class="solution__toggle">
-	      <i class="fa fa-magic solution__icon"></i>
-	      <h1 class="solution__heading">Example solution</h1>
-	      <i class="fa fa-caret-down solution__arrow"></i>
-	    </a>
-	  </div>
-	  <div class="collapse">
-	    <div class="solution__body">
-	<p>
-	  Here's the game tree with the values of each node.
-	</p>
-	
-	<img src="../img/exercises/ex2/tree_Ex2_2-90b2e222.png" width=80%>
-	<p>
-	  As you can see, Max has all the reason to be serious since by
-	  playing in the bottom-right corner (Node (4)), Min can guarantee a
-	  win (just follow the orange arrows). The inevitable victory of Min
-	  can also be seen from the value of the game at the root node which
-	  is &ndash;1.
-	</p>
-	    </div>
-	  </div>
-	</div>
-
-	  
-
-
-	      
-
-        <div class="hint">
-          <div class="hint__header">
-            <i class="fa fa-info-circle hint__icon"></i>Sounds good, can I go home now?
-          </div>
-
-          <div class="hint__body">
-
-            <p>
-              As stated above, the Minimax algorithm can be used to implement
-              optimal game play in any deterministic, two-player,
-              perfect-information game. Such games include tic-tac-toe, connect
-              four, chess, Go, etc. (Rock-paper-scissors is not in this class of
-              games since it involves information hidden from the other player;
-              nor are Monopoly or backgammon which are not deterministic.) So as
-              far as this topic is concerned, is that all folks, can we go home
-              now?
-            </p>
-
-            <p>
-              The answer is that in theory, yes, but in practice, no. In many
-              games, the game tree is simply way too big to traverse in full. For
-              example, in chess the average branching factor, i.e., the average
-              number of children (available moves) per node is about 35. That
-              means that to explore all the possible scenarios up to only two
-              moves ahead, we need to visit approximately 35 x 35 = 1225 nodes
-              -- probably not your favorite pencil-and-paper homework exercise... A
-              look-ahead of three moves requires visiting 42875 nodes; four moves
-              1500625; and ten moves 2758547353515625 (that's about
-              2.7 quadrillion) nodes.
-            </p>
-
-            <p>
-              In Go, the average branching factor is estimated to be about 250.
-              Go means no-go for Minimax.
-            </p>
-
-
-          </div>
-        </div>
-
-        <p>
-          Next, we will learn a few more tricks that help us manage massive
-          game trees, and that were crucial elements in IBM's Deep Blue
-          computer defeating the chess world champion, Garry Kasparov, in
-          1997.
-        </p>
-
-
-        <h2 class="material-heading">
-          Depth-limited minimax and heuristic evalution criteria
-
-        </h2>
-
-        <p>
-          If we can afford to explore only a small part of the game tree,
-          we need a way to stop the minimax recursion before reaching an
-          end-node, i.e., a node where the game is over and the winner
-          is known. This is achieved by using a <b>heuristic
-            evaluation function</b> that takes as input a board position,
-          including the information about which player's turn is next,
-          and returns a score that should be an estimate of the likely
-          outcome of the game continuing from the given board position.
-        </p>
-
-        <p>
-          Good heuristics for chess, for example, typically count the amount
-          of material (pieces) weighted by their type: the queen is usually
-          considered worth about two times as much as a rook, three times a
-          knight or a bishop, and nine times as much as a pawn. The king is of
-          course worth more than all other things combined since losing it
-          amounts to losing the game. Further, occupying the strategically
-          important positions, e.g., near the middle of the board, is
-          considered an advantage.
-        </p>
-
-        <p>
-          The minimax algorithm presented above requires minimal changes
-          to obtain a <b>depth-limited</b> version where the heuristic
-          is returned at all nodes at a given depth limit.
-        </p>
-
-        <h2 class="material-heading">
-          Alpha-beta pruning
-
-        </h2>
-
-        <p>
-          Another breakthrough in game AI, proposed independently by several
-          researchers including John McCarthy in and around 1960,
-          is <a href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">alpha-beta
-            pruning</a>. For small game trees, it can be used independently of
-          the heuristic evaluation method, and for large trees, the two can be
-          combined into a powerful method that has dominated the area of game
-          AI for decades.
-        </p>
-
-        <p>
-          A good example of the idea behind alpha-beta-pruning can be seen
-          in the tic-tac-toe game tree that we discussed above -- scroll
-          up and let the image of the root node burn into your retina.
-        </p>
-
-        <p>
-          Now simulate the Minimax algorithm at the stage where the value of
-          the left child node, -1, has been computed and returned to the
-          <code>min_value</code> function. The next step would be to
-          call <code>max_value</code> to compute the value of the middle
-          child. But hold on! If the left child guarantees victory for Minnie,
-          what does it matter how the game ends if she chooses to play any
-          other way? As soon as the algorithm finds a child node with the best
-          possible outcome for the player whose turn it is, it can make a
-          choice and avoid computing the values of all the other child nodes.
-        </p>
-
-        <p>
-          To implement this in a similar fashion as the Minimax algorithm
-          requires small changes in the <code>min_value</code> and
-          <code>max_value</code> functions. Understanding the connection
-          between these changes and the principle illustrated by the above
-          pruning example is not as easy as it may sound, so please pay
-          close attention to this topic and work out the examples and
-          exercises with care.
-        </p>
-
-        <pre class="sh_java code-highlight"><code>    max_value(node, alpha, beta):
-1:     if end_state(node): return value(node)
-2:     v = -Inf
-3:     for each child in node.children():
-4:        v = max(v, min_value(child, alpha, beta))
-5:        alpha = max(alpha, v)
-6:        if alpha >= beta: return v
-7:     return v
-</code></pre>
-
-        <pre class="sh_java code-highlight"><code>    min_value(node, alpha, beta):
-1:     if end_state(node): return value(node)
-2:     v = +Inf
-3:     for each child in node.children():
-4:        v = min(v, max_value(child, alpha, beta))
-5:        beta = min(beta, v)
-6:        if alpha >= beta: return v
-7:     return v
-</code></pre>
-
-        <p>
-          An important thing to remember is that the <code>alpha</code> value
-          is updated only at the Max nodes, and the <code>beta</code> value is
-          updated only at the Min nodes. The updated values are passed as
-          arguments down to the children, but not up to the calling parent
-          node. (That is, the arguments are passed <i>as values</i>, not <i>as
-            references</i> in programming lingo.)
-        </p>
-
-        <p>
-          The interpretation <code>alpha</code> and <code>beta</code> is that
-          they provide the interval of possible values of the game at the node
-          that is being processed:
-          <code>alpha</code> &le; value &le; <code>beta</code>. This interval
-          is updated during the algorithm, and if at some point, the interval
-          shrinks so that <code>alpha = beta</code>, we know the value and
-          can return it to the parent node without processing any more
-          child nodes. It can also happen that <code>alpha > beta</code>,
-          which implies that the current node will never be visited in
-          optimal game play, and its processing can likewise be aborted.
-        </p>
-
-        <p>
-          When starting the recursion at the root node, we use the minimum and
-          maximum value of the game as the <code>alpha</code>
-          and <code>beta</code> values respectively. For tic-tac-toe and
-          chess, for instance, where the outcome is plain win/loss, this
-          is <code>alpha = -1</code> and <code>beta = 1</code>. If the range
-          of possible values is not specified in advance, we initialize
-          as <code>alpha = -&infin;</code> and <code>beta = &infin;</code>.
-        </p>
-
-        <p>
-          It is useful to work out a few examples to really understand the
-          beauty of alpha-beta pruning. Here's another tic-tac-toe
-          example.
-          <br>
-          <img width=80% src="../img/diagrams/tictactoe-alphabeta-e8cb918f.png">
-          <br>
-        </p>
-
-        <p>
-          You should simulate the algorithm to see that the two branches
-          that are grayed out indeed get pruned -- therefore, it is
-          actually a bit misleading to even show their minimax values
-          since the algorithm never computes them.
-        </p>
-
-        <p>
-          Remember that the Max nodes (such as the root node) only update
-          the <code>alpha</code> value and pass it down to the next
-          child node. Check that you reach a situation where
-          <code>alpha=0</code> and <code>beta=-1</code> in a
-          Min node. Actually you should reach such a situation twice.
-        </p>
-
-		<!-- Material is not available anymore
-        <p>
-          Another good example (except for the choice of colors) can be found
-          from Bruce Rosen's lecture notes for <i>Fundamentals of Artificial
-            Intelligence - CS161</i> at
-          UCLA: <a href="http://web.cs.ucla.edu/~rosen/161/notes/alphabeta.html">here</a>.
-          Note in particular how he emphasizes the fact that the tree is only
-          expanded node by node as the algorithm runs, instead of running the
-          algorithm on a full tree as is often suggested by diagrams such as
-          the ones we use in this material (shame on us!). Rosen's example
-          also illustrates a scenario where the value of the game is not
-          constrained to be –1,0, or +1, and the algorithm starts at the root
-          with <code>alpha = –&infin;</code> and
-          <code>beta = &infin;</code>.
-        </p> -->
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Alpha-beta for tic-tac-toe (1p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                Maxine wants to try again -- best out of three! Minnie agrees and
-                after a while, they arrive at the following position
-              <pre>
-       O|X|O
-       -+-+-
-       X| |X
-       -+-+-
-        |O|
-  </pre>
-              It's again Min's turn to play an O. Evaluate the value of this state
-              of the game as well as the other states in the game tree where the
-              above position is the root, using alpha-beta pruning. Start the
-              recursion by calling <code>min-value(root, -1, 1)</code> where
-              <code>root</code> is the above board position.
-              </p>
-
-              <p>
-                What is the value of the game, and what are the optimal moves?
-              </p>
-
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Exercise 2.3 -->
-
-<div class="solution" data-target='collapse'>
-	  <div class="solution__header">
-	    <a data-toggle="collapse" class="solution__toggle">
-	      <i class="fa fa-magic solution__icon"></i>
-	      <h1 class="solution__heading">Example solution</h1>
-	
-	      <i class="fa fa-caret-down solution__arrow"></i>
-	    </a>
-	  </div>
-	
-	  <div class="collapse">
-	    <div class="solution__body">
-	  <p>
-	    As was stated in the exercise, the recursion
-	    is started by calling
-	    <code>min-value</code> for the root node (Node (1) below) with
-	    arguments
-	    <code>alpha=-1, beta=1</code>. These values are then passed to the
-	    child nodes, starting with the leftmost child (Node (2)), and from
-	    it further down all the way to the leaf node (5). The return value,
-	    which is passed up the parent node (3), is &ndash;1 since in this
-	    case, Min wins with three Os in a row.  Strictly speaking, this
-	    already causes pruning to occur in Node (3): it is a Min node, and
-	    thus it updates its beta value, and the beta value becomes
-	    &ndash;1. The test <code>alpha =-1 &le; beta=-1</code> (line 7
-	    in the pseudocode) triggers the return condition. However, the
-	    effect is null since there wouldn't have been any other children of
-	    Node (3) anyway.
-	  </p>
-	  <img src="../img/exercises/ex2/alphabeta_Ex2_3-3ed29945.png" width=60%>
-	  <p>
-	    Next, Node (3) returns the value &ndash;1 to its parent, Node (2).
-	    As a Max node, Node (2) would update its alpha value but since the
-	    value returned by the child is &ndash;1 which is already the same
-	    as the current alpha value, no update occurs (line 6 in the
-	    pseudocode). The processing of nodes (4) and (6) is analogous to
-	    that of nodes (3) and (5) respectively.
-	  </p>
-	  <p>
-	    Interesting things start to happen in the root node when the value
-	    &ndash;1 is returned from Node (2). The root node is a Min node and
-	    it updates its beta value to be <code>beta=-1</code> (line 6 in the
-	    pseudocode), and therefore, the test <code>alpha=-1 &le;
-	    beta=-1</code> again triggers pruning and the other branches of the
-	    tree need not be traversed at all!
-	  </p>
-	  <p>
-	    The optimal game play can now be obtained by always choosing the
-	    child node with the minimum (maximum) value in Min (Max)
-	    nodes <i>among the child nodes that were visited</i>. The result is
-	    guaranteed to be the same as that of the Minimax algorithm, i.e.,
-	    optimal play for both players. For Max this is bad news: it's Min's
-	    victory even best-out-of-three...
-	  </p>
-	    </div>
-	  </div>
-	</div>
-	
-	
-	      
-
-        <p>
-          Notice that while the left-to-right order of the children of each
-          node, i.e., the order in which the children are processed in the
-          loop on lines 4--7, is arbitrary, it can have significant impact
-          on which branches are pruned.
-        </p>
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Alpha-beta programming exercise (1p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                Now we feel confident enough about concepts and ideas behind the
-                Minimax algorithm and alpha-beta pruning that we can start
-                programming. We'll implement a tic-tac-toe bot.
-              </p>
-
-              <p>
-              <ol>
-                <li> First implement the basic framework for the game: a
-                  data structure (class) for board positions, the functions for
-                  checking whether either player has a row of three, and a
-                  function for producing the list of children for a given board
-                  position.
-                <li> Then implement the Minimax algorithm according to the pseudo-code
-                  given above. The algorithm should return for any given board
-                  position, the value of the game: -1, 0, or 1.
-                <li> Using the previous step, modify the program so that it also
-                  outputs the optimal move for the player whose turn it is (which
-                  is given as an input, of course). You can do this by keeping
-                  record of the child node that yields the highest (lowest) value
-                  in a Max (Min) node.
-                <li> You can test the solution at this stage by using it to solve
-                  the above pencil-and-paper exercises.
-                <li> As the culmination of this exercise, modify the algorithm to
-                  implement alpha-beta pruning as detailed in the pseudo-code
-                  above. To see whether you gain any speed-up, you can see how
-                  long the algorithm runs (or how many recursive function calls
-                  are performed) with or without alpha-beta pruning -- simply
-                  comment out line 7 with the test <code>alpha >= beta</code> to
-                  revert back to vanilla Minimax.
-              </ol>
-
-              As a bonus question, you can think about how to order the child
-              nodes so that as much pruning is done as possible.
-
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Exercise 2.4 -->
-
-<div class="solution" data-target='collapse'>
-	  <div class="solution__header">
-	    <a data-toggle="collapse" class="solution__toggle">
-	      <i class="fa fa-magic solution__icon"></i>
-	      <h1 class="solution__heading">Example solution</h1>
-	
-	      <i class="fa fa-caret-down solution__arrow"></i>
-	    </a>
-	  </div>
-	
-	  <div class="collapse">
-	    <div class="solution__body">
-	  <p>
-	    Example solutions for <a href="https://materiaalit.github.io/intro-to-ai/files/AlphaBeta_model_python.zip">Python</a>.
-	  </p>
-	    </div>
-	  </div>
-	</div>
-
-	   
-
-	      
 
         <h1 class="material-heading">
           Reasoning under Uncertainty
@@ -989,7 +214,7 @@
               href="https://www.stat.cmu.edu/~brian/valerie/617-2022/0%20-%20books/2004%20-%20wasserman%20-%20all%20of%20statistics.pdf">All of Statistics</a> (Part I, Probability is great)
         </ul>
         The Bayes rule (aka Bayes theorem) is the single most important tool
-        from probability calculus, and we'll be using in again and again for
+        from probability calculus, and we'll be using it again and again for
         building AI applications, here is some more material about it
         in particular:
         <ul>
@@ -1049,7 +274,7 @@
           </div>
         </div>
 
-        <!-- Exercise 2.5 -->
+        <!-- Exercise 2.1 -->
 
 
 	<div class="solution" data-target='collapse'>
@@ -1089,7 +314,7 @@
 	        The elementary events where both A and B occur are
 	        (3,6) and (6,3). Thus, P(A,B) = 1/6 &times; 1/2 + 1/6 &times; 1/10 =
 	    6/60. Event B, on the other hand, is the complement of event
-	        "neither outcome is 6" from item (b) above, so we can get its probability
+	        "neither outcome is 6" from item 2 above, so we can get its probability
 	        easiest by applying the rule P(B) = 1 &ndash; P(&not;B), to get
 	        P(B) = 1 &ndash; 5/12 = 7/12.<br><br>
 	        Thus we get the conditional probability by substituting into the formula
@@ -1097,7 +322,7 @@
 	      <li>
 	        With the notation of the previous item, we get
 	        P(B | A) = P(A, B) / P(A) = 6/60 / (8/60) = 6/8 &asymp; 0.75, where
-	        P(A) = 8/60 was calculated in item (c) above.
+	        P(A) = 8/60 was calculated in item 3 above.
 	    </ol>
 	  </p>
 
@@ -1158,7 +383,7 @@
           </div>
         </div>
 
-        <!-- Exercise 2.6 -->
+        <!-- Exercise 2.2 -->
 
 	<div class="solution" data-target='collapse'>
 	  <div class="solution__header">
@@ -1271,7 +496,1579 @@
 	  </div>
 	</div>
 
+        <h1 class="material-heading">
+          Probabilistic Inference
+
+        </h1>
+
+        <p>
+          Now that the probability basics are in place, we will see how they
+          are used for inference in AI problems.
+        </p>
+
+        <h2 class="material-heading">
+          Bayes rule and probabilistic inference
+
+        </h2>
+
+        <p>
+          Bayes rule has a central role in statistical inference and machine
+          learning. The basis for this is that it can be applied in scenarios
+          where one of the random variables in the model corresponds to an
+          unknown "state" which we are interested to learn. If the model
+          includes other variables that correspond to "observations" that
+          can be made and that are dependent on the unknown state, we
+          can use the Bayes rule as follows
+        </p>
+        <img src="../img/drawings/posterior_prior_likelihood-279c07c5.png" width=83%
+          alt="P(state | observation) = P(state) P(observation | state) / P(observation)">
+        <p>
+          The left side of the equation is called the <strong>posterior
+            probability</strong> (probability after the observation).
+          The first factor on the right is called the <strong>prior
+            probability</strong> (probability prior to the observation),
+          the middle factor is called the <strong>likelihood</strong>
+          (how likely the observation is when the state is given), and
+          the last term on the right has many names, of which
+          <strong>the annoying denominator</strong> may be the most
+          fitting. (Evidence and marginal likelihood are more
+          common.)
+        </p>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>On (not) calculating the annoying denominator
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              As you may have noticed in the dice exercises above,
+              and as you will notice again later in this part,
+              calculating the denominator may indeed be annoying.
+            </p>
+
+            <p>
+              A nice trick that can sometimes save a lot of effort is to
+              calculate the <strong>ratio</strong> of posterior probabilities,
+              instead of the probabilities themselves. For example, consider
+              the following ratio
+            </p>
+            <pre>
+     R = P(State=1 | obs) / P(State=2 | obs)
+</pre>
+            <p>
+              where <code>obs</code> is an abbreviation for observation.
+              Applying Bayes rule to both the numerator and the denominator
+              in the ratio, we'll notice that the denominator <code>P(obs)</code>
+              cancels:
+            </p>
+            <pre>
+     P(State=1) P(obs | State=1) / P(obs)   P(State=1) P(obs | State=1)
+R =  ------------------------------------ = ---------------------------
+     P(State=2) P(obs | State=2) / P(obs)   P(State=2) P(obs | State=2)
+</pre>
+            <p>
+              In case the two states (1 and 2) are the only possibilities, we
+              have <code>P(State=2|obs) = 1-P(State=1|obs)</code> (because one of
+              the events must happen and both cannot occur at the same time).
+              In this case, after calculating the above ratio, <code>R</code>,
+              it can be mapped back into the posterior probability of state 1 by
+            </p>
+            <pre>
+  P(State=1 | obs) = R / (1+R)
+</pre>
+            <p>
+              You can check that this is true by assigning and using the
+              fact <code>P(State=2|obs) = 1-P(State=1|obs)</code>.
+            </p>
+
+
+          </div>
+        </div>
+
+        <h2 class="material-heading">
+          Naive Bayes classification
+
+        </h2>
+
+        <p>
+          One of the most useful applications of the Bayes rule is the so
+          called <strong>naive Bayes classifier</strong>. It is a machine
+          learning technique that can be used to <strong> classify</strong>
+          objects such as text documents into two or more classes. The
+          classifier is trained by analysing a set of <strong>training
+            data</strong>, for which the correct classes are given.
+        </p>
+
+        <p>
+          The naive Bayes model is a probabilistic model that involves a class
+          variable -- this corresponds to the state variable above -- and a
+          number of feature variables. The assumption in the model is that the
+          feature variables are <strong> conditionally independent</strong>
+          given the class. (We will not discuss the exact meaning of
+          conditional independence on this course. You can find more about it
+          from the literature. For our purposes, it is enough to be able to
+          exploit conditional independence in building the classifier.)
+        </p>
+
+        <p>
+          We will use a <strong>spam email filter</strong> as a running
+          example for illustrating the idea of the naive Bayes
+          classifier. Thus, the class variable indicates whether a message is
+          spam (or "junk email") or whether it is a legitimate message (also
+          called "ham"). The words in the message correspond to the feature
+          variables, so that the number of feature variables in the model
+          is determined by the length of the message.
+        </p>
+
+        <p>
+          <img src="../img/diagrams/nbmodel-e74b4b40.png" width=65%>
+        </p>
+
+        <p>
+          The naive Bayes model can be represented as a <strong>Bayesian
+            network</strong>, which encodes the conditional independence
+          between the feature variables (in this case, the words of the
+          email message) given the class variable as in the above diagram.
+          We'll return to Bayesian networks in the next section below.
+        </p>
+
+        <h3 class="material-heading">
+          Estimating parameters
+
+        </h3>
+
+        <p>
+          To define the naive Bayes model, we need to specify the distribution
+          of each variable. For the class variable, this is the distribution
+          of spam vs ham messages, which we can for simplicity assume to be
+          1:1, i.e., <code>P(spam) = P(ham) = 0.5</code>.
+        </p>
+
+        <p>
+          For the feature variables, we will define two distributions: one for
+          the spam messages and another one for the ham messages. In each case,
+          we will make the simplifying assumption that each of the words in the
+          message is distributed according to the same distribution. And as we
+          said above, we also assume that the words are independent of each
+          other given the spam/ham class.
+        </p>
+
+        <p>
+          The word distributions for the two classes are
+          best <strong>estimated</strong> from actual training data, i.e., a
+          corpus of spam messages and a corpus of legitimate messages. The
+          simplest way is to count how many times each word, <code>aardvark,
+  aardwolf, ..., Zyzzogeton</code>, appears in the corpus and dividing
+          the number by the total number of words in the corpus.
+        </p>
+
+        <p>
+          To illustrate the idea, let's assume that we have at our disposal
+          both a spam corpus and a ham corpus. You can easily obtain one
+          by saving a batch of your emails in two files.
+        </p>
+
+        <p>
+          Assume that we have calculated the number of occurrences of the
+          following words in the two classes of messages:
+        </p>
+        <pre>
+        word    spam     ham
+ ----------- ------- -------
+ million         156      98
+ dollars          29     119
+ adclick          51       0
+ conferences       0      12
+ ----------- ------- -------
+       total   95791  306438
+</pre>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>Watch out for the Singularity!
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              One problem with estimating the probabilities directly from the
+              counts is that the zero counts lead to zero estimates. This can be
+              quite harmful for the performance of the classifier -- it easily
+              leads to situations where the ratio of the posterior probabilities
+              obtained as 0/0. That sounds dangerously close to the Singularity,
+              so we'd better find a better way. The simplest solution is to use a
+              small lower bound for all probability estimates. The value 0.000001,
+              for instance, does the job.
+            </p>
+
+
+          </div>
+        </div>
+
+        <p>
+          We can now estimate that the probability that a word in a spam
+          message is <code>million</code>, for example, is about 156/95791
+          &asymp; 0.0016285. In other words, on the average, roughly every
+          614th word in a spam message is <code>million</code>. Likewise, we
+          get the estimate 0.0003198 for the probability that a word in a ham
+          message is <code>million</code>. Both of these probability estimates
+          are small but more importantly, the former is higher than the
+          latter. This turns out to be a sign that the word in question hints
+          towards the message being spam -- which sounds logical. Words for
+          which the ratio of the probabilities is the other way around, hint
+          towards the message being ham.
+        </p>
+
+        <h3 class="material-heading">
+          Classifying new data
+
+        </h3>
+
+        <p>
+          After the parameters of the model have been estimated, the
+          classifier is ready for use! When we are given a new message, we
+          will compute the posterior probability <code>P(spam |
+  message)</code>, where <code>message</code> is a place-holder for
+          the words in the message, for example, <code>P(spam | 'million',
+  'conferences')</code> (which would be a really short message).
+        </p>
+
+        <p>
+          Let's compute the posterior probability
+        </p>
+        <pre>
+     P(spam | Word1 = 'million', Word2 = 'conferences')
+</pre>
+        <p>
+          which is abbreviated without a great risk of confusion -- but please
+          note that unlike <code>million</code> and <code>conferences</code>,
+          which are hyphenated ('like this') to indicate that they are words that occur
+          in the message, the term <code>spam</code> indicates
+          the <i>class</i> of the message, not the word "spam" -- as
+        </p>
+        <pre>
+     P(spam | 'million', 'conferences')
+</pre>
+        <p>
+          By Bayes rule, we have
+        </p>
+        <pre>
+                                      P(spam) P('million', 'conferences' | spam)
+ P(spam | 'million', 'conferences') = ------------------------------------------
+                                            P('million', 'conferences')
+</pre>
+        <p>
+          The numerator on the right side is the likelihood term and its meaning
+          is the probability that the first two words are <code>million</code>
+          and <code>conferences</code> given that the message is spam. The
+          denominator on the right side -- it's the annoying one -- is the
+          probability that the first two words are as stated when the spam/ham
+          status of the message is <strong>not</strong> given.
+        </p>
+
+        <p>
+          Let's look at the likelihood term first. The conditional independence
+          assumption, i.e., the naive Bayes assumption, implies that the
+          likelihood can be "factorized" as follows
+        </p>
+        <pre>
+  P('million', 'conferences' | spam) = P('million' | spam) P('conferences' | spam)
+</pre>
+        <p>
+          This is very useful since these are the kind of probabilities we
+          have estimated from the data. The same factorization rule can be
+          applied no matter how many words there are in the message.
+        </p>
+
+        <p>
+          Next up is the annoying denominator. However, we'll use the hint above
+          and avoid calculating the denominator (at least explicitly). To achieve
+          this, we consider the ratio of posteriors:
+        </p>
+        <pre>
+ P(spam | 'million', 'conferences')   P(spam) P('million', 'conferences' | spam) / Z
+ ---------------------------------- = ----------------------------------------------
+  P(ham | 'million', 'conferences')    P(ham) P('million', 'conferences' | ham) / Z
+</pre>
+        <p>
+          where Z, defined as <code>Z = P('million', 'conferences')</code>,
+          is the annoying denominator which cancels out just as promised in the hint.
+        </p>
+
+        <p>
+          The term <code>P('million', 'conferences' | ham)</code> is treated in the exact
+          same manner as the term corresponding term for spam (see above), and the
+          numbers required to calculate its value are available since we have
+          estimated them from the training data.
+        </p>
+
+        <p>
+          The following exercises will demonstrate the use of the naive Bayes
+          model.
+        </p>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Naive Bayes and Spam (pencil-and-paper) (2p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Consider the word counts given in the table above (million, dollars, <i>etc</i>).
+              </p>
+              <ol>
+                <li>
+                  Estimate the remaining word probabilities for both classes.
+                <li>
+                  Use the obtained estimates to calculate the probability
+                  <code>P(Word &ne; 'million')</code>, i.e., the probability that
+                  a single word in a message is <i>not</i> <code>million</code> when
+                  the class of the message is unknown. <i>Hint:</i> You should recall
+                  the rule for calculating the <b>marginal probability</b>
+                  (see, for example, the references given under
+                  Probability Fundamentals above).
+                <li>
+                  Calculate <code>P(spam | 'million')</code>, i.e., the probability
+                  that the message is spam given that its first word (or in fact,
+                  any particular word) is <code>million</code>.
+                <li>
+                  Calculate <code>P(spam | 'million', 'dollars', 'adclick', 'conferences')</code>,
+                  i.e., the probability that the message is spam when its first four
+                  words are as stated.
+              </ol>
+              <p>
+                Use the prior probability <code>P(spam) = 0.5</code>. Also, if there is zero instances of a word in the
+                table, use the lower bound 0.000001.
+              </p>
+              <p>
+                <i>Additional hints:</i> In item 3, remember Bayes. In item 4, remember
+                to use a lower bound on the estimates. Also recall the trick about
+                not calculating the annoying denominator.
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2.3 -->
+
+
+<div class="solution" data-target='collapse'>
+	  <div class="solution__header">
+	    <a data-toggle="collapse" class="solution__toggle">
+	      <i class="fa fa-magic solution__icon"></i>
+	      <h1 class="solution__heading">Example solution</h1>
+	
+	      <i class="fa fa-caret-down solution__arrow"></i>
+	    </a>
+	  </div>
+	  <div class="collapse">
+	    <div class="solution__body">
+	  <p>
+	    <ol>
+	      <li>
+	        Dividing the occurrence counts by the total number of words
+	        in each class gives
+	        <pre>
+	          word     spam      ham
+	   ----------- -------- --------
+	   million     0.001629 0.000320
+	   dollars     0.000303 0.000388
+	   adclick     0.000532 0.000001
+	   conferences 0.000001 0.000039</pre>
+	        where we used the lower bound 0.000001 in case of zero counts.<br><br>
+	      <li>
+	        First of all, we can use <code>P(Word &ne; 'million')
+	        = 1 - P(Word = 'million')</code>. The probability on the right
+	        needs to be computed by the same technique as we've applied
+	        to obtain the annoying denominator in Bayes rule calculations,
+	        i.e., dividing it into the two possible ways to get the word
+	        'million':
+	        <br><br>
+	        <pre>
+	     P(Word = 'million')
+	     = P(spam) P(Word = 'million' | spam)
+	     + P(ham) P(Word = 'million' | ham)
+	     &asymp; 0.5 &times; 0.001629 + 0.5 &times; 0.000320 &asymp; 0.000974</pre>
+	        Thus, we get <code>P(Word &ne; 'million') &asymp; 1-0.000974
+	      = 0.999346</code>.<br><br>
+	      <li>
+	        <pre>
+	     P(spam | 'million') = P(spam) P('million' | spam) / P('million')
+	     &asymp; 0.5 &times; 0.001629 / 0.000974 &asymp; 0.836
+	  </pre>
+	        This is a straightforward application of the Bayes rule where
+	        the annoying denominator was known from the previous item.
+	        If you are still uncertain about this, please review the
+	        material on Bayes rule and the references given in
+	        Probability Fundamentals above.<br><br>
+	      <li>
+	        In this case, it is most convenient to use the trick for
+	        avoiding the computation of the annoying denominator (see above).
+	        Hence, we'll calculate the ratio of posterior probabilities<br><br>
+	        <pre>
+	      P(spam | 'million', 'dollars', 'adclick', 'conferences')
+	  R = --------------------------------------------------------
+	       P(ham | 'million', 'dollars', 'adclick', 'conferences')
+	      P(spam) P('million'|spam) P('dollars'|spam) P('adclick'|spam) P('conferences'|spam)
+	    = -----------------------------------------------------------------------------------
+	        P(ham) P('million'|ham) P('dollars'|ham) P('adclick'|ham) P('conferences'|ham)
+	      0.5 &times; 0.001629 &times; 0.000303 &times; 0.000532 &times; 0.000001
+	    = ----------------------------------------------- &asymp; 54.23
+	      0.5 &times; 0.000320 &times; 0.000388 &times; 0.000001 &times; 0.000039</pre>
+	        Note that 54.23 is clearly not the required <i>probability</i>. To get
+	        the probability from the ratio R, we use the formula
+	        Prob = R/(1+R):<br><br>
+	        <pre>
+	  P(spam | 'million', 'dollars', 'adclick', 'conferences') &asymp; 54.23 / (1+54.23) &asymp; 0.982</pre>
+	    </ol>
+	  </p>
+	    </div>
+	  </div>
+	</div>
+
 	      
+
+        <h3 class="material-heading">
+          Implementation details
+
+        </h3>
+
+        <p>
+          The above exercise should make it relatively straightforward to see
+          how the filter can be implemented by programming: the key insight is
+          the routine nature of the word-by-word calculations.
+        </p>
+
+        <p>
+          A convenient way to group the computations is obtained by slight
+          reshuffling of the terms. Consider still our example two-word message,
+          and the following formula for the ratio of the posterior probabilities
+        </p>
+        <pre>
+     P(spam | 'million', 'conferences')
+ R = ----------------------------------
+      P(ham | 'million', 'conferences')
+
+     P(spam) P('million' | spam) P('conferences' | spam)
+   = ---------------------------------------------------
+       P(ham) P('million' | ham) P('conferences' | ham)
+</pre>
+        <p>
+          Since the ratio of products is equal to the product of ratios -- i.e.,
+          for example, (ABC)/(DEF) = (A/D)(B/E)(C/F) -- we can group the above terms as
+        </p>
+        <pre>
+     P(spam)  P('million' | spam)  P('conferences' | spam)
+ R = -------  -------------------  -----------------------
+     P(ham)   P('million' | ham)   P('conferences' | ham)
+</pre>
+        <p>
+          More generally, the formula is
+        </p>
+        <pre>
+       P(spam)  N  P(word_i | spam)
+   R = -------  &Pi;  ----------------
+       P(ham)  i=1 P(word_i | ham)
+</pre>
+        <p>
+          where N is the number of words in the message, and <code>word_i</code> is the
+          i'th word in the message.
+        </p>
+
+        <p>
+          Intuitively, the above formula encodes the rule that any word whose
+          probability is higher in spam messages than in ham messages will
+          increase the ratio R, and vice versa. For example, in our two-word
+          message, for <i>i</i>=1, we have <code>word_i =
+  'million'</code>, and the ratio of the word probabilities is
+          given by
+        </p>
+        <pre>
+    P(word_1 | spam)   P('million' | spam)   0.0016285
+    ---------------- = ------------------- &asymp; --------- &asymp; 5.1
+    P(word_1 | ham)    P('million' | ham)    0.0003198
+</pre>
+        <p>
+          Thus, each occurrence of the word <code>'million'</code> in the message
+          leads to roughly a five-fold increase in the posterior probability ratio.
+        </p>
+
+        <p>
+          Putting things together, here's a pseudocode sketch of the classification
+          stage where we assume that the probability estimates have already been
+          calculated from training data.
+        </p>
+
+        <pre class="sh_java code-highlight"><code>    spamicity(words, estimates):
+1:     R = estimates.prior_spam / estimates.prior_ham
+2:     for each w in words:
+3:        R = R * estimates.spam_prob(w) / estimates.ham_prob(w)
+4:     return R
+</code></pre>
+
+        <p>
+          Here <code>estimates</code> is an object that stores the estimated
+          probabilities: <code>estimates.prior_spam</code> is the probability that
+          a message is spam, P(spam), <code>estimates.prior_ham</code> the same
+          for ham; <code>estimates.spam_prob(w)</code> is the probability
+          <code>P(Word = w | spam)</code>, and <code>estimates.ham_prob(w)</code>
+          the same for ham.
+        </p>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>Avoiding under- and overflows
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              When dealing with long messages, the posterior probability ratio becomes
+              a product with very many terms. This can easily lead to trouble because
+              products are creatures that easily grow very very large or very very small
+              (close to zero); the mathematical term is 'exponential rate'.
+            </p>
+
+            <p>
+              In order to reduce the risk of under- and overflows in the floating
+              point arithmetics, it is a good idea to carry out the computations
+              in log-scale. That is, instead of computing the ratio, R, you
+              should compute its logarithm, log(R). (Store the log-ratio in a variable
+              like <code>logR</code>.)
+            </p>
+
+            <p>
+              The important thing to recall about logarithms is that they convert
+              multiplication into addition: log(AB) = log(A) + log(B); and similarly,
+              division becomes subtraction: log(A/B) = log(A) &ndash; log(B). Using these,
+              we can write the log-ratio as
+            </p>
+            <pre>
+                                       N
+   logR = log(P(spam)) - log(P(ham)) + &Sigma; [log(P(word_i | spam)) - log(P(word_i | ham))]
+                                      i=1
+</pre>
+            <p>
+              The base of the logarithm (natural, 2, 10, ...) is not
+              consequential. The important thing is to map the end result back to
+              the ratio by exponentiating the log-ratio with the same base. So if
+              you use natural logarithms, for instance, then you should
+              exponentiate the log-ratio by <code>exp(logR)</code> to get R.
+            </p>
+
+
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Naive Bayes and Spam (programming) (2p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Next you get to implement a naive Bayes spam filter by
+                programming. The python template is available on TMC. (In case you
+                prefer to use another programming language, feel free to. You can
+                find the ready-made spam and ham word count
+                files, <code>spamcount.txt</code> and <code>hamcount.txt</code> in
+                the template.)
+              </p>
+
+              <p>
+              <ol>
+                <li>
+                  Download the template and take a look at the word count files in
+                  the template, which originally come from the development team of
+                  the <a href="http://spamassassin.apache.org/">SpamAssassin</a>
+                  spam filter. The common "stop-words" that are uninteresting for
+                  our present purpose, such as <i>the, a, to, ...</i> have been
+                  removed, as have words that occur only once. The files are
+                  sorted so that the most common words in the respective class
+                  come first:
+                  <pre>
+
+	top 10 spam words: top 10 ham words:
+        ------------------ -----------------
+         624 free          1776 list
+         465 email         1263 lists
+         414 money         1204 use
+         410 please        1007 exmh
+         410 mail           987 like
+         383 list           952 some
+         360 click          919 wrote
+         358 content        909 linux
+         339 business       895 listinfo
+         306 information    893 rpm
+      </pre>
+                  The total number of unique words in the spam messages is 6245, and the
+                  total word count is 75268. The ham messages have 16207 unique words and
+                  the total word count is 290673.
+                <lI>
+                  Estimate the conditional probabilities <code>P(Word=s | spam)</code>
+                  and <code>P(Word=s | ham)</code> for all words <code>s</code> that occur
+                  in the files. For example, you should get the estimate <code>P('free' | spam)</code>
+                  &asymp; 0.00829.
+                <li>
+                  Now implement a filter that reads a new message and calculates the probability
+                  that it is spam using the naive Bayes model, following the instructions
+                  above.
+                <li>
+                  Test your classifiers by running it on the two example messages that come with
+                  the TMC template <code>spamesim.txt</code> (which should classified as spam) and
+                  <code>hamesim.txt</code> (which should be classified as ham).
+                  You can also try your spam filter on your own email messages.
+              </ol>
+              </p>
+
+              <p>
+                <i>Hint:</i> In item 3, you may encounter words that you haven't
+                encountered in the training data at all. You can use the small constant
+                lower bound for them.
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2.4 -->
+
+        <p>
+          Here is some additional material on naive Bayes spam filtering that you
+          may like to take a look at:
+        <ul>
+          <li>Dr Dobbs Journal: <a href="http://drdobbs.com/architecture-and-design/184406064">Naive Bayesian text
+              classification</a>
+          <li>M. Sahami, S. Dumais, D. Heckerman, E. Horvitz (1998). <a
+              href="http://robotics.stanford.edu/users/sahami/papers-dir/spam.pdf">"A Bayesian approach to filtering
+              junk e-mail"</a>. AAAI'98 Workshop on Learning for Text Categorization.
+        </ul>
+        </p>
+
+        <h2 class="material-heading">
+          Bayesian networks
+
+        </h2>
+
+        <p>
+          As we mentioned above, the naive Bayes model is a kind of a Bayesian
+          network, with an associated graph structure where the class variable
+          is the root and the only "parent" of all the feature variables.
+        </p>
+
+        <p>
+          Bayesian networks are a model family which belong to the still more
+          general category
+          of <a href="https://en.wikipedia.org/wiki/Graphical_model">(probabilistic)
+            graphical models</a>, which are a modeling "language" for
+          probabilistic models. The power of graphical models is mainly due to
+          i) their ability to compactly represent multivariate domains with
+          complex dependencies, and ii) efficient inference procedures that
+          exploit the structure of the models.
+        </p>
+
+        <h3 class="material-heading">
+          Building blocks of a Bayesian network
+
+        </h3>
+
+        <p>
+          A Bayesian network will represent a joint distribution over a number
+          of random variables. Depending on the complexity of the network
+          (which depends on the number and placement of the edges in the
+          graph), the Bayesian network representation may require
+          significantly fewer numerical parameters than the number of
+          elementary events in the domain.
+        </p>
+
+        <p>
+          The structure of the network is encoded as a graph where each random
+          variable is represented as a node, and the dependency structure is
+          characterized by a set of directed edges between the nodes. The
+          graph must be a <strong>directed acyclic graph</strong> (DAG), which
+          means that it is impossible to start from a node follow a path in
+          the direction of the edges to arrive at the same node.
+        </p>
+
+        <p>
+          Here's an example DAG:<br>
+          <img src="../img/diagrams/BNexample1-5591f5d5.png" width=25% align=middle>
+        </p>
+
+        <p>
+          The random variables in the model are X,Y,Z, and &Aring;. (For the
+          non-Scandi students, the last one is what we call the "Swedish O" in
+          Finland;
+          see <a href="https://en.wikipedia.org/wiki/%C3%85">Wikipedia:&Aring;</a>.
+          It conveniently comes after X, Y, and Z in our alphabet.) The edges
+          correspond to <strong>direct</strong> dependency, so that
+          the <i>absence</i> of an edge between any two variables means that
+          the variables are conditionally independent given some (possibly
+          empty) set of other variables. The details of this are slightly too
+          complicated to discuss here, so we'll not go into them. For now, it
+          is enough to remember that the edges are a way to encode the
+          dependency structure in the domain.
+        </p>
+
+        <p>
+          In addition to the structure encoded as the DAG, a Bayesian network
+          comes with a set of parameters quantifying the conditional
+          distributions of the variables. These are given in the form P(V=v |
+          Pa<sub>V</sub> = pa<sub>V</sub>), where V is a random variable and v
+          is a value, and Pa<sub>V</sub> denotes the <strong>parents</strong>
+          of node V in the graph: i.e., the nodes from which there is an edge
+          to V. For example, in the above DAG, we have Pa<sub>Z</sub> = {X,Y},
+          and Pa<sub>Y</sub> = &empty; because node Y has no parents at all.
+        </p>
+
+        <p>
+          When the variables are categorical, i.e., they take values in a finite
+          set, the conditional distributions can be specified as
+          <strong>conditional probability tables</strong> (CPTs). A CPT for
+          variable V includes the distribution of V for each possible
+          combination of the values of V's parents. We call such combinations
+          <strong>parent configurations</strong>. For example, if in the above
+          example network, all variables are binary, then the parent configurations
+          of Z are (X=0, Y=0), (X=0, Y=1), (X=1, Y=0), (X=1, Y=1), and the CPT
+          of Z will have four rows, each containing a conditional distribution
+          for Z. A concrete example is as follows
+        </p>
+
+        <p>
+        <table style="background-color: #7fb3d5; text-align: center;">
+          <tr>
+            <td colspan=2></td>
+            <td colspan=2>Z</td>
+          </tr>
+          <tr>
+            <td>&nbsp;X&nbsp;</td>
+            <td>&nbsp;Y&nbsp;</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td bgcolor=ecf0f1>&nbsp;0.1&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.9&nbsp;</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td bgcolor=ecf0f1>0.2</td>
+            <td bgcolor=ecf0f1>0.8</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0</td>
+            <td bgcolor=ecf0f1>0.5</td>
+            <td bgcolor=ecf0f1>0.5</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>1</td>
+            <td bgcolor=ecf0f1>0.0</td>
+            <td bgcolor=ecf0f1>1.0</td>
+          </tr>
+        </table>
+        </p>
+
+        <p>
+          So for instance, if X=1 and Y=0, then the conditional probability of Z=1
+          is given by P(Z=1 | X=1, Y=0) = 0.5, and so on.
+        </p>
+
+        <p>
+          For a variable that has no parents in the network, the CPT is actually
+          just a single distribution, and the CPT has only one row. For variables
+          that have many parents, the CPT may easily become very very large.
+        </p>
+
+        <p>
+          To make things concrete, we use a running example which is the
+          car Bayesian network discussed at the lecture. Its structure is
+          the following:<br>
+          <img src="../img/diagrams/carBN-f8e83c71.png" width=50%>
+        </p>
+
+        <p>
+          The variables in the model are abbreviated as the first letters:
+        <pre>
+    [B]attery
+    [R]adio
+    [I]gnition
+    [G]as
+    [S]tarts
+    [M]oves</pre>
+        </p>
+
+        <p>
+          The CPTs are as follows:
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=2 align=center>B</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td bgcolor=ecf0f1>&nbsp;0.1&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.9&nbsp;</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=1></td>
+            <td colspan=2>R</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;1.0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.0&nbsp;</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td bgcolor=ecf0f1>&nbsp;0.1&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.9&nbsp;</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=1></td>
+            <td colspan=2>I</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;1.0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.0&nbsp;</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td bgcolor=ecf0f1>&nbsp;0.05&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.95&nbsp;</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=2 align=center>G</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td bgcolor=ecf0f1>&nbsp;0.05&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.95&nbsp;</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=2></td>
+            <td colspan=2>S</td>
+          </tr>
+          <tr>
+            <td>I</td>
+            <td>G</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td>&nbsp;0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;1.0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.0&nbsp;</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td bgcolor=ecf0f1>1.0</td>
+            <td bgcolor=ecf0f1>0.0</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0</td>
+            <td bgcolor=ecf0f1>1.0</td>
+            <td bgcolor=ecf0f1>0.0</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>1</td>
+            <td bgcolor=ecf0f1>0.01</td>
+            <td bgcolor=ecf0f1>0.99</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=1></td>
+            <td colspan=2>M</td>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;1.0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.0&nbsp;</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td bgcolor=ecf0f1>&nbsp;0.01&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.99&nbsp;</td>
+          </tr>
+        </table>
+        </p>
+
+        <p>
+          Just to take an example, the car will start (S=1) with probability
+          0.99 in case the ignition works (I=1) and there is gasoline in the tank (G=1).
+          (No Tesla obviously). If there's a problem either with the ignition <i>or</i>
+          the gasoline, then the car won't start for sure, i.e., P(S=1 | I=i, G=g) = 0.0 for
+          all other combinations (i,g) than (1,1).
+        </p>
+
+        <p>
+          The structure (the DAG) and the parameters in the CPTs are the
+          building blocks of a Bayesian network. Next we dicuss how they
+          represent a joint distribution and how they can be used to
+          perform inference about the domain.
+        </p>
+
+        <h3 class="material-heading">
+          Defining a probabilistic model as a Bayesian network
+
+        </h3>
+
+        <p>
+          A probabilistic model is really nothing but a joint distribution
+          over the random variables in the domain. The joint distribution
+          defines the probability of each elementary event, which are
+          equivalent to joint value assignments for the random variables.
+          In the car domain, an elementary event is defined by six bits,
+          B,R,I,G,S,M. For example, the event 1,1,1,1,1,1 would be a good
+          day: the battery is alive, you listen to some good music, the
+          car starts because you remembered to fill the tank yesterday, and
+          you make it to the lecture in time.
+        </p>
+
+        <p>
+          The joint probability of any elementary event is obtained as the
+          product of the conditional probabilities of the form P(V=v |
+          Pa<sub>V</sub> = pa<sub>V</sub>), where you'll recall Pa<sub>V</sub>
+          refers to the parent set of V. In the car domain, the product is
+          thus of the form:<br><br>
+          P(B=b,R=r,I=i,G=g,S=s,M=m) =
+          P(B=b) P(R=r | B=b) P(I=i | B=b) P(G=g) P (S=s | I=i,G=g) P(M=m | S=s),<br><br>
+          where b,r,i,g,s, and m denote values of the respective random
+          variables. The above formula is called a <strong>factorization</strong>
+          of the joint probability.
+        </p>
+
+
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>On short-hand notation
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              To make it easier to interpret the events we won't use the rather
+              long notation like B=1,R=1,I=1,G=1,S=1,M=1 or even the shorter
+              notation like 1,1,1,1,1,1 to denote events in the car
+              domain. Rather, we'll have a different label for the values of each
+              of the random variables. For the variable Battery, we denote the
+              good case (battery is alive) by B and the bad case by &not;B.
+              Similarly, for Radio, we denote the good case (music is played) by
+              R, and the bad case by &not;R, and so on.
+            </p>
+
+            <p>
+              This is actually slight abuse of notation since we also denote the
+              corresponding variables by the initial letters, B, R, etc, but we
+              hope the meaning is clear enough.
+            </p>
+
+
+          </div>
+        </div>
+
+        <p>
+          The probability of a good day with the car is<br><br>
+          P(B) P(R|B) P(I|B) P(G) P(S|I,G) P(M|S)
+          = 0.9 &times; 0.9 &times; 0.95 &times; 0.95 &times; 0.99 &times 99
+          &asymp; 0.716.<br><br>
+          Pay close attention to the form of the terms, and make sure you could
+          choose the right values from the above CPTs to do the above
+          calculation.
+        </p>
+
+        <p>
+          Or, some days are fine except the radio may not work, which is
+          denoted as &not;R. The probability of the elementary event where
+          everything else is good but the radio is out is obtained similarly,
+          and the result is:
+          <br><br>
+          P(B) P(&not;R|B) P(I|B) P(G) P(S|I,G) P(M|S)
+          <!--= 0.9 &times; 0.1 &times; 0.95 &times; 0.95 &times; 0.99 &times 99-->
+          &asymp; 0.080.
+          <br><br>
+          Check that you get the same result by substituting the numbers from
+          the CPTs in the correct places. Remember that &not;R means R=0 (see the
+          hint above).
+        </p>
+
+        <p>
+          You may ask what the point in all this business with the CPTs is:
+          having to come up with all the numbers (parameters) in the CPTs
+          looks like a lot of work. Why not just directly try to come up with
+          the probabilities of the elementary events if that is the end
+          result? The answer is that we can sometimes save a whole lot of
+          work this way. In the car example, the CPTs contain 2+4+4+2+8+4 = 24
+          numbers, of which half are actually redundant since the numbers on
+          each row must always sum up to one, i.e., there are really only 12
+          numbers to choose. The number of elementary events, on the other
+          hand, is 2<sup>6</sup>=64, i.e., we would have to come up with 63
+          parameters (the last one could be obtained by subtracting the others
+          from 1.0). This shows how Bayesian networks can lead to <b>compact
+            representation</b> of probabilistic models.
+        </p>
+
+        <h3 class="material-heading">
+          Exact inference in Bayesian networks
+
+        </h3>
+
+        <p>
+          Compact representation of probabilistic models is only one of the
+          two main advantages of Bayesian networks. The other advantage is
+          efficient inference. Here we will discuss what we mean by inference,
+          but to get to the <i>efficient</i> inference algorithms, you will have
+          to study a bit more than this course.
+        </p>
+
+        <p>
+          Just like in the above examples where we used Bayes rule and other
+          probability calculus methods to compute posterior probabilities of
+          the kind P(state | observations), we can do the same with Bayesian
+          networks. Continuing with the car example, we can for example
+          compute P(battery dead | radio doesn't work, car won't move), or
+          P(&not;B | &not;R, &not;M), to figure out what is wrong with our car.
+        </p>
+
+        <p>
+          So, let's get to work. We can start by writing the conditional
+          probability as a ratio of two probabilities
+        <pre>
+                   P(&not;B, &not;R, &not;M)
+  P(&notB | &not;R, &not;M) = -------------
+                      P(&not;R, &not;M)</pre>
+        To obtain these probabilities, we need to use the marginalization
+        rule, which we have used before to write the annoying denominator
+        as a sum of two terms. Here the sum will be composed of many
+        terms instead of only two, but the basic principle is the same.
+        The numerator becomes:<br><br>
+        P(&not;B, &not;R, &not;M) =
+        &Sigma;<sub>&omega; &isin; (&not;B,&not;R,&not;M)</sub> P(&omega;) <br>
+        = P(&not;B, &not;R, I, G, S, &not;M)<br>
+        + P(&not;B, &not;R, I, G, &not;S, &not;M)<br>
+        + P(&not;B, &not;R, I, &not;G, S, &not;M)<br>
+        + P(&not;B, &not;R, I, &not;G, &not;S, &not;M)<br>
+        + P(&not;B, &not;R, &not;I, G, S, &not;M)<br>
+        + P(&not;B, &not;R, &not;I, G, &not;S, &not;M)<br>
+        + P(&not;B, &not;R, &not;I, &not;G, S, &not;M)<br>
+        + P(&not;B, &not;R, &not;I, &not;G, &not;S, &not;M)<br><br>
+        where &omega; &isin; (&not;B,&not;R,&not;M) denotes the set of
+        elementary events that belong to the event (&not;B,&not;R,&not;M).
+        </p>
+
+        <p>
+          We can now obtain the probability of each of the above eight
+          elementary events by using the factorization into a product of
+          conditional probabilities, and substituting the appropriate values
+          into the product from the CPTs. Take the first one:<br><br>
+          P(&not;B, &not;R, I, G, S, &not;M)
+          = 0.1 &times; 1.0 &times; 0.0 &times; 0.95 &times; 0.0 &times; 1.0 = 0.0
+          <br><br>
+          which turns out to be equal to zero. Can you see why this makes sense?
+          (Remember the meaning of &not;B and I. Can they happen at the same
+          time?)
+        </p>
+
+        <p>
+          The denominator in the formula for the posterior probability we wish
+          to compute, P(&not;R, &not;M), can also be evaluated using the
+          same technique. It will involve a sum of 16 terms since there are
+          four variables that we need to sum over when we expand the
+          event into a sum of elementary events. But if we work hard and
+          do the math, we'll get the answer we need.
+        </p>
+
+        <p>
+          We call this the <strong>brute-force</strong> approach, and it has
+          the advantage that it always leads to exactly the right answer.
+          Implementing the calculations in a computer avoids the tedious task
+          of writing down large sums and manually calculating them. However,
+          in larger domains than our small car example, the calculations will
+          become infeasible even for a computer. The problem is that the
+          number of terms to be evaluated grows exponentially with respect to
+          the number of variables in the model. That is why the more advanced
+          and efficient inference algorithms that we've alluded to a few times
+          are such an important thing. Another solution is to use <strong>
+            approximate inference</strong>, which is our next topic.
+        </p>
+
+        <h3 class="material-heading">
+          Generating data from a Bayesian network
+
+        </h3>
+
+        <p>
+          In order to do approximate inference, we need to be able to generate
+          (or sample) data from the joint distribution defined by a
+          Bayesian network. The data will consist of <b>tuples</b>, each of
+          which is essentially a list of values for each of the random
+          variables in the domain. Thus, each tuple corresponds one-to-one
+          to an elementary event &omega;.
+        </p>
+
+        <p>
+          The algorithm to generate tuples is quite simple. We first choose
+          values for any variables that have no parents. The choice is
+          done randomly according to the distribution defined by the CPT.
+          For example, to choose the value for the Battery variable in the
+          car model, we use the distribution (0.1, 0.9). Similarly, the
+          value of variable Gas is drawn from the distribution (0.05, 0.95).
+        </p>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>Random sampling from a distribution
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              You have probably generated numbers from a pseudorandom number
+              generator in your favorite programming language. In python, you may
+              have used <code>random.random()</code>, and in Java, <code>Math.random()</code>.
+              Both of these return pseudorandom floating point values in the range
+              [0.0, 1.0). Other functions exist for generating random integers,
+              Booleans, etc.</p>
+
+            <p>
+              Some languages also have functions to generate categorical values
+              (values in a finite set) from a given distribution. If your favorite
+              language doesn't provide such functions, it is easy to apply the
+              existing functions to implement them.
+            </p>
+
+            <p>
+              For binary variables, the method works as follows. Let the
+              probability of zero in the distribution you wish to sample from be
+              some P(X=0). Generate a random floating point value <code>r</code>
+              by the aforementioned functions. If <code>r</code> &lt; P(X=0), then
+              output the value 0, and otherwise 1. Clearly a uniformly distributed
+              value between 0 and 1 is less than P(X=0) with probability P(X=0), so
+              our method produces value 0 with probability P(X=0), as it should.
+            </p>
+
+            <p>
+              In the following, we will only need the binary case, but just in
+              case you are interested: For categorical variables with more than
+              two values, the method works in a similar fashion. The value 0 is
+              produced if <code>r</code> is less than P(X=0). The value 1 is
+              produced if <code>r</code> is between P(X=0) and P(X=0)+P(X=1). And
+              generally, the value x is produced if
+              <code>r</code> is between A = &Sigma;<sub>i=0,...,x-1</sub> P(X=i)
+              = P(X=0) + ... + P(X=i-1) and A + P(X=i).
+            </p>
+
+
+          </div>
+        </div>
+
+        <p>
+          To choose values for the remaining variables, we proceed in such an
+          order that when dealing with a variable, we have already chosen the
+          value(s) for its parent(s). After choosing the value for Battery, we
+          can thus move on to variable Radio. The distribution from which we
+          choose the value of a child variable (such as Radio) is determined
+          by the configuration of its parents (such as Battery). If B=1, then
+          we draw the value of R from distribution (0.1, 0.9). Whereas if B=0,
+          then we draw the value of R from distribution (1.0, 0.0) and the
+          outcome is always R=0. No battery, no music.
+        </p>
+
+        <p>
+          Note that when choosing the value of Starts, we need to chosen the
+          values of both Ignition and Gas.
+        </p>
+
+        <p>
+          Pseudocode for a generating n random tuples from a Bayesian network
+          is as follows.
+        </p>
+
+        <pre class="sh_java code-highlight"><code>   generate_tuples(n, model):
+1:    for i = 1 to n:
+2:       v = empty array
+3:       for V in model.variables:
+4:          pa = v[V.Pa]    # parents of V
+5:          v.append(sample(V.CPT(pa)))
+6:       output v
+</code></pre>
+
+        <p>
+          In the pseudocode, <code>model</code> is an object that defines the
+          Bayesian network model by giving for each variable <code>V</code> a
+          set of parents (in the form of a set of indices that can be used to
+          select variables in array <code>v</code>), and the corresponding
+          CPTs. The selection operator <code>v[V.Pa]</code> extracts from the
+          array the elements that define the values of the parents
+          of <code>V</code>. These are used on line 6 to choose the correct
+          row from the CPT of <code>V</code>. Note that here it is important
+          that the variables be processed in such an order that the parent
+          values are added into the array before they are needed for
+          generating the children.
+        </p>
+
+        <h3 class="material-heading">
+          Approximate inference (Monte Carlo)
+
+        </h3>
+
+        <p>
+          The simplest approximate inference method is based on using the
+          tuples sampled from a Bayesian network to estimate probabilities
+          directly as relative frequencies. To estimate the probability of an
+          event, we simply draw a large number n of tuples, and count in how
+          many of them the event occurs. The number of occurrences divided by
+          n is then an estimate of the probability of the event.
+        </p>
+
+        <p>
+          Thus, we get
+        <pre>
+                    #{tuples where B=0, R=0, M=0}
+    P(&not;B, &not;R, &not;M) &asymp; -----------------------------
+                                  n</pre>
+        </p>
+
+        <p>
+          To approximate conditional probabilities, we simply write them as
+          ratios, P(A | B) = P(A, B) / (B), and apply the same estimator to
+          both the numerator and the denominator.
+        </p>
+
+        <p>
+          This is a very simple and general technique, which belongs to the
+          category of <strong>Monte Carlo</strong> techniques due to the use
+          of chance in obtaining the results. The downside is that the
+          result is not exact. The variance that is caused by the random
+          nature of the process can sometimes make the obtained probabilities
+          quite inaccurate. The bigger the number of tuples, however, the
+          better the accuracy, and in the limit as n &rarr; &infin; the
+          approximation converges to the exact value.
+        </p>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Bayesian networks (pencil-and-paper) (2p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Above, we discussed how Bayesian networks lead to compact
+                representation of probabilistic models.
+              <ol>
+                <li>
+                  Consider a model with N=4 variables, each of which has k possible
+                  values (0,1,...,k&ndash;1). How many different elementary events are there
+                  in the domain? One less is the number of probabilities that we'd have
+                  to determine in order to fully specify the model. (For example, in the
+                  Car model above, with N=6 and k=2, this number was 63.)
+                <li>
+                  How many parameters would we have to define to specify the model using
+                  an "empty" Bayesian network, i.e, a network with no edges at all?
+                <li>
+                  What is the maximum number of parameters we'd have to define in a
+                  Bayesian network in this domain (N variables with k values each)?
+                  Remember that the graph has to be a DAG, i.e., no directed cycles are
+                  allowed.
+                <li>
+                  <i>Optional:</i> Generalize to arbitrary values of N. It may be helpful to
+                  recall the sum of a geometric series 1+k+k<sup>2</sup>+...+k<sup>N&ndash;1</sup> =
+                  (k<sup>N</sup>&ndash;1)/(k&ndash;1), where k&ne;1.
+              </ol>
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2.5 -->
+
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Example solution</h1>
+        
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+          <p>
+            <ol>
+              <li>
+                The number of combinations is k<sup>N</sup> = k<sup>4</sup>.
+                Since the probabilities of the elementary events must sum to
+                one, it is enough to give k<sup>4</sup>&ndash;1 probability
+                values to define the model this way.<br><br>
+              <li>
+                In an empty network, we only need to specify the distributions
+                of each variable. Since each variable has k possible values, we
+                need k&ndash;1 probabilities per variable, and the total number
+                is N(k&ndash;1) = 4(k&ndash;1).<br><br>
+              <li>
+                The more edges there are in the network, the more parameters are
+                required in order to specify all the conditional
+                distributions. Thus, we need to calculate how many parameters
+                there are in the "full" network. A full network has one node
+                with no parents, one node with one parent, one node with two
+                parents, etc.<br><br>
+                For a node with m parents, the number of possible parent
+                configurations is k<sup>m</sup> (since we assumed that the
+                number of values that each parent can take is k). To specify
+                the conditional distribution for all parent configurations,
+                we thus need k<sup>m</sup>(k&ndash;1) probability parameters.<br><br>
+                Summing up the numbers over the N=4 nodes, we thus get k&ndash;1
+                + k(k&ndash;1) + k<sup>2</sup>(k&ndash;1) +
+                k<sup>3</sup>(k&ndash;1).
+                <br><br>
+              <li>
+                For general N, the above formula becomes<br><br>
+                (1 + k + k<sup>2</sup> + ... + k<sup>N&ndash;1</sup>)(k&ndash;1)
+                = k<sup>N</sup>&ndash;1,
+                <br><br>
+                where we used the formula for the sum of a geometric series.
+            </ol>
+        
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Bayesian networks: Car (programming) (2p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Please note that there will be no template solution in TMC for these programming exercises. Implement your solutions from scratch.
+              </p>  
+
+              <p>
+                Implement an algorithm for generating data from the Car network
+                discussed above. You should generate n tuples, each of which is
+                a six element list of bits (or Boolean values). You should start by
+                choosing the value of B so that it takes value 1
+                (or <code>True</code>) with probability 0.9. After choosing the
+                value of B, choose the value of R. If B=0, then R=0 with probability
+                1. If B=1, then R=0 with probability 0.1. Continue this way,
+                choosing the probabilities from the CPTs, until you have generated a
+                complete tuple.
+              </p>
+
+              <p>
+                Generate a sample of n=100 000 tuples. Use it to approximate the following
+                conditional probabilities:
+              <ol>
+                <li>
+                  P(B | R,G,&not;S)
+                <li>
+                  P(S | R,I,G)
+                <li>
+                  P(S | &not;R,I,G)
+              </ol>
+              <strong>
+                and (don't forget this part):
+              </strong>
+              <ol start=4><br>
+                <li>
+                  Give an interpretation to the above probabilities. Are they in line with
+                  your intuition? In other words, do they make sense?
+              </ol>
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2.6 -->
+
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Example solution</h1>
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+        
+          <p>
+            An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/auto.py">here</a>.
+          </p>
+        
+        
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Bayesian networks: Earthquake (programming) (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Consider the following scenario. You live in an area where
+                earthquakes happen on the average every 111th day. Another annoying
+                thing is that a burglar breaks into your home on the average once a
+                year. Both events occur independently of each other and uniformly
+                throughout the year (so any day is like another).
+              </p>
+
+              <p>
+                In case of an earthquake, your home alarm goes off with probability 0.81.
+                If your home is broken into, the alarm goes off with probability 0.92.
+                If these both should occur at the same time, the alarm goes off with
+                probability 0.97. If nothing special is going on, there's a false alarm
+                with probability 0.0095.
+              </p>
+
+              <p>
+                Now modify the algorithm from the previous exercise so that you can generate
+                data from variables [E]arthquake, [B]urglar, [A]larm. Generate a sample of
+                n=100 000 tuples.
+              <ol>
+                <li>
+                  Among the tuples with A=1, what is the fraction where B=1?
+                <li>
+                  Among the tuples with A=1 and E=1, what is the fraction where B=1?
+              </ol>
+              <strong>
+                and (don't forget these):
+              </strong>
+              <ol start=3><br>
+                <li>
+                  Give an interpretation to your answers for items 1 & 2. What
+                  probabilities do they approximate?
+                <li>
+                  Are they in line with your intuition? In other words, do they
+                  make sense? In particular: which of the fractions is bigger and
+                  why?
+                <li>
+                  Repeat the experiment a couple of times to get a feeling of how much
+                  the results change just by chance. (This is the nature of the Monte
+                  Carlo approximation.) Experiment with different values of n. How does
+                  it affect the variability?
+              </ol>
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2.7 -->
+
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Example solution</h1>
+        
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+          <p>
+            An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/earthquake.py">here</a>.
+          </p>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -1289,7 +2086,10 @@
     </div>
   </div>
 
+  <!-- TMC login disabled. Original modal selector:
   <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
+  -->
+  <div class="modal fade" id="tmc-login-modal-disabled" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <form id="tmc-login-form">
