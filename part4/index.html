@@ -1490,6 +1490,246 @@
           The next part covers modern architectures and foundation-model applications.
         </p>
 
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Training Your First Neural Network (programming) (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Time to stop drawing perceptrons on paper and actually train one. We'll use
+                scikit-learn's <code>MLPClassifier</code>, which hides the training loop
+                (forward pass, loss, backward pass, weight update) behind a single
+                <code>.fit()</code> call — exactly the same building blocks you've read about,
+                just already wired up for you.
+              </p>
+
+              <p>
+                Run this on the MNIST digit data (you can reuse the same
+                <code>mnist-x.data</code>/<code>mnist-y.data</code> files from the Perceptron
+                exercise, or load MNIST fresh via
+                <code>sklearn.datasets.fetch_openml("mnist_784")</code>):
+              <pre>
+from sklearn.neural_network import MLPClassifier
+
+clf = MLPClassifier(
+    hidden_layer_sizes=(40,),   # one hidden layer, 40 neurons
+    max_iter=8,
+    solver="sgd",
+    learning_rate_init=0.2,
+    random_state=1,
+)
+clf.fit(X_train, y_train)
+print("Test accuracy:", clf.score(X_test, y_test))
+</pre>
+              </p>
+
+              <ol>
+                <li> Run the code above as-is and note the test accuracy.
+                <li> Change <code>hidden_layer_sizes=(40,)</code> to <code>(10,)</code>, then to
+                  <code>(100, 50)</code> (two hidden layers). Rerun each and record the accuracy.
+                <li> Change <code>max_iter=8</code> to <code>50</code> (keeping
+                  <code>hidden_layer_sizes=(40,)</code>) and rerun.
+                <li> In 3–4 sentences: which change helped most, which helped least or hurt, and
+                  does that match your intuition about network capacity vs. training time?
+              </ol>
+
+              <div class="hint">
+                <div class="hint__header">
+                  <i class="fa fa-info-circle hint__icon"></i>What's actually happening inside <code>.fit()</code>?
+                </div>
+                <div class="hint__body">
+                  <p>
+                    Every one of the ~8 iterations does exactly what you've seen in lecture:
+                    a forward pass through the network, a loss computation, and a weight update
+                    via gradient descent. <code>MLPClassifier</code> doesn't do anything
+                    conceptually different from the perceptron you studied earlier — it's just
+                    stacked into multiple layers and trained automatically.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- New exercise: NN Slot A, Priority 1 -->
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Same Network, Three Activation Functions (programming) (1.5p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Reuse the Keras MNIST script from the "Training an MLP on MNIST with Keras"
+                exercise. This time, the model architecture, training loop, and dataset all
+                stay exactly the same — the only thing that changes is one word:
+              <pre>
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(input_shape=(28, 28)),
+    tf.keras.layers.Dense(128, activation='relu'),   # &larr; change just this word
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(10)
+])
+</pre>
+              </p>
+
+              <ol>
+                <li> Train and evaluate the model with <code>activation='relu'</code> (the
+                  default), <code>'tanh'</code>, and <code>'sigmoid'</code> — three separate
+                  runs, everything else identical.
+                <li> Record the final test accuracy and how many epochs it took to visibly
+                  "settle" (stop improving much epoch to epoch) for each.
+                <li> In 4–5 sentences: which activation trained fastest/most accurately in your
+                  runs? Recall from lecture why sigmoid in particular can suffer from
+                  <i>vanishing gradients</i> in deeper networks — does your small 1-hidden-layer
+                  result seem consistent with that, or too small a network to see the effect?
+              </ol>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- New exercise: NN Slot B, Priority 1 -->
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Loading Pretrained Word Vectors in Three Lines (programming) (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                You don't need to train a word-embedding model yourself to explore one — huge
+                pretrained ones are a download away. This entire exercise is three lines of
+                setup:
+              <pre>
+import gensim.downloader as api
+
+model = api.load("glove-wiki-gigaword-50")   # ~66MB, downloads once
+model.most_similar("glass")
+</pre>
+              </p>
+
+              <ol>
+                <li> Run the code above. You'll get a ranked list of the words whose vectors are
+                  closest to "glass" — record the top 5.
+                <li> Try at least 4 more words of your own choosing, including one ambiguous
+                  word (multiple meanings — e.g. "bank," "bat," "crane") and one very specific,
+                  uncommon word.
+                <li> For the ambiguous word: do the returned neighbors reflect one meaning,
+                  multiple meanings, or something confused? Why do you think that happened,
+                  given that the model was trained on raw text with no sense of "which meaning
+                  is intended" ever labeled?
+                <li> <code>model.similarity("cat", "dog")</code> returns a single number between
+                  &minus;1 and 1 — the cosine similarity between the two words' vectors. Compute
+                  it for 3 word pairs of your choosing (some you expect to be similar, some not)
+                  and report the numbers alongside your expectations.
+              </ol>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- New exercise: NN Slot C, Priority 1 -->
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Running a Real Transformer in Three Lines (programming) (1.5p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Everything we've discussed about attention and Transformers so far has been
+                conceptual. Let's actually run one. The HuggingFace <code>pipeline()</code>
+                function downloads a real, pretrained Transformer and wraps it behind a
+                one-line call — no training, no GPU required, no HuggingFace account needed for
+                any of the calls below.
+              </p>
+
+              <p>
+              <pre>
+from transformers import pipeline
+
+classifier = pipeline("sentiment-analysis")
+classifier("I've been waiting for a HuggingFace course my whole life.")
+</pre>
+              </p>
+
+              <p>Try each of these three pipeline tasks in turn:</p>
+              <ol>
+                <li> <b>Sentiment analysis</b> (code above) — try it on 3 sentences of your own,
+                  including one that's deliberately ambiguous or sarcastic. Report whether the
+                  model's confidence score reflects the ambiguity.
+                <li> <b>Fill-mask</b> — a Transformer guessing a missing word:
+                <pre>
+unmasker = pipeline("fill-mask")
+unmasker("This course will teach you all about [MASK] models.", top_k=3)
+</pre>
+                  Try it on 2 sentences of your own with different missing words.
+                <li> <b>Text generation</b> — the model continues your prompt:
+                <pre>
+generator = pipeline("text-generation")
+generator("In this course, we will teach you how to", max_length=30, num_return_sequences=2)
+</pre>
+                  Try 2 different prompts and compare how coherent/relevant the continuations are.
+              </ol>
+
+              <p>
+                <b>Write-up:</b> in 4–5 sentences, connect what you just saw to the "attention"
+                concept from lecture — in the fill-mask example, the model had to decide which
+                other words in the sentence were most relevant to predicting the missing one.
+                Which words do you think it was "attending to" most for your fill-mask example?
+              </p>
+
+              <div class="hint">
+                <div class="hint__header">
+                  <i class="fa fa-info-circle hint__icon"></i>First run is slow, that's normal
+                </div>
+                <div class="hint__body">
+                  <p>
+                    The first time you call each <code>pipeline(...)</code>, it downloads the
+                    model (roughly 250MB for sentiment-analysis/fill-mask/text-generation with
+                    their default models). That's a one-time cost per model — subsequent calls
+                    are fast.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- New exercise: NN Slot D, Priority 1 -->
+
 
 
     <div class="footer-wrapper">
