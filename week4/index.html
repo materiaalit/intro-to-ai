@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Introduction to Artificial Intelligence 2025 | Part 4</title>
+  <title>Introduction to Artificial Intelligence 2026 | Week 4</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -51,38 +51,38 @@
               onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=index.html&gt;')">Introduction</a>
           </li>
           <li class="nav-item ">
-            <a href="../part1/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part1.html&gt;')">Part
+            <a href="../week1/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week1.html&gt;')">Week
               1</a>
           </li>
           <li class="nav-item ">
-            <a href="../part2/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part2.html&gt;')">Part
+            <a href="../week2/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week2.html&gt;')">Week
               2</a>
           </li>
           <li class="nav-item ">
-            <a href="../part3/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part3.html&gt;')">Part
+            <a href="../week3/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week3.html&gt;')">Week
               3</a>
           </li>
           <li class="nav-item active">
             <a href="./" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part4.html&gt;')">Part
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week4.html&gt;')">Week
               4</a>
           </li>
           <li class="nav-item ">
-            <a href="../part5/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part5.html&gt;')">Part
+            <a href="../week5/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week5.html&gt;')">Week
               5</a>
           </li>
           <li class="nav-item ">
-            <a href="../part6/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
+            <a href="../week6/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week6.html&gt;')">Week
               6</a>
           </li>
           <li class="nav-item ">
-            <a href="../part7/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+            <a href="../week7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week7.html&gt;')">Week
               7</a>
           </li>
         </ul>
@@ -253,7 +253,7 @@
         <p>
           Neural networks learn layered representations by combining linear transformations with nonlinear activation
           functions. Training adjusts their parameters using gradients. Embeddings extend representation learning to
-          discrete items such as words and prepare the ground for attention and Transformers in Part 5.
+          discrete items such as words and prepare the ground for attention and Transformers in Week 5.
         </p>
 
         <div class="exercise-list">
@@ -375,7 +375,7 @@
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
               <h1 class="exercise__heading">Tensorflow Playground: Experimenting with Complex Data and Advanced
-                Features (0.5p)</h1>
+                Features (1p)</h1>
 
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
@@ -428,7 +428,7 @@
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Training Your First Neural Network (programming) (1p)</h1>
+              <h1 class="exercise__heading">Training Your First Neural Network (programming) (1.5p)</h1>
 
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
@@ -500,7 +500,7 @@ print("Test accuracy:", clf.score(X_test, y_test))
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Same Network, Three Activation Functions (programming) (1.5p)</h1>
+              <h1 class="exercise__heading">Same Network, Three Activation Functions (programming) (2p)</h1>
 
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
@@ -510,9 +510,11 @@ print("Test accuracy:", clf.score(X_test, y_test))
             <div class="exercise__body">
 
               <p>
-                Reuse the Keras MNIST script from the "Training an MLP on MNIST with Keras"
-                exercise. This time, the model architecture, training loop, and dataset all
-                stay exactly the same — the only thing that changes is one word:
+                Start from the Keras MNIST script in TensorFlow's
+                <a href="https://www.tensorflow.org/tutorials/quickstart/beginner" target="_blank"
+                  rel="noopener">beginner quickstart</a>, which uses the model below. The model
+                architecture, training loop, and dataset all stay exactly the same — the only
+                thing that changes is one word:
               <pre>
 model = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
@@ -581,82 +583,6 @@ model.most_similar("glass")
                   it for 3 word pairs of your choosing (some you expect to be similar, some not)
                   and report the numbers alongside your expectations.
               </ol>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- New exercise: NN Slot C, Priority 1 -->
-
-        <div class="exercise">
-          <div class="exercise__header">
-            <a data-toggle="collapse" class="exercise__toggle">
-              <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Running a Real Transformer in Three Lines (programming) (1.5p)</h1>
-
-              <i class="fa fa-caret-down exercise__arrow"></i>
-            </a>
-          </div>
-
-          <div class="collapse">
-            <div class="exercise__body">
-
-              <p>
-                Everything we've discussed about attention and Transformers so far has been
-                conceptual. Let's actually run one. The HuggingFace <code>pipeline()</code>
-                function downloads a real, pretrained Transformer and wraps it behind a
-                one-line call — no training, no GPU required, no HuggingFace account needed for
-                any of the calls below.
-        </p>
-
-        <p>
-              <pre>
-from transformers import pipeline
-
-classifier = pipeline("sentiment-analysis")
-classifier("I've been waiting for a HuggingFace course my whole life.")
-</pre>
-              </p>
-
-              <p>Try each of these three pipeline tasks in turn:</p>
-              <ol>
-                <li> <b>Sentiment analysis</b> (code above) — try it on 3 sentences of your own,
-                  including one that's deliberately ambiguous or sarcastic. Report whether the
-                  model's confidence score reflects the ambiguity.
-                <li> <b>Fill-mask</b> — a Transformer guessing a missing word:
-                <pre>
-unmasker = pipeline("fill-mask")
-unmasker("This course will teach you all about [MASK] models.", top_k=3)
-</pre>
-                  Try it on 2 sentences of your own with different missing words.
-                <li> <b>Text generation</b> — the model continues your prompt:
-                <pre>
-generator = pipeline("text-generation")
-generator("In this course, we will teach you how to", max_length=30, num_return_sequences=2)
-</pre>
-                  Try 2 different prompts and compare how coherent/relevant the continuations are.
-              </ol>
-
-              <p>
-                <b>Write-up:</b> in 4–5 sentences, connect what you just saw to the "attention"
-                concept from lecture — in the fill-mask example, the model had to decide which
-                other words in the sentence were most relevant to predicting the missing one.
-                Which words do you think it was "attending to" most for your fill-mask example?
-              </p>
-
-              <div class="hint">
-                <div class="hint__header">
-                  <i class="fa fa-info-circle hint__icon"></i>First run is slow, that's normal
-                </div>
-                <div class="hint__body">
-                  <p>
-                    The first time you call each <code>pipeline(...)</code>, it downloads the
-                    model (roughly 250MB for sentiment-analysis/fill-mask/text-generation with
-                    their default models). That's a one-time cost per model — subsequent calls
-                    are fast.
-                  </p>
-                </div>
-              </div>
 
             </div>
           </div>
@@ -763,7 +689,7 @@ generator("In this course, we will teach you how to", max_length=30, num_return_
     crossorigin="anonymous"></script>
 
   <script>
-    window.SD_SHOW_SURVEY = ['part6', 'part7'].indexOf(window.location.pathname.replace(/\//g, '')) >= 0;
+    window.SD_SHOW_SURVEY = ['week6', 'week7'].indexOf(window.location.pathname.replace(/\//g, '')) >= 0;
   </script>
 
   <script src="../javascripts/scripts-cb52849c.js"></script>

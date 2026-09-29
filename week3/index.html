@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Introduction to Artificial Intelligence 2025 | Part 3</title>
+  <title>Introduction to Artificial Intelligence 2026 | Week 3</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -51,38 +51,38 @@
               onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=index.html&gt;')">Introduction</a>
           </li>
           <li class="nav-item ">
-            <a href="../part1/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part1.html&gt;')">Part
+            <a href="../week1/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week1.html&gt;')">Week
               1</a>
           </li>
           <li class="nav-item ">
-            <a href="../part2/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part2.html&gt;')">Part
+            <a href="../week2/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week2.html&gt;')">Week
               2</a>
           </li>
           <li class="nav-item active">
             <a href="./" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part3.html&gt;')">Part
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week3.html&gt;')">Week
               3</a>
           </li>
           <li class="nav-item ">
-            <a href="../part4/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part4.html&gt;')">Part
+            <a href="../week4/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week4.html&gt;')">Week
               4</a>
           </li>
           <li class="nav-item ">
-            <a href="../part5/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part5.html&gt;')">Part
+            <a href="../week5/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week5.html&gt;')">Week
               5</a>
           </li>
           <li class="nav-item ">
-            <a href="../part6/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
+            <a href="../week6/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week6.html&gt;')">Week
               6</a>
           </li>
           <li class="nav-item ">
-            <a href="../part7/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+            <a href="../week7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week7.html&gt;')">Week
               7</a>
           </li>
         </ul>
@@ -109,7 +109,7 @@
     <div class="content-wrapper">
       <div class="container material" id="material">
         <h1>
-          Classical Machine Learning
+          Bayesian Networks and Classical Machine Learning
         </h1>
 
         <div class="hint">
@@ -126,6 +126,17 @@
                 </td>
                 <td>
                   Objectives (after the course, you ...)
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Reasoning under uncertainty
+                </td>
+                <td>
+                  <ul>
+                    <li>can represent a problem solving situation as a Bayesian network
+                    <li>can apply an approximate (Monte Carlo) technique to perform inference in a Bayesian network
+                  </ul>
                 </td>
               </tr>
               <tr>
@@ -159,9 +170,917 @@
         </div>
 
 
+        <h2 class="material-heading">
+          Bayesian networks
+
+        </h2>
+
         <p>
-          Parts 1 and 2 covered search and reasoning under uncertainty.
-          This part is about <b>classical machine learning</b>: algorithms that
+          As we mentioned above, the naive Bayes model is a kind of a Bayesian
+          network, with an associated graph structure where the class variable
+          is the root and the only "parent" of all the feature variables.
+        </p>
+
+        <p>
+          Bayesian networks are a model family which belong to the still more
+          general category
+          of <a href="https://en.wikipedia.org/wiki/Graphical_model">(probabilistic)
+            graphical models</a>, which are a modeling "language" for
+          probabilistic models. The power of graphical models is mainly due to
+          i) their ability to compactly represent multivariate domains with
+          complex dependencies, and ii) efficient inference procedures that
+          exploit the structure of the models.
+        </p>
+
+        <h3 class="material-heading">
+          Building blocks of a Bayesian network
+
+        </h3>
+
+        <p>
+          A Bayesian network will represent a joint distribution over a number
+          of random variables. Depending on the complexity of the network
+          (which depends on the number and placement of the edges in the
+          graph), the Bayesian network representation may require
+          significantly fewer numerical parameters than the number of
+          elementary events in the domain.
+        </p>
+
+        <p>
+          The structure of the network is encoded as a graph where each random
+          variable is represented as a node, and the dependency structure is
+          characterized by a set of directed edges between the nodes. The
+          graph must be a <strong>directed acyclic graph</strong> (DAG), which
+          means that it is impossible to start from a node follow a path in
+          the direction of the edges to arrive at the same node.
+        </p>
+
+        <p>
+          Here's an example DAG:<br>
+          <img src="../img/diagrams/BNexample1-5591f5d5.png" width=25% align=middle>
+        </p>
+
+        <p>
+          The random variables in the model are X,Y,Z, and &Aring;. (For the
+          non-Scandi students, the last one is what we call the "Swedish O" in
+          Finland;
+          see <a href="https://en.wikipedia.org/wiki/%C3%85">Wikipedia:&Aring;</a>.
+          It conveniently comes after X, Y, and Z in our alphabet.) The edges
+          correspond to <strong>direct</strong> dependency, so that
+          the <i>absence</i> of an edge between any two variables means that
+          the variables are conditionally independent given some (possibly
+          empty) set of other variables. The details of this are slightly too
+          complicated to discuss here, so we'll not go into them. For now, it
+          is enough to remember that the edges are a way to encode the
+          dependency structure in the domain.
+        </p>
+
+        <p>
+          In addition to the structure encoded as the DAG, a Bayesian network
+          comes with a set of parameters quantifying the conditional
+          distributions of the variables. These are given in the form P(V=v |
+          Pa<sub>V</sub> = pa<sub>V</sub>), where V is a random variable and v
+          is a value, and Pa<sub>V</sub> denotes the <strong>parents</strong>
+          of node V in the graph: i.e., the nodes from which there is an edge
+          to V. For example, in the above DAG, we have Pa<sub>Z</sub> = {X,Y},
+          and Pa<sub>Y</sub> = &empty; because node Y has no parents at all.
+        </p>
+
+        <p>
+          When the variables are categorical, i.e., they take values in a finite
+          set, the conditional distributions can be specified as
+          <strong>conditional probability tables</strong> (CPTs). A CPT for
+          variable V includes the distribution of V for each possible
+          combination of the values of V's parents. We call such combinations
+          <strong>parent configurations</strong>. For example, if in the above
+          example network, all variables are binary, then the parent configurations
+          of Z are (X=0, Y=0), (X=0, Y=1), (X=1, Y=0), (X=1, Y=1), and the CPT
+          of Z will have four rows, each containing a conditional distribution
+          for Z. A concrete example is as follows
+        </p>
+
+        <p>
+        <table style="background-color: #7fb3d5; text-align: center;">
+          <tr>
+            <td colspan=2></td>
+            <td colspan=2>Z</td>
+          </tr>
+          <tr>
+            <td>&nbsp;X&nbsp;</td>
+            <td>&nbsp;Y&nbsp;</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td bgcolor=ecf0f1>&nbsp;0.1&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.9&nbsp;</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td bgcolor=ecf0f1>0.2</td>
+            <td bgcolor=ecf0f1>0.8</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0</td>
+            <td bgcolor=ecf0f1>0.5</td>
+            <td bgcolor=ecf0f1>0.5</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>1</td>
+            <td bgcolor=ecf0f1>0.0</td>
+            <td bgcolor=ecf0f1>1.0</td>
+          </tr>
+        </table>
+        </p>
+
+        <p>
+          So for instance, if X=1 and Y=0, then the conditional probability of Z=1
+          is given by P(Z=1 | X=1, Y=0) = 0.5, and so on.
+        </p>
+
+        <p>
+          For a variable that has no parents in the network, the CPT is actually
+          just a single distribution, and the CPT has only one row. For variables
+          that have many parents, the CPT may easily become very very large.
+        </p>
+
+        <p>
+          To make things concrete, we use a running example which is the
+          car Bayesian network discussed at the lecture. Its structure is
+          the following:<br>
+          <img src="../img/diagrams/carBN-f8e83c71.png" width=50%>
+        </p>
+
+        <p>
+          The variables in the model are abbreviated as the first letters:
+        <pre>
+    [B]attery
+    [R]adio
+    [I]gnition
+    [G]as
+    [S]tarts
+    [M]oves</pre>
+        </p>
+
+        <p>
+          The CPTs are as follows:
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=2 align=center>B</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td bgcolor=ecf0f1>&nbsp;0.1&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.9&nbsp;</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=1></td>
+            <td colspan=2>R</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;1.0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.0&nbsp;</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td bgcolor=ecf0f1>&nbsp;0.1&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.9&nbsp;</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=1></td>
+            <td colspan=2>I</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;1.0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.0&nbsp;</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td bgcolor=ecf0f1>&nbsp;0.05&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.95&nbsp;</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=2 align=center>G</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td bgcolor=ecf0f1>&nbsp;0.05&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.95&nbsp;</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=2></td>
+            <td colspan=2>S</td>
+          </tr>
+          <tr>
+            <td>I</td>
+            <td>G</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td>&nbsp;0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;1.0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.0&nbsp;</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td bgcolor=ecf0f1>1.0</td>
+            <td bgcolor=ecf0f1>0.0</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>0</td>
+            <td bgcolor=ecf0f1>1.0</td>
+            <td bgcolor=ecf0f1>0.0</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>1</td>
+            <td bgcolor=ecf0f1>0.01</td>
+            <td bgcolor=ecf0f1>0.99</td>
+          </tr>
+        </table>
+        &nbsp;&nbsp;
+
+        <table style="background-color: #7fb3d5; text-align: center; display: inline-block;">
+          <tr>
+            <td colspan=1></td>
+            <td colspan=2>M</td>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>&nbsp;0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;1.0&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.0&nbsp;</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td bgcolor=ecf0f1>&nbsp;0.01&nbsp;</td>
+            <td bgcolor=ecf0f1>&nbsp;0.99&nbsp;</td>
+          </tr>
+        </table>
+        </p>
+
+        <p>
+          Just to take an example, the car will start (S=1) with probability
+          0.99 in case the ignition works (I=1) and there is gasoline in the tank (G=1).
+          (No Tesla obviously). If there's a problem either with the ignition <i>or</i>
+          the gasoline, then the car won't start for sure, i.e., P(S=1 | I=i, G=g) = 0.0 for
+          all other combinations (i,g) than (1,1).
+        </p>
+
+        <p>
+          The structure (the DAG) and the parameters in the CPTs are the
+          building blocks of a Bayesian network. Next we dicuss how they
+          represent a joint distribution and how they can be used to
+          perform inference about the domain.
+        </p>
+
+        <h3 class="material-heading">
+          Defining a probabilistic model as a Bayesian network
+
+        </h3>
+
+        <p>
+          A probabilistic model is really nothing but a joint distribution
+          over the random variables in the domain. The joint distribution
+          defines the probability of each elementary event, which are
+          equivalent to joint value assignments for the random variables.
+          In the car domain, an elementary event is defined by six bits,
+          B,R,I,G,S,M. For example, the event 1,1,1,1,1,1 would be a good
+          day: the battery is alive, you listen to some good music, the
+          car starts because you remembered to fill the tank yesterday, and
+          you make it to the lecture in time.
+        </p>
+
+        <p>
+          The joint probability of any elementary event is obtained as the
+          product of the conditional probabilities of the form P(V=v |
+          Pa<sub>V</sub> = pa<sub>V</sub>), where you'll recall Pa<sub>V</sub>
+          refers to the parent set of V. In the car domain, the product is
+          thus of the form:<br><br>
+          P(B=b,R=r,I=i,G=g,S=s,M=m) =
+          P(B=b) P(R=r | B=b) P(I=i | B=b) P(G=g) P (S=s | I=i,G=g) P(M=m | S=s),<br><br>
+          where b,r,i,g,s, and m denote values of the respective random
+          variables. The above formula is called a <strong>factorization</strong>
+          of the joint probability.
+        </p>
+
+
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>On short-hand notation
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              To make it easier to interpret the events we won't use the rather
+              long notation like B=1,R=1,I=1,G=1,S=1,M=1 or even the shorter
+              notation like 1,1,1,1,1,1 to denote events in the car
+              domain. Rather, we'll have a different label for the values of each
+              of the random variables. For the variable Battery, we denote the
+              good case (battery is alive) by B and the bad case by &not;B.
+              Similarly, for Radio, we denote the good case (music is played) by
+              R, and the bad case by &not;R, and so on.
+            </p>
+
+            <p>
+              This is actually slight abuse of notation since we also denote the
+              corresponding variables by the initial letters, B, R, etc, but we
+              hope the meaning is clear enough.
+            </p>
+
+
+          </div>
+        </div>
+
+        <p>
+          The probability of a good day with the car is<br><br>
+          P(B) P(R|B) P(I|B) P(G) P(S|I,G) P(M|S)
+          = 0.9 &times; 0.9 &times; 0.95 &times; 0.95 &times; 0.99 &times 99
+          &asymp; 0.716.<br><br>
+          Pay close attention to the form of the terms, and make sure you could
+          choose the right values from the above CPTs to do the above
+          calculation.
+        </p>
+
+        <p>
+          Or, some days are fine except the radio may not work, which is
+          denoted as &not;R. The probability of the elementary event where
+          everything else is good but the radio is out is obtained similarly,
+          and the result is:
+          <br><br>
+          P(B) P(&not;R|B) P(I|B) P(G) P(S|I,G) P(M|S)
+          <!--= 0.9 &times; 0.1 &times; 0.95 &times; 0.95 &times; 0.99 &times 99-->
+          &asymp; 0.080.
+          <br><br>
+          Check that you get the same result by substituting the numbers from
+          the CPTs in the correct places. Remember that &not;R means R=0 (see the
+          hint above).
+        </p>
+
+        <p>
+          You may ask what the point in all this business with the CPTs is:
+          having to come up with all the numbers (parameters) in the CPTs
+          looks like a lot of work. Why not just directly try to come up with
+          the probabilities of the elementary events if that is the end
+          result? The answer is that we can sometimes save a whole lot of
+          work this way. In the car example, the CPTs contain 2+4+4+2+8+4 = 24
+          numbers, of which half are actually redundant since the numbers on
+          each row must always sum up to one, i.e., there are really only 12
+          numbers to choose. The number of elementary events, on the other
+          hand, is 2<sup>6</sup>=64, i.e., we would have to come up with 63
+          parameters (the last one could be obtained by subtracting the others
+          from 1.0). This shows how Bayesian networks can lead to <b>compact
+            representation</b> of probabilistic models.
+        </p>
+
+        <h3 class="material-heading">
+          Exact inference in Bayesian networks
+
+        </h3>
+
+        <p>
+          Compact representation of probabilistic models is only one of the
+          two main advantages of Bayesian networks. The other advantage is
+          efficient inference. Here we will discuss what we mean by inference,
+          but to get to the <i>efficient</i> inference algorithms, you will have
+          to study a bit more than this course.
+        </p>
+
+        <p>
+          Just like in the above examples where we used Bayes rule and other
+          probability calculus methods to compute posterior probabilities of
+          the kind P(state | observations), we can do the same with Bayesian
+          networks. Continuing with the car example, we can for example
+          compute P(battery dead | radio doesn't work, car won't move), or
+          P(&not;B | &not;R, &not;M), to figure out what is wrong with our car.
+        </p>
+
+        <p>
+          So, let's get to work. We can start by writing the conditional
+          probability as a ratio of two probabilities
+        <pre>
+                   P(&not;B, &not;R, &not;M)
+  P(&notB | &not;R, &not;M) = -------------
+                      P(&not;R, &not;M)</pre>
+        To obtain these probabilities, we need to use the marginalization
+        rule, which we have used before to write the annoying denominator
+        as a sum of two terms. Here the sum will be composed of many
+        terms instead of only two, but the basic principle is the same.
+        The numerator becomes:<br><br>
+        P(&not;B, &not;R, &not;M) =
+        &Sigma;<sub>&omega; &isin; (&not;B,&not;R,&not;M)</sub> P(&omega;) <br>
+        = P(&not;B, &not;R, I, G, S, &not;M)<br>
+        + P(&not;B, &not;R, I, G, &not;S, &not;M)<br>
+        + P(&not;B, &not;R, I, &not;G, S, &not;M)<br>
+        + P(&not;B, &not;R, I, &not;G, &not;S, &not;M)<br>
+        + P(&not;B, &not;R, &not;I, G, S, &not;M)<br>
+        + P(&not;B, &not;R, &not;I, G, &not;S, &not;M)<br>
+        + P(&not;B, &not;R, &not;I, &not;G, S, &not;M)<br>
+        + P(&not;B, &not;R, &not;I, &not;G, &not;S, &not;M)<br><br>
+        where &omega; &isin; (&not;B,&not;R,&not;M) denotes the set of
+        elementary events that belong to the event (&not;B,&not;R,&not;M).
+        </p>
+
+        <p>
+          We can now obtain the probability of each of the above eight
+          elementary events by using the factorization into a product of
+          conditional probabilities, and substituting the appropriate values
+          into the product from the CPTs. Take the first one:<br><br>
+          P(&not;B, &not;R, I, G, S, &not;M)
+          = 0.1 &times; 1.0 &times; 0.0 &times; 0.95 &times; 0.0 &times; 1.0 = 0.0
+          <br><br>
+          which turns out to be equal to zero. Can you see why this makes sense?
+          (Remember the meaning of &not;B and I. Can they happen at the same
+          time?)
+        </p>
+
+        <p>
+          The denominator in the formula for the posterior probability we wish
+          to compute, P(&not;R, &not;M), can also be evaluated using the
+          same technique. It will involve a sum of 16 terms since there are
+          four variables that we need to sum over when we expand the
+          event into a sum of elementary events. But if we work hard and
+          do the math, we'll get the answer we need.
+        </p>
+
+        <p>
+          We call this the <strong>brute-force</strong> approach, and it has
+          the advantage that it always leads to exactly the right answer.
+          Implementing the calculations in a computer avoids the tedious task
+          of writing down large sums and manually calculating them. However,
+          in larger domains than our small car example, the calculations will
+          become infeasible even for a computer. The problem is that the
+          number of terms to be evaluated grows exponentially with respect to
+          the number of variables in the model. That is why the more advanced
+          and efficient inference algorithms that we've alluded to a few times
+          are such an important thing. Another solution is to use <strong>
+            approximate inference</strong>, which is our next topic.
+        </p>
+
+        <h3 class="material-heading">
+          Generating data from a Bayesian network
+
+        </h3>
+
+        <p>
+          In order to do approximate inference, we need to be able to generate
+          (or sample) data from the joint distribution defined by a
+          Bayesian network. The data will consist of <b>tuples</b>, each of
+          which is essentially a list of values for each of the random
+          variables in the domain. Thus, each tuple corresponds one-to-one
+          to an elementary event &omega;.
+        </p>
+
+        <p>
+          The algorithm to generate tuples is quite simple. We first choose
+          values for any variables that have no parents. The choice is
+          done randomly according to the distribution defined by the CPT.
+          For example, to choose the value for the Battery variable in the
+          car model, we use the distribution (0.1, 0.9). Similarly, the
+          value of variable Gas is drawn from the distribution (0.05, 0.95).
+        </p>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>Random sampling from a distribution
+          </div>
+
+          <div class="hint__body">
+
+            <p>
+              You have probably generated numbers from a pseudorandom number
+              generator in your favorite programming language. In python, you may
+              have used <code>random.random()</code>, and in Java, <code>Math.random()</code>.
+              Both of these return pseudorandom floating point values in the range
+              [0.0, 1.0). Other functions exist for generating random integers,
+              Booleans, etc.</p>
+
+            <p>
+              Some languages also have functions to generate categorical values
+              (values in a finite set) from a given distribution. If your favorite
+              language doesn't provide such functions, it is easy to apply the
+              existing functions to implement them.
+            </p>
+
+            <p>
+              For binary variables, the method works as follows. Let the
+              probability of zero in the distribution you wish to sample from be
+              some P(X=0). Generate a random floating point value <code>r</code>
+              by the aforementioned functions. If <code>r</code> &lt; P(X=0), then
+              output the value 0, and otherwise 1. Clearly a uniformly distributed
+              value between 0 and 1 is less than P(X=0) with probability P(X=0), so
+              our method produces value 0 with probability P(X=0), as it should.
+            </p>
+
+            <p>
+              In the following, we will only need the binary case, but just in
+              case you are interested: For categorical variables with more than
+              two values, the method works in a similar fashion. The value 0 is
+              produced if <code>r</code> is less than P(X=0). The value 1 is
+              produced if <code>r</code> is between P(X=0) and P(X=0)+P(X=1). And
+              generally, the value x is produced if
+              <code>r</code> is between A = &Sigma;<sub>i=0,...,x-1</sub> P(X=i)
+              = P(X=0) + ... + P(X=i-1) and A + P(X=i).
+            </p>
+
+
+          </div>
+        </div>
+
+        <p>
+          To choose values for the remaining variables, we proceed in such an
+          order that when dealing with a variable, we have already chosen the
+          value(s) for its parent(s). After choosing the value for Battery, we
+          can thus move on to variable Radio. The distribution from which we
+          choose the value of a child variable (such as Radio) is determined
+          by the configuration of its parents (such as Battery). If B=1, then
+          we draw the value of R from distribution (0.1, 0.9). Whereas if B=0,
+          then we draw the value of R from distribution (1.0, 0.0) and the
+          outcome is always R=0. No battery, no music.
+        </p>
+
+        <p>
+          Note that when choosing the value of Starts, we need to chosen the
+          values of both Ignition and Gas.
+        </p>
+
+        <p>
+          Pseudocode for a generating n random tuples from a Bayesian network
+          is as follows.
+        </p>
+
+        <pre class="sh_java code-highlight"><code>   generate_tuples(n, model):
+1:    for i = 1 to n:
+2:       v = empty array
+3:       for V in model.variables:
+4:          pa = v[V.Pa]    # parents of V
+5:          v.append(sample(V.CPT(pa)))
+6:       output v
+</code></pre>
+
+        <p>
+          In the pseudocode, <code>model</code> is an object that defines the
+          Bayesian network model by giving for each variable <code>V</code> a
+          set of parents (in the form of a set of indices that can be used to
+          select variables in array <code>v</code>), and the corresponding
+          CPTs. The selection operator <code>v[V.Pa]</code> extracts from the
+          array the elements that define the values of the parents
+          of <code>V</code>. These are used on line 6 to choose the correct
+          row from the CPT of <code>V</code>. Note that here it is important
+          that the variables be processed in such an order that the parent
+          values are added into the array before they are needed for
+          generating the children.
+        </p>
+
+        <h3 class="material-heading">
+          Approximate inference (Monte Carlo)
+
+        </h3>
+
+        <p>
+          The simplest approximate inference method is based on using the
+          tuples sampled from a Bayesian network to estimate probabilities
+          directly as relative frequencies. To estimate the probability of an
+          event, we simply draw a large number n of tuples, and count in how
+          many of them the event occurs. The number of occurrences divided by
+          n is then an estimate of the probability of the event.
+        </p>
+
+        <p>
+          Thus, we get
+        <pre>
+                    #{tuples where B=0, R=0, M=0}
+    P(&not;B, &not;R, &not;M) &asymp; -----------------------------
+                                  n</pre>
+        </p>
+
+        <p>
+          To approximate conditional probabilities, we simply write them as
+          ratios, P(A | B) = P(A, B) / (B), and apply the same estimator to
+          both the numerator and the denominator.
+        </p>
+
+        <p>
+          This is a very simple and general technique, which belongs to the
+          category of <strong>Monte Carlo</strong> techniques due to the use
+          of chance in obtaining the results. The downside is that the
+          result is not exact. The variance that is caused by the random
+          nature of the process can sometimes make the obtained probabilities
+          quite inaccurate. The bigger the number of tuples, however, the
+          better the accuracy, and in the limit as n &rarr; &infin; the
+          approximation converges to the exact value.
+        </p>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Bayesian networks (pencil-and-paper) (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Above, we discussed how Bayesian networks lead to compact
+                representation of probabilistic models.
+              <ol>
+                <li>
+                  Consider a model with N=4 variables, each of which has k possible
+                  values (0,1,...,k&ndash;1). How many different elementary events are there
+                  in the domain? One less is the number of probabilities that we'd have
+                  to determine in order to fully specify the model. (For example, in the
+                  Car model above, with N=6 and k=2, this number was 63.)
+                <li>
+                  How many parameters would we have to define to specify the model using
+                  an "empty" Bayesian network, i.e, a network with no edges at all?
+                <li>
+                  What is the maximum number of parameters we'd have to define in a
+                  Bayesian network in this domain (N variables with k values each)?
+                  Remember that the graph has to be a DAG, i.e., no directed cycles are
+                  allowed.
+                <li>
+                  <i>Optional:</i> Generalize to arbitrary values of N. It may be helpful to
+                  recall the sum of a geometric series 1+k+k<sup>2</sup>+...+k<sup>N&ndash;1</sup> =
+                  (k<sup>N</sup>&ndash;1)/(k&ndash;1), where k&ne;1.
+              </ol>
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2.5 -->
+
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Example solution</h1>
+        
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+          <p>
+            <ol>
+              <li>
+                The number of combinations is k<sup>N</sup> = k<sup>4</sup>.
+                Since the probabilities of the elementary events must sum to
+                one, it is enough to give k<sup>4</sup>&ndash;1 probability
+                values to define the model this way.<br><br>
+              <li>
+                In an empty network, we only need to specify the distributions
+                of each variable. Since each variable has k possible values, we
+                need k&ndash;1 probabilities per variable, and the total number
+                is N(k&ndash;1) = 4(k&ndash;1).<br><br>
+              <li>
+                The more edges there are in the network, the more parameters are
+                required in order to specify all the conditional
+                distributions. Thus, we need to calculate how many parameters
+                there are in the "full" network. A full network has one node
+                with no parents, one node with one parent, one node with two
+                parents, etc.<br><br>
+                For a node with m parents, the number of possible parent
+                configurations is k<sup>m</sup> (since we assumed that the
+                number of values that each parent can take is k). To specify
+                the conditional distribution for all parent configurations,
+                we thus need k<sup>m</sup>(k&ndash;1) probability parameters.<br><br>
+                Summing up the numbers over the N=4 nodes, we thus get k&ndash;1
+                + k(k&ndash;1) + k<sup>2</sup>(k&ndash;1) +
+                k<sup>3</sup>(k&ndash;1).
+                <br><br>
+              <li>
+                For general N, the above formula becomes<br><br>
+                (1 + k + k<sup>2</sup> + ... + k<sup>N&ndash;1</sup>)(k&ndash;1)
+                = k<sup>N</sup>&ndash;1,
+                <br><br>
+                where we used the formula for the sum of a geometric series.
+            </ol>
+        
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Bayesian networks: Car (programming) (1.5p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                There is no starter package for these programming exercises.
+                Implement your solutions from scratch.
+              </p>  
+
+              <p>
+                Implement an algorithm for generating data from the Car network
+                discussed above. You should generate n tuples, each of which is
+                a six element list of bits (or Boolean values). You should start by
+                choosing the value of B so that it takes value 1
+                (or <code>True</code>) with probability 0.9. After choosing the
+                value of B, choose the value of R. If B=0, then R=0 with probability
+                1. If B=1, then R=0 with probability 0.1. Continue this way,
+                choosing the probabilities from the CPTs, until you have generated a
+                complete tuple.
+              </p>
+
+              <p>
+                Generate a sample of n=100 000 tuples. Use it to approximate the following
+                conditional probabilities:
+              <ol>
+                <li>
+                  P(B | R,G,&not;S)
+                <li>
+                  P(S | R,I,G)
+                <li>
+                  P(S | &not;R,I,G)
+              </ol>
+              <strong>
+                and (don't forget this part):
+              </strong>
+              <ol start=4><br>
+                <li>
+                  Give an interpretation to the above probabilities. Are they in line with
+                  your intuition? In other words, do they make sense?
+              </ol>
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2.6 -->
+
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Example solution</h1>
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+        
+          <p>
+            An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/auto.py">here</a>.
+          </p>
+        
+        
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Bayesian networks: Earthquake (programming) (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Consider the following scenario. You live in an area where
+                earthquakes happen on the average every 111th day. Another annoying
+                thing is that a burglar breaks into your home on the average once a
+                year. Both events occur independently of each other and uniformly
+                throughout the year (so any day is like another).
+              </p>
+
+              <p>
+                In case of an earthquake, your home alarm goes off with probability 0.81.
+                If your home is broken into, the alarm goes off with probability 0.92.
+                If these both should occur at the same time, the alarm goes off with
+                probability 0.97. If nothing special is going on, there's a false alarm
+                with probability 0.0095.
+              </p>
+
+              <p>
+                Now modify the algorithm from the previous exercise so that you can generate
+                data from variables [E]arthquake, [B]urglar, [A]larm. Generate a sample of
+                n=100 000 tuples.
+              <ol>
+                <li>
+                  Among the tuples with A=1, what is the fraction where B=1?
+                <li>
+                  Among the tuples with A=1 and E=1, what is the fraction where B=1?
+              </ol>
+              <strong>
+                and (don't forget these):
+              </strong>
+              <ol start=3><br>
+                <li>
+                  Give an interpretation to your answers for items 1 & 2. What
+                  probabilities do they approximate?
+                <li>
+                  Are they in line with your intuition? In other words, do they
+                  make sense? In particular: which of the fractions is bigger and
+                  why?
+                <li>
+                  Repeat the experiment a couple of times to get a feeling of how much
+                  the results change just by chance. (This is the nature of the Monte
+                  Carlo approximation.) Experiment with different values of n. How does
+                  it affect the variability?
+              </ol>
+              </p>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise 2.7 -->
+
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Example solution</h1>
+        
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+          <p>
+            An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/earthquake.py">here</a>.
+          </p>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Weeks 1 and 2 covered search and reasoning under uncertainty, and the
+          section above continued with Bayesian networks.
+          The rest of this week is about <b>classical machine learning</b>: algorithms that
           improve by fitting a model to labeled examples, then making predictions
           on new ones.
         </p>
@@ -169,7 +1088,7 @@
         <p>
           We will start from what a supervised learning problem is, then study
           linear models, nearest neighbors, decision trees, ensembles, and naive
-          Bayes as a classical classifier. This part also includes a course
+          Bayes as a classical classifier. This week also includes a course
           <b>Kaggle competition</b> on customer churn — a contest with a public
           leaderboard, not one of the usual exercises. It opens after logistic
           regression, once you have a model you can actually submit.
@@ -397,7 +1316,7 @@
         </p>
         
         <p>
-          In this part, we will primarily focus on <b>predictive models</b>, which aim to capture the relationship between the feature representation <code>x</code> of an object and its target <code>y</code>. These models can be expressed as <code>y = f(x)</code>. Occasionally, we will also deal with <b>data models</b>, such as describing a feature with a normal distribution.
+          This week, we will primarily focus on <b>predictive models</b>, which aim to capture the relationship between the feature representation <code>x</code> of an object and its target <code>y</code>. These models can be expressed as <code>y = f(x)</code>. Occasionally, we will also deal with <b>data models</b>, such as describing a feature with a normal distribution.
         </p>
         
         <p>
@@ -714,7 +1633,7 @@
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Plastic Film Folding Machine (1p)</h1>
+              <h1 class="exercise__heading">Plastic Film Folding Machine (0.5p)</h1>
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
           </div>
@@ -813,7 +1732,7 @@
 
 			      <p>
 			        A first valid submission — for example logistic regression from the baseline notebook — already earns two points.
-			        After that, treat it as a contest: try a tree, then an ensemble later in this part, and see whether you move up the leaderboard.
+			        After that, treat it as a contest: try a tree, then an ensemble later this week, and see whether you move up the leaderboard.
 			        Final standings will be shown in class.
 			      </p>
 			
@@ -833,7 +1752,7 @@
 			      <ol>
 			        <li>Open the <a href="https://colab.research.google.com/drive/1hGpBZBmPSfoRkrc5CbDpDA-zE5ZWPIZi?usp=sharing" target="_blank" rel="noopener">baseline notebook</a> for instructions and a simple starter model.</li>
 			        <li>Explore the data, check class balance, and build a clean validation scheme.</li>
-			        <li>Start with logistic regression (you just met it). Later this part you can try a tree or an ensemble and resubmit.</li>
+			        <li>Start with logistic regression (you just met it). Later this week you can try a tree or an ensemble and resubmit.</li>
 			        <li>Export predicted probabilities for <code>test.csv</code> in the exact format shown below and submit on Kaggle.</li>
 			      </ol>
 			
@@ -1092,7 +2011,7 @@
         </p>
         
         <p>
-          Although the generalization ability of decision trees is limited, their predictions are computationally inexpensive. This makes decision trees a common building block for constructing <b>ensembles</b>—models that make predictions by aggregating the outputs of multiple models. We will discuss ensembles later in this part.
+          Although the generalization ability of decision trees is limited, their predictions are computationally inexpensive. This makes decision trees a common building block for constructing <b>ensembles</b>—models that make predictions by aggregating the outputs of multiple models. We will discuss ensembles later this week.
         </p>
 
         <h2 class="material-heading">
@@ -1703,7 +2622,7 @@ Gain(S, A) = Entropy(S) - &sum;<sub>v</sub> (|S<sub>v</sub>| / |S|) &middot; Ent
 
         <p>
           The naive Bayes classifier is actually already familiar to you from
-          the spam filter problem in Part 2. Here we will see how the same
+          the spam filter problem in Week 2. Here we will see how the same
           idea can be applied to the handwritten digit recognition task from the MNIST dataset introduced above.
           In the spam filter application, the class variable was binary (spam/ham) and
           the feature variables were the words in the message. In the
@@ -1806,14 +2725,14 @@ Gain(S, A) = Entropy(S) - &sum;<sub>v</sub> (|S<sub>v</sub>| / |S|) &middot; Ent
         </h1>
         
         <p>
-          This part covered classical methods for tabular prediction: linear models,
+          This week covered classical methods for tabular prediction: linear models,
           nearest neighbors, decision trees, naive Bayes, and ensembles (bagging,
           boosting, random forests, stacking). Bias and variance explain why single
           trees overfit and why ensembles help.
         </p>
         
         <p>
-          The next part turns to neural networks.
+          Next week turns to neural networks.
         </p>
 
 
@@ -1863,7 +2782,7 @@ Gain(S, A) = Entropy(S) - &sum;<sub>v</sub> (|S<sub>v</sub>| / |S|) &middot; Ent
     crossorigin="anonymous"></script>
 
   <script>
-    window.SD_SHOW_SURVEY = ['part6', 'part7'].indexOf(window.location.pathname.replace(/\//g, '')) >= 0;
+    window.SD_SHOW_SURVEY = ['week6', 'week7'].indexOf(window.location.pathname.replace(/\//g, '')) >= 0;
   </script>
 
   <script src="../javascripts/scripts-cb52849c.js"></script>

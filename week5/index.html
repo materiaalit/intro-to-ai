@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Introduction to Artificial Intelligence 2025 | Part 5</title>
+  <title>Introduction to Artificial Intelligence 2026 | Week 5</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -51,38 +51,38 @@
               onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=index.html&gt;')">Introduction</a>
           </li>
           <li class="nav-item ">
-            <a href="../part1/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part1.html&gt;')">Part
+            <a href="../week1/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week1.html&gt;')">Week
               1</a>
           </li>
           <li class="nav-item ">
-            <a href="../part2/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part2.html&gt;')">Part
+            <a href="../week2/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week2.html&gt;')">Week
               2</a>
           </li>
           <li class="nav-item ">
-            <a href="../part3/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part3.html&gt;')">Part
+            <a href="../week3/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week3.html&gt;')">Week
               3</a>
           </li>
           <li class="nav-item ">
-            <a href="../part4/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part4.html&gt;')">Part
+            <a href="../week4/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week4.html&gt;')">Week
               4</a>
           </li>
           <li class="nav-item active">
             <a href="./" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part5.html&gt;')">Part
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week5.html&gt;')">Week
               5</a>
           </li>
           <li class="nav-item ">
-            <a href="../part6/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part6.html&gt;')">Part
+            <a href="../week6/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week6.html&gt;')">Week
               6</a>
           </li>
           <li class="nav-item ">
-            <a href="../part7/" class="nav-link"
-              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=part7.html&gt;')">Part
+            <a href="../week7/" class="nav-link"
+              onclick="ga('send', 'event', 'navigation_topic_link', 'click', '#&lt;Middleman::Sitemap::Resource path=week7.html&gt;')">Week
               7</a>
           </li>
         </ul>
@@ -116,12 +116,12 @@
           Modern Architectures and Foundation-Model Applications
         </h1>
 
-        <div class="hint">
-          <div class="hint__header">
+	<div class="hint">
+	  <div class="hint__header">
             <i class="fa fa-info-circle hint__icon"></i>Learning objectives
-          </div>
+	  </div>
 
-          <div class="hint__body">
+	  <div class="hint__body">
 
             <table class="table">
               <tr>
@@ -145,7 +145,7 @@
                     <li>can describe representative text, image, and multimodal applications
                     <li>can distinguish discriminative and generative modelling
                     <li>can explain latent representations, simple autoencoders, and GANs conceptually
-                  </ul>
+        </ul>
                 </td>
               </tr>
             </table>
@@ -165,7 +165,7 @@
 	        <!-- Teaching content: Episodes 9 to 11 -->
         <h1 class="material-heading">Episode 9: Attention and self-attention</h1>
         <p>
-          Part 4 introduced embeddings as learned vector representations. A static embedding cannot adapt its meaning
+          Week 4 introduced embeddings as learned vector representations. A static embedding cannot adapt its meaning
           to the surrounding sequence. Attention solves this problem by letting each position select and combine
           information from other positions. Episode 9 develops this mechanism and shows why it became the foundation
           of the Transformer.
@@ -607,6 +607,82 @@
 	
 	<img src="../img/material/part5/decision_transformer.svg" alt="Decision Transformer in RL" width="70%">
 
+        <!-- New exercise: NN Slot C, Priority 1 -->
+
+        <div class="exercise">
+          <div class="exercise__header">
+            <a data-toggle="collapse" class="exercise__toggle">
+              <i class="fa fa-pencil exercise__icon"></i>
+              <h1 class="exercise__heading">Running a Real Transformer in Three Lines (programming) (1p)</h1>
+
+              <i class="fa fa-caret-down exercise__arrow"></i>
+            </a>
+          </div>
+
+          <div class="collapse">
+            <div class="exercise__body">
+
+              <p>
+                Everything we've discussed about attention and Transformers so far has been
+                conceptual. Let's actually run one. The HuggingFace <code>pipeline()</code>
+                function downloads a real, pretrained Transformer and wraps it behind a
+                one-line call — no training, no GPU required, no HuggingFace account needed for
+                any of the calls below.
+        </p>
+
+        <p>
+              <pre>
+from transformers import pipeline
+
+classifier = pipeline("sentiment-analysis")
+classifier("I've been waiting for a HuggingFace course my whole life.")
+</pre>
+              </p>
+
+              <p>Try each of these three pipeline tasks in turn:</p>
+              <ol>
+                <li> <b>Sentiment analysis</b> (code above) — try it on 3 sentences of your own,
+                  including one that's deliberately ambiguous or sarcastic. Report whether the
+                  model's confidence score reflects the ambiguity.
+                <li> <b>Fill-mask</b> — a Transformer guessing a missing word:
+                <pre>
+unmasker = pipeline("fill-mask")
+unmasker("This course will teach you all about [MASK] models.", top_k=3)
+</pre>
+                  Try it on 2 sentences of your own with different missing words.
+                <li> <b>Text generation</b> — the model continues your prompt:
+                <pre>
+generator = pipeline("text-generation")
+generator("In this course, we will teach you how to", max_length=30, num_return_sequences=2)
+</pre>
+                  Try 2 different prompts and compare how coherent/relevant the continuations are.
+              </ol>
+
+              <p>
+                <b>Write-up:</b> in 4–5 sentences, connect what you just saw to the "attention"
+                concept from lecture — in the fill-mask example, the model had to decide which
+                other words in the sentence were most relevant to predicting the missing one.
+                Which words do you think it was "attending to" most for your fill-mask example?
+              </p>
+
+              <div class="hint">
+                <div class="hint__header">
+                  <i class="fa fa-info-circle hint__icon"></i>First run is slow, that's normal
+                </div>
+                <div class="hint__body">
+                  <p>
+                    The first time you call each <code>pipeline(...)</code>, it downloads the
+                    model (roughly 250MB for sentiment-analysis/fill-mask/text-generation with
+                    their default models). That's a one-time cost per model — subsequent calls
+                    are fast.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
 	<h2 class="material-heading">Running Language Models Locally</h2>
 
         <p>
@@ -623,7 +699,7 @@
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Running a Local Language Model with Ollama (1p)</h1>
+              <h1 class="exercise__heading">Running a Local Language Model with Ollama (0.5p)</h1>
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
           </div>
@@ -658,7 +734,7 @@
                     <li>a factual question about a topic you know well;</li>
                     <li>a request to explain a difficult idea to a 12-year-old;</li>
                     <li>a creative request, such as writing a short story.</li>
-                  </ul>
+              </ul>
                 </li>
                 <li>
                   Examine the answers. Find one response that is useful and one
@@ -676,6 +752,7 @@
         </div>
 
         <!-- Exercise 5.2 -->
+        <!-- Calendar: Generating Text with GPT-2 and Hugging Face removed (was Ex 5.2)
         <div class="exercise">
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
@@ -736,6 +813,7 @@ for result in generator(
             </div>
           </div>
         </div>
+        -->
 
         <h3>NanoGPT: a small and transparent GPT implementation</h3>
 
@@ -829,7 +907,7 @@ git checkout 3adf61e1</code></pre>
             <div class="exercise__body">
               <p>
                 <b>This is a bonus exercise.</b> It is more technical and may
-                take longer than the other exercises in this part. Complete it if
+                take longer than the other exercises this week. Complete it if
                 you want to see how fine-tuning adapts a pretrained model to a
                 specific dataset.
               </p>
@@ -1468,7 +1546,7 @@ git checkout 3adf61e1</code></pre>
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Detecting AI-Generated Images (1p)</h1>
+              <h1 class="exercise__heading">Detecting AI-Generated Images (1.5p)</h1>
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
           </div>
@@ -1636,7 +1714,7 @@ git checkout 3adf61e1</code></pre>
     crossorigin="anonymous"></script>
 
   <script>
-    window.SD_SHOW_SURVEY = ['part6', 'part7'].indexOf(window.location.pathname.replace(/\//g, '')) >= 0;
+    window.SD_SHOW_SURVEY = ['week6', 'week7'].indexOf(window.location.pathname.replace(/\//g, '')) >= 0;
   </script>
 
   <script src="../javascripts/scripts-cb52849c.js"></script>
