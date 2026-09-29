@@ -425,81 +425,91 @@
         </p>
 
         <h1 class="material-heading">
-          Accounts and tools
+          Tools for the exercises
 
         </h1>
 
-
+        <p>
+          You work on the
+          exercises on your own computer (or in a browser tool when the exercise
+          says so), then discuss them in the exercise sessions. Points are marked
+          there; see <i>Grading</i> above.
+        </p>
 
         <h2 class="material-heading">
-          Creating a user account
+          What you need
 
         </h2>
 
         <p>
-          You'll need a user account to the Test My Code (TMC) system that will be used to download the programming
-          exercises.
-          You should also log in to the course material with the same account.
-        </p>
-
-        <p>
-          You can enter your student number as "Organizational identifier"
-          (found in TMC settings after login) for future purposes, but on this
-          course the exercises points are not collected directly from TMC.
-          If you don't have an account already, you can create one
-          here: <a href="https://tmc.mooc.fi/user/new" target="_blank" rel="noopener">https://tmc.mooc.fi/user/new</a>.
-        </p>
-
-        <h2 class="material-heading">
-          Installing the programming environment
-
-        </h2>
-
-        <p>
-          We recommend that for the Python exercises you use VSCode with the TMC extension. The
-          plugin makes it easy to download the exercises.
+          Install the following before the programming exercises. A normal student
+          laptop is enough; you do not need a dedicated GPU.
         </p>
 
         <ul>
-
           <li>
-            <strong>Python</strong>: If you want to do the exercises in Python we recommend using Visual Studio with the
-            TMC-plugin.
-            Navigate to <a href="https://www.mooc.fi/en/installation/vscode" target="_blank"
-              rel="noopener">https://www.mooc.fi/en/installation/vscode</a>
-            and follow the instructions for your operating system.
-            Alternatively, you can download project templates
-            with <a href="https://github.com/rage/tmc-cli-rust" target="_blank"
-              rel="noopener">tmc-cli</a> or straight
-            from <a href="https://tmc.mooc.fi/org/hy/courses/901">TMC</a>. To run tests locally use the following
-            command: <code>python3 -m tmc</code>
-            <b>Note:</b> TMC tests require Python 3.
+            <strong>Python 3</strong>:
+            Required for the programming exercises. Check your version with
+            <code>python3 --version</code> (or <code>python --version</code> on
+            Windows). Use Python 3.10 or newer if possible.
+            Download from
+            <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>
+            if you do not already have it.
           </li>
+          <li>
+            <strong>Visual Studio Code</strong> (recommended):
+            A free editor that works well with Python.
+            Install it from
+            <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">code.visualstudio.com</a>,
+            then add the official
+            <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python" target="_blank" rel="noopener">Python extension</a>.
+            You may use another editor if you prefer.
+          </li>
+          <li>
+            <strong>Terminal / command line</strong>:
+            Many exercises use short commands (<code>pip</code>, <code>git</code>,
+            running scripts). On macOS and Linux, use Terminal. On Windows, use
+            PowerShell, Command Prompt, or the terminal built into VS Code.
+          </li>
+          <li>
+            <strong>pip and virtual environments</strong>:
+            Install packages with <code>pip</code>. For exercises that need extra
+            libraries (for example PyTorch or Transformers), create a fresh
+            virtual environment so course packages do not mix with other projects:
+            <pre class="sh_bash code-highlight"><code>python3 -m venv .venv
+source .venv/bin/activate          # macOS / Linux
+# .venv\Scripts\activate           # Windows
+python -m pip install &lt;packages&gt;</code></pre>
+          </li>
+          <li>
+            <strong>Git</strong>:
+            Needed when an exercise asks you to clone a repository.
+            Install from
+            <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git-scm.com</a>
+            if <code>git --version</code> does not work in your terminal.
+          </li>
+
         </ul>
 
+        <h2 class="material-heading">
+          Quick check
+
+        </h2>
 
         <p>
-          Next select the right course in the programming environment.
+          After installing Python and VS Code, open a terminal and confirm that
+          these work:
         </p>
 
-
-
-        <h3 class="material-heading">
-          Selecting the right course in the programming environment
-
-        </h3>
+        <pre class="sh_bash code-highlight"><code>python3 --version
+python3 -m pip --version
+git --version</code></pre>
 
         <p>
-          Open the tmc settings and make sure that the server address is: <code>https://tmc.mooc.fi/org/hy</code>. Then
-          log in and select <b> <code>hy-intro-to-ai-python</code> </b> as your course. This is the python version for
-          this course. <br>
-
-          <b>Don't</b> select the <code>hy-intro-to-ai</code> version as it is discontinued. Please change to <b>
-            <code>hy-intro-to-ai-python</code> </b> if you have already selected the old <code>hy-intro-to-ai</code>
-          java version.
+          If any of these fail, fix the installation before the first programming
+          exercise. Ask on the Moodle discussion forum or in an exercise session
+          if you get stuck.
         </p>
-
-
 
         <!--
     <h2 class="material-heading">
