@@ -101,11 +101,7 @@
             <span class="hidden-md-down">Table of contents</span>
             <i class="fa fa-ellipsis-h hidden-lg-up"></i>
           </button>
-
-          <!-- TMC login disabled. Original button:
-          <button class="btn btn-primary" id="tmc-login-toggle">Log in</button>
-          -->
-        </div>
+</div>
       </nav>
 
     </div>
@@ -718,7 +714,7 @@
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
               <i class="fa fa-pencil exercise__icon"></i>
-              <h1 class="exercise__heading">Plastic Film Folding Machine (1p)</h1>
+              <h1 class="exercise__heading">Plastic Film Folding Machine (0p)</h1>
               <i class="fa fa-caret-down exercise__arrow"></i>
             </a>
           </div>
@@ -1018,6 +1014,7 @@
           </li>
         </ul>
 
+        <!-- TOC: Nearest Neighbor programming removed (was Ex 3.3)
         <div class="exercise">
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
@@ -1032,8 +1029,8 @@
             <div class="exercise__body">
 
               <p>
-                Use the Nearest Neighbor template on TMC. (You'll find the necessary data files in the
-                TMC template.)
+                Use the Nearest Neighbor template with the local tests. (You'll find the necessary data files in the
+                starter package.)
               </p>
 
               <p>
@@ -1072,8 +1069,7 @@
             </div>
           </div>
         </div>
-
-        <!-- Exercise 3.3 -->
+        -->
 
         <h1 class="material-heading">
           Decision Trees
@@ -1833,61 +1829,6 @@ Gain(S, A) = Entropy(S) - &sum;<sub>v</sub> (|S<sub>v</sub>| / |S|) &middot; Ent
 
     </div>
   </div>
-
-  <!-- TMC login disabled. Original modal selector:
-  <div class="modal fade" id="tmc-login-modal" tabindex="-1" role="dialog">
-  -->
-  <div class="modal fade" id="tmc-login-modal-disabled" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <form id="tmc-login-form">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Log in with your Test My Code Account</h4>
-          </div>
-          <div class="modal-body">
-            <div class="alert alert-info">
-              Don't have an account yet? <a href="https://tmc.mooc.fi/user/new" class="alert-link" target="_blank"
-                rel="noopener">Create one!</a>
-            </div>
-
-            <div class="alert alert-danger" id="tmc-login-error" style="display: none;"></div>
-
-            <div class="form-group">
-              <label>Username</label>
-              <input type="text" id="tmc-login-username" class="form-control" placeholder="Username" />
-            </div>
-
-            <div class="form-group">
-              <label>Password</label>
-              <input type="password" id="tmc-login-password" class="form-control" placeholder="Password" />
-            </div>
-
-            <div class="form-group">
-              <label>Course</label>
-
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="radio" class="form-check-input" name="tmcLoginCourse" value="intro-to-ai" checked>
-                  Introduction to Artificial Intelligence (intro-to-ai)
-                </label>
-              </div>
-
-              <small class="form-text text-muted">
-                Course selection may affect the contents of the material.
-              </small>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <a class="btn btn-secondary" data-dismiss="modal">Close</a>
-            <button type="submit" class="btn btn-primary">Log in</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
 
   <div class="table-of-contents-layer" id="table-of-contents-layer">
   </div>

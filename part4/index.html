@@ -115,7 +115,7 @@
         <h1>
           Neural Networks
         </h1>
-
+        
         <div class="hint">
           <div class="hint__header">
             <i class="fa fa-info-circle hint__icon"></i>Learning objectives
@@ -133,11 +133,11 @@
                 </td>
               </tr>
               <tr>
-                <td>
+              <td>
                   Neural networks
-                </td>
-                <td>
-                  <ul>
+              </td>
+              <td>
+                <ul>
                     <li>can explain the perceptron and implement the perceptron algorithm
                       for a simple binary classification problem
                     <li>can describe multilayer perceptrons and forward propagation
@@ -146,8 +146,8 @@
                       gradients for optimization
                     <li>can explain learned representations and word embeddings
                       at a conceptual level
-                  </ul>
-                </td>
+                </ul>
+              </td>
               </tr>
             </table>
 
@@ -269,7 +269,7 @@
 
 
 
-        <!-- Exercise 4.1 -->
+        <!-- TOC: Perceptron programming removed (was Ex 4.1)
         <div class="exercise">
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
@@ -286,9 +286,9 @@
               <p>
                 Use the Perceptron template on TMC. (You'll find the necessary data files in the
                 TMC template.)
-              </p>
-
-              <p>
+        </p>
+        
+        <p>
                 The file <code>mnist-x.data</code> contains 6000 images from the popular
                 <a href="http://yann.lecun.com/exdb/mnist/">MNIST dataset</a>, each
                 of which is given on a single line in the file. Each image consists
@@ -322,6 +322,7 @@
             </div>
           </div>
         </div>
+        -->
 
         <!-- Exercise 4.3 -->
         <div class="exercise">
@@ -345,22 +346,22 @@
                 <li>Start with the default dataset (two circles) and network settings.</li>
                 <li>Use one hidden layer with one neuron to classify the points.</li>
                 <li>Observe the decision boundary and how the network performs.</li>
-              </ul>
-
+        </ul>
+        
               <p><b>Task 2: Add More Neurons</b></p>
               <ul>
                 <li>Increase the number of neurons in the hidden layer to three neurons.</li>
                 <li>Observe the changes in the decision boundary and how well the network classifies the data.</li>
                 <li>How does the performance change with more neurons?</li>
-              </ul>
-
+        </ul>
+        
               <p><b>Task 3: Add More Layers</b></p>
               <ul>
                 <li>Add a second hidden layer with two neurons.</li>
                 <li>Compare the performance to the previous network with just one hidden layer. How does adding more
                   layers affect the learning?</li>
-              </ul>
-
+        </ul>
+        
               <p><b>Results:</b><br>
                 Keep a screenshot of each configuration (one neuron, three neurons, two layers). Briefly describe (2-3
                 sentences) how each change affected the decision boundary and model performance.</p>
@@ -397,7 +398,7 @@
                 <li>Gradually increase the number of neurons and layers until the network correctly classifies the
                   spirals.</li>
                 <li>What is the minimum number of layers and neurons needed to classify the spirals accurately?</li>
-              </ul>
+        </ul>
 
               <p><b>Task 2: Adjusting Activation Functions and Learning Rate</b></p>
               <ul>
@@ -405,14 +406,14 @@
                   ability to learn.</li>
                 <li>Now, adjust the learning rate slider and observe how different learning rates (e.g., 0.01, 0.1, 3)
                   impact the training speed and model accuracy.</li>
-              </ul>
+            </ul>
 
               <p><b>Task 3: Experiment with Regularization</b></p>
-              <ul>
+            <ul>
                 <li>Add L2 regularization to your network and observe how it impacts the decision boundary and prevents
                   overfitting.</li>
                 <li>Try increasing the regularization strength to see its effects on training.</li>
-              </ul>
+            </ul>
 
               <p><b>Results:</b><br>
                 Keep screenshots of your experiments with the "Spirals" dataset and different network configurations.
@@ -442,13 +443,13 @@
                 (forward pass, loss, backward pass, weight update) behind a single
                 <code>.fit()</code> call — exactly the same building blocks you've read about,
                 just already wired up for you.
-              </p>
-
-              <p>
-                Run this on the MNIST digit data (you can reuse the same
-                <code>mnist-x.data</code>/<code>mnist-y.data</code> files from the Perceptron
-                exercise, or load MNIST fresh via
-                <code>sklearn.datasets.fetch_openml("mnist_784")</code>):
+        </p>
+        
+        <p>
+                Run this on the MNIST digit data (load MNIST via
+                <code>sklearn.datasets.fetch_openml("mnist_784")</code>, or reuse
+                <code>mnist-x.data</code>/<code>mnist-y.data</code> from
+                <a href="../files/tests/Perceptron.zip">Perceptron.zip</a>):
               <pre>
 from sklearn.neural_network import MLPClassifier
 
@@ -520,9 +521,9 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(10)
 ])
 </pre>
-              </p>
-
-              <ol>
+        </p>
+        
+        <ol>
                 <li> Train and evaluate the model with <code>activation='relu'</code> (the
                   default), <code>'tanh'</code>, and <code>'sigmoid'</code> — three separate
                   runs, everything else identical.
@@ -532,7 +533,7 @@ model = tf.keras.models.Sequential([
                   runs? Recall from lecture why sigmoid in particular can suffer from
                   <i>vanishing gradients</i> in deeper networks — does your small 1-hidden-layer
                   result seem consistent with that, or too small a network to see the effect?
-              </ol>
+        </ol>
 
             </div>
           </div>
@@ -606,9 +607,9 @@ model.most_similar("glass")
                 function downloads a real, pretrained Transformer and wraps it behind a
                 one-line call — no training, no GPU required, no HuggingFace account needed for
                 any of the calls below.
-              </p>
+        </p>
 
-              <p>
+        <p>
               <pre>
 from transformers import pipeline
 

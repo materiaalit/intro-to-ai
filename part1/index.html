@@ -648,9 +648,9 @@ This book discusses AGI in practical terms, focusing on its application in solvi
           <div class="hint__body">
 
             <p>
-              Solving the above exercise gives you one point (1p). Some exercises such
-              as Ex1.4 below require a bit more effort, and they may give you
-              two point (2p). This is indicated in the exercise heading as above.
+              Solving the above exercise gives you one point (1p). Some exercises
+              require a bit more effort, and they may give you
+              two points (2p). This is indicated in the exercise heading as above.
             </p>
 
             <p>
@@ -661,10 +661,10 @@ This book discusses AGI in practical terms, focusing on its application in solvi
             </p>
 
             <p>
-              For programming exercises, you will be able to use the TMC system
-              which helps you see whether the solution is correct. However,
-              even the TMC exercises are marked at the exercise session.
-              In other words, <b>the TMC system is used only for downloading the exercises</b>.
+              Programming exercises come with a downloadable package that includes
+              starter code and local tests. Download the package, implement your
+              solution, and run the tests on your computer.
+              Programming exercises are also marked at the exercise session.
             </p>
 
 
@@ -1116,6 +1116,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
 
+        <!-- TOC: Travel Planner removed (was Ex 1.4)
         <div class="exercise">
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
@@ -1200,7 +1201,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
 
-        <!-- Exercise 1.4 -->
+        <!~~ Exercise 1.4 ~~>
 
       <div class="solution" data-target='collapse'>
         <div class="solution__header">
@@ -1219,6 +1220,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
       </div>
+        -->
 
 
         <p>
@@ -1337,6 +1339,7 @@ state:  ---    |     |          state:  |     |    ---
         </p>
 
 
+        <!-- TOC: TravelPlanner v2.0 (AStar) removed (was Ex 1.5)
         <div class="exercise">
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
@@ -1424,7 +1427,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
 
-        <!-- Exercise 1.5 -->
+        <!~~ Exercise 1.5 ~~>
 
 	  <div class="solution" data-target='collapse'>
         <div class="solution__header">
@@ -1444,6 +1447,7 @@ state:  ---    |     |          state:  |     |    ---
           </div>
         </div>
       </div>
+        -->
 
         <h1 class="material-heading">
           Games
@@ -2046,6 +2050,14 @@ state:  ---    |     |          state:  |     |    ---
               </p>
 
               <p>
+                Download the starter package
+                <a href="../files/tests/AlphaBeta.zip">AlphaBeta.zip</a>,
+                unzip it, and open the <code>AlphaBeta</code> folder in VS Code
+                (or another editor). The package contains starter code under
+                <code>src/</code> and local tests under <code>test/</code>.
+              </p>
+
+              <p>
               <ol>
                 <li> First implement the basic framework for the game: a
                   data structure (class) for board positions, the functions for
@@ -2070,6 +2082,9 @@ state:  ---    |     |          state:  |     |    ---
                   comment out line 6 with the test <code>alpha >= beta</code> to
                   revert back to vanilla Minimax.
               </ol>
+
+              From the <code>AlphaBeta</code> folder, run the local tests with:
+              <pre class="sh_bash code-highlight"><code>python3 -m testrunner</code></pre>
 
               As a bonus question, you can think about how to order the child
               nodes so that as much pruning is done as possible.
