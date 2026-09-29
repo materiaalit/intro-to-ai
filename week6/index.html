@@ -119,6 +119,18 @@
 					Agents
 				</h1>
 
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-calendar hint__icon"></i>Lectures this week
+          </div>
+          <div class="hint__body">
+            <ul>
+              <li><b>Episode 11</b> (We 2/12, 2:15&ndash;4:00 PM): Modern neural network architectures 3 (Giulio)</li>
+              <li><b>Episode 12</b> (Fr 4/12, 10:15 AM&ndash;12:00 PM): Agents, robots and reinforcement learning</li>
+            </ul>
+          </div>
+        </div>
+
 				<div class="hint">
 					<div class="hint__header">
 						<i class="fa fa-info-circle hint__icon"></i>Learning objectives
@@ -166,7 +178,7 @@
 				</div>
 
 
-				                <h1 class="material-heading">Episode 12: Agents, reinforcement learning, and robots</h1>
+				                <h1 class="material-heading">Agents, reinforcement learning, and robots</h1>
                 <p>An <b>agent</b> is a system that perceives an environment and acts in it. This definition covers a thermostat, a chess program, a delivery robot, and an LLM that chooses tools. The important shift is from predicting an answer to selecting an action whose consequences change what happens next. An agent therefore operates in a loop: observe, update an internal state, choose an action, and observe the result.</p>
                 <svg viewBox="0 0 800 210" role="img" aria-label="Agent environment loop" style="width:100%;max-width:800px"><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#555"/></marker></defs><rect x="60" y="55" width="210" height="100" rx="12" fill="#f1e7fb" stroke="#7b3fa1"/><text x="165" y="112" text-anchor="middle" font-size="25">Agent</text><rect x="530" y="55" width="210" height="100" rx="12" fill="#e4f2fb" stroke="#2878a5"/><text x="635" y="112" text-anchor="middle" font-size="25">Environment</text><path d="M275 78 H520" stroke="#555" stroke-width="3" marker-end="url(#a)"/><text x="400" y="65" text-anchor="middle">actions</text><path d="M525 137 H280" stroke="#555" stroke-width="3" marker-end="url(#a)"/><text x="400" y="165" text-anchor="middle">percepts and rewards</text></svg>
 
@@ -303,7 +315,7 @@
                 <h2 class="material-heading">Putting the pieces together</h2>
                 <table class="table"><tr><th>Example</th><th>State/observation</th><th>Actions</th><th>Feedback</th></tr><tr><td>Tool-using LLM</td><td>Prompt, memory, tool results</td><td>Respond, search, call API</td><td>Task success, evaluator or user</td></tr><tr><td>Game-playing agent</td><td>Board or observation history</td><td>Legal moves</td><td>Score or win/loss</td></tr><tr><td>Delivery robot</td><td>Map and noisy sensors</td><td>Move, stop, manipulate</td><td>Progress, safety and energy</td></tr></table>
                 <p>The same vocabulary—environment, observation, action, policy, objective, and feedback—connects all three. Yet their engineering requirements differ because tools, other agents, and physical bodies introduce different consequences. When analysing any agent, ask: What can it observe? What can it change? What objective is actually optimized? How does it learn or plan? Where can uncertainty enter? Who can intervene? These questions are more informative than simply asking whether the system is “autonomous.”</p>
-                <div class="hint"><div class="hint__header"><i class="fa fa-info-circle hint__icon"></i>Episode 12 takeaway</div><div class="hint__body"><p>Agency is a relationship between a system and an environment. Reinforcement learning provides one way to improve action through consequences; agentic frameworks connect models to tools and memory; robotics grounds the loop in uncertain physical reality. Capability depends on the entire loop, while safe and intended behaviour depends on objectives, constraints, monitoring, and human authority.</p></div></div>
+                <div class="hint"><div class="hint__header"><i class="fa fa-info-circle hint__icon"></i>Takeaway</div><div class="hint__body"><p>Agency is a relationship between a system and an environment. Reinforcement learning provides one way to improve action through consequences; agentic frameworks connect models to tools and memory; robotics grounds the loop in uncertain physical reality. Capability depends on the entire loop, while safe and intended behaviour depends on objectives, constraints, monitoring, and human authority.</p></div></div>
 
 <div class="exercise">
 					<div class="exercise__header">
