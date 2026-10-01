@@ -196,344 +196,308 @@
 
         <h1 class="material-heading">
           What is AI?
-
         </h1>
 
         <p>
-          In this first week, we will discuss what we mean when we talk about AI.
-          It turns out that there is no exact definition at all, but that the
-          field is rather being redefined at all times.
+          Artificial intelligence is not defined by one universally accepted sentence. It is a field of research and
+          engineering whose boundaries move as technologies become familiar. Search, optical character recognition and
+          speech recognition were once emblematic AI problems; when they became reliable, they increasingly came to be
+          treated as ordinary computing infrastructure. This is sometimes called the <b>AI effect</b>.
         </p>
 
         <p>
-          We will also briefly discuss the philosophical aspects of AI: whether
-          intelligent behavior implies or requires the existence of a ''mind'', and
-          in what extent is consciousness replicable as a computational process.
-          However, this course is first and foremost focused on building
-          practically useful AI tools, and we will quickly push considerations
-          about consciousness aside as they tend to be only in the way when
-          designing working solutions to real problems.
-        </p>
-
-        <p>
-          The technical topics covered in Week 1 are problem-solving by
-          search, including the A* algorithm, and games.
-        </p>
-
-
-        <h2 class="material-heading">
-          A (Very) Brief History of AI
-
-        </h2>
-
-        <p>
-          Artificial Intelligence (AI) is a subdiscipline of Computer
-          Science. Indeed, it is arguably as old as Computer Science itself:
-          <a href="https://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</a>
-          (1912-1954) proposed the Turing machine -- the formal model
-          underlying the theory of computation -- as a model with equivalent
-          capacity to carry out calculations as a human being (ignoring
-          resource constraints on either side).
-        </p>
-
-        <p>
-          It is believed that the term AI was originally proposed by John
-          McCarthy (1927-2011). The term was established when McCarthy,
-          together with Marvin Minsky, Nathaniel Rochester, and Claude
-          Shannon, used it the title of a summer seminar, known
-          as <a href="https://en.wikipedia.org/wiki/Dartmouth_workshop">
-            Dartmouth conference</a> held in 1956 at Dartmouth College.
-        </p>
-
-        <p>
-          As computers developed to the level where it was feasible to
-          experiment with practical AI algorithms in the 1940s and 1950s, the most
-          distinctive AI problems were games. Games provided a convenient
-          restricted domain that could be formalized easily. Board games such
-          as checkers, chess, and (recently quite prominently) Go, have
-          inspired countless researchers, and continue to do so.
-        </p>
-
-        <p>
-          Closely related to games, search and planning algorithms were an
-          area where AI lead to great advances in the 1960s: in a little
-          while, we will be able to admire the beauty of, for example,
-          the <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">A*
-            search algorithm</a> and
-          <a href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">alpha-beta
-            pruning</a>, and apply them to solve AI problems.
+          It is therefore useful to distinguish an <b>operational definition</b>, which tells us what systems fall within
+          a technical or regulatory scope, from a <b>philosophical definition</b>, which asks what intelligence,
+          understanding or mind actually are. The first can guide engineering and governance without settling the second.
         </p>
 
         <div class="hint">
           <div class="hint__header">
-            <i class="fa fa-info-circle hint__icon"></i>The Elusive Definition of AI
+            <i class="fa fa-info-circle hint__icon"></i>A contemporary working definition
           </div>
-
           <div class="hint__body">
-
             <p>
-              There's an old (geeky) joke that AI is defined as ''cool things that
-              computer can't do.'' The joke is that under this definition, AI can
-              never make any progress: as soon as we find a way to do something cool
-              with a computer, it stops being an AI problem.
+              The updated <a href="https://oecd.ai/en/ai-publications/explanatory-memorandum-on-the-updated-definition-of-an-ai-system">OECD definition</a>
+              and the <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">EU AI Act</a> describe an AI system as a
+              machine-based system that operates with varying levels of autonomy and may adapt after deployment. For
+              explicit or implicit objectives, it infers from its inputs how to generate outputs such as predictions,
+              content, recommendations or decisions that can influence physical or virtual environments.
             </p>
-
             <p>
-              However, there is an element of truth in the definition in the sense
-              that fifty years ago, for instance, search and planning algorithms
-              were considered to belong to the domain of AI. Nowadays algorithms
-              such as breadth-first and depth-first search, and A*, are thought
-              (and taught) as belonging to Data Structures and Algorithms.
+              The important words are <b>machine-based</b>, <b>objectives</b>, <b>inference</b>, <b>outputs</b> and
+              <b>influence</b>. The definition does not require the system to resemble a human, be conscious, or use one
+              particular technique such as machine learning.
             </p>
-
-
           </div>
         </div>
 
-        <p>
-          The history of AI, just like many other fields of science, has
-          witnessed the coming and going (and coming back and going again,
-          etc.) of various different paradigms. Typically, a particular
-          paradigm is adopted by most of the research community and
-          ultra-optimistic estimates of progress in the near-future are
-          provided. All such scenarios so far have ended up running into
-          unsurmountable, unexpected problems and the interest has died
-          out. For example, in the 1960s <b>artificial neural networks</b>
-          were widely believed to solve all AI problems by imitating the
-          learning mechanisms in the nature (such as the human central nervous
-          system and the brain, in particular). However, certain negative
-          results about the expressibility of certain neural computation
-          models quickly lead to pessimism and an <b>AI winter</b> followed.
-        </p>
+        <h2 class="material-heading">Model, system and application</h2>
 
         <p>
-          The 1980s brought a new wave of AI methods based on logic-based
-          methods. So called <b>expert systems</b>, manipulating knowledge
-          elicited from domain experts, such as medical doctors, showed
-          great promise by solving nicely contained, well-defined
-          ''toy problems'', but turned out to fail every time when they
-          were deployed in more complex, real-world problems. The second
-          (or the third, depending on the counting) AI winter lasted from the
-          late 1980s until the mid-1990s.
+          An AI <b>model</b> is a learned or programmed mathematical structure that transforms inputs into outputs. An AI
+          <b>system</b> includes the model together with interfaces, data flows, tools, rules, monitoring, people and a
+          context of use. For example, a language model is not by itself a clinical triage system. The latter also includes
+          the user interface, patient data, prompts, retrieval tools, escalation procedures and human responsibility.
+          This distinction matters because capabilities belong partly to models, while consequences and accountability
+          arise from systems in use.
         </p>
+
+        <h2 class="material-heading">Four ways of asking whether a system is intelligent</h2>
+
+        <p>Russell and Norvig organize influential approaches to AI around two distinctions:</p>
+
+        <table>
+          <thead>
+            <tr><th></th><th>Human standard</th><th>Rational standard</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Thinking</th>
+              <td><b>Thinking humanly:</b> does the system reproduce human cognitive processes?</td>
+              <td><b>Thinking rationally:</b> does it draw correct conclusions?</td>
+            </tr>
+            <tr>
+              <th>Acting</th>
+              <td><b>Acting humanly:</b> is its behaviour indistinguishable from human behaviour?</td>
+              <td><b>Acting rationally:</b> does it choose actions expected to achieve its objectives?</td>
+            </tr>
+          </tbody>
+        </table>
 
         <p>
-          Currently, since the turn of the millennium, AI has been on the rise
-          again. In the late 1990s, the ''classical'' or <b>''Good
-            Old-Fashioned AI'' (GOFAI)</b> that addressed crisp, clearly
-          defined, and isolated problems begun to be replaced by so called
-          <b>''modern AI''</b> (in lack of a better name). Modern AI
-          introduced methods that were able to handle uncertain and imprecise
-          information, most notably by probabilistic methods, and which had
-          the great advantage that it was designed to work in the real world.
-          The rise of modern AI has continued until present day, further
-          boosted by the come-back of neural networks under the label <b>Deep
-            Learning</b>.
+          These approaches select different evidence. A system can act successfully without thinking like a human. A
+          system can reason correctly in a simplified model and still fail in the world. Modern AI courses often use the
+          <b>rational-agent</b> perspective: an agent receives information from an environment and selects actions according
+          to a performance measure, given limited information, computation and time. This is a useful engineering stance,
+          not a complete theory of human intelligence.
         </p>
+
+        <h2 class="material-heading">Narrow AI, general-purpose models and AGI</h2>
+
+        <table>
+          <thead>
+            <tr><th>Term</th><th>Useful meaning</th><th>Example or qualification</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Narrow AI</b></td>
+              <td>A system with strong capabilities in a bounded task or domain.</td>
+              <td>A chess engine, spam filter or medical-image classifier.</td>
+            </tr>
+            <tr>
+              <td><b>General-purpose AI model</b></td>
+              <td>A model displaying significant generality and capable of performing a wide range of distinct tasks or
+                supporting many downstream applications.</td>
+              <td>This is a legal category in the EU AI Act; it does not mean that the model possesses general intelligence.</td>
+            </tr>
+            <tr>
+              <td><b>Artificial general intelligence (AGI)</b></td>
+              <td>A contested research concept referring to broad and high-level competence across tasks and contexts.</td>
+              <td>There is no agreed scientific test or legal definition.</td>
+            </tr>
+          </tbody>
+        </table>
 
         <p>
-          Whether the history will repeat itself, and the current boom will be
-          once again followed by an AI winter, is a matter that only time can
-          tell. Even if it does, the significance of AI in the society is
-          going to stay. Today, we live our life surrounded by AI, most of the
-          time happily unaware of it: the music that we listen, the products
-          that we buy online, the movies and series that we watch, our routes
-          of transportation, and the information that we have available, are
-          all influenced more and more by AI.
+          Discussions of AGI often become confused because several different properties are compressed into one label.
+          A clearer approach is to ask separately about <b>breadth</b>, <b>performance</b>, <b>transfer</b>,
+          <b>robustness</b>, <b>learning</b> and <b>autonomy</b>. The
+          <a href="https://deepmind.google/research/publications/66938/">Levels of AGI framework</a>, for example,
+          classifies systems using the breadth and depth of their capabilities while treating autonomy as a separate
+          deployment dimension.
         </p>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>AGI is not a synonym for everything dramatic
+          </div>
+          <div class="hint__body">
+            <ul>
+              <li><b>AGI is not the same as consciousness:</b> broad task performance does not establish subjective experience.</li>
+              <li><b>AGI is not the same as autonomy:</b> a capable model may be deployed with little independent control, and a simple system may operate autonomously.</li>
+              <li><b>AGI is not the same as superintelligence:</b> generality concerns breadth; superintelligence implies performance far beyond humans.</li>
+              <li><b>AGI need not reproduce human cognition:</b> similar performance can arise from very different mechanisms.</li>
+              <li><b>AGI does not automatically imply moral status:</b> that requires a further ethical and philosophical argument.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="material-heading">What would count as evidence for AGI?</h2>
 
         <p>
-          No wonder that you have decided to learn more about AI!
+          A benchmark samples behaviour under specified conditions; it does not measure an entire mind. Strong scores can
+          be influenced by training-data contamination, prompt design, tool access and evaluation choices. Real-world
+          competence additionally requires reliability, recovery from errors, sensitivity to context and the ability to
+          cope with consequences over time. When evaluating an AGI claim, ask:
         </p>
 
-        <p> Being able to apply AI methods and thus to be part of the progress
-          of AI is a great way to change the world for the better. And even if
-          you wouldn't aspire to become an AI researcher or developer, it is
-          almost your duty as a citizen to understand at least the
-          fundamentals of AI so that you can better use it: be aware of its
-          limitations and enjoy all the goodies it can provide.
-        </p>
+        <ul>
+          <li>How broad are the tasks, and are genuinely novel tasks included?</li>
+          <li>Is performance reliable or based on occasional successful demonstrations?</li>
+          <li>Does knowledge transfer when the setting, representation or goal changes?</li>
+          <li>Can the system recognize uncertainty and seek clarification or help?</li>
+          <li>How much scaffolding is provided by prompts, humans, retrieval systems or tools?</li>
+          <li>Is autonomy being measured separately from capability?</li>
+        </ul>
 
-        <h2 class="material-heading">
-          On the Philosophy of AI
-
-        </h2>
-
-<p>The philosophy of Artificial Intelligence (AI) is concerned with the conceptual, ethical, metaphysical, and epistemological questions that arise from the development and use of AI systems. It explores fundamental issues about the nature of intelligence, the role of machines in society, and the implications of creating entities that could potentially rival or surpass human intelligence.
- </p>
-<p>One central area of inquiry in the philosophy of AI is the nature of intelligence. Philosophers and researchers ask what intelligence truly is and whether it can be accurately replicated in machines. A key distinction is made between machine intelligence and human intelligence, raising questions about whether machines can genuinely possess understanding or merely simulate it. This debate is illustrated by John Searle’s Chinese Room Argument, which challenges the notion that machines processing symbols according to rules can achieve true understanding, as it distinguishes between syntactic processing and semantic comprehension.
- </p>
-<p>Another critical focus is the relationship between AI and consciousness. Philosophers debate whether machines can have consciousness, self-awareness, or subjective experiences, and if so, how this compares to human consciousness. Related to this is the question of whether consciousness can arise from computational processes, as explored in the debate between functionalism (the idea that mental states can be realized in different substrates, including machines) and traditional dualism or materialism. David Chalmers’ framing of the "hard problem of consciousness" exemplifies this area of concern, asking how physical processes, whether neural or computational, give rise to subjective experience.
- </p>
-<p>The ethical dimensions of AI are also a major concern in its philosophy. Questions about the principles that should guide the development and use of AI systems, the alignment of AI actions with human values, and the mitigation of risks like bias, unfairness, and unintended consequences are central topics. For instance, the alignment problem—ensuring that AI systems’ goals remain aligned with human intentions—is a pressing issue, particularly as autonomous systems become more capable. The use of AI in areas such as autonomous weapons or decision-making in justice systems raises profound ethical dilemmas about accountability, fairness, and the societal impacts of delegating such power to machines.
- </p>
-<p>Philosophers also examine issues of free will and autonomy in the context of AI. This includes exploring whether AI systems can have autonomy or free will and how this affects concepts of moral and legal responsibility. Questions arise about whether AI actions are purely deterministic or whether self-directed, emergent behaviors could evolve as systems become more complex. These considerations challenge existing frameworks for assigning responsibility and accountability when autonomous AI systems are involved in critical decisions or unintended outcomes.
- </p>
-<p>The epistemology of AI is another significant area, dealing with how AI systems acquire, process, and generate knowledge. Questions about whether machine learning models truly "understand" the world or are simply sophisticated pattern recognizers highlight the philosophical challenges of evaluating knowledge in AI. The opacity of decision-making processes in complex AI systems, often referred to as the "black-box problem," raises concerns about interpretability and the need for explainability in AI systems, particularly when they are deployed in high-stakes environments.
- </p>
-<p>The philosophy of AI also grapples with the long-term implications and potential existential risks of AI, especially with the development of Artificial General Intelligence (AGI). Philosophers like Nick Bostrom have examined scenarios in which AGI could either enhance or threaten humanity, exploring challenges such as the "control problem"—ensuring that superintelligent AI systems remain aligned with human values. These discussions emphasize the need to anticipate and address risks associated with creating AI systems that might surpass human intelligence in various domains.
- </p>
-<p>Finally, questions of creativity and societal impact are central to the philosophical exploration of AI. Philosophers debate whether AI systems can create art, music, or literature that is genuinely original and meaningful or whether machine creativity is fundamentally different from human creativity. Additionally, the broader societal impacts of AI, such as its influence on employment, privacy, surveillance, and human relationships, raise important ethical and practical concerns. The integration of AI into society prompts ongoing debates about how to regulate and govern AI systems to ensure they benefit humanity while minimizing harm.
- </p>
-        <p>
-          The best known contribution to AI by Turing is his <i>imitation
-            game</i>, which later became known as the <a href="https://en.wikipedia.org/wiki/Turing_test">Turing
-            test</a>. In the
-          test, a human interrogator interacts with two players, A and B, by
-          exchanging written messages (in a ''chat''). If the interrogator
-          cannot determine which player, A or B, is a computer and which is a
-          human, the computer is said to pass the test. The argument is that
-          if a computer is indistinguishable from a human in a general
-          natural language conversation, then it must have reached human-level
-          intelligence.
-        </p>
+        <h2 class="material-heading">A very brief history: changing bets about intelligence</h2>
 
         <p>
-          Turing's argument that whether a being is intelligent or not can be
-          decided based on the behavior it exhibits has been challenged by
-          some. The best known counter-argument is John Searle's
-          <a href="http://www.iep.utm.edu/chineser/">Chinese Room</a> thought
-          experiment. Searle descibes an experiment where a person who doesn't
-          know Chinese is locked in a room. Outside the room is a person who
-          can slip notes written in Chinese inside the room through a mail
-          slot. The person inside the room is given a large manual where she
-          can find detailed instructions for responding to the notes she
-          receives from the outside.
-        </p>
-
-        <p>
-          Searle argued that that even if the person outside the room gets the
-          impression that he is in a conversation with another
-          Chinese-speaking person, the person inside the room does <i>not
-            understand</i> Chinese. Likewise, his argument continues, even if a
-          machine behaves in an intelligent manner, for example, by
-          passing the Turing test, it doesn't follow that it <i>is</i>
-          intelligent or that it has a ''mind'' in the way that a human
-          has. The word ''intelligent'' can also be replaced by the word
-          ''self-conscious'' and a similar argument can be made.
+          The 1956 Dartmouth proposal expressed the ambition that every aspect of learning or intelligence could in
+          principle be described precisely enough for a machine to simulate it. Early AI concentrated on search, games,
+          logic and symbol manipulation. Expert systems later encoded specialist knowledge as rules, but proved difficult
+          to maintain and brittle outside tightly bounded situations. These limitations, together with limited computing
+          power and unrealistic expectations, contributed to periods known as <b>AI winters</b>.
         </p>
 
         <p>
-          The definition of intelligence, natural or artificial, and
-          consciousness appears to be extremely evasive and leads to
-          apparently never-ending discourse. In an intellectual company, with
-          plenty of good Burgundy (Bordeaux will also do), this discussion can
-          be quite enjoyable. However, as John
-          McCarthy <a href="http://www-formal.stanford.edu/jmc/aiphil/node2.html#SECTION00020000000000000000">pointed
-            out</a>, the philosophy of AI is ''unlikely to have any more effect
-          on the practice of AI research than philosophy of science generally
-          has on the practice of science.''
+          From the 1990s onward, statistical machine learning placed greater emphasis on learning patterns from data.
+          Deep learning expanded this approach by learning internal representations rather than requiring every useful
+          feature to be hand-designed. Foundation models now reuse large pretrained models across many tasks and
+          modalities. This history is not a simple replacement of old methods: search, symbolic representations,
+          probability and learning remain complementary parts of modern systems.
+        </p>
+
+        <h1 class="material-heading">On the philosophy of AI</h1>
+
+        <p>
+          Philosophy helps separate questions that are easily conflated. <b>Behaviour</b> asks what a system can do.
+          <b>Mechanism</b> asks how it produces that behaviour. <b>Understanding</b> asks whether its symbols or outputs
+          have meaning for the system. <b>Phenomenology</b> asks whether the system has subjective experience. Evidence
+          bearing on one question does not automatically settle the others.
+        </p>
+
+        <h2 class="material-heading">Turing: operationalizing intelligent behaviour</h2>
+
+        <p>
+          In <i>Computing Machinery and Intelligence</i> (1950), Alan Turing proposed an <b>imitation game</b>. A human
+          interrogator exchanges written messages with hidden participants and attempts to determine which is human and
+          which is a machine. Turing's move was methodological: rather than first defining an invisible inner property
+          called thinking, examine observable linguistic performance. Passing such a test would be significant evidence
+          of conversational competence, but it would not by itself explain the mechanism, establish consciousness or
+          prove that the machine thinks in the way humans do.
+        </p>
+
+        <h2 class="material-heading">Searle: syntax is not automatically semantics</h2>
+
+        <p>
+          John Searle's <a href="https://iep.utm.edu/chinese-room-argument/">Chinese Room</a> thought experiment asks us
+          to imagine a person who does not understand Chinese but follows a rulebook for transforming Chinese symbols.
+          To people outside the room, the answers may appear fluent and appropriate. Searle argues that formal symbol
+          manipulation&mdash;<b>syntax</b>&mdash;is not by itself sufficient for meaning or <b>semantics</b>. The argument
+          targets the claim that running the right program is sufficient for understanding; it does not show that AI
+          systems cannot be useful or behave intelligently. Replies include the systems reply, robot reply and brain-
+          simulator reply, each locating understanding in a larger system than the person following the rulebook.
+        </p>
+
+        <h2 class="material-heading">Dreyfus: intelligence is more than rule-following</h2>
+
+        <p>
+          Hubert Dreyfus criticized a picture of intelligence that dominated much early symbolic AI: the world is first
+          represented as explicit facts, cognition applies formal rules to those facts, and action follows from the
+          resulting representation. His challenge was not simply that computers were too slow. It was that everyday
+          intelligent activity depends on a background of embodied skills, habits, social practices and sensitivity to
+          context that is not normally represented as an exhaustive list of facts and rules.
         </p>
 
         <p>
-          <b>Questions in the philosophy of AI</b>. "Can a machine act intelligently? Can it solve any problem that a
-          person would solve by thinking?
-          Are human intelligence and machine intelligence the same? Is the human brain essentially a computer?
-          Can a machine have a mind, mental states, and consciousness in the same sense that a human being can? Can it
-          feel how things are? (i.e. does it have qualia?)"
-          <a href="https://en.wikipedia.org/wiki/Philosophy_of_artificial_intelligence">Wikipedia page on the Philosophy
-            of AI</a>
-          The questions can be found presented in <a
-            href="https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach"> Russell & Norvig 2003 </a> ,
-          including the additional question of the ethics of artificial intelligence.
+          This argument draws on phenomenology, especially Heidegger and Merleau-Ponty. We are usually not detached
+          spectators constructing a complete internal description of the world. We are already involved in meaningful
+          situations: a door is encountered as something to open, a sentence as inviting a reply, and a changing traffic
+          scene as calling for slowing down. Dreyfus called this practical, action-oriented engagement
+          <b>absorbed or embodied coping</b>.
         </p>
+
+        <h2 class="material-heading">Knowing-that and knowing-how</h2>
 
         <p>
-          <b> Notable propositions and themes </b>.
-          The <a "https://en.wikipedia.org/wiki/Dartmouth_Workshop#Planning_the_Summer_Research_Project:_The_Proposal">
-            Dartmouth proposal</a>: "Every aspect of learning or any other feature of intelligence can in principle be
-          so precisely described that a machine can be made to simulate it."
-          Can a machine display general intelligence? This is what the turing test and the Searle criticism addressed.
-          Intelligence as achieving goals, Twenty-first century AI research defines intelligence in terms of
-          goal-directed behavior. It views intelligence as a set of problems that the machine is expected to solve – the
-          more problems it can solve, and the better its solutions are, the more intelligent the program is.
-          AI founder John McCarthy defined intelligence as "the computational part of the ability to achieve goals in
-          the world." <a href="http://jmc.stanford.edu/artificial-intelligence/what-is-ai/index.html"> John McCarthy
-            Interview </a>
-          Stuart Russell and Peter Norvig formalized this definition using abstract intelligent agents. An "agent" is
-          something which perceives and acts in an environment. A "performance measure" defines what counts as success
-          for the agent.
-          "If an agent acts so as to maximize the expected value of a performance measure based on past experience and
-          knowledge then it is intelligent." (<a
-            href="https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach"> Russell & Norvig 2003 </a>
-          Arguments that a machine can display general intelligence. Hubert Dreyfus describes this argument as claiming
-          that "if the nervous system obeys the laws of physics and chemistry, which we have every reason to suppose it
-          does, then ... we ... ought to be able to reproduce the behavior of the nervous system with some physical
-          device"
-          (Dreyfus, Hubert 1972 What Computers Can't Do, New York: MIT Press).
-          Allen Newell and Herbert A. Simon's physical symbol system hypothesis: "A physical symbol system has the
-          necessary and sufficient means of general intelligent action." (<a
-            href="https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach"> Russell & Norvig 2003 </a> and
-          Newell & Simon 1976 )
-          There are critics against symbol processing, showing that human thinking does not consist solely of high level
-          symbol manipulation, (only that more than symbol processing is required). Hubert Dreyfus argued that human
-          intelligence and expertise depended primarily on fast intuitive judgements rather than step-by-step symbolic
-          manipulation, and argued that these skills would never be captured in formal rules.
-          A notable controversy on symbolic processing was published in the Journal Cognitive Science as a critique of
-          ethomethodologist Lucy Suchman to the Varela and Simon paper "Situated Action: A Symbolic Interpretation
-          Situated Action perspectives" <a "https://onlinelibrary.wiley.com/doi/epdf/10.1207/s15516709cog1701_5"> Paper
-          </a>
-          Stuart Russel recently proposed the notion of Provably Beneficial Artificial Intelligence , also presented in
-          a keynote speech at the IACM IUI conference in 2022 March , that was held online at the University of
-          Helsinki. Chaired by G Jacucci <a "https://www.youtube.com/watch?v=SYqVKrY8XpA"> Video </a>
-          Minute 25:30, and Minute 48:00
-          <a "https://people.eecs.berkeley.edu/~russell/papers/russell-bbvabook17-pbai.pdf#page=5.17"> In text</a>
+          <b>Knowing-that</b> is propositional knowledge that can often be stated explicitly: knowing that braking distance
+          increases on an icy road. <b>Knowing-how</b> is skilled performance: feeling a loss of traction and adjusting
+          appropriately before completing a conscious calculation. The distinction is not between reason and emotion,
+          nor does it imply that experts never reflect. It means that competent performance is not exhausted by following
+          explicit instructions.
         </p>
 
-<h2> Artificial General Intelligence AGI </h2>
+        <h2 class="material-heading">The Dreyfus model of skill acquisition</h2>
 
- <p>Artificial General Intelligence (AGI) is a type of artificial intelligence that aims to possess the broad cognitive capabilities of a human, enabling it to perform any intellectual task that a human can do. Unlike narrow AI, which is designed for specific tasks, AGI is characterized by generality and flexibility across a wide range of domains, but there are a variety of definitions of AGI all putting emphasis on a particular aspect:
- </p>	 
+        <p>
+          Stuart and Hubert Dreyfus proposed that learners commonly move from reliance on context-free rules toward
+          increasingly situated perception and action. The model is a philosophical and educational account, not a law
+          that every learner follows identically.
+        </p>
 
-<p>Functional Definition
-AGI is an AI system that can understand, learn, and apply knowledge across a broad range of tasks, adapting to new and unforeseen challenges without explicit programming or task-specific optimization.	      
-Russell, S., & Norvig, P. (2021). Artificial Intelligence: A Modern Approach (4th ed.). Pearson.
-This book discusses the goals of AI, including AGI, focusing on the functional perspective of building systems that exhibit intelligent behavior across a broad range of tasks.
-</p>
-<p>Cognitive Parity Definition
-AGI is a form of intelligence that matches or exceeds human-level cognitive abilities, such as reasoning, problem-solving, learning, creativity, and understanding natural language.
-Legg, S., & Hutter, M. (2007). Universal Intelligence: A Definition of Machine Intelligence. Minds and Machines, 17(4), 391–444.
-In this paper, the authors define intelligence as the ability to achieve goals in a wide range of environments, a concept closely aligned with human cognitive abilities, which supports the cognitive parity definition.
-</p>
-<p>Behavioral Definition
-AGI refers to an AI system that can perform any intellectual task that a human can perform, demonstrating behaviors consistent with human intelligence, including the ability to generalize knowledge and skills across diverse tasks.
-Turing, A. M. (1950). Computing Machinery and Intelligence. Mind, 59(236), 433–460.
-Turing’s concept of intelligence, particularly his proposal of the Turing Test, emphasizes behavior as the criterion for evaluating an intelligent system, aligning with the behavioral definition of AGI.
-</p>
-<p>Theoretical Definition
-AGI is defined as a system capable of recursive self-improvement and learning, leading to continuous enhancement of its abilities without human intervention.
-Goertzel, B. (2007). Artificial General Intelligence: Concept, State of the Art, and Future Prospects. Journal of Artificial General Intelligence, 1(1), 1–32.
-Goertzel explores the theoretical underpinnings of AGI, emphasizing the ability to self-improve and recursively enhance capabilities as a defining feature of AGI.
-</p>
-<p>Philosophical Definition
-AGI is a hypothetical intelligence with problem-solving skill. The philosophical definition also requires self-awareness, consciousness, and the ability to set its own goals.
-Searle, J. R. (1980). Minds, Brains, and Programs. Behavioral and Brain Sciences, 3(3), 417–457.
-Searle’s discussion of consciousness and the distinction between "strong AI" (akin to AGI) and "weak AI" aligns with the philosophical perspective, especially in terms of self-awareness and intentionality.
-</p>
-<p>Practical Definition
-AGI is an AI system capable of operating in an open-ended environment, solving real-world problems across a variety of domains without requiring extensive retraining or domain-specific data.
-Nilsson, N. J. (2009). The Quest for Artificial Intelligence. Cambridge University Press.
-This book discusses AGI in practical terms, focusing on its application in solving real-world problems across diverse domains without domain-specific retraining.
-</p>
+        <table>
+          <thead>
+            <tr><th>Stage</th><th>How the situation is encountered</th><th>Typical mode of action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>Novice</b></td><td>Recognizes context-free features taught by an instructor.</td><td>Follows explicit rules.</td></tr>
+            <tr><td><b>Advanced beginner</b></td><td>Begins noticing recurring situational cues.</td><td>Combines rules with examples from experience.</td></tr>
+            <tr><td><b>Competent</b></td><td>Selects what matters from many possible features.</td><td>Plans deliberately and accepts responsibility for choices.</td></tr>
+            <tr><td><b>Proficient</b></td><td>Perceives the situation more holistically.</td><td>Sees what needs attention, while still deliberating about action.</td></tr>
+            <tr><td><b>Expert</b></td><td>The situation immediately appears in terms of meaningful possibilities for action.</td><td>Usually responds fluently and intuitively, while retaining the capacity to reflect when needed.</td></tr>
+          </tbody>
+        </table>
 
-<p> AGI is often best introduced as a bundle of properties rather than a single sentence. A compact “requirements checklist” that fits modern discussions (and aligns with the “Levels of AGI” framework) is:
+        <p>
+          Consider learning to drive. A novice may apply separate rules about speed, mirrors and distance. An experienced
+          driver sees a wet road, a pedestrian's posture, a hidden junction and the rhythm of traffic as one meaningful
+          situation. The relevant response is not produced by consciously enumerating every fact. Experience has changed
+          what the driver notices and how the situation solicits action.
+        </p>
 
-<ul>
-	<li>Generality (breadth): works across many distinct task families, including novel tasks.</li>
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>What modern machine learning changes&mdash;and what it does not
+          </div>
+          <div class="hint__body">
+            <p>
+              Dreyfus was right that brittle, hand-written rule systems do not scale gracefully to open environments and
+              that relevance is difficult to specify in advance. However, his strongest predictions about what machines
+              could never do were weakened by systems that learn patterns and representations from data. Chess, vision,
+              speech and language systems achieved levels of performance that earlier symbolic programs did not.
+            </p>
+            <p>
+              Yet success without hand-written rules does not dissolve the philosophical problem. A learned model can be
+              highly capable while questions remain about grounding, embodied experience, social practices, robust
+              transfer and whether machine competence is the same kind of skill as human expertise. Neural learning
+              changes the engineering premise; it does not automatically establish understanding or lived involvement in
+              a meaningful world.
+            </p>
+          </div>
+        </div>
 
-<li>Performance (depth/reliability): not just “can sometimes,” but reaches robust, human-competitive levels across that breadth.</li>
+        <h2 class="material-heading">A working definition for this course</h2>
 
-<li>Metacognitive learning: can learn new tasks and manage its own limits (e.g., knows when to ask for help/clarification).</li>
+        <p>
+          In this course, we use <b>AI</b> to refer to the study and construction of machine-based systems that perceive or
+          receive information, infer or learn, and act or generate outputs in pursuit of objectives. This definition is
+          broad enough to include search, probabilistic reasoning, machine learning, neural networks, language models,
+          agents and robotics. It remains deliberately neutral about whether such systems possess consciousness or human-
+          like understanding.
+        </p>
 
-<li>Autonomy/agency: can pursue multi-step goals with minimal supervision.</li>
+        <p>Keep the following distinctions in view throughout the course:</p>
+        <ul>
+          <li>an <b>AI model</b> is not the same thing as an <b>AI system in use</b>;</li>
+          <li><b>general-purpose</b> does not automatically mean <b>general intelligence</b>;</li>
+          <li>successful <b>performance</b> does not by itself settle <b>understanding</b>;</li>
+          <li><b>autonomy</b> is not the same thing as <b>consciousness</b>;</li>
+          <li>explicit <b>rules</b> are useful, but they may not exhaust human <b>skill</b>.</li>
+        </ul>
 
-<li>Ecological validity: evaluated on tasks people value in the real world, not only toy benchmarks.</li>
+        <h2 class="material-heading">Selected sources</h2>
+        <ul>
+          <li>OECD (2024), <a href="https://oecd.ai/en/ai-publications/explanatory-memorandum-on-the-updated-definition-of-an-ai-system">Explanatory memorandum on the updated definition of an AI system</a>.</li>
+          <li>European Union (2024), <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Artificial Intelligence Act, Regulation (EU) 2024/1689</a>.</li>
+          <li>Morris et al. (2024), <a href="https://deepmind.google/research/publications/66938/">Levels of AGI for Operationalizing Progress on the Path to AGI</a>.</li>
+          <li>Alan Turing (1950), <i>Computing Machinery and Intelligence</i>.</li>
+          <li>John Searle (1980), <i>Minds, Brains, and Programs</i>.</li>
+          <li>Hubert Dreyfus (1972/1992), <i>What Computers Can't Do</i> / <i>What Computers Still Can't Do</i>.</li>
+          <li>Stuart E. Dreyfus and Hubert L. Dreyfus (1980), <i>A Five-Stage Model of the Mental Activities Involved in Directed Skill Acquisition</i>.</li>
+          <li>Stuart Russell and Peter Norvig, <i>Artificial Intelligence: A Modern Approach</i>.</li>
+        </ul>
 
-<li>Capability vs deployment: “being AGI” should be about what the system can do, not whether it’s already widely deployed.</li>
-
-<li>Not required (in that framing): consciousness/sentience and even physical embodiment are treated as optional, not definitional.</li>
-
-	</p>
         <div class="exercise">
           <div class="exercise__header">
             <a data-toggle="collapse" class="exercise__toggle">
