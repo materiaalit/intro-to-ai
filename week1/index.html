@@ -349,22 +349,124 @@
           <li>Is autonomy being measured separately from capability?</li>
         </ul>
 
-        <h2 class="material-heading">A very brief history: changing bets about intelligence</h2>
+        <h2 class="material-heading" id="history-of-ai">A brief history of AI: origins, optimism and setbacks</h2>
 
         <p>
-          The 1956 Dartmouth proposal expressed the ambition that every aspect of learning or intelligence could in
-          principle be described precisely enough for a machine to simulate it. Early AI concentrated on search, games,
-          logic and symbol manipulation. Expert systems later encoded specialist knowledge as rules, but proved difficult
-          to maintain and brittle outside tightly bounded situations. These limitations, together with limited computing
-          power and unrealistic expectations, contributed to periods known as <b>AI winters</b>.
+          AI developed alongside computer science. Alan Turing's work connected the idea of mechanical computation
+          with questions about intelligent behaviour. John McCarthy, Marvin Minsky, Nathaniel Rochester and Claude
+          Shannon used the term <b>artificial intelligence</b> in their 1955 proposal for the Dartmouth summer research
+          project, held in <b>1956</b>. Its ambition was that aspects of learning and intelligence could be described
+          precisely enough for a machine to simulate them.
         </p>
 
         <p>
-          From the 1990s onward, statistical machine learning placed greater emphasis on learning patterns from data.
-          Deep learning expanded this approach by learning internal representations rather than requiring every useful
-          feature to be hand-designed. Foundation models now reuse large pretrained models across many tasks and
-          modalities. This history is not a simple replacement of old methods: search, symbolic representations,
-          probability and learning remain complementary parts of modern systems.
+          Games, theorem proving and puzzles provided early testbeds: their states, legal moves and goals could be
+          specified explicitly. Search and planning produced important advances, including methods related to the
+          A* search and alpha-beta pruning studied in this course. Success in these restricted settings encouraged
+          optimism about much broader machine intelligence, but moving from a well-defined problem to an open,
+          changing world proved much harder.
+        </p>
+
+        <h2 class="material-heading" id="gofai-modern-ai">Good Old-Fashioned AI (GOFAI) versus modern AI</h2>
+
+        <p>
+          <b>GOFAI</b> refers to the classical symbolic approach: represent knowledge as explicit symbols, facts and
+          rules, then manipulate those representations through logical inference, search or planning. For example,
+          an expert system might combine rules elicited from specialists to derive a recommendation. The difficulty
+          is not only executing the rules: someone must identify relevant knowledge, encode it and keep it up to date.
+        </p>
+
+        <p>
+          The earlier course material used <b>modern AI</b> to emphasize methods that cope with uncertain, incomplete
+          and noisy information. Probabilistic models represent degrees of uncertainty and update beliefs as evidence
+          arrives. Machine learning estimates patterns or model parameters from data; deep learning also learns
+          useful internal representations. These are related developments, but <b>reasoning under uncertainty and
+          learning from data are different capabilities</b>: a probabilistic model can be specified by an expert,
+          and a learned model need not explicitly represent uncertainty.
+        </p>
+
+        <table class="table table-striped">
+          <thead>
+            <tr><th scope="col">Question</th><th scope="col">Classical symbolic AI / GOFAI</th><th scope="col">Probabilistic and learning-based approaches</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">How is knowledge represented?</th><td>Explicit symbols, facts, relations and rules.</td><td>Probability distributions, statistical models or learned representations.</td></tr>
+            <tr><th scope="row">Where does knowledge come from?</th><td>Mainly from people encoding a domain and its rules.</td><td>From expert assumptions, data, or a combination of both.</td></tr>
+            <tr><th scope="row">How are conclusions produced?</th><td>Inference, search and planning over explicit representations.</td><td>Probabilistic inference or predictions from learned models.</td></tr>
+            <tr><th scope="row">What works well?</th><td>Clearly specified constraints, structured problems and inspectable reasoning steps.</td><td>Noisy observations, pattern recognition and tasks where writing every rule is impractical.</td></tr>
+            <tr><th scope="row">What can go wrong?</th><td>Brittleness, missing knowledge, expensive maintenance and large search spaces.</td><td>Biased or inadequate data, distribution shift, uncertain reliability and difficult explanations.</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <b>Example: identifying spam.</b> A symbolic filter could apply a rule such as “if a message contains a
+          particular phrase and comes from a blocked sender, flag it.” A learned classifier instead estimates
+          patterns from labelled messages; a probabilistic classifier can estimate the probability of spam given
+          the observed words. The first approach depends on the coverage of its rules; the second depends on
+          the quality of its data and how well those patterns transfer to new messages.
+        </p>
+
+        <p>
+          This contrast describes broad emphases, rather than two mutually exclusive eras. Neural learning already
+          existed in the early decades of AI, symbolic methods remain useful today, and systems can combine learned
+          perception with explicit rules, search or planning. “Modern” does not mean that a system understands the
+          world or will necessarily generalize reliably.
+        </p>
+
+        <h2 class="material-heading" id="ai-winters">AI winters: when expectations exceeded results</h2>
+
+        <p>
+          An <b>AI winter</b> is a period of reduced funding, commercial investment and confidence in AI after
+          expectations are disappointed. It does not mean that research stopped. Dates vary across accounts and
+          countries, but two broad periods are commonly distinguished.
+        </p>
+
+        <h3>The first AI winter: roughly the mid-1970s to the early 1980s</h3>
+        <p>
+          Early demonstrations had encouraged claims that general machine intelligence was close. In practice,
+          programs struggled with real-world language, perception and the rapid growth of search spaces. Computing
+          resources and available data were limited. Criticism of simple perceptrons also weakened confidence in
+          neural-network research, although the limitations of those models were not a proof that all neural
+          networks were incapable. The <b>1973 Lighthill Report</b> criticized progress in the UK, and changes in
+          funding priorities in the UK and US contributed to a broader loss of support.
+        </p>
+
+        <h3>The second AI winter: roughly the late 1980s to the mid-1990s</h3>
+        <p>
+          The commercial expansion of <b>expert systems</b> brought renewed optimism. Some systems were useful in
+          bounded domains, but acquiring and maintaining their knowledge was expensive, and they often struggled
+          with unfamiliar situations. Disappointing returns, together with the collapse of the specialized
+          <b>Lisp-machine</b> market as general-purpose computers became competitive, undermined investment.
+          These problems concern the limits of particular technologies and business expectations; they do not
+          imply that every expert system failed or that symbolic reasoning became useless.
+        </p>
+
+        <h3>Renewed growth: probability, data and learned representations</h3>
+        <p>
+          From the late 1980s and through the 1990s, probabilistic reasoning and statistical machine learning gained
+          influence. Larger datasets, improved algorithms and increased computing power later supported the resurgence
+          of neural networks as <b>deep learning</b>. Large pretrained models subsequently enabled reuse across many
+          tasks and modalities. These developments overlap: they are not a single invention that suddenly ended a winter.
+        </p>
+
+        <div class="hint">
+          <div class="hint__header"><i class="fa fa-info-circle hint__icon"></i>What should we learn from AI winters?</div>
+          <div class="hint__body">
+            <p>
+              Success on a restricted task does not establish general intelligence. Ask what a system demonstrates,
+              under which conditions it works, what resources it needs and whether claims go beyond the evidence.
+              The history of AI connects directly to our philosophical questions: successful behaviour alone does
+              not settle understanding, consciousness or the nature of human skill.
+            </p>
+          </div>
+        </div>
+
+        <p>
+          <b>Connection to the course:</b> Week 1 introduces search and games; Week 2 develops reasoning under
+          uncertainty with probability and Bayesian methods. Later weeks explore learning and neural networks.
+          The aim is to understand what each approach contributes and how they can be combined.
+          For further historical context, see Russell and Norvig,
+          <a href="https://aima.cs.berkeley.edu/4th-ed/pdfs/newchap01.pdf">the introduction to <i>Artificial Intelligence: A Modern Approach</i></a>.
         </p>
 
         <h1 class="material-heading">On the philosophy of AI</h1>
