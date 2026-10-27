@@ -27,6 +27,72 @@
     ga('send', 'pageview');
   </script>
 
+
+  <style>
+    .concept-matrix {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.25rem 0 1.75rem;
+    }
+    .concept-card {
+      border: 1px solid #d5dee5;
+      border-left: 5px solid #0072ce;
+      border-radius: 4px;
+      padding: 1rem 1.1rem;
+      background: #f8fbfd;
+    }
+    .concept-card h3 {
+      margin: 0 0 .45rem;
+      font-size: 1.15rem;
+    }
+    .concept-card p {
+      margin: .35rem 0;
+    }
+    .concept-card__label {
+      color: #536a7c;
+      font-size: .88rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    .term-list {
+      margin: 1.25rem 0 1.75rem;
+    }
+    .term-row {
+      display: grid;
+      grid-template-columns: minmax(10rem, 1fr) minmax(14rem, 1.65fr) minmax(14rem, 1.65fr);
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid #d5dee5;
+    }
+    .term-row:first-child {
+      border-top: 4px solid #0072ce;
+      background: #eef6fb;
+    }
+    .term-row__heading {
+      font-weight: 700;
+      color: #17324d;
+    }
+    .reasoning-example {
+      border: 1px solid #b9c9d6;
+      border-left: 6px solid #2e7d5b;
+      padding: 1rem 1.2rem;
+      margin: 1.25rem 0;
+      background: #f5faf8;
+    }
+    .reasoning-step {
+      margin: .65rem 0;
+    }
+    @media (max-width: 760px) {
+      .concept-matrix { grid-template-columns: 1fr; }
+      .term-row { grid-template-columns: 1fr; gap: .35rem; }
+      .term-row:first-child { display: none; }
+      .term-row__meaning::before { content: "Meaning: "; font-weight: 700; }
+      .term-row__example::before { content: "Example or qualification: "; font-weight: 700; }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -258,23 +324,32 @@
 
         <p>Russell and Norvig organize influential approaches to AI around two distinctions:</p>
 
-        <table>
-          <thead>
-            <tr><th></th><th>Human standard</th><th>Rational standard</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Thinking</th>
-              <td><b>Thinking humanly:</b> does the system reproduce human cognitive processes?</td>
-              <td><b>Thinking rationally:</b> does it draw correct conclusions?</td>
-            </tr>
-            <tr>
-              <th>Acting</th>
-              <td><b>Acting humanly:</b> is its behaviour indistinguishable from human behaviour?</td>
-              <td><b>Acting rationally:</b> does it choose actions expected to achieve its objectives?</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="concept-matrix" aria-label="Four approaches to defining artificial intelligence">
+          <section class="concept-card">
+            <div class="concept-card__label">Human standard · Thinking</div>
+            <h3>Thinking humanly</h3>
+            <p>Does the system reproduce processes observed in human cognition?</p>
+            <p><b>Typical evidence:</b> psychological experiments and cognitive models.</p>
+          </section>
+          <section class="concept-card">
+            <div class="concept-card__label">Rational standard · Thinking</div>
+            <h3>Thinking rationally</h3>
+            <p>Does the system derive conclusions that follow from its premises?</p>
+            <p><b>Typical evidence:</b> formal logic and proofs.</p>
+          </section>
+          <section class="concept-card">
+            <div class="concept-card__label">Human standard · Acting</div>
+            <h3>Acting humanly</h3>
+            <p>Is the system's behaviour difficult to distinguish from human behaviour?</p>
+            <p><b>Typical evidence:</b> the Turing test and human comparison studies.</p>
+          </section>
+          <section class="concept-card">
+            <div class="concept-card__label">Rational standard · Acting</div>
+            <h3>Acting rationally</h3>
+            <p>Does the system choose actions expected to achieve its objective under its constraints?</p>
+            <p><b>Typical evidence:</b> performance relative to a stated objective.</p>
+          </section>
+        </div>
 
         <p>
           These approaches select different evidence. A system can act successfully without thinking like a human. A
@@ -286,29 +361,28 @@
 
         <h2 class="material-heading">Narrow AI, general-purpose models and AGI</h2>
 
-        <table>
-          <thead>
-            <tr><th>Term</th><th>Useful meaning</th><th>Example or qualification</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><b>Narrow AI</b></td>
-              <td>A system with strong capabilities in a bounded task or domain.</td>
-              <td>A chess engine, spam filter or medical-image classifier.</td>
-            </tr>
-            <tr>
-              <td><b>General-purpose AI model</b></td>
-              <td>A model displaying significant generality and capable of performing a wide range of distinct tasks or
-                supporting many downstream applications.</td>
-              <td>This is a legal category in the EU AI Act; it does not mean that the model possesses general intelligence.</td>
-            </tr>
-            <tr>
-              <td><b>Artificial general intelligence (AGI)</b></td>
-              <td>A contested research concept referring to broad and high-level competence across tasks and contexts.</td>
-              <td>There is no agreed scientific test or legal definition.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="term-list" aria-label="Narrow AI, general-purpose models and AGI">
+          <div class="term-row">
+            <div class="term-row__heading">Term</div>
+            <div class="term-row__heading">Useful meaning</div>
+            <div class="term-row__heading">Example or qualification</div>
+          </div>
+          <div class="term-row">
+            <div class="term-row__heading">Narrow AI</div>
+            <div class="term-row__meaning">Strong capability in a bounded task or domain.</div>
+            <div class="term-row__example">A chess engine, spam filter or medical-image classifier can exceed human performance without broad competence.</div>
+          </div>
+          <div class="term-row">
+            <div class="term-row__heading">General-purpose AI model</div>
+            <div class="term-row__meaning">A model that can perform many distinct tasks or support many downstream applications.</div>
+            <div class="term-row__example">This is a category in the EU AI Act. It does not imply general intelligence.</div>
+          </div>
+          <div class="term-row">
+            <div class="term-row__heading">Artificial general intelligence (AGI)</div>
+            <div class="term-row__meaning">A contested research concept for broad, high-level competence across tasks and contexts.</div>
+            <div class="term-row__example">There is no agreed scientific test or legal definition.</div>
+          </div>
+        </div>
 
         <p>
           Discussions of AGI often become confused because several different properties are compressed into one label.
@@ -401,12 +475,20 @@
           </tbody>
         </table>
 
+        <div class="reasoning-example">
+          <h3>A small GOFAI example: classifying one email</h3>
+          <p class="reasoning-step"><b>Observed facts:</b> the sender is unknown; the message mentions a lottery; it asks for an urgent money transfer.</p>
+          <p class="reasoning-step"><b>Rule 1:</b> IF the sender is unknown AND the message urgently requests money, THEN mark the message as suspicious.</p>
+          <p class="reasoning-step"><b>Rule 2:</b> IF a suspicious message mentions a lottery, THEN classify it as spam.</p>
+          <p class="reasoning-step"><b>Inference:</b> Rule 1 derives <i>suspicious</i>; Rule 2 then derives <i>spam</i>. Every step can be inspected.</p>
+          <p class="reasoning-step"><b>Limitation:</b> “You won a prize” or a new fraud vocabulary may evade the rules until someone updates the knowledge base.</p>
+        </div>
+
         <p>
-          <b>Example: identifying spam.</b> A symbolic filter could apply a rule such as “if a message contains a
-          particular phrase and comes from a blocked sender, flag it.” A learned classifier instead estimates
-          patterns from labelled messages; a probabilistic classifier can estimate the probability of spam given
-          the observed words. The first approach depends on the coverage of its rules; the second depends on
-          the quality of its data and how well those patterns transfer to new messages.
+          A learned classifier approaches the same task differently: it estimates patterns from labelled messages,
+          while a probabilistic classifier can estimate the probability of spam given the observed words. The symbolic
+          approach depends on the coverage of its rules; the learned approach depends on the quality of its data and
+          whether the learned patterns transfer to new messages.
         </p>
 
         <p>
@@ -482,7 +564,7 @@
           <div class="hint__header"><i class="fa fa-book hint__icon"></i>Further reading: symbolic AI</div>
           <div class="hint__body">
             <ul>
-              <li>Newell and Simon (1976), <a href="https://doi.org/10.1145/360018.360022"><i>Computer Science as Empirical Inquiry: Symbols and Search</i></a>.</li>
+              <li>Newell and Simon (1976), <a href="https://doi.org/10.1145/360018.360022"><i>Computer Science as Empirical Inquiry: Symbols and Search</i></a> — the physical symbol system hypothesis.</li>
               <li>Winograd (1972), <a href="https://hci.stanford.edu/winograd/shrdlu/"><i>Understanding Natural Language</i> and the SHRDLU materials</a>.</li>
               <li>SRI International, <a href="https://www.sri.com/hoi/shakey-the-robot/"><i>Shakey the Robot</i></a>.</li>
               <li>Buchanan and Shortliffe (eds., 1984), <a href="https://people.dbmi.columbia.edu/~ehs7001/Buchanan-Shortliffe-1984/"><i>Rule-Based Expert Systems: The MYCIN Experiments</i></a>.</li>
@@ -708,8 +790,8 @@
           <div class="hint__body">
             <ul>
               <li>Simon (1996), <a href="https://mitpress.mit.edu/9780262691918/the-sciences-of-the-artificial/"><i>The Sciences of the Artificial</i></a>.</li>
-              <li>Suchman (1987), <a href="https://doi.org/10.1017/CBO9780511620727"><i>Plans and Situated Actions</i></a>.</li>
-              <li>Vera and Simon (1993), <a href="https://doi.org/10.1207/s15516709cog1701_2"><i>Situated Action: A Symbolic Interpretation</i></a>.</li>
+              <li>Suchman (1987), <a href="https://doi.org/10.1017/CBO9780511620727"><i>Plans and Situated Actions</i></a> — the primary critique of plans as complete scripts for action.</li>
+              <li>Vera and Simon (1993), <a href="https://doi.org/10.1207/s15516709cog1701_2"><i>Situated Action: A Symbolic Interpretation</i></a>, together with <a href="https://doi.org/10.1207/s15516709cog1701_5">Suchman’s response</a> — the debate over whether situated action requires abandoning symbolic accounts.</li>
               <li>Suchman (1993), <a href="https://doi.org/10.1207/s15516709cog1701_5"><i>Response to Vera and Simon</i></a>.</li>
               <li>Brooks (1991), <a href="https://people.csail.mit.edu/brooks/papers/representation.pdf"><i>Intelligence without Representation</i></a>.</li>
             </ul>
@@ -776,10 +858,14 @@
         </ul>
 
         <h2 class="material-heading">Selected sources and further reading</h2>
+        <p>
+          The references below are linked at the point where their ideas are introduced. The short notes indicate
+          what each source contributes and help distinguish primary texts from later frameworks or regulation.
+        </p>
         <ul>
-          <li>OECD (2024), <a href="https://oecd.ai/en/ai-publications/explanatory-memorandum-on-the-updated-definition-of-an-ai-system">Explanatory memorandum on the updated definition of an AI system</a>.</li>
-          <li>European Union (2024), <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Artificial Intelligence Act, Regulation (EU) 2024/1689</a>.</li>
-          <li>Morris et al. (2024), <a href="https://deepmind.google/research/publications/66938/">Levels of AGI for Operationalizing Progress on the Path to AGI</a>.</li>
+          <li>OECD (2024), <a href="https://oecd.ai/en/ai-publications/explanatory-memorandum-on-the-updated-definition-of-an-ai-system">Explanatory memorandum on the updated definition of an AI system</a> — the operational definition used in this section.</li>
+          <li>European Union (2024), <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Artificial Intelligence Act, Regulation (EU) 2024/1689</a> — the legal definitions of AI systems and general-purpose AI models.</li>
+          <li>Morris et al. (2024), <a href="https://deepmind.google/research/publications/66938/">Levels of AGI for Operationalizing Progress on the Path to AGI</a> — a proposed framework for separating breadth, performance and autonomy.</li>
           <li>Turing (1950), <a href="https://doi.org/10.1093/mind/LIX.236.433"><i>Computing Machinery and Intelligence</i></a>.</li>
           <li>Searle (1980), <a href="https://doi.org/10.1017/S0140525X00005756"><i>Minds, Brains, and Programs</i></a>.</li>
           <li>Dreyfus (1972/1992), <i>What Computers Can't Do</i> / <i>What Computers Still Can't Do</i>.</li>
