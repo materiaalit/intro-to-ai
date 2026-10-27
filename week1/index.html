@@ -179,6 +179,8 @@
                     <li>know the main-stream developments in the history of AI
                     <li>can explain the idea of artificial general intelligence (AGI)
                       and distinguish it from narrow AI
+                    <li>can compare planning as an internal representation with Suchman's account of plans as resources for situated action
+                    <li>can explain why provably beneficial AI treats human objectives as uncertain rather than fixed
                   </ul>
                 </td>
               </tr>
@@ -578,6 +580,87 @@
           </div>
         </div>
 
+        <h2 class="material-heading">Simon and Suchman: plans, action and the situation</h2>
+
+        <p>
+          Herbert Simon's work on <b>bounded rationality</b> starts from a practical constraint: agents rarely possess
+          complete information or enough time to optimize perfectly. They use representations, heuristics and search to
+          find satisfactory actions. In this tradition, a plan can function as an internal structure that guides action
+          through a problem space.
+        </p>
+
+        <p>
+          Lucy Suchman's <i>Plans and Situated Actions</i> challenges the idea that action normally consists of executing
+          a complete plan prepared in advance. Her studies of people using an interactive photocopier showed how action is
+          produced locally through the evolving situation, available resources and interaction with other people and
+          artifacts. Plans remain useful, but often as <b>resources for action</b> and retrospective accounts rather than
+          scripts that determine every next step.
+        </p>
+
+        <table class="table table-striped">
+          <thead><tr><th scope="col">Question</th><th scope="col">Simon and symbolic problem solving</th><th scope="col">Suchman and situated action</th></tr></thead>
+          <tbody>
+            <tr><td>Where does order come from?</td><td>Internal representations, goals, heuristics and search.</td><td>Ongoing interaction between people, artifacts and the local situation.</td></tr>
+            <tr><td>What is a plan?</td><td>A representation that can guide choices.</td><td>A resource used flexibly before, during and after action.</td></tr>
+            <tr><td>Typical failure</td><td>The representation omits relevant features of the world.</td><td>Designers treat situated improvisation as noise or user error.</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          Consider a route-planning agent during a railway disruption. A classical planner searches over represented
+          routes and costs. A situated system must also notice an unannounced platform change, interpret a crowd, ask for
+          clarification and revise its goal with the traveler. Current language-model agents combine both views: they
+          explicitly plan and call tools, yet their success depends on feedback from a changing environment.
+        </p>
+
+        <h2 class="material-heading">Consciousness and functionalism</h2>
+
+        <p>
+          <b>Functionalism</b> identifies mental states through the roles they play: what tends to cause them, how they
+          interact with other states and what behaviour they produce. On this view, a non-biological system could in
+          principle instantiate a mind if it realized the relevant functional organization. The view does not imply that
+          every competent program is conscious.
+        </p>
+
+        <p>
+          David Chalmers distinguishes the tractable questions of cognitive function from the <b>hard problem of
+          consciousness</b>: why and how physical or computational processes give rise to subjective experience. Behavioural
+          tests can reveal capability, but they cannot by themselves settle whether a system has experiences. This is why
+          claims about intelligence, agency and consciousness should be evaluated separately.
+        </p>
+
+        <h2 class="material-heading">Russell: provably beneficial AI</h2>
+
+        <p>
+          A standard rational agent assumes that designers provide a fixed objective and that the system should optimize
+          it. Stuart Russell argues that this creates a structural safety problem: human objectives are incomplete,
+          context-sensitive and easily misspecified. A highly capable optimizer may achieve the formal objective while
+          producing an outcome that people did not intend.
+        </p>
+
+        <p>
+          <b>Provably beneficial AI</b> reverses the premise. The machine should treat the human objective as uncertain,
+          observe human choices for evidence, ask questions and remain open to correction or shutdown. In cooperative
+          inverse reinforcement learning, a human and a machine share a reward function known to the human but initially
+          uncertain to the machine. The machine's uncertainty gives it an instrumental reason to defer and learn.
+        </p>
+
+        <div class="hint">
+          <div class="hint__header"><i class="fa fa-info-circle hint__icon"></i>Why this remains a philosophical problem</div>
+          <div class="hint__body">
+            <p>
+              Human preferences can be inconsistent, changing, manipulated or in conflict with the interests of other
+              people. Learning what someone appears to want does not determine what the system ought to do. Beneficial AI
+              therefore connects technical alignment to normative questions about autonomy, welfare, justice and who has
+              authority to define the objective.
+            </p>
+            <p>
+              Further viewing: Stuart Russell's
+              <a href="https://www.youtube.com/watch?v=_H87qqT8pdY" target="_blank" rel="noopener">Reith Lectures on living with artificial intelligence</a>.
+            </p>
+          </div>
+        </div>
+
         <h2 class="material-heading">A working definition for this course</h2>
 
         <p>
@@ -607,6 +690,12 @@
           <li>Hubert Dreyfus (1972/1992), <i>What Computers Can't Do</i> / <i>What Computers Still Can't Do</i>.</li>
           <li>Stuart E. Dreyfus and Hubert L. Dreyfus (1980), <i>A Five-Stage Model of the Mental Activities Involved in Directed Skill Acquisition</i>.</li>
           <li>Stuart Russell and Peter Norvig, <i>Artificial Intelligence: A Modern Approach</i>.</li>
+          <li>Herbert A. Simon (1957), <i>Models of Man: Social and Rational</i>.</li>
+          <li>Lucy Suchman (1987/2007), <a href="https://doi.org/10.1017/CBO9780511620727"><i>Plans and Situated Actions / Human-Machine Reconfigurations</i></a>.</li>
+          <li>Alonso Vera and Herbert Simon (1993), <a href="https://doi.org/10.1207/s15516709cog1701_2">Situated Action: A Symbolic Interpretation</a>, and Lucy Suchman's <a href="https://doi.org/10.1207/s15516709cog1701_5">response</a>.</li>
+          <li>David Chalmers (1995), <a href="https://consc.net/papers/facing.pdf">Facing Up to the Problem of Consciousness</a>.</li>
+          <li>Stuart Russell, Daniel Dewey and Max Tegmark (2015), <a href="https://doi.org/10.1609/aimag.v36i4.2577">Research Priorities for Robust and Beneficial Artificial Intelligence</a>.</li>
+          <li>Dylan Hadfield-Menell et al. (2016), <a href="https://proceedings.neurips.cc/paper/2016/hash/c3395dd46c34fa7fd8d729d8cf88b7a8-Abstract.html">Cooperative Inverse Reinforcement Learning</a>.</li>
         </ul>
 
         <div class="exercise">
