@@ -84,6 +84,52 @@
     .reasoning-step {
       margin: .65rem 0;
     }
+    .question-sequence {
+      counter-reset: question;
+      margin: 1.25rem 0 1.75rem;
+    }
+    .question-sequence > div {
+      counter-increment: question;
+      position: relative;
+      margin: .8rem 0;
+      padding: .85rem 1rem .85rem 3.5rem;
+      border-left: 5px solid #0072ce;
+      background: #f8fbfd;
+    }
+    .question-sequence > div::before {
+      content: counter(question);
+      position: absolute;
+      left: 1rem;
+      top: .75rem;
+      color: #0072ce;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .agi-aspects {
+      margin: 1.25rem 0 1.75rem;
+    }
+    .agi-aspect {
+      display: grid;
+      grid-template-columns: minmax(9rem, .8fr) minmax(16rem, 2fr) minmax(12rem, 1.25fr);
+      gap: 1rem;
+      padding: .9rem 1rem;
+      border-bottom: 1px solid #d5dee5;
+    }
+    .agi-aspect:first-child {
+      border-top: 4px solid #2e7d5b;
+      background: #f5faf8;
+    }
+    .agi-aspect__name {
+      font-weight: 700;
+      color: #17324d;
+    }
+    .agi-aspect__source {
+      color: #536a7c;
+      font-size: .95rem;
+    }
+    @media (max-width: 760px) {
+      .agi-aspect { grid-template-columns: 1fr; gap: .3rem; }
+    }
     @media (max-width: 760px) {
       .concept-matrix { grid-template-columns: 1fr; }
       .term-row { grid-template-columns: 1fr; gap: .35rem; }
@@ -359,7 +405,24 @@
           not a complete theory of human intelligence.
         </p>
 
-        <h2 class="material-heading">Narrow AI, general-purpose models and AGI</h2>
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>Three different questions
+          </div>
+          <div class="hint__body">
+            <div class="question-sequence">
+              <div><b>What counts as an AI system?</b><br>An operational or legal scope question. The OECD definition and EU AI Act answer this without defining a mind or measuring intelligence.</div>
+              <div><b>What do we mean by intelligence?</b><br>A conceptual and measurement question. Different theories emphasize goal achievement, reasoning, learning efficiency or adaptation.</div>
+              <div><b>What evidence would justify calling a system AGI?</b><br>A threshold and classification question. There is no agreed test, so proposed frameworks operationalize different aspects.</div>
+            </div>
+            <p>
+              These answers are complementary rather than competing definitions. A system may fall within a legal
+              definition of AI without being highly intelligent, and a general-purpose model is not automatically AGI.
+            </p>
+          </div>
+        </div>
+
+                <h2 class="material-heading">Narrow AI, general-purpose models and AGI</h2>
 
         <div class="term-list" aria-label="Narrow AI, general-purpose models and AGI">
           <div class="term-row">
@@ -385,13 +448,50 @@
         </div>
 
         <p>
-          Discussions of AGI often become confused because several different properties are compressed into one label.
-          A clearer approach is to ask separately about <b>breadth</b>, <b>performance</b>, <b>transfer</b>,
-          <b>robustness</b>, <b>learning</b> and <b>autonomy</b>. The
-          <a href="https://deepmind.google/research/publications/66938/">Levels of AGI framework</a>, for example,
-          classifies systems using the breadth and depth of their capabilities while treating autonomy as a separate
-          deployment dimension.
+          AGI is not one additional legal category. It is a contested claim about the breadth and level of a system's
+          intelligence. Different frameworks operationalize that claim differently. The aspects below should therefore
+          be read as a comparison of proposals, not as an agreed checklist that a system either passes or fails.
         </p>
+
+        <h2 class="material-heading">Aspects used to operationalize general intelligence</h2>
+
+        <div class="agi-aspects" aria-label="Aspects used in frameworks for measuring general intelligence">
+          <div class="agi-aspect">
+            <div class="agi-aspect__name">Goal achievement across environments</div>
+            <div>An intelligent agent succeeds at goals over a wide range of environments rather than one predefined task.</div>
+            <div class="agi-aspect__source"><a href="https://arxiv.org/abs/0712.3329">Legg and Hutter (2007)</a></div>
+          </div>
+          <div class="agi-aspect">
+            <div class="agi-aspect__name">Breadth or generality</div>
+            <div>How many qualitatively different tasks and domains can the system handle?</div>
+            <div class="agi-aspect__source"><a href="https://proceedings.mlr.press/v235/morris24b.html">Morris et al. (2024)</a>; Legg and Hutter (2007)</div>
+          </div>
+          <div class="agi-aspect">
+            <div class="agi-aspect__name">Depth or performance</div>
+            <div>How well does the system perform within that range: emerging, competent, expert, virtuoso or superhuman?</div>
+            <div class="agi-aspect__source"><a href="https://proceedings.mlr.press/v235/morris24b.html">Morris et al. (2024)</a></div>
+          </div>
+          <div class="agi-aspect">
+            <div class="agi-aspect__name">Novel generalization</div>
+            <div>Can the system infer how to solve genuinely new tasks rather than reproduce skills prepared during training?</div>
+            <div class="agi-aspect__source"><a href="https://arxiv.org/abs/1911.01547">Chollet (2019)</a>; operationalized in ARC-AGI</div>
+          </div>
+          <div class="agi-aspect">
+            <div class="agi-aspect__name">Skill-acquisition efficiency</div>
+            <div>How efficiently does the system acquire a new skill, accounting for its priors, previous experience and the difficulty of generalization?</div>
+            <div class="agi-aspect__source"><a href="https://arxiv.org/abs/1911.01547">Chollet (2019)</a></div>
+          </div>
+          <div class="agi-aspect">
+            <div class="agi-aspect__name">Adaptive measurement</div>
+            <div>Can a test adjust to different agents, ability levels and time budgets while continuing to improve its estimate?</div>
+            <div class="agi-aspect__source"><a href="https://doi.org/10.1016/j.artint.2010.09.006">Hernández-Orallo and Dowe (2010)</a></div>
+          </div>
+          <div class="agi-aspect">
+            <div class="agi-aspect__name">Autonomy</div>
+            <div>How independently is the system allowed to act? This affects deployment and risk, but should be assessed separately from capability.</div>
+            <div class="agi-aspect__source"><a href="https://proceedings.mlr.press/v235/morris24b.html">Morris et al. (2024)</a></div>
+          </div>
+        </div>
 
         <div class="hint">
           <div class="hint__header">
@@ -400,30 +500,29 @@
           <div class="hint__body">
             <ul>
               <li><b>AGI is not the same as consciousness:</b> broad task performance does not establish subjective experience.</li>
-              <li><b>AGI is not the same as autonomy:</b> a capable model may be deployed with little independent control, and a simple system may operate autonomously.</li>
-              <li><b>AGI is not the same as superintelligence:</b> generality concerns breadth; superintelligence implies performance far beyond humans.</li>
-              <li><b>AGI need not reproduce human cognition:</b> similar performance can arise from very different mechanisms.</li>
-              <li><b>AGI does not automatically imply moral status:</b> that requires a further ethical and philosophical argument.</li>
+              <li><b>AGI is not the same as autonomy:</b> a capable model may have little independent control, while a simple system may operate autonomously.</li>
+              <li><b>AGI is not the same as superintelligence:</b> generality concerns breadth; superintelligence concerns performance far beyond humans.</li>
+              <li><b>AGI need not reproduce human cognition:</b> similar performance can arise from different mechanisms.</li>
             </ul>
           </div>
         </div>
 
-        <h2 class="material-heading">What would count as evidence for AGI?</h2>
+        <h2 class="material-heading">What would count as convincing evidence?</h2>
 
         <p>
-          A benchmark samples behaviour under specified conditions; it does not measure an entire mind. Strong scores can
-          be influenced by training-data contamination, prompt design, tool access and evaluation choices. Real-world
-          competence additionally requires reliability, recovery from errors, sensitivity to context and the ability to
-          cope with consequences over time. When evaluating an AGI claim, ask:
+          No framework above supplies a complete test. A benchmark samples behaviour under specified conditions; it does
+          not measure an entire mind. Strong scores can reflect training-data contamination, prompt design, tool access or
+          extensive scaffolding. When evaluating an AGI claim, ask:
         </p>
 
         <ul>
-          <li>How broad are the tasks, and are genuinely novel tasks included?</li>
-          <li>Is performance reliable or based on occasional successful demonstrations?</li>
-          <li>Does knowledge transfer when the setting, representation or goal changes?</li>
-          <li>Can the system recognize uncertainty and seek clarification or help?</li>
-          <li>How much scaffolding is provided by prompts, humans, retrieval systems or tools?</li>
-          <li>Is autonomy being measured separately from capability?</li>
+          <li><b>Breadth:</b> are the tasks genuinely diverse rather than minor variations of one task family?</li>
+          <li><b>Novelty:</b> were the test problems unavailable during training, and do they require new abstractions?</li>
+          <li><b>Efficiency:</b> how much data, computation, prior knowledge and human guidance were required?</li>
+          <li><b>Transfer:</b> does competence survive changes in representation, domain or objective?</li>
+          <li><b>Reliability:</b> is performance consistent, or based on occasional successful demonstrations?</li>
+          <li><b>Scaffolding:</b> what comes from the model, and what comes from prompts, retrieval, tools or human operators?</li>
+          <li><b>Autonomy:</b> is independent action being reported separately from capability?</li>
         </ul>
 
         <h2 class="material-heading" id="history-of-ai">A brief history of AI: origins, optimism and setbacks</h2>
@@ -865,7 +964,10 @@
         <ul>
           <li>OECD (2024), <a href="https://oecd.ai/en/ai-publications/explanatory-memorandum-on-the-updated-definition-of-an-ai-system">Explanatory memorandum on the updated definition of an AI system</a> — the operational definition used in this section.</li>
           <li>European Union (2024), <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Artificial Intelligence Act, Regulation (EU) 2024/1689</a> — the legal definitions of AI systems and general-purpose AI models.</li>
-          <li>Morris et al. (2024), <a href="https://deepmind.google/research/publications/66938/">Levels of AGI for Operationalizing Progress on the Path to AGI</a> — a proposed framework for separating breadth, performance and autonomy.</li>
+          <li>Legg and Hutter (2007), <a href="https://arxiv.org/abs/0712.3329"><i>Universal Intelligence: A Definition of Machine Intelligence</i></a> — a formal account of goal achievement across a wide range of environments.</li>
+          <li>Chollet (2019), <a href="https://arxiv.org/abs/1911.01547"><i>On the Measure of Intelligence</i></a> — intelligence as skill-acquisition efficiency relative to priors and experience.</li>
+          <li>Hernández-Orallo and Dowe (2010), <a href="https://doi.org/10.1016/j.artint.2010.09.006"><i>Measuring Universal Intelligence: Towards an Anytime Intelligence Test</i></a> — adaptive testing across agents, ability levels and time budgets.</li>
+          <li>Morris et al. (2024), <a href="https://proceedings.mlr.press/v235/morris24b.html"><i>Levels of AGI for Operationalizing Progress on the Path to AGI</i></a> — a position paper separating breadth, performance and deployment autonomy.</li>
           <li>Turing (1950), <a href="https://doi.org/10.1093/mind/LIX.236.433"><i>Computing Machinery and Intelligence</i></a>.</li>
           <li>Searle (1980), <a href="https://doi.org/10.1017/S0140525X00005756"><i>Minds, Brains, and Programs</i></a>.</li>
           <li>Dreyfus (1972/1992), <i>What Computers Can't Do</i> / <i>What Computers Still Can't Do</i>.</li>
