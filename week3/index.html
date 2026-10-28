@@ -895,56 +895,6 @@
 
         <!-- Exercise 2.5 -->
 
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-        
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-          <div class="collapse">
-            <div class="solution__body">
-          <p>
-            <ol>
-              <li>
-                The number of combinations is k<sup>N</sup> = k<sup>4</sup>.
-                Since the probabilities of the elementary events must sum to
-                one, it is enough to give k<sup>4</sup>&ndash;1 probability
-                values to define the model this way.<br><br>
-              <li>
-                In an empty network, we only need to specify the distributions
-                of each variable. Since each variable has k possible values, we
-                need k&ndash;1 probabilities per variable, and the total number
-                is N(k&ndash;1) = 4(k&ndash;1).<br><br>
-              <li>
-                The more edges there are in the network, the more parameters are
-                required in order to specify all the conditional
-                distributions. Thus, we need to calculate how many parameters
-                there are in the "full" network. A full network has one node
-                with no parents, one node with one parent, one node with two
-                parents, etc.<br><br>
-                For a node with m parents, the number of possible parent
-                configurations is k<sup>m</sup> (since we assumed that the
-                number of values that each parent can take is k). To specify
-                the conditional distribution for all parent configurations,
-                we thus need k<sup>m</sup>(k&ndash;1) probability parameters.<br><br>
-                Summing up the numbers over the N=4 nodes, we thus get k&ndash;1
-                + k(k&ndash;1) + k<sup>2</sup>(k&ndash;1) +
-                k<sup>3</sup>(k&ndash;1).
-                <br><br>
-              <li>
-                For general N, the above formula becomes<br><br>
-                (1 + k + k<sup>2</sup> + ... + k<sup>N&ndash;1</sup>)(k&ndash;1)
-                = k<sup>N</sup>&ndash;1,
-                <br><br>
-                where we used the formula for the sum of a geometric series.
-            </ol>
-        
-            </div>
-          </div>
-        </div>
 
         <div class="exercise">
           <div class="exercise__header">
@@ -1004,25 +954,6 @@
 
         <!-- Exercise 2.6 -->
 
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-          <div class="collapse">
-            <div class="solution__body">
-        
-          <p>
-            An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/auto.py">here</a>.
-          </p>
-        
-        
-            </div>
-          </div>
-        </div>
 
         <div class="exercise">
           <div class="exercise__header">
@@ -1088,24 +1019,6 @@
         </div>
 
         <!-- Exercise 2.7 -->
-
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-        
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-          <div class="collapse">
-            <div class="solution__body">
-          <p>
-            An example solution is <a href="https://materiaalit.github.io/intro-to-ai/files/earthquake.py">here</a>.
-          </p>
-            </div>
-          </div>
-        </div>
 
         <p>
           Weeks 1 and 2 covered search and reasoning under uncertainty, and the
@@ -1242,46 +1155,7 @@
         </ol>
 
 
-        
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Don't open it right away, think about it first!</h1>
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-          <div class="collapse">
-            <div class="solution__body">
-              <ol>
-                <li>
-                  This is a regression task. The model predicts a continuous value, even if it’s represented with a limited number of decimal places.
-                </li>
-                <li>
-                  This task involves generating new objects based on existing ones.
-                </li>
-                <li>
-                  Depending on the objective, this could be:
-                  <ul>
-                    <li>A regression task: Predicting the coordinates of the bounding box surrounding the cat;</li>
-                    <li>A classification task: Determining whether a cat is present in the image or not.</li>
-                  </ul>
-                </li>
-                <li>
-                  This task can be approached in different ways:
-                  <ul>
-                    <li>By building a physical model of the robot's movement and calculating the optimal sequence of actions;</li>
-                    <li>By using machine learning to create a simulation and train a model to predict optimal movements. The model adjusts its behavior based on performance in the simulation.</li>
-                  </ul>
-                  This paradigm is known as <b>reinforcement learning</b>. It is not supervised learning because generating a vast number of labeled trajectories and outcomes would be computationally expensive and impractical.
-                </li>
-                <li>
-                  This is an <b>unsupervised learning</b> task, specifically clustering or association rule mining.
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
+  
         
         <h3>Additional Question</h3>
         
@@ -1289,24 +1163,6 @@
           Ranking is a task where the target is an ordered finite set (<code>Y = {1, ..., K}</code>). At first glance, ranking could be treated as either classification (with <code>K</code> classes) or regression. Why is this not the case?
         </p>
         
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Don't open it right away, think about it first!</h1>
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-          <div class="collapse">
-            <div class="solution__body">
-              <p>
-                For ranking tasks, models typically predict a continuous value, which is then used to sort objects. However, it is not considered regression because the loss functions and metrics are fundamentally different.  
-                In ranking, the exact predicted values are irrelevant—what matters is that more relevant objects receive higher scores.  
-                For instance, the task “predict the 10 most relevant objects” differs significantly from classification. As new objects are introduced, the relevance order can change entirely, invalidating any fixed mapping of objects to positions.
-              </p>
-            </div>
-          </div>
-        </div>
 
         <h2 class="material-heading">
           Example: handwritten digit recognition (MNIST)
@@ -1701,28 +1557,6 @@
         </div>
 
         <!-- Exercise 3.2 -->
-
-        <div class="solution" data-target='collapse'>
-          <div class="solution__header">
-            <a data-toggle="collapse" class="solution__toggle">
-              <i class="fa fa-magic solution__icon"></i>
-              <h1 class="solution__heading">Example solution</h1>
-              <i class="fa fa-caret-down solution__arrow"></i>
-            </a>
-          </div>
-        
-          <div class="collapse">
-            <div class="solution__body">
-        
-          <p>
-        Correct Answer: (C) β̂₀ = 252, β̂₁ = -0.9, σ̂ = 3.6
-           - Explanation: Extending the fitted line to temperature 0 gives an intercept (β̂₀) near 252. The slope (β̂₁) is negative and approximately -0.9, and the residual standard deviation (σ̂) is closer to 3.6 than 36.
-          </p>
-              
-        </div>
-      </div>
-    </div>
-
         <p>
           Logistic regression predicts a probability between 0 and 1.
           That is the same kind of output the course competition below asks for.
@@ -2294,68 +2128,6 @@ Gain(S, A) = Entropy(S) - &sum;<sub>v</sub> (|S<sub>v</sub>| / |S|) &middot; Ent
 
 <!-- Exercise 3.4 -->
 
-<div class="solution" data-target='collapse'>
-  <div class="solution__header">
-    <a data-toggle="collapse" class="solution__toggle">
-      <i class="fa fa-magic solution__icon"></i>
-      <h1 class="solution__heading">Example solution</h1>
-
-      <i class="fa fa-caret-down solution__arrow"></i>
-    </a>
-  </div>
-  <div class="collapse">
-    <div class="solution__body">
-
-      <p>
-        <code>Entropy(S) = -9/14&middot;log&#8322;(9/14) - 5/14&middot;log&#8322;(5/14)
-        &approx; 0.940</code>
-      </p>
-
-      <p>
-        <b>Outlook:</b> <code>Entropy(Sunny) &approx; 0.971</code>,
-        <code>Entropy(Overcast) = 0</code> (pure), <code>Entropy(Rain) &approx; 0.971</code>.
-        <br>
-        <code>Gain(S, Outlook) = 0.940 - [5/14&middot;0.971 + 4/14&middot;0 + 5/14&middot;0.971] &approx; 0.246</code>
-      </p>
-
-      <p>
-        <b>Temperature:</b> <code>Entropy(Hot) = 1.0</code>,
-        <code>Entropy(Mild) &approx; 0.918</code>, <code>Entropy(Cool) &approx; 0.811</code>.
-        <br>
-        <code>Gain(S, Temperature) = 0.940 - [4/14&middot;1.0 + 6/14&middot;0.918 + 4/14&middot;0.811] &approx; 0.029</code>
-      </p>
-
-      <p>
-        <b>Humidity:</b> <code>Entropy(High) &approx; 0.985</code>,
-        <code>Entropy(Normal) &approx; 0.592</code>.
-        <br>
-        <code>Gain(S, Humidity) = 0.940 - [7/14&middot;0.985 + 7/14&middot;0.592] &approx; 0.151</code>
-      </p>
-
-      <p>
-        <b>Wind:</b> <code>Entropy(Weak) &approx; 0.811</code>,
-        <code>Entropy(Strong) = 1.0</code>.
-        <br>
-        <code>Gain(S, Wind) = 0.940 - [8/14&middot;0.811 + 6/14&middot;1.0] &approx; 0.048</code>
-      </p>
-
-      <p>
-        <code>Outlook</code> has by far the highest gain (0.246 vs. 0.151 for the
-        runner-up, Humidity), so it becomes the root of the tree. This matches
-        intuition: whether it's sunny, overcast, or raining is the single strongest
-        predictor in this data — notice in particular that every <code>Overcast</code>
-        day is a "Yes", so that branch of the tree is already finished after one split.
-      </p>
-
-      <p>
-        <i>Bonus:</i> a branch with zero entropy is already pure — every example in it
-        agrees on the label — so the tree-building algorithm stops there and makes it a
-        leaf. No further attribute needs to be tested.
-      </p>
-
-    </div>
-  </div>
-</div>
 
         <h1 class="material-heading">
           Ensembles in Machine Learning
