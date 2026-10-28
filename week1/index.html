@@ -368,42 +368,122 @@
 
         <h2 class="material-heading">Four ways of asking whether a system is intelligent</h2>
 
-        <p>Russell and Norvig organize influential approaches to AI around two distinctions:</p>
+        <p>
+          What should an AI system do to count as intelligent? Should it <b>think like a person</b>, or is it enough
+          for it to <b>behave successfully</b>? Should we compare it with humans, who sometimes make mistakes,
+          or with a standard of rationality?
+        </p>
+        <p>Russell and Norvig organize approaches to AI around two distinctions:</p>
+        <ul>
+          <li><b>Thinking versus acting:</b> thinking concerns the processes inside the system and how it arrives at
+            a conclusion; acting concerns its observable behaviour and what it achieves.</li>
+          <li><b>Human versus rational standards:</b> a human standard compares the system with how people actually
+            think or behave; a rational standard asks whether its reasoning is correct or its actions are expected
+            to achieve its objectives.</li>
+        </ul>
+        <p>
+          Combining these distinctions gives four perspectives. These are <b>not four types of AI system</b>.
+          They are four ways of defining the goal of AI research and deciding what evidence would count as success.
+        </p>
 
         <div class="concept-matrix" aria-label="Four approaches to defining artificial intelligence">
           <section class="concept-card">
             <div class="concept-card__label">Human standard · Thinking</div>
             <h3>Thinking humanly</h3>
-            <p>Does the system reproduce processes observed in human cognition?</p>
-            <p><b>Typical evidence:</b> psychological experiments and cognitive models.</p>
+            <p><b>Question:</b> Does the system solve problems in a way that resembles human thinking?</p>
+            <p>
+              This approach studies the process, not just the answer. A person and a computer might solve the same
+              puzzle correctly but use very different steps. A cognitive model aims to reproduce aspects of how
+              people actually think, including their response times and characteristic mistakes.
+            </p>
+            <p>
+              <b>Example:</b> a model of human memory predicts that people recall frequently used words more easily
+              than rarely used words. Researchers compare its predictions with experiments involving people.
+            </p>
+            <p><b>Typical evidence:</b> psychological experiments, observations of human problem-solving and cognitive models.</p>
           </section>
           <section class="concept-card">
             <div class="concept-card__label">Rational standard · Thinking</div>
             <h3>Thinking rationally</h3>
-            <p>Does the system derive conclusions that follow from its premises?</p>
-            <p><b>Typical evidence:</b> formal logic and proofs.</p>
+            <p><b>Question:</b> Does the system reason correctly from the information it has?</p>
+            <p>
+              Formal logic provides rules for checking whether conclusions follow from premises. In deductive
+              reasoning, if the premises are true and the reasoning is valid, the conclusion must also be true.
+            </p>
+            <p>
+              <b>Example:</b> all mammals are warm-blooded; a whale is a mammal; therefore, a whale is warm-blooded.
+              The conclusion follows from the two premises.
+            </p>
+            <p>
+              Correct reasoning alone is not enough: a premise may be wrong, relevant facts may be missing,
+              or the system may lack time to work through all possibilities.
+            </p>
+            <p><b>Typical evidence:</b> formal logic and proofs that conclusions follow from stated premises.</p>
           </section>
           <section class="concept-card">
             <div class="concept-card__label">Human standard · Acting</div>
             <h3>Acting humanly</h3>
-            <p>Is the system's behaviour difficult to distinguish from human behaviour?</p>
-            <p><b>Typical evidence:</b> the Turing test and human comparison studies.</p>
+            <p><b>Question:</b> Does the system behave in a way that resembles human behaviour?</p>
+            <p>
+              Here the focus is observable behaviour. The system does not necessarily need to use the same internal
+              processes as a person; it needs to produce sufficiently human-like behaviour.
+            </p>
+            <p>
+              <b>Example:</b> in the Turing test, a human interrogator exchanges written messages with an unseen
+              human and an unseen machine and tries to distinguish them from their answers.
+            </p>
+            <p>
+              Human-like behaviour is not necessarily optimal. People make errors, take shortcuts and sometimes
+              act inconsistently. Resembling a human and performing a task well are different goals.
+            </p>
+            <p><b>Typical evidence:</b> the Turing test and studies comparing human and machine behaviour.</p>
           </section>
           <section class="concept-card">
             <div class="concept-card__label">Rational standard · Acting</div>
             <h3>Acting rationally</h3>
-            <p>Does the system choose actions expected to achieve its objective under its constraints?</p>
-            <p><b>Typical evidence:</b> performance relative to a stated objective.</p>
+            <p><b>Question:</b> Does the system choose actions expected to achieve its objective, given what it knows
+              and the resources available?</p>
+            <p>
+              An <b>agent</b> receives information from an environment and acts in that environment. A
+              <b>performance measure</b> specifies what counts as doing well.
+            </p>
+            <p>
+              <b>Example:</b> a robot vacuum uses its sensors to decide where to move. Its performance measure
+              might reward cleaning the floor while considering time, energy use and avoiding collisions.
+              It does not need to clean the way a human would.
+            </p>
+            <p>
+              Rationality does not mean always succeeding or having perfect information. A sensible action can
+              have a poor outcome because of an unexpected event. The question is whether the choice was
+              reasonable given the information and resources available at the time.
+            </p>
+            <p><b>Typical evidence:</b> task performance relative to a stated objective under specified conditions.</p>
           </section>
         </div>
 
+        <h3>One example seen from four perspectives</h3>
+        <p>Consider a navigation app finding a route through a city:</p>
+        <ul>
+          <li><b>Thinking humanly:</b> does it plan the route using processes that resemble human planning?</li>
+          <li><b>Thinking rationally:</b> do its conclusions follow correctly from the information and rules it uses?</li>
+          <li><b>Acting humanly:</b> do its route choices resemble those a person would make?</li>
+          <li><b>Acting rationally:</b> is its chosen route expected to achieve the stated objective, such as arriving
+            quickly while avoiding tolls?</li>
+        </ul>
         <p>
-          These approaches select different evidence. A system can act successfully without thinking like a human. A
-          system can reason correctly in a simplified model and still fail in the world. Modern AI courses often use the
-          <b>rational-agent</b> perspective: an agent receives information from an environment and selects actions according
-          to a performance measure, given limited information, computation and time. This is a useful engineering stance,
-          not a complete theory of human intelligence.
+          The app may find an excellent route without planning like a person. Equally, it may reason correctly
+          from its map but suggest a poor route because the map is outdated. <b>Human similarity, correct reasoning
+          and successful action are different things.</b>
         </p>
+        <p>
+          Russell and Norvig use the <b>rational-agent perspective</b> as an organizing framework for much of AI:
+          an agent receives information from an environment and selects actions according to a performance measure,
+          given limited information, computation and time. This is useful for designing and evaluating systems,
+          but it is <b>not a complete theory of human intelligence</b>. What counts as a good action also depends
+          on how we define the objective and what the performance measure includes.
+        </p>
+        <p><b>Reference:</b> Stuart Russell and Peter Norvig, <i>Artificial Intelligence: A Modern Approach</i>,
+          4th edition, Section 1.1.</p>
 
         <div class="hint">
           <div class="hint__header">
