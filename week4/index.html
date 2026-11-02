@@ -184,6 +184,7 @@
                       gradients for optimization
                     <li>can explain learned representations and word embeddings
                       at a conceptual level
+                    <li>can explain the brain analogy, its limitations and key historical developments
                     <li>can distinguish epochs, mini-batches and optimizer updates
                     <li>can explain validation, overfitting and basic regularization
                     <li>can compare dense, convolutional and recurrent architectures conceptually
@@ -209,11 +210,12 @@
               <caption>Suggested progression for Episodes 7 and 8</caption>
               <thead><tr><th scope="col">Lecture</th><th scope="col">Topic and activity</th><th scope="col">Minutes</th></tr></thead>
               <tbody>
-                <tr><td rowspan="5">Episode 7: how a network computes and learns</td><td>Inputs, weights, bias and one perceptron update</td><td>20</td></tr>
+                <tr><td rowspan="6">Episode 7: how a network computes and learns</td><td>History and the biological-neuron analogy</td><td>15</td></tr>
+                <tr><td>Inputs, weights, bias and one perceptron update</td><td>15</td></tr>
                 <tr><td>XOR and the purpose of hidden layers</td><td>15</td></tr>
                 <tr><td>Forward propagation, shapes and activation functions</td><td>20</td></tr>
-                <tr><td>Loss, gradients and a worked backpropagation example</td><td>25</td></tr>
-                <tr><td>Trace the training loop and discuss misconceptions</td><td>10</td></tr>
+                <tr><td>Loss, gradients and a worked backpropagation example</td><td>20</td></tr>
+                <tr><td>Trace the training loop and discuss misconceptions</td><td>5</td></tr>
                 <tr><td rowspan="5">Episode 8: making learned representations useful</td><td>Retrieval practice, mini-batches and optimization</td><td>15</td></tr>
                 <tr><td>Generalization, data splits and a Playground investigation</td><td>25</td></tr>
                 <tr><td>Images and convolutional networks</td><td>20</td></tr>
@@ -226,6 +228,61 @@
         </div>
 
         <h1 class="material-heading" id="episode7">Episode 7: from perceptrons to learning</h1>
+        <h2 class="material-heading" id="neural-history">Historical context: an old idea, several different research traditions</h2>
+        <p>Neural networks did not begin with today's large language models. They emerged from attempts to connect mathematical models of computation, learning and nervous systems. The history includes logical threshold units, trainable classifiers, associative memories, self-organizing maps and deep representation learning. These traditions overlap; they are not a simple sequence in which each new model replaces everything before it.</p>
+        <div style="overflow-x:auto"><table class="table">
+          <caption>Selected milestones in neural computation</caption>
+          <thead><tr><th scope="col">Period</th><th scope="col">Contribution</th><th scope="col">Why it matters here</th></tr></thead>
+          <tbody>
+            <tr><td>1943</td><td>McCulloch and Pitts: a logical model of neural activity</td><td>Showed how networks of simplified threshold units could implement logical operations. These units did not learn weights from examples.</td></tr>
+            <tr><td>1949</td><td>Hebb: activity-dependent changes in connections</td><td>Helped establish the idea that learning could involve changes in connection strengths. Hebbian learning is different from supervised error correction.</td></tr>
+            <tr><td>1958</td><td>Rosenblatt: the perceptron</td><td>Combined a classifier with a learning procedure that adjusts weights from labelled examples.</td></tr>
+            <tr><td>Late 1960s–1970s</td><td>Limitations and reduced enthusiasm</td><td>Limited models, computing resources and unmet expectations constrained progress. Minsky and Papert's <i>Perceptrons</i> (1969) analyzed important limitations; it did not prove that all neural networks were incapable of useful computation.</td></tr>
+            <tr><td>1970 / 1976</td><td>Seppo Linnainmaa: reverse accumulation of derivatives</td><td>His University of Helsinki thesis and subsequent paper provided an important foundation for reverse-mode automatic differentiation. This was a general computational method, not originally a neural-network training demonstration.</td></tr>
+            <tr><td>1982</td><td>Hopfield networks and Kohonen's self-organizing maps</td><td>Illustrated different uses of networks: recovering stored patterns and organizing data by similarity.</td></tr>
+            <tr><td>1986</td><td>Rumelhart, Hinton and Williams: learning representations by backpropagating errors</td><td>A landmark demonstration and exposition of learning hidden representations with propagated gradients, building on earlier derivative and learning research.</td></tr>
+            <tr><td>1990s–2000s</td><td>Continued development despite changing research fashions</td><td>Convolutional networks, recurrent models and other neural methods continued to develop. Neural-network research never disappeared completely.</td></tr>
+            <tr><td>2012 onward</td><td>Deep learning becomes highly effective at scale</td><td>AlexNet's ImageNet result exemplified the combination of learned representations, large datasets and GPU computation. Later architectures, including Transformers, expanded the range of applications.</td></tr>
+            <tr><td>2024</td><td>Physics Nobel Prize to John Hopfield and Geoffrey Hinton</td><td>Recognized foundational contributions enabling machine learning with artificial neural networks, including connections to statistical physics.</td></tr>
+          </tbody>
+        </table></div>
+        <p><b>Historical caution:</b> it is misleading to date a single “AI winter” to 1960 or attribute a whole research downturn to one book. AI funding and neural-network interest changed at different times and for several reasons. It is also misleading to credit one person or one paper with every part of backpropagation: reverse-mode differentiation, its application to learning and its popularization have distinct histories.</p>
+        <p><b>Sources and further reading:</b> <a href="https://doi.org/10.1007/BF02478259" target="_blank" rel="noopener">McCulloch &amp; Pitts (1943)</a>; Hebb (1949), <i>The Organization of Behavior</i>; <a href="https://doi.org/10.1037/h0042519" target="_blank" rel="noopener">Rosenblatt (1958)</a>; <a href="https://doi.org/10.1007/BF01931367" target="_blank" rel="noopener">Linnainmaa (1976)</a>, which cites his 1970 Helsinki thesis; <a href="https://doi.org/10.1073/pnas.79.8.2554" target="_blank" rel="noopener">Hopfield (1982)</a>; <a href="https://doi.org/10.1007/BF00337288" target="_blank" rel="noopener">Kohonen (1982)</a>; <a href="https://doi.org/10.1038/323533a0" target="_blank" rel="noopener">Rumelhart, Hinton &amp; Williams (1986)</a>; <a href="https://www.nobelprize.org/prizes/physics/2024/press-release/" target="_blank" rel="noopener">the 2024 Nobel announcement</a>. The broader narrative is developed in Goodfellow, Bengio and Courville (2016), Chapter 1.</p>
+
+        <h2 class="material-heading" id="brain-analogy">The brain analogy: copy an organizing idea, not a whole brain</h2>
+        <p>The useful analogy is that many connected units can produce complex behaviour, and changing their connections can change that behaviour. A biological neuron is a living cell with dendrites, a cell body and an axon. Signals arriving through synapses affect its activity; many neurons transmit action potentials along the axon and communicate chemically at synapses. The artificial unit keeps only a small part of this picture: inputs, adjustable connection weights, an aggregation and an output function.</p>
+        <svg viewBox="0 0 960 340" role="img" aria-label="Conceptual comparison: biological dendrites, cell body, axon and synapses versus mathematical inputs, weights, weighted sum and activation" style="width:100%;max-width:960px">
+          <g font-family="Roboto,sans-serif" font-size="20">
+            <text x="235" y="30" text-anchor="middle" font-weight="bold">Biological neuron (schematic)</text>
+            <g stroke="#2878a5" stroke-width="4" fill="none"><path d="M55 95 L145 135 L205 165 M55 155 L145 160 L205 175 M55 235 L145 205 L205 185 M145 135 L125 85 M145 205 L120 250"/></g>
+            <ellipse cx="240" cy="175" rx="44" ry="36" fill="#e4f2fb" stroke="#2878a5" stroke-width="3"/>
+            <path d="M285 175 H380 L420 130 M380 175 L420 220" fill="none" stroke="#2f8a50" stroke-width="5"/>
+            <circle cx="425" cy="128" r="8" fill="#9a4c28"/><circle cx="425" cy="223" r="8" fill="#9a4c28"/>
+            <text x="65" y="295">dendrites</text><text x="190" y="245">cell body</text><text x="320" y="155">axon</text><text x="370" y="270">synapses</text>
+            <text x="720" y="30" text-anchor="middle" font-weight="bold">Artificial unit (mathematical model)</text>
+            <g fill="#e4f2fb"><circle cx="545" cy="105" r="25"/><circle cx="545" cy="175" r="25"/><circle cx="545" cy="245" r="25"/></g>
+            <g text-anchor="middle"><text x="545" y="112">x₁</text><text x="545" y="182">x₂</text><text x="545" y="252">x₃</text></g>
+            <path d="M575 105 L670 155 M575 175 H670 M575 245 L670 195" fill="none" stroke="#555" stroke-width="3"/>
+            <text x="605" y="110">w₁</text><text x="605" y="165">w₂</text><text x="605" y="250">w₃</text>
+            <rect x="675" y="130" width="125" height="90" rx="8" fill="#f1e7fb"/>
+            <text x="737" y="168" text-anchor="middle">w·x + b</text><text x="737" y="198" text-anchor="middle">φ(z)</text>
+            <path d="M805 175 H900" fill="none" stroke="#555" stroke-width="3"/><text x="910" y="183">ŷ</text>
+            <text x="720" y="300" text-anchor="middle">numbers and functions, not a living cell</text>
+          </g>
+        </svg>
+        <div style="overflow-x:auto"><table class="table"><caption>What the analogy captures, and what it leaves out</caption><thead><tr><th scope="col">Biological idea</th><th scope="col">Mathematical counterpart</th><th scope="col">Limit of the analogy</th></tr></thead><tbody>
+          <tr><td>Signals from other cells</td><td>Inputs x</td><td>A numeric feature vector omits most neural signalling dynamics and its bodily context.</td></tr>
+          <tr><td>Synaptic influence</td><td>Weights w</td><td>A single scalar weight simplifies a complex, changing biological connection.</td></tr>
+          <tr><td>Integration and generation of activity</td><td>Weighted sum, bias and activation</td><td>A biological cell does much more than a static sum followed by one threshold.</td></tr>
+          <tr><td>Activity passed to other cells</td><td>Output becomes another unit's input</td><td>Many artificial networks use continuous activations, not timed biological spikes.</td></tr>
+          <tr><td>Plasticity and learning</td><td>Parameter changes during training</td><td>Ordinary backpropagation is not established as the exact mechanism used by brains.</td></tr>
+        </tbody></table></div>
+        <p>Brains contain extensive recurrent connections, many cell types and interactions over multiple timescales. Artificial networks may be feedforward, recurrent, probabilistic or spiking. Consequently, “natural networks are binary while artificial networks are continuous” and “artificial networks have no feedback” are not universal distinctions. A spike is an event, but firing rates, spike timing and other biological variables also carry information.</p>
+        <p><b>Connection to computation:</b> parallel, adaptive neural computation contrasts with the simple picture of a sequential instruction-following program, but it does not establish that neural networks compute functions outside the Turing-computable class. Most networks in this course run as numerical programs on conventional digital hardware. Brain inspiration also supplies no automatic evidence of consciousness or human-like understanding.</p>
+        <p><b>Biology reference:</b> the US National Institute of Neurological Disorders and Stroke, <a href="https://www.ninds.nih.gov/sites/default/files/2025-05/know-your-brain-brian-basics.pdf" target="_blank" rel="noopener">Know Your Brain</a>. The comparison diagram here is a conceptual teaching schematic, not an anatomical or mechanistic model.</p>
+        <details><summary>Historical extension: associative memory and self-organizing maps</summary><p>A Hopfield network provides an example of recurrent dynamics: its evolving state can retrieve a stored pattern from a partial or corrupted cue. Under suitable conditions, an energy function helps analyze convergence; this does not mean every cue retrieves the intended memory. A Boltzmann machine uses stochastic units in an energy-based probabilistic model. A self-organizing map uses a different idea: a winning prototype and neighbouring prototypes move toward an input, organizing a grid by similarity. These examples show why neural computation encompasses more than supervised feedforward classification. They provide context, not additional implementation requirements this week.</p></details>
+
+
         <h2 class="material-heading" id="inputs">1. What does the network actually receive?</h2>
         <p>A handwritten digit image might contain 28 by 28 grayscale pixels. A fully connected network can receive it as a vector of 784 numbers. A pixel value is a measurement, not an instruction such as “this is the upper loop of an eight.” The model must learn which combinations of measurements are useful. A training example pairs an input <code>x</code> with a target <code>y</code>, such as the digit label 8.</p>
         <p>A training dataset contains many such pairs. At prediction time the model receives a new image without the correct label. Its parameters must therefore encode a rule that works across variations in handwriting, thickness and position, rather than a lookup table for images it has already seen. Features such as pixel scale and image resolution must be consistent between training and later use.</p>
@@ -240,11 +297,28 @@
         <p><b>Worked prediction:</b> let <code>x = (1, 2)</code>, <code>w = (0.7, −0.2)</code> and <code>b = 0.1</code>. The score is <code>0.7 × 1 − 0.2 × 2 + 0.1 = 0.4</code>, so the output is 1. A negative weight does not make an input unimportant: it makes increasing that input lower the score, holding other inputs fixed.</p>
         <p>For two inputs, changing the weights changes the orientation and location of the line. Changing only the bias shifts the boundary parallel to itself. The model learns these quantities from examples rather than asking a programmer to draw the line by hand.</p>
         <h3 class="material-heading" id="perceptron-update">A concrete learning update</h3>
-        <p>For labels 0 and 1, one version of the perceptron rule is <code>w ← w + η(y − prediction)x</code> and <code>b ← b + η(y − prediction)</code>, where <code>η</code> is the learning rate. The rule changes nothing for a correctly classified example. For an error, it moves the score in the direction of the correct class.</p>
-        <p>Suppose the correct label for the example above is 0 and <code>η = 0.1</code>. The error term is −1. The new weights are <code>(0.6, −0.4)</code> and the new bias is 0. The score for that same example becomes <code>0.6 − 0.8 = −0.2</code>, which gives class 0. This fixes this example; it does not guarantee that all other examples are now correct. Training revisits the dataset, allowing different examples to influence the boundary.</p>
+        <p>The generalized error-correction form makes the learning rule easy to remember. Using the same notation as the lecture slides:</p>
+        <div class="hint"><div class="hint__header">Perceptron learning rule</div><div class="hint__body">
+          <p style="text-align:center;font-size:1.6em"><b>w′ = w + λ(y − ŷ)x</b></p>
+          <p style="text-align:center;font-size:1.25em"><b>b′ = b + λ(y − ŷ)</b></p>
+          <p><code>w</code> is the current weight vector, <code>w′</code> the updated vector, <code>x</code> the current input, <code>y</code> the true label, <code>ŷ</code> the predicted label, and <code>λ &gt; 0</code> the learning rate. Each component follows <code>wᵢ′ = wᵢ + λ(y − ŷ)xᵢ</code>. A correct prediction gives zero error, so no update. A mistake changes the parameters in the direction that supports the target label.</p>
+        </div></div>
+        <p>Here we use labels 0 and 1, so the error term is −1, 0 or +1. The same written formula also works with labels −1 and +1, but an incorrect prediction then gives −2 or +2. Its step size therefore depends on the label convention as well as λ. The familiar signed-label update <code>w′ = w + α y x</code> on a mistake is equivalent when <code>α = 2λ</code>.</p>
+        <p>Suppose the correct label for the example above is 0 and <code>λ = 0.1</code>. The error term is −1. The new weights are <code>(0.6, −0.4)</code> and the new bias is 0. The score for that same example becomes <code>0.6 − 0.8 = −0.2</code>, which gives class 0. This fixes this example; it does not guarantee that all other examples are now correct. Training revisits the dataset, allowing different examples to influence the boundary.</p>
         <svg viewBox="0 0 900 330" role="img" aria-label="A perceptron moves a straight decision boundary when it makes classification errors" style="width:100%;max-width:900px"><g font-family="Roboto, sans-serif"><line x1="100" y1="280" x2="400" y2="280" stroke="#555"/><line x1="100" y1="280" x2="100" y2="35" stroke="#555"/><circle cx="155" cy="225" r="12" fill="#2878a5"/><circle cx="205" cy="195" r="12" fill="#2878a5"/><circle cx="245" cy="235" r="12" fill="#2878a5"/><circle cx="305" cy="100" r="12" fill="#db4b3f"/><circle cx="345" cy="75" r="12" fill="#db4b3f"/><circle cx="365" cy="135" r="12" fill="#db4b3f"/><line x1="145" y1="70" x2="355" y2="255" stroke="#c58a00" stroke-width="5"/><text x="250" y="315" text-anchor="middle" font-size="20">A linear decision boundary</text><path d="M430 155 H540" stroke="#555" stroke-width="3" marker-end="url(#p-arrow)"/><text x="485" y="135" text-anchor="middle" font-size="19">update weights</text><line x1="590" y1="280" x2="860" y2="280" stroke="#555"/><line x1="590" y1="280" x2="590" y2="35" stroke="#555"/><circle cx="645" cy="225" r="12" fill="#2878a5"/><circle cx="695" cy="195" r="12" fill="#2878a5"/><circle cx="735" cy="235" r="12" fill="#2878a5"/><circle cx="795" cy="100" r="12" fill="#db4b3f"/><circle cx="835" cy="75" r="12" fill="#db4b3f"/><circle cx="855" cy="135" r="12" fill="#db4b3f"/><line x1="635" y1="75" x2="825" y2="245" stroke="#7b3fa1" stroke-width="5"/><text x="725" y="315" text-anchor="middle" font-size="20">Errors drive the boundary</text></g></svg>
-        <details><summary>Check your understanding: one more update</summary><p>With <code>w = (0, 0)</code>, <code>b = −0.5</code>, <code>x = (1, 1)</code>, target 1 and <code>η = 0.5</code>, the initial score is −0.5 and prediction is 0. The new weights are (0.5, 0.5), the bias is 0 and the score becomes 1. Notice that the update changes the bias as well as the weights.</p></details>
+        <details><summary>Check your understanding: one more update</summary><p>With <code>w = (0, 0)</code>, <code>b = −0.5</code>, <code>x = (1, 1)</code>, target 1 and <code>λ = 0.5</code>, the initial score is −0.5 and prediction is 0. The new weights are (0.5, 0.5), the bias is 0 and the score becomes 1. Notice that the update changes the bias as well as the weights.</p></details>
         <p><b>Reading:</b> Rosenblatt's <a href="https://doi.org/10.1037/h0042519" target="_blank" rel="noopener">original perceptron paper (1958)</a> supplies historical context. The numerical examples here use a simplified modern notation.</p>
+
+        <details><summary>Worked example with −1/+1 labels, as in the lecture slides</summary>
+          <p>Use <code>ŷ = +1</code> when <code>w·x ≥ 0</code> and <code>−1</code> otherwise. For this illustration only, omit the bias and start at <code>w = (0, 0)</code>. The score is initially zero for every input, so every input receives +1. This is a degenerate classifier, not a meaningful separating line.</p>
+          <ol>
+            <li>For <code>A = (−2.5, −1)</code> with target −1 and λ = 1, <code>y − ŷ = −2</code>. Therefore <code>w′ = (0, 0) + 1(−2)(−2.5, −1) = (5, 2)</code>.</li>
+            <li>For <code>B = (1, −2)</code> with target −1, the new score is <code>5 − 4 = 1</code>, so the prediction is again +1. Update to <code>w″ = (5, 2) + 1(−2)(1, −2) = (3, 6)</code>.</li>
+            <li>For <code>C = (−2, 1)</code> with target −1, the score is <code>−6 + 6 = 0</code>, giving +1. Keeping λ = 1 gives <code>w‴ = (3, 6) + 1(−2)(−2, 1) = (7, 4)</code>.</li>
+          </ol>
+          <p>Alternatively, starting again from <code>(3, 6)</code> for that third update and choosing λ = 0.5 gives <code>(5, 5)</code>. These are two different learning-rate choices, not the same update. For a general affine boundary, include the bias update above. Equivalently, append a constant input 1 and treat the bias as its weight.</p>
+          <p>This is a perceptron error-correction rule, not a universal training formula for every neural network. In a sigmoid output with binary cross-entropy, a single-example gradient update also has an error-times-input form when ŷ denotes a probability. Hidden layers additionally require the derivatives calculated by backpropagation.</p>
+        </details>
 
         <h2 class="material-heading" id="xor">3. Why one neuron cannot solve XOR</h2>
         <p>The perceptron learning rule converges to a separator after finitely many errors when a finite dataset is linearly separable and the usual assumptions of the convergence theorem hold. When the classes overlap or require a nonlinear boundary, there may be no separating weights to find. More training cannot repair a limitation of the model family.</p>
