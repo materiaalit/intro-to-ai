@@ -548,44 +548,23 @@
 	
 	<img src="../img/material/part5/bert_vs_gpt_attention.webp" alt="BERT vs GPT Attention Mechanisms" width="60%">
 	
-	<h2 class="material-heading">Training Nuances</h2>
-	
-	<p>
-	  Unfortunately, if you simply implement a <strong>Transformer</strong> neural network and attempt to train it using 
-	  conventional hyperparameters from other architectures, you are highly likely to encounter failure. 
-	  The optimization process for such models often requires adjustments, and neglecting these details can 
-	  result in significant quality degradation or even unstable training.
-	</p>
-
-	<p>
-	  One critical factor is the <strong>batch size</strong>. Almost all modern Transformer models are trained on 
-	  extremely large batches, sometimes reaching <strong>millions of tokens</strong> in the largest language models. 
-	  Since no modern GPU can handle such large batches in a single step, techniques like 
-	  <a href="https://sebastianraschka.com/blog/2023/llm-grad-accumulation.html#what-is-gradient-accumulation" target="_blank">
-	  gradient accumulation</a> are commonly used to accumulate gradients over micro-batches before performing an update.
-	</p>
-	
-	<p>
-	  Recent research also suggests <a href="https://openreview.net/forum?id=B1Yy1BxCZ" target="_blank">
-	  increasing the batch size dynamically</a> during training. The idea is that during early training stages, 
-	  making more frequent gradient descent steps is crucial, while in later stages, it is more important 
-	  to have an accurate gradient estimation.
-	</p>
-
-	<img src="../img/material/part5/batches_BLEU.webp" alt="batches BLEU" width="60%">
-	
-	<p>
-	  Another crucial factor is the choice of <strong>optimizer</strong> and <strong>learning rate schedule</strong>. 
-	  Training a Transformer with standard <strong>SGD</strong> is highly unlikely to succeed. 
-	  In the original Transformer paper, the <strong>Adam</strong> optimizer was used, and to this day, 
-	  it remains the standard choice.
-	</p>
-	
-	<p>
-	  However, for large batch sizes, Adam sometimes struggles, leading researchers to use alternatives 
-	  such as <a href="https://arxiv.org/abs/1904.00962" target="_blank">LAMB</a>, which normalizes weight updates 
-	  for each layer to stabilize training.
-	</p>
+        <h2 class="material-heading">Training Transformers: building on Week 4</h2>
+        <p>The foundations of mini-batches, epochs, learning rates and optimizers
+          are now introduced in <a href="../week4/#optimization">Week 4</a>.
+          Transformer training uses the same forward, loss, backward and update loop.
+          Architecture, scale and the task determine the appropriate settings.</p>
+        <p>Large models may use <b>gradient accumulation</b>: compute gradients on
+          several smaller micro-batches and combine them before one optimizer update.
+          This can approximate a larger effective batch when one batch will not fit
+          in memory, provided loss scaling and averaging are handled consistently.</p>
+        <p>The original Transformer used Adam with a warm-up and decay schedule.
+          These are design choices rather than a rule that SGD can never train a
+          Transformer. Batch size, initialization, normalization and the learning-rate
+          schedule interact. For the original setup and equations, see
+          <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Vaswani et al. (2017), Section 5</a>.
+          Techniques such as <a href="https://arxiv.org/abs/1904.00962" target="_blank" rel="noopener">LAMB</a>
+          are examples of research on large-batch optimization, not prerequisites for
+          the exercises in this course.</p>
 
 	<h2 class="material-heading">Transformers Beyond Text</h2>
 	
@@ -1047,6 +1026,14 @@ git checkout 3adf61e1</code></pre>
         <svg viewBox="0 0 960 300" role="img" aria-label="Text, image, audio, and sensor data connect through learned representations" style="width:100%;max-width:960px"><g font-family="Roboto, sans-serif" text-anchor="middle"><circle cx="480" cy="145" r="88" fill="#f1e7fb" stroke="#7b3fa1" stroke-width="3"/><text x="480" y="135" font-size="23">shared or aligned</text><text x="480" y="167" font-size="23">representation</text><g font-size="22"><rect x="55" y="45" width="165" height="65" rx="10" fill="#e4f2fb"/><text x="138" y="85">text</text><rect x="55" y="190" width="165" height="65" rx="10" fill="#fff1c9"/><text x="138" y="230">images</text><rect x="740" y="45" width="165" height="65" rx="10" fill="#e7f6e7"/><text x="823" y="85">audio</text><rect x="740" y="190" width="165" height="65" rx="10" fill="#f9e3df"/><text x="823" y="230">video/actions</text></g><path d="M220 78 L395 115 M220 222 L395 175 M740 78 L565 115 M740 222 L565 175" stroke="#555" stroke-width="4"/></g></svg>
 
         <h2 class="material-heading">Generative models</h2>
+        <div class="hint"><div class="hint__header"><i class="fa fa-info-circle hint__icon"></i>Connection to Week 4</div>
+          <div class="hint__body"><p>The encoder–decoder and latent-code introduction
+            now appears in <a href="../week4/#autoencoders">Week 4's autoencoder section</a>.
+            Here we extend that foundation to sampling and generative models.
+            Reconstruction by a standard autoencoder alone does not guarantee that
+            random latent vectors produce realistic new samples. The graded
+            autoencoder exercise below remains in Week 5.</p></div></div>
+
 	
 	<p>
 	  Up until now, you have studied machine learning models that primarily predict certain characteristics of objects, 
@@ -1761,3 +1748,4 @@ git checkout 3adf61e1</code></pre>
 </body>
 
 </html>
+
