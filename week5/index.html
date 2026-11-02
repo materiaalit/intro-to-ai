@@ -192,7 +192,19 @@
         </div>
 
 	        <!-- Teaching content: Episodes 9 to 11 -->
-        <h1 class="material-heading">Attention and self-attention</h1>
+        <h1 class="material-heading" id="week5-overview">Week 5 overview: from neural networks to foundation models</h1>
+<p>Week 4 explained how networks compute, learn, and build representations. Week 5 asks how those foundations support modern language, vision, and generative systems. The organizing thread is not a list of model names: it is how a representation gains context, how a reusable model is trained, and how that model is adapted and used.</p>
+<table class="table"><thead><tr><th>Part of this week</th><th>Central question</th><th>Connection to the next part</th></tr></thead><tbody>
+<tr><td>Attention and self-attention</td><td>Which information should each token or position use?</td><td>Queries, keys, and values explain contextual representations and the attention mechanism inside transformers.</td></tr>
+<tr><td>Transformers, BERT, and GPT</td><td>How do attention, feed-forward layers, residual connections, and training objectives work together?</td><td>Encoder and decoder designs show why a shared family of components supports different tasks.</td></tr>
+<tr><td>Foundation models and adaptation</td><td>How can broad pretraining support many downstream uses?</td><td>Prompting, retrieval, and fine-tuning offer different ways to connect a model to a task; they are not interchangeable.</td></tr>
+<tr><td>Multimodal and generative applications</td><td>How do models represent and generate text, images, and other data?</td><td>Latent representations, autoencoders, and GANs provide complementary perspectives on generation and its limitations.</td></tr>
+<tr><td>Practical exercises</td><td>What do these mechanisms look like when we run and inspect models?</td><td>The existing pipeline, local-model, nanoGPT, and generative activities connect abstractions to observable behaviour.</td></tr>
+</tbody></table>
+<p><b>Core route:</b> understand attention intuitively; distinguish encoder-style and autoregressive decoder-style training; explain pretraining versus adaptation; and interpret generation as learned statistical structure rather than guaranteed knowledge. Detailed architecture variants and implementation studies offer further depth. The practical activities retain their existing instructions and assessment requirements.</p>
+<p><b>Bridge to <a href="../week6/">Week 6</a>:</b> a model can predict or generate without deciding how to act in an environment. Agents add observations, memory, tools, objectives, and an action loop. Reinforcement learning then asks how consequences can improve action over time. This distinction keeps model architecture, learning method, and deployed system separate.</p>
+
+<h1 class="material-heading">Attention and self-attention</h1>
         <p>
           Week 4 introduced embeddings as learned vector representations. A static embedding cannot adapt its meaning
           to the surrounding sequence. Attention solves this problem by letting each position select and combine
