@@ -1151,6 +1151,46 @@
           </li>
         </ol>
 
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Don't open it right away, think about it first!</h1>
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+              <ol>
+                <li>
+                  This is a regression task. The model predicts a continuous value, even if it’s represented with a limited number of decimal places.
+                </li>
+                <li>
+                  This task involves generating new objects based on existing ones.
+                </li>
+                <li>
+                  Depending on the objective, this could be:
+                  <ul>
+                    <li>A regression task: Predicting the coordinates of the bounding box surrounding the cat;</li>
+                    <li>A classification task: Determining whether a cat is present in the image or not.</li>
+                  </ul>
+                </li>
+                <li>
+                  This task can be approached in different ways:
+                  <ul>
+                    <li>By building a physical model of the robot's movement and calculating the optimal sequence of actions;</li>
+                    <li>By using machine learning to create a simulation and train a model to predict optimal movements. The model adjusts its behavior based on performance in the simulation.</li>
+                  </ul>
+                  This paradigm is known as <b>reinforcement learning</b>. It is not supervised learning because generating a vast number of labeled trajectories and outcomes would be computationally expensive and impractical.
+                </li>
+                <li>
+                  This is an <b>unsupervised learning</b> task, specifically clustering or association rule mining.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
 
   
         
@@ -1159,6 +1199,25 @@
         <p>
           Ranking is a task where the target is an ordered finite set (<code>Y = {1, ..., K}</code>). At first glance, ranking could be treated as either classification (with <code>K</code> classes) or regression. Why is this not the case?
         </p>
+
+        <div class="solution" data-target='collapse'>
+          <div class="solution__header">
+            <a data-toggle="collapse" class="solution__toggle">
+              <i class="fa fa-magic solution__icon"></i>
+              <h1 class="solution__heading">Don't open it right away, think about it first!</h1>
+              <i class="fa fa-caret-down solution__arrow"></i>
+            </a>
+          </div>
+          <div class="collapse">
+            <div class="solution__body">
+              <p>
+                For ranking tasks, models typically predict a continuous value, which is then used to sort objects. However, it is not considered regression because the loss functions and metrics are fundamentally different.  
+                In ranking, the exact predicted values are irrelevant—what matters is that more relevant objects receive higher scores.  
+                For instance, the task “predict the 10 most relevant objects” differs significantly from classification. As new objects are introduced, the relevance order can change entirely, invalidating any fixed mapping of objects to positions.
+              </p>
+            </div>
+          </div>
+        </div>
         
 
         <h2 class="material-heading">
