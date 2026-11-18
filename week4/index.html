@@ -203,27 +203,16 @@
         <p>A neural network is a parameterized function built by composing simpler functions. Training changes its parameters so that its outputs become useful for a task. The central questions this week are: <b>what can a network represent, how can its parameters be learned, and how do we know that it has learned something useful beyond the training examples?</b> We will follow one example, recognizing handwritten digits, and use small numerical examples to make the computations visible.</p>
         <p>The word <i>neuron</i> is a mathematical analogy, not a claim that these models reproduce a biological brain. A network's architecture, training objective and data determine what it can learn. Large parameter counts alone do not explain intelligence, understanding or reliable behaviour.</p>
         <div class="hint">
-          <div class="hint__header"><i class="fa fa-clock-o hint__icon"></i>Two lectures, 180 minutes of teaching</div>
+          <div class="hint__header">Week 4 contents</div>
           <div class="hint__body">
-            <p>Each lecture contains approximately 90 minutes of teaching and activities, with the remaining time in the scheduled slot available for a break. The short activities below are for discussion, not additional graded exercises.</p>
-            <div style="overflow-x:auto"><table class="table">
-              <caption>Suggested progression for Episodes 7 and 8</caption>
-              <thead><tr><th scope="col">Lecture</th><th scope="col">Topic and activity</th><th scope="col">Minutes</th></tr></thead>
-              <tbody>
-                <tr><td rowspan="6">Episode 7: how a network computes and learns</td><td>History and the biological-neuron analogy</td><td>15</td></tr>
-                <tr><td>Inputs, weights, bias and one perceptron update</td><td>15</td></tr>
-                <tr><td>XOR and the purpose of hidden layers</td><td>15</td></tr>
-                <tr><td>Forward propagation, shapes and activation functions</td><td>20</td></tr>
-                <tr><td>Loss, gradients and a worked backpropagation example</td><td>20</td></tr>
-                <tr><td>Trace the training loop and discuss misconceptions</td><td>5</td></tr>
-                <tr><td rowspan="5">Episode 8: making learned representations useful</td><td>Retrieval practice, mini-batches and optimization</td><td>15</td></tr>
-                <tr><td>Generalization, data splits and a Playground investigation</td><td>25</td></tr>
-                <tr><td>Images and convolutional networks</td><td>20</td></tr>
-                <tr><td>Embeddings, sequence order and the bridge to attention</td><td>20</td></tr>
-                <tr><td>Autoencoders and synthesis</td><td>10</td></tr>
-              </tbody>
-            </table></div>
-            <p>Core material covers the explanations and worked examples. Expandable answers support self-study. Additional reading and the optional architecture details provide depth without requiring every paragraph to be presented in class.</p>
+            <p><a href="#episode7"><b>Episode 7: from perceptrons to learning</b></a></p>
+            <ul><li><a href="#neural-history">History</a>, <a href="#neural-computation">neural computation</a> and the <a href="#brain-analogy">brain analogy</a></li>
+            <li><a href="#perceptron">The perceptron</a> and its <a href="#perceptron-update">learning rule</a></li>
+            <li><a href="#xor">XOR</a>, <a href="#mlp">hidden layers and forward propagation</a>, and <a href="#backprop">backpropagation</a></li></ul>
+            <p><a href="#episode8"><b>Episode 8: making learned representations useful</b></a></p>
+            <ul><li><a href="#optimization">Optimization</a> and <a href="#generalization">generalization</a></li>
+            <li><a href="#cnn">Convolution</a>, <a href="#embeddings">embeddings</a> and <a href="#sequences">sequences</a></li>
+            <li><a href="#autoencoders">Autoencoders</a></li></ul>
           </div>
         </div>
 
@@ -248,6 +237,11 @@
         </table></div>
         <p><b>Historical caution:</b> it is misleading to date a single “AI winter” to 1960 or attribute a whole research downturn to one book. AI funding and neural-network interest changed at different times and for several reasons. It is also misleading to credit one person or one paper with every part of backpropagation: reverse-mode differentiation, its application to learning and its popularization have distinct histories.</p>
         <p><b>Sources and further reading:</b> <a href="https://doi.org/10.1007/BF02478259" target="_blank" rel="noopener">McCulloch &amp; Pitts (1943)</a>; Hebb (1949), <i>The Organization of Behavior</i>; <a href="https://doi.org/10.1037/h0042519" target="_blank" rel="noopener">Rosenblatt (1958)</a>; <a href="https://doi.org/10.1007/BF01931367" target="_blank" rel="noopener">Linnainmaa (1976)</a>, which cites his 1970 Helsinki thesis; <a href="https://doi.org/10.1073/pnas.79.8.2554" target="_blank" rel="noopener">Hopfield (1982)</a>; <a href="https://doi.org/10.1007/BF00337288" target="_blank" rel="noopener">Kohonen (1982)</a>; <a href="https://doi.org/10.1038/323533a0" target="_blank" rel="noopener">Rumelhart, Hinton &amp; Williams (1986)</a>; <a href="https://www.nobelprize.org/prizes/physics/2024/press-release/" target="_blank" rel="noopener">the 2024 Nobel announcement</a>. The broader narrative is developed in Goodfellow, Bengio and Courville (2016), Chapter 1.</p>
+
+        <h2 class="material-heading" id="neural-computation">Neural computation</h2>
+        <p>A Turing machine describes computation as a sequence of rule-governed steps. Natural nervous systems organize computation differently: many neurons are active <b>in parallel</b>, signalling can be <b>stochastic</b>, and connections can <b>adapt</b> with experience. This is a contrast in how computation is organized; conventional computers can still simulate neural networks.</p>
+        <p>Earlier in the course we contrasted symbolic AI (GOFAI), which often uses explicit symbols and rules, with neural systems that usually learn <b>subsymbolic</b> representations: numerical patterns spread across units. These approaches can coexist. Both run on digital computers, so <i>digital</i> is not the distinction.</p>
+        <p>Some neural networks model probabilities; others, such as the perceptron below, return a deterministic prediction for fixed inputs and weights. Neural networks are sometimes called <b>black boxes</b>: we can inspect their weights and activations, yet it can be hard to explain why a large network made a particular prediction.</p>
 
         <h2 class="material-heading" id="brain-analogy">The brain analogy: copy an organizing idea, not a whole brain</h2>
         <p>The useful analogy is that many connected units can produce complex behaviour, and changing their connections can change that behaviour. A biological neuron is a living cell with dendrites, a cell body and an axon. Signals arriving through synapses affect its activity; many neurons transmit action potentials along the axon and communicate chemically at synapses. The artificial unit keeps only a small part of this picture: inputs, adjustable connection weights, an aggregation and an output function.</p>
@@ -323,9 +317,13 @@
         <h2 class="material-heading" id="xor">3. Why one neuron cannot solve XOR</h2>
         <p>The perceptron learning rule converges to a separator after finitely many errors when a finite dataset is linearly separable and the usual assumptions of the convergence theorem hold. When the classes overlap or require a nonlinear boundary, there may be no separating weights to find. More training cannot repair a limitation of the model family.</p>
         <div style="overflow-x:auto"><table class="table"><caption>XOR is true when exactly one input is true</caption><thead><tr><th scope="col">x₁</th><th scope="col">x₂</th><th scope="col">Target</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></tbody></table></div>
-        <svg viewBox="0 0 520 340" role="img" aria-label="The XOR pattern cannot be separated by one straight line" style="width:70%;max-width:520px"><g font-family="Roboto, sans-serif" font-size="20"><line x1="90" y1="280" x2="450" y2="280" stroke="#555"/><line x1="90" y1="280" x2="90" y2="40" stroke="#555"/><circle cx="160" cy="220" r="18" fill="#2878a5"/><circle cx="380" cy="90" r="18" fill="#2878a5"/><circle cx="160" cy="90" r="18" fill="#e28b32"/><circle cx="380" cy="220" r="18" fill="#e28b32"/><text x="270" y="322" text-anchor="middle">XOR requires more than one boundary</text></g></svg>
-        <p><b>Activity:</b> try drawing one line that separates the diagonal pairs. Then consider two hidden units: <code>h₁ = step(x₁ + x₂ − 0.5)</code> and <code>h₂ = step(x₁ + x₂ − 1.5)</code>. The first detects whether at least one input is 1. The second detects whether both are 1. An output <code>step(h₁ − 2h₂ − 0.5)</code> produces XOR.</p>
-        <details><summary>Show the hidden representation</summary><p>The four inputs become (0, 0), (1, 0), (1, 0) and (1, 1), respectively. The two positive examples now share the hidden representation (1, 0), which the output can separate from the negative examples. We hand-set these weights to demonstrate representational capacity. Training a network to discover useful hidden features is a separate problem.</p></details>
+        <svg viewBox="0 0 380 290" role="img" aria-label="XOR: class 0 at (0,0) and (1,1), class 1 at (0,1) and (1,0). The diagonals cross at (0.5,0.5)." style="width:100%;max-width:380px"><g font-family="sans-serif" font-size="17"><path d="M54 232H328 M64 245V36" stroke="#525967" fill="none"/><path d="M64 232L260 64 M64 64L260 232" stroke="#a4a8af" stroke-dasharray="6 5" fill="none"/><g text-anchor="middle" fill="#fff" font-weight="bold"><circle cx="64" cy="232" r="15" fill="#285a81"/><circle cx="260" cy="64" r="15" fill="#285a81"/><circle cx="64" cy="64" r="15" fill="#a85012"/><circle cx="260" cy="232" r="15" fill="#a85012"/><text x="64" y="238">0</text><text x="260" y="70">0</text><text x="64" y="70">1</text><text x="260" y="238">1</text></g><text x="30" y="42">x₂</text><text x="334" y="238">x₁</text><text x="162" y="275" text-anchor="middle">Numbers inside points are class labels</text></g></svg>
+        <p><b>Why no line works:</b> put both class-1 points on one side of a line. Their midpoint must be on that same side. Put both class-0 points on the other side and their midpoint must be there instead. But both pairs share the midpoint (½, ½). So no single line works in the original input space, regardless of how long we train.</p>
+        <h3 class="material-heading">Two hidden units change the inputs to the classifier</h3>
+        <p>One unit asks <b>“Is at least one input on?”</b> The other asks <b>“Are both inputs on?”</b> XOR says yes to the first and no to the second. In the table, the two class-1 cases now map to the same hidden point, (1, 0). The output unit can separate this point from (0, 0) and (1, 1) with a straight line in the <em>hidden-feature space</em>.</p>
+        <div style="overflow-x:auto"><table class="table"><caption>XOR after the hidden layer</caption><thead><tr><th scope="col">Inputs (x₁, x₂)</th><th scope="col">At least one (h₁)</th><th scope="col">Both (h₂)</th><th scope="col">Output</th></tr></thead><tbody><tr><td>(0, 0)</td><td>0</td><td>0</td><td>0</td></tr><tr><td>(0, 1)</td><td>1</td><td>0</td><td>1</td></tr><tr><td>(1, 0)</td><td>1</td><td>0</td><td>1</td></tr><tr><td>(1, 1)</td><td>1</td><td>1</td><td>0</td></tr></tbody></table></div>
+        <details><summary>Show the weights and thresholds</summary><p>Let <code>step(z)</code> return 1 for <code>z ≥ 0</code> and 0 otherwise. Set <code>h₁ = step(x₁ + x₂ − 0.5)</code> and <code>h₂ = step(x₁ + x₂ − 1.5)</code>. The output is <code>step(h₁ − 2h₂ − 0.5)</code>. Try the input (1, 1): both units turn on, so the output score is 1 − 2 − 0.5 = −1.5 and the output is 0.</p></details>
+        <p>This is the handoff to multilayer networks: a hidden layer transforms the input, then the output layer classifies that new representation. The nonlinear step functions make this possible. If we simply stacked weighted sums and biases without nonlinear activations, the result would still be one weighted sum plus a bias. We chose the XOR features by hand; in a trainable multilayer network, the goal is to <em>learn</em> useful hidden features from examples.</p>
 
         <h2 class="material-heading" id="mlp">4. Multilayer networks and forward propagation</h2>
         <p>A multilayer perceptron (MLP) alternates affine transformations and nonlinear activation functions. In layer <code>ℓ</code>, <code>z⁽ℓ⁾ = W⁽ℓ⁾h⁽ℓ−1⁾ + b⁽ℓ⁾</code> and <code>h⁽ℓ⁾ = φ(z⁽ℓ⁾)</code>, with <code>h⁽0⁾ = x</code>. Each hidden layer provides a representation for the next layer. The output layer converts the final representation into the quantities required by the task.</p>
@@ -405,7 +403,7 @@ evaluate the selected model on the test set</code></pre>
         </ul>
         <p>Regularization does not guarantee improvement, and a bigger model is not automatically overfit. Compare learning curves and repeat promising experiments across seeds. Report the data split, preprocessing and selection procedure along with accuracy. See <a href="https://www.deeplearningbook.org/contents/regularization.html" target="_blank" rel="noopener">Goodfellow, Bengio and Courville, Chapter 7</a> for a more detailed treatment.</p>
 
-        <h3 class="material-heading" id="playground-activity">A 10-minute visual investigation</h3>
+        <h3 class="material-heading" id="playground-activity">A visual investigation</h3>
         <p>Open <a href="https://playground.tensorflow.org/" target="_blank" rel="noopener">TensorFlow Playground</a>. Use only the raw inputs x₁ and x₂ initially; engineered inputs such as x₁² can make a nonlinear pattern separable without a hidden layer. Keep the dataset, noise and split fixed. Compare a single unit, a hidden layer with several units and a deeper network. Predict the boundary before training, then inspect it. This is preparation for the existing graded Playground exercises below.</p>
         <p>Next increase noise and compare training and test loss. Finally change just one of learning rate, activation or regularization. Explain what changed in terms of representation, optimization or generalization. Do not claim a universal “minimum network” for spirals from one run: initialization, learning rate, features and the accuracy criterion affect the answer.</p>
 
