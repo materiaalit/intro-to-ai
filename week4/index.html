@@ -717,7 +717,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 
 # MNIST download is required on the first run. Use a fixed subset for speed.
-X, y = fetch_openml("mnist_784", version=1, return_X_y=True, as_frame=False)
+X, y = fetch_openml("mnist_784", version=1, return_X_y=True, as_frame=False, parser="liac-arff")
 X = X.astype("float32") / 255.0
 X_small, _, y_small, _ = train_test_split(
     X, y, train_size=10000, stratify=y, random_state=1
