@@ -930,7 +930,7 @@ R =  ------------------------------------ = ---------------------------
 	     + P(ham) P(Word = 'million' | ham)
 	     &asymp; 0.5 &times; 0.001629 + 0.5 &times; 0.000320 &asymp; 0.000974</pre>
 	        Thus, we get <code>P(Word &ne; 'million') &asymp; 1-0.000974
-	      = 0.999346</code>.<br><br>
+	      = 0.999026</code>.<br><br>
 	      <li>
 	        <pre>
 	     P(spam | 'million') = P(spam) P('million' | spam) / P('million')
@@ -1179,6 +1179,8 @@ R =  ------------------------------------ = ---------------------------
               <p>
                 From the <code>SpamHam</code> folder, run the local tests with:
                 <pre class="sh_bash code-highlight"><code>python3 -m testrunner</code></pre>
+                To run the program itself:
+                <pre class="sh_bash code-highlight"><code>python3 src/main.py</code></pre>
               </p>
 
 

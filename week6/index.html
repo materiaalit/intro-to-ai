@@ -522,14 +522,18 @@ for episode in tqdm(range(n_episodes)):
         obs = next_obs
     agent.decay_epsilon()
 </pre>
-							and the agent's hyperparameters are exposed right at the top of the script:
+							and the agent's hyperparameters are set in the tutorial's training setup block:
 							<code>learning_rate</code>, <code>n_episodes</code>, <code>start_epsilon</code>,
 							<code>epsilon_decay</code>, <code>final_epsilon</code>.
 							</p>
 
 							<ol>
-								<li> Run the tutorial's full script as-is (it includes built-in plotting of the
-									learning curve — episode reward and episode length over time).
+								<li> Copy the tutorial's code blocks into one file, in the order they appear: the
+									agent class, the training setup with the hyperparameters, the training loop, the
+									plotting code and the test code. Skip the one- and two-line snippets that only
+									illustrate an idea. Install the packages with
+									<code>pip install gymnasium matplotlib tqdm</code> and run the file as-is. It plots
+									three curves over time: episode reward, episode length and training error.
 								<li> Change <code>learning_rate</code> to a much smaller value (e.g.
 									<code>0.001</code>) and a much larger one (e.g. <code>0.5</code>). Rerun with
 									each and compare the learning curves.
@@ -581,23 +585,26 @@ for episode in tqdm(range(n_episodes)):
 								We've talked about agentic frameworks conceptually — now let's build one you can
 								actually run. <code>smolagents</code> is a lightweight, purpose-built-for-
 								teaching agent library from Hugging Face. Getting a first agent running is
-								genuinely four lines:
+								genuinely a few lines:
 							<pre>
-from smolagents import CodeAgent, InferenceClientModel
+from smolagents import CodeAgent, TransformersModel
 
-agent = CodeAgent(tools=[], model=InferenceClientModel(), add_base_tools=True)
+model = TransformersModel(model_id="Qwen/Qwen2.5-Coder-3B-Instruct", max_new_tokens=400)
+agent = CodeAgent(tools=[], model=model, add_base_tools=True, max_steps=5)
 agent.run("Could you give me the 118th number in the Fibonacci sequence?")
 </pre>
 							</p>
 
 							<p>
-								<i>Setup note: this needs a free Hugging Face account and an access token
-								(hf.co/settings/tokens) — no payment required, a free account includes enough
-								inference credit for this exercise.</i>
+								<i>Setup note: the model runs locally on your own computer, so no account or
+								payment is needed. The first run downloads the model (a few GB), and each
+								agent step can take up to a minute on a laptop CPU. Small local models sometimes
+								repeat a step instead of finishing; <code>max_steps=5</code> limits how long that can go
+								on. Notice in the trace whether your agent stops on its own.</i>
 							</p>
 
 							<ol>
-								<li> Install with <code>pip install smolagents</code>, get a free HF token, and
+								<li> Install with <code>pip install "smolagents[toolkit,transformers]" torch</code> and
 									run the code above. Read the printed trace — the agent will show its
 									reasoning (its "Thoughts") and the code it decides to run.
 								<li> Add your own tool — a Python function decorated with <code>@tool</code>
@@ -614,7 +621,7 @@ def celsius_to_fahrenheit(celsius: float) -&gt; float:
     """
     return celsius * 9 / 5 + 32
 
-agent = CodeAgent(tools=[celsius_to_fahrenheit], model=InferenceClientModel())
+agent = CodeAgent(tools=[celsius_to_fahrenheit], model=model, max_steps=5)
 agent.run("What is 24 degrees Celsius in Fahrenheit?")
 </pre>
 								<li> Ask the agent a question that requires it to use your tool, and one that
@@ -827,7 +834,7 @@ agent.run("What is 24 degrees Celsius in Fahrenheit?")
 							<ol>
 								<li> AI-generated art is currently a hot topic
 									with systems like DALL-E, Imagen, and Stable
-									Diffusion being used to create amazign
+									Diffusion being used to create amazing
 									artwork. Who (or what) should be entitled to
 									intellectual property rights in these cases?
 								<li> The real-world impact of AI is growing all
