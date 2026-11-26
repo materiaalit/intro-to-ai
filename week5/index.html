@@ -244,10 +244,7 @@
 	</ul>
 	
 	<p>
-	  These issues make it challenging to apply RNNs to truly long sequences: even if you wait for 
-	  training to finish, your model, by design, will inevitably lose information from the beginning of the text. 
-	  Ideally, we want a way to "read" a sequence such that at any moment, the model can refer to 
-	  any previous point in constant time, without losing information.
+	  A recurrent network can use earlier words, but evidence from a distant word must pass through the intervening state updates. With causal self-attention, the current position can draw directly on earlier positions. Direct access does not mean that all information is preserved or that processing the whole sequence costs constant time.
 	</p>
 	
 	<p>
@@ -326,8 +323,7 @@
 	</p>
 	
 	<p>
-	  where <b>C</b> is a normalization constant. In the original paper, the normalization constant was chosen as 
-	  the square root of the key and value dimension <b>√d<sub>k</sub></b>.
+	  where <b>C = 1/√d<sub>k</sub></b> and d<sub>k</sub> is the number of coordinates in a key. Divide each query–key dot product by √d<sub>k</sub> before applying softmax. For example, if the score is 16 and the key has 64 coordinates, the scaled score is 16/8 = 2.
 	</p>
 	
 	<p>
@@ -344,6 +340,9 @@
 	  stored as row vectors, and softmax is applied row-wise.
 	</p>
 
+        <h3>Attention to “toast” or a prediction of “butter”?</h3>
+        <p>Read “She spread the warm toast with …”. At the position of <em>with</em>, suppose one attention head assigns 75% to <em>toast</em>. This is an illustrative number: the head takes 0.75 times the value vector at <em>toast</em> and adds the weighted contributions from the other permitted positions. The result is a vector, not a predicted word.</p>
+        <p>Only at the output does GPT assign probabilities to possible <em>next</em> tokens such as <em>butter</em> or <em>jam</em>. Try the prompt in <a href="https://poloclub.github.io/transformer-explainer/">Transformer Explainer</a>: compare the tokens listed in an attention row with the candidates at the output. One list is drawn from the input; the other is drawn from the vocabulary.</p>
 	<h2 class="material-heading">Attention Layer in the Decoder</h2>
 	
 	<p>
@@ -363,7 +362,7 @@
 	
 	<p>
 	  To prevent this issue, an <b>autoregressive mask</b> is applied to attention during training, 
-	  manually setting weights for future tokens to <code>-∞</code> before the softmax operation, 
+	  setting attention scores for future tokens to <code>-∞</code> before the softmax operation, 
 	  ensuring their probabilities become zero after softmax. As shown in the image below, this 
 	  mask has a lower triangular shape.
 	</p>
@@ -1011,6 +1010,9 @@ git checkout 3adf61e1</code></pre>
 
         <svg viewBox="0 0 980 285" role="img" aria-label="A broadly pretrained foundation model can be adapted to several downstream uses" style="width:100%;max-width:980px"><defs><marker id="fm-arrow" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#555"/></marker></defs><g font-family="Roboto, sans-serif" text-anchor="middle"><rect x="35" y="85" width="190" height="105" rx="12" fill="#e4f2fb"/><text x="130" y="125" font-size="21">broad data</text><text x="130" y="155" font-size="21">general objective</text><path d="M225 137 H330" stroke="#555" stroke-width="3" marker-end="url(#fm-arrow)"/><rect x="340" y="60" width="250" height="155" rx="16" fill="#f1e7fb" stroke="#7b3fa1" stroke-width="3"/><text x="465" y="125" font-size="25">foundation model</text><text x="465" y="160" font-size="19">shared representations</text><path d="M590 100 H705 M590 137 H705 M590 174 H705" stroke="#555" stroke-width="3" marker-end="url(#fm-arrow)"/><rect x="715" y="35" width="220" height="55" rx="9" fill="#e7f6e7"/><rect x="715" y="110" width="220" height="55" rx="9" fill="#fff1c9"/><rect x="715" y="185" width="220" height="55" rx="9" fill="#e4f2fb"/><text x="825" y="70" font-size="20">prompt or retrieve</text><text x="825" y="145" font-size="20">fine-tune or adapt</text><text x="825" y="220" font-size="20">embed or generate</text><text x="465" y="265" font-size="19">One pretrained model supports many downstream systems</text></g></svg>
 
+        <h3>A new example or a new task?</h3>
+        <p>A new handwritten 7 asks the MNIST classifier to do its familiar task on a new example. Now give one instruction-following language model a single email: “I missed the exam. Can I take it in January?” Ask it to summarise the email, translate it into Finnish, and classify its topic. This time the example stays fixed and the <em>task</em> changes. The same pretrained weights can support all three. This breadth of reuse is what the word <em>foundation</em> highlights.</p>
+        <p>Notice the limit: translating the question does not establish whether a January resit is allowed. Answering that question requires the current course policy. That is a reason to retrieve evidence, rather than merely change the instruction.</p>
         <h2 class="material-heading">Transfer and adaptation</h2>
         <table class="table"><tr><th>Method</th><th>What changes</th><th>Main trade-off</th></tr>
           <tr><td>Prompting</td><td>The input instructions and examples</td><td>Fast, but sensitive to wording and model capability</td></tr>
@@ -1641,6 +1643,17 @@ git checkout 3adf61e1</code></pre>
 
         <div class="hint"><div class="hint__header"><i class="fa fa-info-circle hint__icon"></i>Checkpoint</div>
         <div class="hint__body"><ul><li>What makes a pretrained model a foundation model rather than merely a large model?</li><li>When would prompting, retrieval or fine-tuning be the appropriate adaptation?</li><li>How should a multimodal model be tested for grounding?</li></ul></div></div>
+        <h2 class="material-heading" id="guided-reading">Further reading and visual explanations</h2>
+        <p>The demo is a visual companion to the lecture. The papers below are optional; the questions indicate what to look for.</p>
+        <ul>
+          <li><a href="https://poloclub.github.io/transformer-explainer/">Transformer Explainer</a>. Start here: follow one input token through attention, then find the separate distribution over possible next tokens.</li>
+          <li><a href="https://arxiv.org/abs/1706.03762">Vaswani et al. (2017), Attention Is All You Need</a>. In §3.2.1, identify the scaling, softmax and weighted sum in one head.</li>
+          <li><a href="https://arxiv.org/abs/2108.07258">Bommasani et al. (2021), On the Opportunities and Risks of Foundation Models</a>. Read the introduction: why can different applications inherit the same strengths and weaknesses?</li>
+          <li><a href="https://arxiv.org/abs/2005.14165">Brown et al. (2020), Language Models are Few-Shot Learners</a>. Compare the zero-shot and few-shot setups: what changes in the prompt, and what stays fixed?</li>
+          <li><a href="https://proceedings.mlr.press/v139/radford21a.html">Radford et al. (2021), Learning Transferable Visual Models From Natural Language Supervision</a>. Figure 1: how can a model select a matching caption without writing one?</li>
+          <li><a href="https://arxiv.org/abs/1406.2661">Goodfellow et al. (2014), the original GAN paper</a>. Read the abstract: what does each network learn from the other?</li>
+        </ul>
+
 
 
       </div>
