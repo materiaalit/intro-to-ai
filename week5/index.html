@@ -195,18 +195,117 @@
         <h1 class="material-heading" id="week5-overview">Week 5 overview: from neural networks to foundation models</h1>
 <p>Week 4 explained how networks compute, learn, and build representations. Week 5 asks how those foundations support modern language, vision, and generative systems. The organizing thread is not a list of model names: it is how a representation gains context, how a reusable model is trained, and how that model is adapted and used.</p>
 <table class="table"><thead><tr><th>Part of this week</th><th>Central question</th><th>Connection to the next part</th></tr></thead><tbody>
+<tr><td><a href="#image-architectures">CNNs, autoencoders and GANs</a></td><td>What changes when we name a digit, draw it again, or invent a new one?</td><td>The training target tells us what the network must learn.</td></tr>
 <tr><td>Attention and self-attention</td><td>Which information should each token or position use?</td><td>Queries, keys, and values explain contextual representations and the attention mechanism inside transformers.</td></tr>
 <tr><td>Transformers, BERT, and GPT</td><td>How do attention, feed-forward layers, residual connections, and training objectives work together?</td><td>Encoder and decoder designs show why a shared family of components supports different tasks.</td></tr>
 <tr><td>Foundation models and adaptation</td><td>How can broad pretraining support many downstream uses?</td><td>Prompting, retrieval, and fine-tuning offer different ways to connect a model to a task; they are not interchangeable.</td></tr>
 <tr><td>Multimodal and generative applications</td><td>How do models represent and generate text, images, and other data?</td><td>Latent representations, autoencoders, and GANs provide complementary perspectives on generation and its limitations.</td></tr>
 <tr><td>Practical exercises</td><td>What do these mechanisms look like when we run and inspect models?</td><td>The existing pipeline, local-model, nanoGPT, and generative activities connect abstractions to observable behaviour.</td></tr>
 </tbody></table>
+<p><b>Reading with the slides:</b> In lecture 1, follow the same digit through classification, reconstruction and generation. In lecture 2, follow the toast prompt through <a href="#attention-and-self-attention">attention</a>, next-token prediction and the GPT demo, then ask how the same trained model can serve different tasks. The BERT comparison and architecture details remain here for reference.</p>
 <p><b>Core route:</b> understand attention intuitively; distinguish encoder-style and autoregressive decoder-style training; explain pretraining versus adaptation; and interpret generation as learned statistical structure rather than guaranteed knowledge. Detailed architecture variants and implementation studies offer further depth. The practical activities retain their existing instructions and assessment requirements.</p>
 <p><b>Bridge to <a href="../week6/">Week 6</a>:</b> a model can predict or generate without deciding how to act in an environment. Agents add observations, memory, tools, objectives, and an action loop. Reinforcement learning then asks how consequences can improve action over time. This distinction keeps model architecture, learning method, and deployed system separate.</p>
 
-<p><b>Terminology from Week 4:</b> <a href="../week4/#model-categories">representations, objectives and architectures describe different aspects of a model</a>. Word2vec learns word vectors; sequence-to-sequence specifies an input/output framework; an autoencoder learns reconstruction; and a Transformer supplies attention-based architecture. A Transformer can perform sequence-to-sequence translation without being an autoencoder. Its encoder usually retains one contextual vector per input position. GANs later in this week introduce a different, adversarial training framework.</p>
+<p><b>Terminology from Week 4:</b> <a href="../week4/#model-categories">representations, objectives and architectures describe different aspects of a model</a>. Word2vec learns word vectors; sequence-to-sequence specifies an input/output framework; an autoencoder learns reconstruction; and a Transformer supplies attention-based architecture. A Transformer can perform sequence-to-sequence translation without being an autoencoder. Its encoder usually retains one contextual vector per input position. The first lecture illustrates adversarial training with handwritten digits.</p>
 
-<h1 class="material-heading">Attention and self-attention</h1>
+<h1 class="material-heading" id="image-architectures">Lecture 1: recognising, reconstructing and generating digits</h1>
+<p>Start with a handwritten 7. To <strong>recognise</strong> it, a CNN classifier can learn to use the top bar and diagonal stroke and ignore small variations in penmanship. To <strong>reconstruct</strong> it, an autoencoder must keep enough information to draw <em>this writer’s</em> 7 again. Its encoder turns the image into a code; its decoder turns that code back into pixels. We can use convolutional layers in either network. What differs is the target: a digit label for classification, the original pixels for reconstruction.</p>
+<h2 class="material-heading" id="gans">How can a GAN draw a new digit without a target drawing?</h2>
+<p>Imagine training on a collection of handwritten sevens. We want a new plausible 7, but there is no single correct arrangement of pixels to copy. A <strong>generative adversarial network (GAN)</strong> couples two networks. The <strong>generator</strong> turns random numbers into a candidate drawing. The <strong>discriminator</strong> sees both genuine training images and generated drawings and learns to tell which is which.</p>
+<img src="../img/material/part5/gan-training-basics.svg" alt="Random input enters the generator. Generated and real examples enter the discriminator, whose feedback trains the generator." width="70%">
+<ol><li><strong>Update the discriminator.</strong> Give it a real 7 and a generated drawing. We know their origins, so we can compare its scores with the real/fake labels and adjust its weights. Leave the generator fixed.</li>
+<li><strong>Update the generator.</strong> Make another drawing and score it with the discriminator. This time, hold the discriminator’s weights fixed. Backpropagate through its score to change the generator’s weights so that its drawings are more likely to be judged real.</li></ol>
+<p>Repeat these steps. Unlike the autoencoder, the generator never has to reproduce a particular person’s 7. After training, we can keep the generator and give it fresh random inputs to make new drawings. Inspect several: one convincing 7 is not enough if every input produces the same handwriting.</p>
+<p><a href="https://arxiv.org/abs/1406.2661">Goodfellow et al. (2014), the original GAN paper</a>. A GAN specifies how two networks train together; it does not prescribe a particular arrangement of layers.</p>
+<details><summary>Optional depth: GAN training, variants and applications</summary>
+<h2 class="material-heading">Fundamentals of GAN Training</h2>
+	
+	<p>
+	  Generative Adversarial Networks (GANs) are implicit generative models. 
+	  This means they do not explicitly estimate the probability density of the data 
+	  but instead learn to sample from the data distribution.
+	</p>
+	
+	
+	
+	<p>
+	  A classical analogy for how GANs learn is the scenario of a counterfeiter and a policeman. 
+	  The counterfeiter's goal is to create counterfeit banknotes that the policeman cannot distinguish from real ones. 
+	  The policeman's task is to learn how to differentiate the counterfeit banknotes from the authentic ones.
+	</p>
+	
+	<p>
+	  To understand how GANs train, imagine the following thought experiment:
+	  Suppose the counterfeiter and the policeman are friends who decide to improve their skills together. 
+	  The counterfeiter creates several fake banknotes and shows them to the policeman. 
+	  The policeman then evaluates them and informs the counterfeiter which ones he thinks are fake and which ones appear real. 
+	  The counterfeiter remembers this feedback and improves the fake banknotes accordingly for the next round. 
+	  At the same time, the policeman also learns: he keeps track of the fake notes he has seen to refine his ability to distinguish real from fake.
+	</p>
+	
+	<p>
+	  Imagine that this process repeats multiple times. 
+	  What happens as a result? Each time, the counterfeiter produces banknotes that become harder and harder to differentiate from real ones. 
+	  Similarly, the policeman's ability to detect counterfeit money improves continuously.
+	</p>
+	
+	<p>
+	  The key question for understanding GANs: 
+	  At what point can we say that the counterfeiter is truly skilled at forging banknotes?
+	</p>
+	
+	<p>
+	  The answer: When the counterfeiter is able to fool even a highly trained policeman. 
+	  At the beginning of the experiment, the policeman may not be very skilled at detecting counterfeits, 
+	  so low-quality fake banknotes might deceive him. 
+	  However, our ultimate goal is to develop a counterfeiter who can produce banknotes 
+	  that are indistinguishable from the original ones, even for a professional expert.
+	</p>
+	      
+	<p>
+	  While GANs are powerful, they come with several challenges:
+	</p>
+	
+	<ul>
+	  <li><strong>Mode Collapse:</strong> The generator may learn to produce limited variations of outputs instead of generating diverse samples.</li>
+	  <li><strong>Training Instability:</strong> The generator and discriminator must remain balanced—if one improves too quickly, the other may fail to learn.</li>
+	  <li><strong>Vanishing Gradients:</strong> If the discriminator becomes too good, the generator may stop receiving meaningful feedback for improvement.</li>
+	</ul>
+	
+	<p>
+	  To address these challenges, researchers have introduced various modifications to the standard GAN framework:
+	</p>
+	
+	<ul>
+	  <li><strong>Wasserstein GAN (WGAN):</strong> Improves stability by changing the loss function, making training more efficient.</li>
+	  <li><strong>Conditional GAN (cGAN):</strong> Allows control over the generated output by conditioning on additional input (e.g., class labels).</li>
+	  <li><strong>StyleGAN:</strong> Used for high-quality image generation, particularly in human face synthesis.</li>
+	  <li><strong>CycleGAN:</strong> Enables image-to-image translation without paired training data (e.g., converting horse images to zebra images).</li>
+	</ul>
+	
+	<h3> Applications of GANs</h3>
+	
+	<p>
+	  GANs have numerous real-world applications, including:
+	</p>
+	
+	<ul>
+	  <li><strong>Image Synthesis:</strong> Generating realistic human faces, artwork, and objects.</li>
+	  <li><strong>Data Augmentation:</strong> Enhancing datasets for training machine learning models.</li>
+	  <li><strong>Style Transfer:</strong> Applying artistic styles to photos or modifying image features.</li>
+	  <li><strong>Super-Resolution:</strong> Enhancing low-resolution images to improve detail and clarity.</li>
+	  <li><strong>Deepfake Technology:</strong> Replacing faces in videos with AI-generated counterparts.</li>
+	</ul>
+	
+	<p>
+	  GANs demonstrated that an adversarial objective can produce highly realistic synthetic data and remain important
+	  in areas such as image translation and controllable synthesis. Their unstable training and limited mode coverage
+	  also help explain why other generative approaches are often preferred for general-purpose generation today.
+	</p>
+</details>
+<p><strong>Lecture 2 changes the task.</strong> To generate text in GPT we do not need a discriminator to judge each proposed word: the training text already supplies the next token. The question now is which earlier tokens should help predict it. That is where attention enters.</p>
+
+<h1 class="material-heading" id="attention-and-self-attention">Attention and self-attention</h1>
         <p>
           Week 4 introduced embeddings as learned vector representations. A static embedding cannot adapt its meaning
           to the surrounding sequence. Attention solves this problem by letting each position select and combine
@@ -1399,117 +1498,8 @@ git checkout 3adf61e1</code></pre>
 	<p>
 	  Modern generative models have achieved remarkable quality and are now being actively used 
 	  in real-world applications, as we have described throughout this section.
-        <h2 class="material-heading" id="gans">Generative adversarial networks</h2>
-<p><b>Original source:</b> <a href="https://arxiv.org/abs/1406.2661">Goodfellow et al. (2014), Generative Adversarial Networks</a>. A GAN specifies competing generator and discriminator objectives. It does not prescribe one particular neural architecture.</p>
-	<h2 class="material-heading">Introduction</h2>
-	
-	<p>
-	  Generative Adversarial Networks (GANs) are a broad class of generative models 
-	  that are trained alongside another network that attempts to distinguish 
-	  generated objects from real ones. 
-	</p>
-	
-	<p>
-	  In this section, we will cover the fundamentals of GANs, provide an intuitive 
-	  explanation of their working principles, and explore numerous techniques 
-	  and modifications that enhance the original approach in the most successful models.
-	</p>
-	
-	<p>
-	  Additionally, we will showcase various practical applications where 
-	  Generative Adversarial Networks have been effectively utilized.
-	</p>
-
-	<p>
-	  The simplest and most effective design of generative models that can only sample 
-	  but not estimate density is the transformation of one set of random variables into another.
-	</p>
-
-	<h2 class="material-heading">Fundamentals of GAN Training</h2>
-	
-	<p>
-	  Generative Adversarial Networks (GANs) are implicit generative models. 
-	  This means they do not explicitly estimate the probability density of the data 
-	  but instead learn to sample from the data distribution.
-	</p>
-	
-	<img src="../img/material/part5/gan-training-basics.svg" alt="GAN Training Fundamentals" width="70%">
-	
-	<p>
-	  A classical analogy for how GANs learn is the scenario of a counterfeiter and a policeman. 
-	  The counterfeiter's goal is to create counterfeit banknotes that the policeman cannot distinguish from real ones. 
-	  The policeman's task is to learn how to differentiate the counterfeit banknotes from the authentic ones.
-	</p>
-	
-	<p>
-	  To understand how GANs train, imagine the following thought experiment:
-	  Suppose the counterfeiter and the policeman are friends who decide to improve their skills together. 
-	  The counterfeiter creates several fake banknotes and shows them to the policeman. 
-	  The policeman then evaluates them and informs the counterfeiter which ones he thinks are fake and which ones appear real. 
-	  The counterfeiter remembers this feedback and improves the fake banknotes accordingly for the next round. 
-	  At the same time, the policeman also learns: he keeps track of the fake notes he has seen to refine his ability to distinguish real from fake.
-	</p>
-	
-	<p>
-	  Imagine that this process repeats multiple times. 
-	  What happens as a result? Each time, the counterfeiter produces banknotes that become harder and harder to differentiate from real ones. 
-	  Similarly, the policeman's ability to detect counterfeit money improves continuously.
-	</p>
-	
-	<p>
-	  The key question for understanding GANs: 
-	  At what point can we say that the counterfeiter is truly skilled at forging banknotes?
-	</p>
-	
-	<p>
-	  The answer: When the counterfeiter is able to fool even a highly trained policeman. 
-	  At the beginning of the experiment, the policeman may not be very skilled at detecting counterfeits, 
-	  so low-quality fake banknotes might deceive him. 
-	  However, our ultimate goal is to develop a counterfeiter who can produce banknotes 
-	  that are indistinguishable from the original ones, even for a professional expert.
-	</p>
-	      
-	<p>
-	  While GANs are powerful, they come with several challenges:
-	</p>
-	
-	<ul>
-	  <li><strong>Mode Collapse:</strong> The generator may learn to produce limited variations of outputs instead of generating diverse samples.</li>
-	  <li><strong>Training Instability:</strong> The generator and discriminator must remain balanced—if one improves too quickly, the other may fail to learn.</li>
-	  <li><strong>Vanishing Gradients:</strong> If the discriminator becomes too good, the generator may stop receiving meaningful feedback for improvement.</li>
-	</ul>
-	
-	<p>
-	  To address these challenges, researchers have introduced various modifications to the standard GAN framework:
-	</p>
-	
-	<ul>
-	  <li><strong>Wasserstein GAN (WGAN):</strong> Improves stability by changing the loss function, making training more efficient.</li>
-	  <li><strong>Conditional GAN (cGAN):</strong> Allows control over the generated output by conditioning on additional input (e.g., class labels).</li>
-	  <li><strong>StyleGAN:</strong> Used for high-quality image generation, particularly in human face synthesis.</li>
-	  <li><strong>CycleGAN:</strong> Enables image-to-image translation without paired training data (e.g., converting horse images to zebra images).</li>
-	</ul>
-	
-	<h3> Applications of GANs</h3>
-	
-	<p>
-	  GANs have numerous real-world applications, including:
-	</p>
-	
-	<ul>
-	  <li><strong>Image Synthesis:</strong> Generating realistic human faces, artwork, and objects.</li>
-	  <li><strong>Data Augmentation:</strong> Enhancing datasets for training machine learning models.</li>
-	  <li><strong>Style Transfer:</strong> Applying artistic styles to photos or modifying image features.</li>
-	  <li><strong>Super-Resolution:</strong> Enhancing low-resolution images to improve detail and clarity.</li>
-	  <li><strong>Deepfake Technology:</strong> Replacing faces in videos with AI-generated counterparts.</li>
-	</ul>
-	
-	<p>
-	  GANs demonstrated that an adversarial objective can produce highly realistic synthetic data and remain important
-	  in areas such as image translation and controllable synthesis. Their unstable training and limited mode coverage
-	  also help explain why other generative approaches are often preferred for general-purpose generation today.
-	</p>
-
+        </p>
+        <p>To revisit how the two networks learn before trying the image exercise, see <a href="#gans">the handwritten-digit GAN example</a>.</p>
 
 <!-- <h2> Exercise on Stable diffusion</h2> -->
 <!-- 
