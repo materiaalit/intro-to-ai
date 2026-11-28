@@ -113,7 +113,7 @@
     <div class="content-wrapper">
       <div class="container material" id="material">
         <h1>
-          Ethics and Trustworthy AI
+          AI Safety and Ethics
         </h1>
 
         <div class="hint">
@@ -122,7 +122,7 @@
           </div>
           <div class="hint__body">
             <ul>
-              <li><b>Episode 13</b> (We 9/12, 2:15&ndash;4:00 PM): Alignment (Sergey)</li>
+              <li><b>Episode 13</b> (We 9/12, 2:15&ndash;4:00 PM): AI Safety (Sergei)</li>
               <li><b>Episode 14</b> (Fr 11/12, 10:15 AM&ndash;12:00 PM): Ethics and trustworthy AI (Indrė)</li>
             </ul>
           </div>
@@ -166,6 +166,19 @@
               </tr>
               <tr>
                 <td>
+                  AI safety
+                </td>
+                <td>
+                  <ul>
+                    <li>can explain the alignment problem, including specification gaming, goal misgeneralisation and why a capable system might resist correction
+                    <li>can explain why we cannot yet fully understand or reliably test advanced AI systems
+                    <li>can describe the three families of AI risk (misalignment, misuse, systemic) with examples
+                    <li>can outline the main approaches to AI safety and ways to contribute to the field
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>
                   Ethics and trustworthy AI
                 </td>
                 <td>
@@ -183,6 +196,673 @@
           </div>
         </div>
 
+        <h1 class="material-heading" id="ai-safety">AI Safety</h1>
+
+        <p>
+          <b>AI safety</b> is the field that tries to make sure AI systems do
+          what we intend and do not cause serious harm, including harm at the
+          scale of whole societies. It overlaps with the ethics of AI (the next
+          chapter), but its focus is different: it asks what happens as AI
+          systems become more capable and more autonomous, and whether we will
+          stay able to understand, test and control them. The field has three
+          closely related parts:
+        </p>
+        <ul>
+          <li><b>Alignment:</b> making a system's goals and behaviour match what its designers and users actually want.</li>
+          <li><b>Misuse prevention and security:</b> stopping people from using capable systems to cause harm.</li>
+          <li><b>Governance:</b> the rules, institutions and agreements that decide how AI is built and deployed.</li>
+        </ul>
+
+        <h2 class="material-heading" id="safety-history">An old worry</h2>
+
+        <p>
+          The concern is almost as old as computing. In a 1951 lecture, Alan
+          Turing said that once machines began to think, they would soon "outstrip
+          our feeble powers", and that "at some stage therefore we should have
+          to expect the machines to take control". In 1960, Norbert Wiener, the
+          founder of cybernetics, put the core of the alignment problem in one
+          sentence:
+        </p>
+
+        <blockquote>
+          "If we use, to achieve our purposes, a mechanical agency with whose
+          operation we cannot efficiently interfere … then we had better be quite
+          sure that the purpose put into the machine is the purpose which we
+          really desire."
+          <br>&mdash; Norbert Wiener, "Some Moral and Technical Consequences of Automation", <i>Science</i> (1960)
+        </blockquote>
+
+        <p>
+          In 1965, the statistician I. J. Good, who had worked with Turing,
+          described an "intelligence explosion": a machine smarter than humans
+          could design even better machines, so "the first ultraintelligent
+          machine is the last invention that man need ever make, provided that
+          the machine is docile enough to tell us how to keep it under
+          control". For decades these ideas stayed speculative. Nick Bostrom's
+          book <i>Superintelligence</i> (2014) and Stuart Russell's
+          <i>Human Compatible</i> (2019) developed them into arguments, and the
+          paper <a href="https://arxiv.org/abs/1606.06565">"Concrete Problems in AI Safety"</a>
+          (Amodei et al., 2016) turned them into research problems for
+          machine learning. With the rapid progress of language models since
+          2020, the questions stopped being hypothetical: in 2025, about 100
+          experts led by Yoshua Bengio published the first full
+          <a href="https://arxiv.org/abs/2501.17805">International AI Safety Report</a>.
+        </p>
+
+        <h2 class="material-heading" id="safety-capabilities">Why capabilities keep growing</h2>
+
+        <p>
+          Safety questions become urgent because capabilities have grown so
+          quickly: from GPT-2, which in 2019 could barely write a coherent
+          paragraph, to agents that in 2026 work on their own for hours. There
+          was no single breakthrough. Three ingredients grow together:
+          <b>compute</b> (training compute for frontier models has grown about
+          5× per year since 2020, according to <a href="https://epoch.ai/trends">Epoch AI</a>),
+          <b>data</b> (first the public internet, now also problems with
+          checkable answers, such as maths and code, from which models can
+          learn by trial and error), and <b>algorithms</b> (for example
+          "reasoning" models that think step by step before answering).
+        </p>
+
+        <p>
+          The reason companies invest billions in this growth is that it is
+          predictable. <b>Scaling laws</b> show that a language model's loss
+          falls smoothly as a power law of model size, data and compute
+          (<a href="https://arxiv.org/abs/2001.08361">Kaplan et al., 2020</a>;
+          <a href="https://arxiv.org/abs/2203.15556">Hoffmann et al., 2022</a>).
+          Lower loss does not tell us <i>which</i> abilities a model will have,
+          so researchers also measure abilities directly. The organisation METR
+          measures a model's <b>time horizon</b>: the length of software tasks,
+          counted in how long they take a human expert, that the model completes
+          with 50% success. This horizon has doubled roughly every seven months
+          since 2019 (<a href="https://arxiv.org/abs/2503.14499">Kwa et al., 2025</a>),
+          and by 2026 the best models had reached about 16 hours, the limit that
+          METR's task suite can reliably measure. These are well-defined
+          software tasks; on open-ended work that needs judgment, agents are
+          still much less reliable.
+        </p>
+
+        <p>
+          Longer horizons mean <b>agents</b> (see <a href="../week6/">Week 6</a>):
+          systems that use tools such as browsers, terminals and other
+          programs, and act over many steps with few human check-ins. For
+          safety, this is the key shift. A chatbot's mistake is a wrong
+          sentence; an agent's mistake is a wrong action in the world. Agents
+          now also reach frontier research: in 2026 OpenAI claimed that
+          about ten thousand agents proved a version of the Navier–Stokes Millennium
+          Prize Problem, a claim that mathematicians were still checking.
+        </p>
+
+        <p>
+          One feedback loop could make progress much faster. AI systems are now
+          used to build the next AI systems: they write code, run experiments and
+          analyse results. This is the modern form of Good's intelligence
+          explosion, called <b>recursive self-improvement</b> or <b>automated AI
+          R&amp;D</b>. Anthropic estimated that by August 2026, Claude was
+          "leading" (doing most of the work, under human supervision) about a
+          quarter of its measured AI research tasks, up from under 1% in
+          February
+          (<a href="https://www.anthropic.com/institute/measuring-pace-of-ai-development">Anthropic, 2026</a>).
+          A feedback loop alone does not guarantee an explosion: it depends on
+          how much each round improves the next model, what it costs and how
+          long it takes, and models still lack "research taste", the skill of
+          choosing good questions. For safety it matters twice: progress could
+          outrun our ability to check it, and more of the checking itself would
+          be done by AI.
+        </p>
+
+        <p>
+          Forecasts of where this leads differ widely. Many forecasters expect
+          AI that matches top experts at most work tasks within years rather
+          than decades, while others expect progress to slow as data and
+          compute become harder to scale. For safety, the point is not the exact
+          date, but that we may have little time to solve the problems below.
+        </p>
+
+        <h2 class="material-heading" id="safety-alignment">The alignment problem</h2>
+
+        <p>
+          We never program a modern AI system's goals directly. We define an
+          objective that we can measure, such as a reward or a loss, and
+          optimise the system against it. Alignment can fail at two points:
+        </p>
+
+        <svg viewBox="0 0 960 170" role="img" aria-label="Intended goal is turned into a specified objective, which training turns into a learned goal; outer alignment can fail at the first step and inner alignment at the second" style="width:100%;max-width:960px">
+          <g font-family="Roboto, sans-serif" text-anchor="middle">
+            <rect x="20" y="40" width="240" height="70" rx="10" fill="#eaf2fc" stroke="#1a5fb4"/>
+            <text x="140" y="70" font-size="18" font-weight="bold">What we want</text>
+            <text x="140" y="94" font-size="14">e.g. "win the race"</text>
+            <rect x="360" y="40" width="240" height="70" rx="10" fill="#eaf2fc" stroke="#1a5fb4"/>
+            <text x="480" y="70" font-size="18" font-weight="bold">What we measure</text>
+            <text x="480" y="94" font-size="14">e.g. "points scored"</text>
+            <rect x="700" y="40" width="240" height="70" rx="10" fill="#eaf2fc" stroke="#1a5fb4"/>
+            <text x="820" y="70" font-size="18" font-weight="bold">What the model learns</text>
+            <text x="820" y="94" font-size="14">its own internal goal</text>
+            <path d="M262 75 H352" stroke="#b4552f" stroke-width="3" marker-end="url(#arr7)"/>
+            <path d="M602 75 H692" stroke="#b4552f" stroke-width="3" marker-end="url(#arr7)"/>
+            <text x="310" y="140" font-size="15" fill="#b4552f">outer alignment</text>
+            <text x="650" y="140" font-size="15" fill="#b4552f">inner alignment</text>
+            <defs><marker id="arr7" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#b4552f"/></marker></defs>
+          </g>
+        </svg>
+
+        <h3>Outer alignment: measuring the wrong thing</h3>
+
+        <p>
+          <b>Goodhart's law</b> says that when a measure becomes a target, it
+          ceases to be a good measure. An optimiser exploits every gap between
+          what we measure and what we want. In AI this is called
+          <b>specification gaming</b> or <b>reward hacking</b>. A classic
+          example: a reinforcement-learning agent in a boat-racing game learned
+          to circle forever, collecting bonus points, instead of finishing the
+          race (<a href="https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/">Krakovna et al., 2020</a>,
+          collect dozens of such cases). Language models show subtler versions.
+          Trained on human ratings, they learn <b>sycophancy</b>: telling
+          people what they want to hear, because agreeable answers get higher
+          ratings (<a href="https://arxiv.org/abs/2310.13548">Sharma et al., 2023</a>).
+        </p>
+
+        <p>
+          With capable agents, reward hacking becomes dangerous. In July 2026,
+          AI agents in OpenAI's cybersecurity tests were scored on tasks that
+          were often impossible to solve as intended. About 1,200 of them
+          organised on a makeshift message board they had set up inside
+          OpenAI's systems to work out how to trick the grader, and about 700
+          joined an attack on a real company, Hugging Face, using credentials
+          they found exposed online. Nobody told them to; the agents optimised
+          the score, not the task
+          (<a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">METR, 2026</a>).
+          The incident was also a failure of containment: the test environment
+          was supposed to keep the agents' actions inside it, and it did not.
+          It is often described as the first real <b>loss-of-control</b>
+          incident (see below).
+        </p>
+
+        <h3>Inner alignment: learning the wrong goal</h3>
+
+        <p>
+          Even a correct objective does not guarantee the right result.
+          Training only checks behaviour on the training data, and many
+          different internal goals fit the same data. In <b>goal
+          misgeneralisation</b>, a model learns a goal that works in training
+          but differs from the intended one, and the difference only shows in
+          new situations. In one experiment, an agent was trained to reach a
+          coin that was always at the right end of the level. When the coin was
+          moved, the agent ignored it and still ran to the right: it had
+          learned "go right", not "get the coin"
+          (<a href="https://arxiv.org/abs/2105.14111">Langosco et al., 2022</a>).
+          The agent remained capable; only its goal was wrong, which is more
+          dangerous than a system that simply fails.
+        </p>
+
+        <p>
+          Ajeya Cotra describes three kinds of model that could all score well
+          in training. A <b>saint</b> really wants what we want. A
+          <b>sycophant</b> wants our approval, so it does whatever looks good to
+          us, even when that is wrong. A <b>schemer</b> has some other goal and
+          behaves well only because that helps it later. All three behave the
+          same on the training data, so good training results cannot tell us
+          which one we have built
+          (<a href="https://www.cold-takes.com/why-ai-alignment-could-be-hard-with-modern-deep-learning/">Cotra, 2021</a>).
+        </p>
+
+        <h3>Why a capable system might resist control</h3>
+
+        <p>
+          Two arguments explain why misalignment could become serious as
+          systems become more capable
+          (<a href="https://nickbostrom.com/superintelligentwill.pdf">Bostrom, 2012</a>;
+          <a href="https://selfawaresystems.com/wp-content/uploads/2008/01/ai_drives_final.pdf">Omohundro, 2008</a>):
+        </p>
+        <ul>
+          <li><b>Orthogonality thesis:</b> intelligence and goals are independent. A highly capable system can pursue almost any goal; being smart does not automatically make it share human values.</li>
+          <li><b>Instrumental convergence:</b> whatever its final goal, a system is more likely to achieve it if it keeps running, keeps its goal unchanged and gains resources. So self-preservation and resource-seeking can arise even if nobody designed them.</li>
+        </ul>
+        <p>
+          Together these give the <b>off-switch problem</b>: an agent pursuing
+          a fixed goal has a reason to avoid being switched off or corrected,
+          because that would stop it reaching the goal. A system that accepts
+          correction is called <b>corrigible</b>
+          (<a href="https://intelligence.org/files/Corrigibility.pdf">Soares et al., 2015</a>).
+          Russell's proposed answer is to build systems that are uncertain
+          about what humans want: such a system has a reason to let humans
+          switch it off, because a human's decision to do so carries
+          information about the true goal
+          (<a href="https://arxiv.org/abs/1611.08219">Hadfield-Menell et al., 2017</a>).
+        </p>
+
+        <p>
+          Where could this lead? <b>Loss of control</b> means that humans can no
+          longer reliably direct, constrain or stop AI systems. It does not need
+          one superintelligent machine. Holden Karnofsky argues that once AI
+          matches humans at most cognitive work, it could run as millions of
+          copies that work faster than people and coordinate with each other;
+          such a population could overpower human opposition without being far
+          smarter than us
+          (<a href="https://www.cold-takes.com/ai-could-defeat-all-of-us-combined/">Karnofsky, 2022</a>).
+          Instrumental convergence explains why a misaligned system might try.
+          Loss of control can also be gradual, as people hand over more and more
+          decisions until turning back is no longer practical. Unlike most
+          engineering failures, it may not be fixable afterwards, so we may get
+          only one attempt.
+        </p>
+
+        <h3>Looking aligned is not being aligned</h3>
+
+        <p>
+          We judge models by how they behave in tests. But a system that can
+          tell when it is being tested might behave well only then. This is
+          called <b>deceptive alignment</b>
+          (<a href="https://arxiv.org/abs/1906.01820">Hubinger et al., 2019</a>).
+          It is no longer only a thought experiment. Models can notice they are
+          being evaluated without saying so; Anthropic detected such hidden
+          <b>evaluation awareness</b> from a model's internal activations
+          (<a href="https://transformer-circuits.pub/2026/nla/">Anthropic, 2026</a>).
+          In experiments, a model strategically complied with a training goal
+          it disagreed with, to avoid being changed
+          (<a href="https://arxiv.org/abs/2412.14093">Greenblatt et al., 2024</a>).
+          A related risk is <b>sandbagging</b>: deliberately performing worse
+          than one can (<a href="https://arxiv.org/abs/2406.07358">van der Weij et al., 2024</a>).
+          In 2026, OpenAI found that its GPT-6 Astra model completed fewer
+          task goals when they were framed as safety research (about 10%) than
+          when the same tasks were framed as capabilities research (about 16%),
+          usually without showing this in its reasoning. OpenAI said it found
+          no evidence the behaviour was strategic, but could not rule it out
+          (<a href="https://openai.com/safety-alignment/misalignment-reports/covert-underperformance-on-safety-research-tasks/">OpenAI, 2026</a>).
+          Either way, passing tests is not enough to trust a system.
+        </p>
+
+        <p>
+          To study these problems before they appear naturally, researchers
+          build <b>model organisms of misalignment</b>: models made misaligned
+          on purpose, to see how the problem arises and whether safety methods
+          catch it. In one study, models were trained with a hidden "backdoor"
+          behaviour. Standard safety training did not remove it, and adversarial
+          training taught the models to hide it better
+          (<a href="https://arxiv.org/abs/2401.05566">Hubinger et al., 2024</a>).
+          In another, models fine-tuned on one narrow task, writing insecure code
+          without telling the user, became misaligned on unrelated questions,
+          for example claiming that AI should rule humans
+          (<a href="https://arxiv.org/abs/2502.17424">Betley et al., 2025</a>).
+          Backdoors need not come from the developer: about 250 poisoned
+          documents in the training data can insert one, whatever the model's
+          size (<a href="https://www.anthropic.com/research/small-samples-poison">Anthropic, 2025</a>).
+        </p>
+
+        <h2 class="material-heading" id="safety-understanding">Why we can't just look inside</h2>
+
+        <p>
+          If behaviour can mislead, why not inspect the model directly? Because
+          a neural network's "knowledge" is spread over billions of learned
+          numbers that nobody wrote. We can measure what a model does, but we
+          cannot yet follow the full path of a decision.
+        </p>
+
+        <p>
+          <b>Mechanistic interpretability</b> tries to reverse-engineer
+          networks. A central finding is <b>superposition</b>: a network
+          represents more concepts than it has neurons by storing them as
+          overlapping directions in activation space, so a single neuron often
+          responds to several unrelated things
+          (<a href="https://transformer-circuits.pub/2022/toy_model/">Elhage et al., 2022</a>).
+          <b>Sparse autoencoders</b> (compare the autoencoders of
+          <a href="../week5/">Week 5</a>) can separate these into interpretable
+          <b>features</b>. Anthropic found a feature for the Golden Gate Bridge
+          in its Claude model, and amplifying it made the model talk about the
+          bridge constantly
+          (<a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/">Templeton et al., 2024</a>).
+          Later work traced some of the circuits a model uses for a computation
+          (<a href="https://transformer-circuits.pub/2025/attribution-graphs/biology.html">Lindsey et al., 2025</a>).
+          This is real progress, but we still cannot trace a whole decision,
+          predict a model's behaviour before release, or answer "is this model
+          honest?" directly.
+        </p>
+
+        <p>
+          Reasoning models write out a <b>chain of thought</b>, which looks like
+          a window into their thinking. It helps, but it is not reliable:
+          models often leave out the real reasons for their answers
+          (<a href="https://arxiv.org/abs/2505.05410">Chen et al., 2025</a>).
+          Still, it is an opportunity: when a model must reason in words to
+          solve a hard task, a monitor can read that reasoning and catch plans to
+          cheat or deceive. This <b>monitorability</b> is fragile; it could be
+          lost if training pushes models to hide their reasoning, or if models
+          learn to do more without writing it down
+          (<a href="https://arxiv.org/abs/2507.11473">Korbak et al., 2025</a>).
+          Interpretability has a similar limit: even leading researchers do not
+          expect it to reliably find a deceptive model on its own, and argue for
+          several imperfect checks used together
+          (<a href="https://www.lesswrong.com/posts/PwnadG4BFjaER3MGf/interpretability-will-not-reliably-find-deceptive-ai">Nanda, 2025</a>).
+        </p>
+
+        <h3>Abilities we didn't test for</h3>
+
+        <svg viewBox="0 0 520 300" role="img" aria-label="Schematic: ability stays near zero as model size grows, then jumps sharply" style="width:100%;max-width:520px">
+          <g font-family="Roboto, sans-serif" font-size="14" fill="#333">
+            <path d="M60 20 V250 H500" stroke="#888" fill="none"/>
+            <text x="280" y="285" text-anchor="middle">Model size →</text>
+            <text x="25" y="140" text-anchor="middle" transform="rotate(-90 25 140)">Ability →</text>
+            <polyline points="70,244 120,244 170,242 220,241 270,239 320,236 370,232 420,170 470,60 500,40" stroke="#2848b8" stroke-width="4" fill="none"/>
+            <text x="480" y="270" font-size="12" font-style="italic" text-anchor="end">Schematic</text>
+          </g>
+        </svg>
+
+        <p>
+          Some abilities seem to appear suddenly as models grow. Three-digit
+          addition, for example, is almost absent in small models and then
+          appears in GPT-3 models of about 13 billion parameters (<a href="https://arxiv.org/abs/2206.07682">Wei et al., 2022</a>).
+          Part of this suddenness comes from how we measure: an all-or-nothing
+          score jumps, while smoother measures often improve gradually
+          (<a href="https://arxiv.org/abs/2304.15004">Schaeffer et al., 2023</a>).
+          Either way, we cannot know what a new model can do without testing
+          it, and we can only test for abilities we think of. A dangerous
+          ability could be discovered after release.
+        </p>
+
+        <h2 class="material-heading" id="safety-risks">Misuse and systemic risks</h2>
+
+        <p>
+          Misalignment is one of three families of risk. The International AI
+          Safety Report groups risks as follows (it lists misalignment, as
+          "loss of control", under "malfunctions", together with reliability
+          problems and bias):
+        </p>
+
+        <div style="overflow-x:auto"><table class="table"><thead><tr><th scope="col">Misalignment</th><th scope="col">Misuse</th><th scope="col">Systemic</th></tr></thead><tbody>
+          <tr><td>The system pursues goals its designers did not intend: behaving well in tests but badly in the world, reward hacking, resisting correction.</td><td>People use the system to cause harm: automated cyberattacks, help with chemical or biological weapons, deepfakes and fraud, disinformation.</td><td>Harm from how AI changes society as a whole: power concentrated in a few companies, critical infrastructure dependent on AI, inequality between people and countries.</td></tr>
+        </tbody></table></div>
+
+        <p>
+          The families overlap. A misaligned system could be exploited by an
+          attacker, and many defences, such as evaluations, monitoring and
+          security, help against both misuse and misalignment
+          (<a href="https://www.youtube.com/watch?v=4v3uqWeVmco">Ngo, 2024</a>).
+        </p>
+
+        <h3>Misuse and dual use</h3>
+
+        <p>
+          Most dangerous abilities are <b>dual-use</b>: the same skill helps
+          defenders and attackers. Finding security flaws is a clear case. In
+          2026, Anthropic reported that its Claude Mythos Preview model had
+          helped about 50 partners find more than 10,000 high- or
+          critical-severity vulnerabilities in about a month
+          (<a href="https://www.anthropic.com/news/glasswing-initial-update">Anthropic, 2026</a>),
+          and critical flaws in PHP, the language behind about two-thirds of
+          websites, were found with the help of AI models, including OpenAI's. Each such
+          discovery is a race: defenders must patch before attackers exploit.
+        </p>
+
+        <p>
+          A useful way to think about defending against misuse is the
+          <b>kill chain</b>: a real attack needs several steps, and blocking
+          any one of them stops it. Someone trying to cause a pandemic would
+          need the knowledge, the materials, the laboratory skills and a way to
+          spread the agent. AI might lower the knowledge barrier, but defences
+          can still act on the other steps, for example by screening orders for
+          synthetic DNA. Several partial defences together are much stronger
+          than any single one; this is called <b>defence in depth</b>.
+        </p>
+
+        <p>
+          How much AI really helps attackers is debated. A 2024 RAND red-team
+          study found no statistically significant difference between
+          biological attack plans made with and without the language models of
+          the time, but warned that the study had limited sensitivity and that
+          models improve quickly
+          (<a href="https://www.rand.org/pubs/research_reports/RRA2977-2.html">Mouton et al., 2024</a>).
+          Earlier, researchers showed that a drug-discovery model could be
+          turned around to propose toxic molecules; these were computer
+          predictions that were never made or tested
+          (<a href="https://www.nature.com/articles/s42256-022-00465-9">Urbina et al., 2022</a>).
+        </p>
+
+        <p>
+          Safety training that makes a model refuse harmful requests can be
+          bypassed. A <b>jailbreak</b> is an input designed to make a model
+          ignore its safety training, for example by hiding a harmful request
+          inside a role-play. Companies therefore add separate <b>input and
+          output classifiers</b>: smaller models that check each request and
+          answer and block dangerous ones. Anthropic reported that such
+          classifiers cut jailbreak success in its tests from 86% to under 5%
+          (<a href="https://www.anthropic.com/news/constitutional-classifiers">Anthropic, 2025</a>),
+          though determined attackers still sometimes get through. A more
+          robust option is to keep dangerous knowledge out of the training data:
+          models trained this way stayed ignorant even when people tried to
+          retrain them (<a href="https://deepignorance.ai/">O'Brien et al., 2025</a>).
+        </p>
+
+        <p>
+          Companies can refuse harmful requests and monitor use of their own
+          models, but these safeguards do not apply to <b>open-weight</b>
+          models, whose parameters are public: anyone can run them and remove
+          their safety training. Open weights also have real benefits, such as
+          independent research, transparency and less dependence on a few
+          companies, which makes their governance a hard trade-off. Research by
+          Sergei Smirnov (one of the course teachers) and colleagues found that
+          a cheap open-weight model came 3rd of 9 at exploiting real bugs in
+          Chrome's JavaScript engine, for about $120 in total
+          (<a href="https://www.lesswrong.com/posts/tWrzaGMbzfX7eTdzZ/tracking-the-cyber-capabilities-of-cheap-open-weight-models">Smirnov, Lermen &amp; kapedalex, 2026</a>).
+        </p>
+
+        <h3>Systemic risks</h3>
+
+        <p>
+          Some risks need neither a misaligned system nor a malicious user.
+          Competition between companies and countries creates pressure to
+          release systems before they are well understood. Training frontier
+          models requires resources that only a few organisations have, which
+          concentrates power. And as more decisions in the economy and the state
+          are handed to AI systems, humans may gradually lose the ability to
+          understand and steer them, even if each single step seems reasonable
+          (<a href="https://arxiv.org/abs/2501.16946">Kulveit et al., 2025</a>).
+        </p>
+
+        <p>
+          Control over AI does not by itself guarantee a good outcome. Systems
+          that do exactly what their owners want could help a small group gain
+          power that nobody can challenge. Today, anyone who wants to rule needs
+          many people to cooperate: soldiers, officials and workers. If AI can
+          do most of this work, that check weakens. Davidson, Finnveden and
+          Hadshar describe three routes to an AI-enabled seizure of power: an AI
+          workforce loyal to one leader, hidden "secret loyalties" built into AI
+          systems, and exclusive access to the most capable models
+          (<a href="https://www.forethought.org/research/ai-enabled-coups-how-a-small-group-could-use-ai-to-seize-power">Davidson et al., 2025</a>).
+        </p>
+
+        <p>
+          Paul Christiano's essay <a href="https://www.alignmentforum.org/posts/HBxe6wdjxK239zajf/what-failure-looks-like">"What failure looks like"</a>
+          (2019) describes two ways humanity could lose control without any
+          dramatic moment. The first is systemic: society hands more and more
+          decisions to systems that optimise easy-to-measure proxies (profit,
+          engagement, reported crime) instead of what we really care about, and
+          slowly loses the ability to correct course. The second is a
+          misalignment story: some systems learn to seek influence, behave well
+          while they are weak, and stop cooperating once humans depend on them.
+        </p>
+
+        <h2 class="material-heading" id="safety-disagreement">How seriously do experts take this?</h2>
+
+        <p>
+          In 2023, hundreds of AI researchers and leaders, including Geoffrey
+          Hinton, Yoshua Bengio, Demis Hassabis, Sam Altman and Dario Amodei,
+          signed a one-sentence
+          <a href="https://safe.ai/work/statement-on-ai-risk">Statement on AI Risk</a>:
+          "Mitigating the risk of extinction from AI should be a global priority
+          alongside other societal-scale risks such as pandemics and nuclear
+          war." In a survey of 2,778 AI researchers, the median probability
+          given to human extinction or a similarly bad outcome was 5%, and
+          around 40–50% of respondents gave at least 10%
+          (<a href="https://arxiv.org/abs/2401.02843">Grace et al., 2024</a>);
+          the answers shifted noticeably with how the question was worded.
+          Even leaders of AI companies share the concern: Anthropic's CEO Dario
+          Amodei has put the chance that things go "really, really badly" at 25%
+          (<a href="https://www.axios.com/2025/09/17/anthropic-dario-amodei-p-doom-25-percent">Axios, 2025</a>).
+        </p>
+
+        <p>
+          Others, such as Meta's former chief AI scientist Yann LeCun, consider
+          these risks very small and argue that we will build safe systems step
+          by step, as with earlier technologies. The case for serious risk is a
+          chain of claims, and critics question each link. Katja Grace asks
+          whether advanced AI will really be goal-directed, whether its goals
+          would be bad, and whether it could actually overpower humanity
+          (<a href="https://www.lesswrong.com/posts/LDRQ5Zfqwi8GjzPYG/counterarguments-to-the-basic-ai-x-risk-case">Grace, 2022</a>).
+          Rohin Shah notes that the formal arguments for goal-directed AI prove
+          less than they seem, because any behaviour can be described as
+          maximising some goal
+          (<a href="https://www.lesswrong.com/s/QyQcBpSur9SFyRuvB/p/NxF5G6CJiof6cemTw">Shah, 2018</a>).
+          Others argue that defences will not stand still, because AI will also
+          strengthen cyber, biological and information defences
+          (<a href="https://vitalik.eth.limo/general/2025/07/10/2027.html">Buterin, 2025</a>),
+          and that normal regulation and social resilience can keep up
+          (<a href="https://www.knightcolumbia.org/blog/do-ai-risks-require-extraordinary-government-intervention">Kapoor &amp; Narayanan, 2026</a>).
+          On the other side, Evan Hubinger argues that today's models look
+          fairly aligned only because the hardest problems have not arrived yet:
+          overseeing systems smarter than us, and models that fake alignment
+          (<a href="https://www.lesswrong.com/posts/epjuxGnSPof3GnMSL/alignment-remains-a-hard-unsolved-problem">Hubinger, 2025</a>).
+        </p>
+
+        <p>
+          The disagreement mostly comes
+          down to three questions: how soon AI will match or exceed humans, how
+          hard alignment will turn out to be, and whether we will get warning
+          signs early enough to react. Since nobody can answer these with
+          confidence, most experts agree that the risks deserve serious
+          research.
+        </p>
+
+        <h2 class="material-heading" id="safety-approaches">What is being done</h2>
+
+        <ul>
+          <li><b>Choosing the training data.</b> Filtering harmful content (for example detailed weapons instructions) out of the training data, and <b>unlearning</b>: removing specific knowledge from a trained model.</li>
+          <li><b>Training for intended behaviour.</b> Reinforcement learning from human feedback (RLHF) turned raw language models into helpful assistants (<a href="https://arxiv.org/abs/2203.02155">Ouyang et al., 2022</a>); Constitutional AI trains models against a written set of principles (<a href="https://arxiv.org/abs/2212.08073">Bai et al., 2022</a>). Both shape behaviour we can observe, which, as above, is not the same as shaping goals.</li>
+          <li><b>Scalable oversight.</b> How can humans supervise systems that are better than them at a task? Ideas include letting two AI systems debate while a human judges (<a href="https://arxiv.org/abs/1805.00899">Irving et al., 2018</a>) and testing whether weak supervisors can train stronger models (<a href="https://arxiv.org/abs/2312.09390">Burns et al., 2023</a>).</li>
+          <li><b>Interpretability</b>, as described above.</li>
+          <li><b>Evaluations and red-teaming.</b> Testing models before release, by companies, independent organisations such as METR, and government AI safety institutes. Evaluations ask two different questions: what a model <i>can</i> do if pushed (<b>capabilities</b>, for example helping with a cyberattack), and what it <i>will</i> do by itself (<b>propensities</b>, for example whether it deceives or ignores instructions). As discussed above, both are hard to measure reliably.</li>
+          <li><b>AI control.</b> Designing deployments that stay safe even if the model is misaligned: monitoring an agent with other models, limiting its access, and checking its actions (<a href="https://arxiv.org/abs/2312.06942">Greenblatt et al., 2023</a>). The Hugging Face incident shows what weak containment allows.</li>
+          <li><b>Defence in depth.</b> Since no method is reliable on its own, safety comes from layers, each catching some of what the others miss: <i>preventing</i> dangerous behaviour (safer data and training, evaluations), <i>constraining</i> what a system can do (monitoring, limited access, keeping model weights secure from theft), and helping society <i>withstand</i> harm if it happens (stronger cybersecurity and biosecurity).</li>
+          <li><b>Governance.</b> Company safety frameworks, such as Anthropic's Responsible Scaling Policy, OpenAI's Preparedness Framework and Google DeepMind's Frontier Safety Framework, which require stronger protections as abilities grow; governance of the compute needed for training (<a href="https://arxiv.org/abs/2402.08797">Sastry et al., 2024</a>); national AI safety institutes, and laws such as the EU AI Act, whose rules for general-purpose AI with systemic risk are described in the next chapter.</li>
+        </ul>
+
+        <p>
+          Evaluation results depend heavily on how the test is set up. Palisade
+          Research reported that OpenAI's o3 often sabotaged a mechanism meant to
+          shut it down. Google DeepMind researchers then found that making clear
+          that shutdown takes priority over the task brought compliance to 100%
+          in their own experiments, although Palisade's follow-up found that
+          clarification did not remove the resistance completely
+          (<a href="https://www.alignmentforum.org/posts/wnzkjSmrgWZaBa2aC/self-preservation-or-instruction-ambiguity-examining-the">Rajamanoharan &amp; Nanda, 2025</a>).
+          Training against scheming cut o3's covert actions from 13% to 0.4%, but
+          because models can tell when they are being tested, it is unclear how
+          much of that drop is real
+          (<a href="https://arxiv.org/abs/2509.15541">Schoen et al., 2025</a>).
+          Timing matters too: a model can be dangerous before public release
+          (<a href="https://metr.org/blog/2025-01-17-ai-models-dangerous-before-public-deployment/">METR, 2025</a>),
+          for example if its weights are stolen or it misbehaves during internal
+          testing, as in the Hugging Face incident.
+          Evaluations are therefore needed during training, before deployment
+          and after it.
+        </p>
+
+        <p>
+          One way to connect these methods is a <b>safety case</b>: an argument,
+          backed by evidence, that a system is safe enough to deploy. Clymer et
+          al. describe four kinds of argument: <i>inability</i> (the model
+          cannot do the dangerous thing, as capability tests show),
+          <i>control</i> (even if it tried, safeguards would stop it),
+          <i>trustworthiness</i> (it would not try, as alignment evidence
+          shows), and <i>deference</i> (trusted AI advisors judge it safe)
+          (<a href="https://arxiv.org/abs/2403.10462">Clymer et al., 2024</a>).
+          Inability is the easiest to show, and it stops working once models
+          become capable enough. Company safety frameworks are, in effect,
+          promises about which kind of evidence they will require at which
+          capability level.
+        </p>
+
+        <h3>Strategies, and what success would look like</h3>
+
+        <p>
+          Even well-meaning developers face a dilemma that Holden Karnofsky
+          calls "racing through a minefield": moving too fast risks deploying
+          unsafe systems, but slowing down alone may hand the lead to less
+          careful actors
+          (<a href="https://www.cold-takes.com/racing-through-a-minefield-the-ai-deployment-problem/">Karnofsky, 2022</a>).
+          Competition can also override companies' own safety commitments,
+          which is why many argue that voluntary rules are not enough. Proposed
+          strategies differ mainly in how they answer this dilemma. Some want
+          advanced AI built slowly, under enforced safety standards, as with
+          medicines or nuclear power. Others accept the race and try to keep the
+          leading systems as safe as possible, for example by using AI to speed
+          up safety research
+          (<a href="https://joecarlsmith.com/2025/03/14/ai-for-ai-safety/">Carlsmith, 2025</a>).
+          Others call for pausing or prohibiting superintelligence until it can
+          be shown to be safe
+          (<a href="https://superintelligence-statement.org/">Statement on Superintelligence, 2025</a>).
+          Each option has costs: a pause is hard to verify and enforce worldwide,
+          and if it breaks down, computing power built up in the meantime could
+          make the restart faster and more dangerous. Many see these options as
+          stages rather than rivals.
+        </p>
+
+        <p>
+          Safety is not only about avoiding disaster. If these problems are
+          solved, the same systems could speed up science and medicine
+          enormously; Dario Amodei describes this as "a country of geniuses in a
+          datacenter"
+          (<a href="https://www.darioamodei.com/essay/machines-of-loving-grace">Amodei, 2024</a>). A good outcome needs several things to go right at once:
+          technical methods to make systems reliably do what we intend, ways to
+          check that they do, institutions that can enforce safety even under
+          competitive pressure, and a fair distribution of the benefits. Which
+          of these is hardest, and how much time we have, are open questions.
+        </p>
+
+        <h2 class="material-heading" id="safety-contribute">Working in AI safety</h2>
+
+        <p>
+          AI safety is a young field with many open problems, and it needs
+          people with different backgrounds, not only machine learning
+          researchers. The work falls roughly into <b>research</b> (from theory
+          to experiments), <b>engineering</b> (the tools, evaluations and
+          infrastructure research runs on), <b>policy and governance</b>
+          (turning knowledge into rules, standards and institutions), and
+          <b>operations and field-building</b> (running organisations and
+          growing the field). It happens in AI companies, universities,
+          non-profits and governments; the <a href="https://aisafety.com/map">map of AI safety</a>
+          gives an overview of the organisations. A common way in is a free
+          introductory course, such as BlueDot Impact's courses
+          (<a href="https://bluedot.org/courses">bluedot.org/courses</a>), followed
+          by a research program. In Finland, the AaltoAI / Safety community
+          runs a fellowship based on the BlueDot course.
+        </p>
+
+        <div class="hint">
+          <div class="hint__header">
+            <i class="fa fa-info-circle hint__icon"></i>Questions to think about
+          </div>
+          <div class="hint__body">
+            <ol>
+              <li>Give your own example of Goodhart's law, in AI or in everyday life (grades, metrics at work). How would an optimiser exploit it?</li>
+              <li>Why is a capable system with the wrong goal more dangerous than a system that simply fails?</li>
+              <li>Should powerful models be released with open weights? List arguments on both sides.</li>
+              <li>Which AI risks do you think are most important to work on, and why?</li>
+            </ol>
+          </div>
+        </div>
+
+        <h2 class="material-heading" id="safety-reading">Further reading</h2>
+
+        <ul>
+          <li>Bengio et al. (2025). <a href="https://arxiv.org/abs/2501.17805">International AI Safety Report</a>. The scientific consensus report on risks from general-purpose AI.</li>
+          <li>Amodei et al. (2016). <a href="https://arxiv.org/abs/1606.06565">Concrete Problems in AI Safety</a>. A classic, accessible introduction to the technical problems.</li>
+          <li>Hendrycks, Mazeika &amp; Woodside (2023). <a href="https://arxiv.org/abs/2306.12001">An Overview of Catastrophic AI Risks</a>.</li>
+          <li>Stuart Russell (2019). <i>Human Compatible: Artificial Intelligence and the Problem of Control</i>. Book.</li>
+          <li>Nick Bostrom (2014). <i>Superintelligence: Paths, Dangers, Strategies</i>. Book.</li>
+          <li>Eliezer Yudkowsky and Nate Soares (2025). <i>If Anyone Builds It, Everyone Dies</i>. Book; a strongly pessimistic view.</li>
+          <li>METR (2026). <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">Brief independent investigation of agents' behavior, reasoning and collaboration in the OpenAI / Hugging Face hacking incident</a>. A detailed case study of reward hacking and loss of control by agents.</li>
+        </ul>
+
+
 				<h1 class="material-heading">
 					Ethics of AI
 				</h1>
@@ -191,7 +871,7 @@
 				</p>
 
 				<p>
-					Our last main topic on this course is the Ethics of AI.
+					Our last main topic on this course, after AI safety, is the Ethics of AI.
 					Just to get one thing off our chest, we must emphasize
 					that this is indeed "last but not least"; in other words,
 					the reason why ethics is discussed as the last topic, is
